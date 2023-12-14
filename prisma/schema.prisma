@@ -16,7 +16,9 @@ model Users {
   documento           String?
   type_document       String?
   email               String?       @unique
-  password            String?     
+  termo               Boolean?
+  instituicao         String? 
+  id_telegram         String        @unique
   ddd_phone           String?
   phone               String?
   token_auth_password String?
@@ -24,6 +26,6 @@ model Users {
   updated_at          DateTime      @updatedAt @default(now())
   created_at          DateTime      @default(now())
 
-  @@map("bmil_users")
+  @@map("bdmil_users")
 }
 

@@ -10,7 +10,7 @@ const bot = new TelegramBot (token_bot, {polling: true});
 //   bot.sendMessage(dados.chatId, dados.adresp);
 // }
 
-class BotTelegram{
+class Bot_bd_mil_comprar{
   static execute() {  
 
   bot.on('message', async (msg) => {
@@ -24,4 +24,4 @@ class BotTelegram{
  }
 }
 
-export { BotTelegram };
+export { Bot_bd_mil_comprar };

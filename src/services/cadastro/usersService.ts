@@ -17,7 +17,7 @@ interface dados {
 
 async function Cadastro_usersService ( dados: dados, id_user:string) {
 
-    const req = await prisma_db.clientes.findUnique({
+    const req = await prisma_db.users.findUnique({
         where:{email: dados.email}
     })
 
@@ -31,8 +31,7 @@ async function Cadastro_usersService ( dados: dados, id_user:string) {
         nome               :dados.nome,
         documento          :dados.type,
         type_document      :dados.type,
-        email              :dados.type,   
-        password           :dados.type,   
+        email              :dados.type,  
         ddd_phone          :dados.type,
         phone              :dados.type,
         token_auth_password:dados.type,
