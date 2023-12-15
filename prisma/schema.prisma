@@ -11,9 +11,9 @@ model Users {
   id                  String        @id @default(uuid())
   delete              String?
   status              String?
-  type                String?
   nome                String?
-  documento           String?
+  username            String?
+  document            String?
   type_document       String?
   email               String?       @unique
   termo               Boolean?
@@ -21,7 +21,6 @@ model Users {
   id_telegram         String        @unique
   ddd_phone           String?
   phone               String?
-  token_auth_password String?
   avatar_url          String?
   updated_at          DateTime      @updatedAt @default(now())
   created_at          DateTime      @default(now())

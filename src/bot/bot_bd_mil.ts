@@ -2,7 +2,7 @@ process.env['NTBA_FIX_319'] = "0";
 import TelegramBot from 'node-telegram-bot-api';
 import { prisma_db } from '../database/prisma_db';
 
-const token_bot = ''; // Nome bot teste
+const token_bot = '6886561681:AAEL0_4SPcmWNV3_l9Nys0fe3Q2N2_9b--I'; // CentrallTest1
 
 const bot = new TelegramBot (token_bot, {polling: true});
 
@@ -53,6 +53,21 @@ const termo= `
   bot.on('message', async (msg) => {
     console.log(msg)
 
+    const opts = {
+      reply_markup: {
+        inline_keyboard: [
+          [
+            { text: 'OK', callback_data: 'ok__' }
+          ],
+          [
+            { text: 'Exercito Brasileiro', callback_data: '_EB_' },
+            { text: 'Marinha Brasileira', callback_data: '_MB_' },
+            { text: 'Força Aéria Brasileira', callback_data: '_FAB_'}
+          ]
+        ]
+      }
+    };
+
     const id_telegram = msg.chat.id.toString();
     const texto = msg.text;
     const name = msg.chat.first_name;   
@@ -65,31 +80,61 @@ const termo= `
     if(!req){ // Primeiro contato com o bot    
       if(texto==='ok__'){
         // Salvar os dados no banco com o ok do termo
+        const cadastro = prisma_db.users.create({
+          data:{
+            delete:       '',
+            status:       '',
+            nome:         name,
+            username:     username,
+            document:     '',
+            type_document:'cpf',
+            email:        '',
+            termo:        true,
+            instituicao:  '',
+            id_telegram:  id_telegram,
+            ddd_phone:    '',
+            phone:        '',
+            avatar_url:   ''
+          }
+        })
         // Qual sua corporação 
-        bot.sendMessage(id_telegram, ``);
+        bot.sendMessage(id_telegram, `A qual Instituição/corporação você pertence?`);
         return
       }else{
         bot.sendMessage(id_telegram, bemvindo);
         bot.sendMessage(id_telegram, termo);
+        //colocar um botão de OK aqui!!
       }      
     }else{
       if(req.termo){
         if(req.instituicao===''){
-          // updata no banco salvando a instituição
+          // update no banco salvando a instituição
+          const cadastro = await prisma_db.users.update({
+            where:{id_telegram: id_telegram},
+            data:{instituicao:texto}
+          })
           // Qual seu nome
-          bot.sendMessage(id_telegram, ``);
+          bot.sendMessage(id_telegram, `Qual o seu nome?`);
           return      
         } 
         if(req.nome===''){
           // updata no banco salvando nome
+          const cadastro = await prisma_db.users.update({
+            where:{id_telegram: id_telegram},
+            data:{nome: texto}
+          })
           // Qual seu cpf
-          bot.sendMessage(id_telegram, ``);
+          bot.sendMessage(id_telegram, `Qual o seu CPF?`);
           return      
         } 
-        if(req.documento===''){
+        if(req.document===''){
           // updata no banco cpf
+          const cadastro = await prisma_db.users.update({
+            where:{id_telegram: id_telegram},
+            data:{document: texto}
+          })
           // quer editar o cadastro
-          bot.sendMessage(id_telegram, ``);
+          bot.sendMessage(id_telegram, `Desejar editar os dados cadastrados?`);
           return      
         } 
 
