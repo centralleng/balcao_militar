@@ -9,16 +9,16 @@ datasource db {
 
 model Users {
   id                  String        @id @default(uuid())
-  delete              String?
-  status              String?
+  delete              Int?
+  status              Int?
   nome                String?
   username            String?
-  document            String?
   type_document       String?
+  document            String?
   email               String?       @unique
   termo               Boolean?
   instituicao         String? 
-  id_telegram         String        @unique
+  id_telegram         String?        @unique
   ddd_phone           String?
   phone               String?
   avatar_url          String?
