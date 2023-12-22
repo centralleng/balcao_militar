@@ -14,8 +14,8 @@ model Users {
   nome                String?
   username            String?
   type_document       String?
-  document            String?
-  email               String?       @unique
+  document            String?        @unique
+  email               String?        @unique
   termo               Boolean?
   instituicao         String? 
   id_telegram         String?        @unique
@@ -25,6 +25,25 @@ model Users {
   updated_at          DateTime      @updatedAt @default(now())
   created_at          DateTime      @default(now())
 
+  produto             Produtos[]
+
   @@map("bdmil_users")
+}
+
+model Produtos {
+  id                  Int        @id @default(autoincrement())
+  delete              Int?
+  status              Int?
+  categoria           String?
+  descricao           String?
+  valor_produto       Float?
+  link_pagamento      String?
+  user_id             String
+  message_id          Int?  // Id quando cirar um produto, vamos precisar quando for deletar um produto             
+  updated_at          DateTime      @updatedAt @default(now())
+  created_at          DateTime      @default(now())
+  users               Users  @relation(fields: [user_id], references: [id])
+
+  @@map("bdmil_produtos")
 }
 

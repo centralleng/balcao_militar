@@ -1,7 +1,7 @@
 process.env['NTBA_FIX_319'] = "0";
 import TelegramBot from 'node-telegram-bot-api';
 
-const token_bot = ''; // Token do bot do telegram... COPPS_START
+const token_bot = '6962343359:AAERsmVCjSJczzeQ-ONe_nfVyQxQYDzFYlg'; // Token do bot do telegram... COPPS_START
 
 const bot = new TelegramBot (token_bot, {polling: true});
 

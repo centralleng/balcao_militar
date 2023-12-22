@@ -77,8 +77,7 @@ Olá! Bem-vindo ao Balcão dos militares (BDMil). Esse Balcão tem por objetivo 
           { text: "CBMERJ", callback_data: "CBMERJ"},
           { text: "PMDF", callback_data: "PMDF"},
         ],
-      ],
-        
+      ],        
       },
     };
 
@@ -86,17 +85,16 @@ Olá! Bem-vindo ao Balcão dos militares (BDMil). Esse Balcão tem por objetivo 
       reply_markup: {
         inline_keyboard: [
         [
-          { text: "[EB Balcão vendas]", url: "https://t.me/+U78s3c8_alY1NjNh"},
-          { text: "[MB Balcão vendas]", url: "https://t.me/+U78s3c8_alY1NjNh" },
-          { text: "[FAB Balcão vendas]", url: "https://t.me/+U78s3c8_alY1NjNh"},
+          { text: "[EB Balcão vendas]", url: "https://t.me/"},
+          { text: "[MB Balcão vendas]", url: "https://t.me/" },
+          { text: "[FAB Balcão vendas]", url: "https://t.me/"},
         ],
         [
-          { text: "[PMERJ Balcão vendas]", url: "https://t.me/+U78s3c8_alY1NjNh"},
-          { text: "[CBMERJ Balcão vendas]", url: "https://t.me/+U78s3c8_alY1NjNh"},
-          { text: "[PMDF Balcão vendas]", url: "https://t.me/+U78s3c8_alY1NjNhF"},
+          { text: "[PMERJ Balcão vendas]", url: "https://t.me/"},
+          { text: "[CBMERJ Balcão vendas]", url: "https://t.me/"},
+          { text: "[PMDF Balcão vendas]", url: "https://t.me/F"},
         ],
-      ],
-        
+      ],        
       },
     };
 
@@ -166,8 +164,8 @@ Qual sua instituição.
 
       const id_telegram = msg.chat.id.toString();
       const texto = msg.text;
-      // const name = msg.chat.first_name;
-      // const username = msg.chat.username;
+      const name = msg.chat.first_name;
+      const username = msg.chat.username;
 
       const req = await prisma_db.users.findUnique({
         where:{id_telegram:id_telegram}
@@ -220,7 +218,7 @@ Qual sua instituição.
               data:{type_document:'cpf',document: verificar_cpf.replace(/[^0-9]/g, ''),}
             })
                // quer editar o cadastro
-            bot.sendMessage(id_telegram, `Digite um emal?`);
+            bot.sendMessage(id_telegram, `Digite um email?`);
             }else{
               bot.sendMessage(id_telegram, `Você precisa digitar um CPF válido`);
             }  
@@ -232,8 +230,7 @@ Qual sua instituição.
             const email = texto||''
             
             function Validador_email(email: string) {
-              const emailValido = validator.isEmail(email);
-              console.log(emailValido)
+              const emailValido = validator.isEmail(email);            
               return emailValido
             }
 
@@ -249,7 +246,7 @@ Qual sua instituição.
                     ` 
                     ,grupos);
 
-            }{
+            }else{
               bot.sendMessage(id_telegram, `Você precisa digitar um email válido`);
             }          
 

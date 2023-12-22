@@ -1,0 +1,200 @@
+Fluxo BDMilQueroVender
+
+><><><><><><><><><><><><><><><><><><><><><><><><><><><
+MOMENTO EM QUE VOCÊ CADASTRA SEU PRODUTO PRA VENDA!!!
+><><><><><><><><><><><><><><><><><><><><><><><><><><><
+
+/start (Ou qualquer outra mensagem)
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+⚠️ Atenção, esse local é feito para ofertar a VENDA de produtos, esse é o formato. 
+❗️O balcão é monitorado e os procedimentos são assistidos. Boas práticas em todo o processo é essencial. Não serão emitidos alertas ou advertências prévias antes de qualquer exclusão de usuário.
+✔️Opa! Qual Departamento se encaixa o produto? (referencial comparativo de artigos civis: Ponto Frio)
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+BOTÕES
+:::::::::::::::::::::::::::::::::::::::::::::
+|=================|
+|Artigos Militáres|
+|=================|
+
+=============
+Artigos Civis
+=============
+:::::::::::::::::::::::::::::::::::::::::::::
+input{}
+
+TENDO ENTRADO NO ARTIGOS MILITARES
+:::::::::::::::::::::::::::::::::::::::::::::
+Qual instituição/Corporação?
+:::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::::
+==
+EB
+==
+==
+MB
+==
+===
+FAB
+===
+:::::::::::::::::::::::::::::::::::::::::::::
+input{}
+
+TENDO ENTRADO NOS ARTIGOS CIVIS
+:::::::::::::::::::::::::::::::::::::::::::::
+Em qual categoria se encaixa o seu produto?
+:::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::::
+=======
+Vaículo
+=======
+=======
+Serviço
+=======
+==========
+smartphone
+==========
+==========
+acessórios
+==========
+===============
+Eletrodoméstico
+===============
+==========
+automotivo
+==========
+=====
+áudio
+=====
+==============
+eletroportátil
+==============
+==========
+ferramenta
+==========
+======
+bebida
+======
+====
+bebê
+====
+=======
+esporte
+=======
+========
+Smart TV
+========
+===============
+Ar e ventilação
+===============
+======
+imóvel
+======
+=========
+Brinquedo
+=========
+===========
+informática
+===========
+====
+game
+====
+=====
+móvel
+=====
+===================
+utilidade doméstica
+===================
+:::::::::::::::::::::::::::::::::::::::::::::
+input{}
+
+CADASTRO DO PRODUTO!!!
+:::::::::::::::::::::::::::::::::::::::::::::
+Descreva de forma sucinta o produto que você quer ofertar, incluindo obrigatoriamente a quantidade (um ou 1 par) e a cor. NÃO coloque o valor nesse momento (máximo 150 caracteres). SÓ coloque ponto no fim.
+:::::::::::::::::::::::::::::::::::::::::::::
+Input{}
+
+:::::::::::::::::::::::::::::::::::::::::::::
+Cliente (Não entendi de onde veio isso)
+:::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::::
+Qual valor pretendido? (escreva somente números. Caso haja centavos coloque ponto)
+:::::::::::::::::::::::::::::::::::::::::::::
+input{}
+
+:::::::::::::::::::::::::::::::::::::::::::::
+Cliente 10,50 (exemplo de uma resposta errada)
+:::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::::
+Cliente 10.50 (Correção do robô, caso o cliente coloque vírgula)
+:::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::::
+Em caso de problemas com a entrega e já tenha recebido algum valor, o vendedor devolve quantos % ao comprador? (de 0 a 100)
+:::::::::::::::::::::::::::::::::::::::::::::
+input{}
+
+:::::::::::::::::::::::::::::::::::::::::::::
+ÍCONE PARA PAGAMENTO (como processar automaticamente o pagamento enviar o comando para o balcão) Comissão
+:::::::::::::::::::::::::::::::::::::::::::::
+input{}
+
+FINALIZAÇÃO DO PROCESSO DE CADASTRO DO PRODUTO!!
+:::::::::::::::::::::::::::::::::::::::::::::
+✔️Oferta de venda cadastrada, se quiser cadastrar uma nova me avisa
+▪️ Se quiser excluir a oferta, me envia apenas: Excluir 9999999
+▪️ Se quiser modificar, me envia apenas: modificar 999999
+▪️ Se quiser atualizar, me envia apenas: atualizar 999999
+💡 Quando for decidir em comprar ou vender o produto/serviço, avalie também as recomendações.
+🤝 Gostaria de lembrar a importância de honrar acordos com o vendedor ou comprador no Balcão, depois de selar o acordo até a entrega do produto.
+❌ O mau comportamento pode acarretar a exclusão do Balcão.
+:::::::::::::::::::::::::::::::::::::::::::::
+
+
+><><><><><><><><><><><><><><><><><><><><><><><
+MOMENTO EM QUE ALGUEM QUER COMPRAR O PRODUTO!!
+><><><><><><><><><><><><><><><><><><><><><><><
+
+:::::::::::::::::::::::::::::::::::::::::::::
+💡 @ fulano quer comprar o seu produto referente a oferta xxxxxxx, você deve informar para ele a senha 955900 para que ele saiba que você é realmente o postador da oferta. Verifique se é a mesma senha.
+▪️ Dicas do Balcão dos militares:
+Recomendo que sempre seja confirmado o valor do produto, bem como a forma de entrega, prazos, formas de pagamento e outras coisas que se fizerem necessárias antes de fechar a transação, a fim de evitar transtornos desnecessários e exclusão do Balcão.
+❗️verifique dados adicionais durante a negociação, para ter a certeza de estar mitigando riscos.
+⬆️ recomendado por 50 pessoas (dados do comprador)
+Não recomendado por outro usuário (dados do comprador)
+✅ conta verificada (dados do comprador)
+✔️Membro desde 10 mês (es) (dados do comprador)
+👍🏻 Para avaliar se essa transação deu certo, responda com a seguinte frase: recomendo 555555555
+👎Se a sua transação não ocorreu bem, responda com a seguinte frase; desaconselho 5555555
+❗️ não esqueça de, após a venda me enviar: vendido 9999999 para excluir a oferta do Balcão.
+:::::::::::::::::::::::::::::::::::::::::::::
+
+><><><><><><><><><><><><><><><><><><><><><><><
+MOMENTO EM QUE VOCÊ AVALIA UM CLIENTE!!
+><><><><><><><><><><><><><><><><><><><><><><><
+
+:::::::::::::::::::::::::::::::::::::::::::::
+✔️Sua avaliação foi registrada.
+👍🏻 Você recebeu uma recomendação, agora você tem 22
+👏Parabéns! Bom trabalho! Obrigado por atender bem nossa comunidade, segue um presente para você continuar com o bom atendimento e a gentiliza.  
+Segue 6 meses de Award Wallet, chama nosso robô para ganhar: https://t.me/Presentao_bot
+:::::::::::::::::::::::::::::::::::::::::::::
+
+><><><><><><><><><><><><><><><><><><><><><><><
+MOMENTO EM QUE UM CLIENTE TE AVALIA!!
+><><><><><><><><><><><><><><><><><><><><><><><
+
+:::::::::::::::::::::::::::::::::::::::::::::
+👎Você recebeu um desaconselhamento, agora você tem 1
+❗️ procure evitar esse tipo de situação. Caso seja grave, você será excluído do Balcão.   
+:::::::::::::::::::::::::::::::::::::::::::::
+
+
+
+
+db_prisma
