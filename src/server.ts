@@ -38,8 +38,8 @@ app.listen(port, function () {
     console.log(`O servidor está rodando da porta ${port}...`);
 });
 
-Bot_bd_mil.execute()
-// Bot_bd_mil_venda.execute()
+// Bot_bd_mil.execute()
+Bot_bd_mil_venda.execute()
 // Bot_bd_mil_comprar.execute()
 // cronDiario.envia()
 
