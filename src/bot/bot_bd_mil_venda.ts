@@ -101,11 +101,11 @@ const texto_inicial = `
 `
 
 const atencao = `
-❗️O balcão é monitorado e os procedimentos são assistidos. Boas práticas em todo o processo é essencial. Não serão emitidos alertas ou advertências prévias antes de qualquer exclusão de usuário.
+❗️ O balcão é monitorado e os procedimentos são assistidos. Boas práticas em todo o processo é essencial. Não serão emitidos alertas ou advertências prévias antes de qualquer exclusão de usuário.
 `
 
 const categoria = `
-✔️Opa! Qual Departamento se encaixa o produto? (referencial comparativo de artigos civis: Ponto Frio) 
+✔️ Opa! Qual Departamento se encaixa o produto? (referencial comparativo de artigos civis: Ponto Frio) 
 `
 
 const formato_venda = `
@@ -134,13 +134,13 @@ Descreva de forma sucinta o produto que você quer ofertar, incluindo obrigatori
 const valor = `
 Qual valor pretendido? (escreva somente números. Caso haja centavos coloque ponto)
 
-Exemplos:
+💵 Exemplos:
 
 Para R$ 1 real -> 1.00
 Para R$ 10 reais -> 10.00
 Para R$ 1 mil reais -> 1000.00
 
-Exemplos com os centavos:
+🪙 Exemplos com os centavos:
 
 Para R$ 1 real e vinte centavos -> 1.20
 Para R$ 10 reais e vinte centavos -> 10.20
@@ -148,7 +148,7 @@ Para R$ 1 mil reais e vinte centavos -> 1000.20
 `
 
 const produto_criado = `
-✔️Oferta de venda cadastrada, se quiser cadastrar uma nova me avisa
+✔️ Oferta de venda cadastrada, se quiser cadastrar uma nova me avisa
 💡 Quando for decidir em comprar ou vender o produto/serviço, avalie também as recomendações.
 🤝 Gostaria de lembrar a importância de honrar acordos com o vendedor ou comprador no Balcão, depois de selar o acordo até a entrega do produto.
 ❌ O mau comportamento pode acarretar a exclusão do Balcão.
@@ -174,12 +174,12 @@ const produto_criado = `
       });
 
       if(!user){
-        bot.sendMessage(id_telegram, `Primeiro precisar fazer seu cadastro`);
+        bot.sendMessage(id_telegram, `⚠️ Primeiro precisar fazer seu cadastro`);
         return
       }    
   
       if(username===null){
-        bot.sendMessage(id_telegram, `Cadastre um User Name`);
+        bot.sendMessage(id_telegram, `⚠️ Cadastre um User Name`);
       }else{
 
     if(texto==='VENDER'){ // Entra no fluxo de venda basta criar um produto e não finalizar o processo, so vai parar quando finalizar ou cancelar -> cancelar seguinifica apagar o produto.
@@ -195,7 +195,7 @@ const produto_criado = `
         await bot.sendMessage(id_telegram, `Artigos Civis`, artigos_civis);
 
        }else{
-        bot.sendMessage(id_telegram, `Você precisa finalizar o produto que vc deu inicio na criação ou deletar`, msg_deletar_produto);
+        bot.sendMessage(id_telegram, `⚠️ Primeiro você precisa finalizar o produto que deu inicio na criação ou deleta-lo.`, msg_deletar_produto);
        }      
     }
 
@@ -208,9 +208,9 @@ const produto_criado = `
         await prisma_db.produtos.delete({
           where:{id: user.produto[0].id}
         })
-        bot.sendMessage(id_telegram, `Produto deletado com sucesso!`, botao_inicial);
+        bot.sendMessage(id_telegram, `✅ Produto deletado com sucesso!`, botao_inicial);
       }else{
-        bot.sendMessage(id_telegram, `Algo deu errado, entre em contato com o suporte`, suporte);
+        bot.sendMessage(id_telegram, `⚠️ Algo deu errado, entre em contato com o suporte.`, suporte);
       }
     }
 
@@ -224,7 +224,7 @@ const produto_criado = `
         })
         bot.sendMessage(id_telegram, descricao, descarta_produto);        
       } catch (error) {
-        bot.sendMessage(id_telegram, `Ops algo deu errado o que você pretende fazer?`, botao_inicial); 
+        bot.sendMessage(id_telegram, `⚠️ Ops algo deu errado o que você pretende fazer?`, botao_inicial); 
       }
     }    
     }
@@ -250,12 +250,12 @@ const produto_criado = `
       });
 
     if(!user){
-      bot.sendMessage(id_telegram, `Primeiro precisar fazer seu cadastro`);
+      bot.sendMessage(id_telegram, `⚠️ Primeiro você precisar se cadastrar!`);
       return
     }
 
     if(username===null){
-      bot.sendMessage(id_telegram, `Cadastre um User Name`);
+      bot.sendMessage(id_telegram, `⚠️ Cadastre um User Name!`);
     }else{
       // Inicio dos comandos /////////////////////////////////////////////
       if(username!=user?.username){ // So estou atualizando o user name no banco de dados mais nada.
@@ -269,7 +269,7 @@ const produto_criado = `
         await bot.sendMessage(id_telegram, texto_inicial);
         await bot.sendMessage(id_telegram, formato_venda);
         await bot.sendMessage(id_telegram, atencao);
-        bot.sendMessage(id_telegram, 'Escolha sua ação', botao_inicial);
+        bot.sendMessage(id_telegram, 'Escolha sua ação:', botao_inicial);
         return
       }
 
@@ -289,7 +289,7 @@ const produto_criado = `
           bot.sendMessage(id_telegram, valor, descarta_produto); 
           return       
           } catch (error) {
-            bot.sendMessage(id_telegram, `Ops algo deu errado escreca sua descrição novamente`); 
+            bot.sendMessage(id_telegram, `⚠️ Ops algo deu errado escreva sua descrição novamente.`); 
           } 
           return
         }
@@ -314,7 +314,7 @@ const produto_criado = `
         //   return
         // }
       }else{
-        bot.sendMessage(id_telegram, 'Escolha sua ação', botao_inicial);
+        bot.sendMessage(id_telegram, 'Escolha sua ação:', botao_inicial);
       }
 
 

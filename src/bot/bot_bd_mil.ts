@@ -79,6 +79,91 @@ class Bot_bd_mil {
           { text: "CBMERJ", callback_data: "CBMERJ"},
           { text: "PMDF", callback_data: "PMDF"},
         ],
+        [
+          { text: "CBMDF", callback_data: "CBMDF"},
+          { text: "PMESP", callback_data: "PMESP"},
+          { text: "CBMESP", callback_data: "CBMESP"},
+        ],
+        [
+          { text: "PMMG", callback_data: "PMMG"},
+          { text: "CBMMG", callback_data: "CBMMG"},
+          { text: "PMGO", callback_data: "PMGO"},
+        ],
+        [
+          { text: "CBMGO", callback_data: "CBMGO"},
+          { text: "PMPR", callback_data: "PMPR"},
+          { text: "CBMPR", callback_data: "CBMPR"},
+        ],
+        [
+          { text: "PMSC", callback_data: "PMSC"},
+          { text: "CBMSC", callback_data: "CBMSC"},
+          { text: "BRIGADA MILITAR", callback_data: "BRIGADA MILITAR"},
+        ],
+        [
+          { text: "CBMRS", callback_data: "CBMRS"},
+          { text: "PMMS", callback_data: "PMMS"},
+          { text: "CBMMS", callback_data: "CBMMS"},
+        ],
+        [
+          { text: "PMMT", callback_data: "PMMT"},
+          { text: "CBMMT", callback_data: "CBMMT"},
+          { text: "PMBA", callback_data: "PMBA"},
+        ],
+        [
+          { text: "CBMBA", callback_data: "CBMBA"},
+          { text: "PMES", callback_data: "PMES"},
+          { text: "CBMES", callback_data: "CBMES"},
+        ],
+        [
+          { text: "PMAL", callback_data: "PMAL"},
+          { text: "CBMAL", callback_data: "CBMAL"},
+          { text: "PMSE", callback_data: "PMSE"},
+        ],
+        [
+          { text: "CBMSE", callback_data: "CBMSE"},
+          { text: "PMPE", callback_data: "PMPE"},
+          { text: "CBMPE", callback_data: "CBMPE"},
+        ],
+        [
+          { text: "PMRN", callback_data: "PMRN"},
+          { text: "CBMRN", callback_data: "CBMRN"},
+          { text: "PMCE", callback_data: "PMCE"},
+        ],
+        [
+          { text: "CBMCE", callback_data: "CBMCE"},
+          { text: "PMPI", callback_data: "PMPI"},
+          { text: "CBMPI", callback_data: "CBMPI"},
+        ],
+        [
+          { text: "PMMA", callback_data: "PMMA"},
+          { text: "CBMMA", callback_data: "CBMMA"},
+          { text: "PMAM", callback_data: "PMAM"},
+        ],
+        [
+          { text: "CBMAM", callback_data: "CBMAM"},
+          { text: "PMAP", callback_data: "PMAP"},
+          { text: "CBMAP", callback_data: "CBMAP"},
+        ],
+        [
+          { text: "PMERO", callback_data: "PMERO"},
+          { text: "CBMERO", callback_data: "CBMERO"},
+          { text: "PMTO", callback_data: "PMTO"},
+        ],
+        [
+          { text: "CBMTO", callback_data: "CBMTO"},
+          { text: "PMAC", callback_data: "PMAC"},
+          { text: "CBMAC", callback_data: "CBMAC"},
+        ],
+        [
+          { text: "PMPA", callback_data: "PMPA"},
+          { text: "CBMPA", callback_data: "CBMPA"},
+          { text: "PMRR", callback_data: "PMRR"},
+        ],
+        [
+          { text: "CBMRR", callback_data: "CBMRR"},
+          { text: "PMPB", callback_data: "PMPB"},
+          { text: "CBMPB", callback_data: "CBMPB"},
+        ],
       ],        
       },
     };
@@ -95,6 +180,91 @@ class Bot_bd_mil {
           { text: "[PMERJ Balcão vendas]", url: "https://t.me/"},
           { text: "[CBMERJ Balcão vendas]", url: "https://t.me/"},
           { text: "[PMDF Balcão vendas]", url: "https://t.me/F"},
+        ],
+        [
+          { text: "[CBMDF Balcão vendas]", url: "https://t.me/"},
+          { text: "[PMESP Balcão vendas]", url: "https://t.me/"},
+          { text: "[CBMESP Balcão vendas]", url: "https://t.me/F"},
+        ],
+        [
+          { text: "[PMMG Balcão vendas]", url: "https://t.me/"},
+          { text: "[CBMMG Balcão vendas]", url: "https://t.me/"},
+          { text: "[PMGO Balcão vendas]", url: "https://t.me/F"},
+        ],
+        [
+          { text: "[CBMGO Balcão vendas]", url: "https://t.me/"},
+          { text: "[PMPR Balcão vendas]", url: "https://t.me/"},
+          { text: "[CBMPR Balcão vendas]", url: "https://t.me/F"},
+        ],
+        [
+          { text: "[PMSC Balcão vendas]", url: "https://t.me/"},
+          { text: "[CBMSC Balcão vendas]", url: "https://t.me/"},
+          { text: "[BRIGADA MILITAR Balcão vendas]", url: "https://t.me/F"},
+        ],
+        [
+          { text: "[CBMRS Balcão vendas]", url: "https://t.me/"},
+          { text: "[PMMS Balcão vendas]", url: "https://t.me/"},
+          { text: "[CBMMS Balcão vendas]", url: "https://t.me/F"},
+        ],
+        [
+          { text: "[PMMT Balcão vendas]", url: "https://t.me/"},
+          { text: "[CBMMT Balcão vendas]", url: "https://t.me/"},
+          { text: "[PMBA Balcão vendas]", url: "https://t.me/F"},
+        ],
+        [
+          { text: "[CBMBA Balcão vendas]", url: "https://t.me/"},
+          { text: "[PMES Balcão vendas]", url: "https://t.me/"},
+          { text: "[CBMES Balcão vendas]", url: "https://t.me/F"},
+        ],
+        [
+          { text: "[PMAL Balcão vendas]", url: "https://t.me/"},
+          { text: "[CBMAL Balcão vendas]", url: "https://t.me/"},
+          { text: "[PMSE Balcão vendas]", url: "https://t.me/F"},
+        ],
+        [
+          { text: "[CBMSE Balcão vendas]", url: "https://t.me/"},
+          { text: "[PMPE Balcão vendas]", url: "https://t.me/"},
+          { text: "[CBMPE Balcão vendas]", url: "https://t.me/F"},
+        ],
+        [
+          { text: "[PMRN Balcão vendas]", url: "https://t.me/"},
+          { text: "[CBMRN Balcão vendas]", url: "https://t.me/"},
+          { text: "[PMCE Balcão vendas]", url: "https://t.me/F"},
+        ],
+        [
+          { text: "[CBMCE Balcão vendas]", url: "https://t.me/"},
+          { text: "[PMPI Balcão vendas]", url: "https://t.me/"},
+          { text: "[CBMPI Balcão vendas]", url: "https://t.me/F"},
+        ],
+        [
+          { text: "[PMMA Balcão vendas]", url: "https://t.me/"},
+          { text: "[CBMMA Balcão vendas]", url: "https://t.me/"},
+          { text: "[PMAM Balcão vendas]", url: "https://t.me/F"},
+        ],
+        [
+          { text: "[CBMAM Balcão vendas]", url: "https://t.me/"},
+          { text: "[PMAP Balcão vendas]", url: "https://t.me/"},
+          { text: "[CBMAP Balcão vendas]", url: "https://t.me/F"},
+        ],
+        [
+          { text: "[PMRO Balcão vendas]", url: "https://t.me/"},
+          { text: "[CBMRO Balcão vendas]", url: "https://t.me/"},
+          { text: "[PMTO Balcão vendas]", url: "https://t.me/F"},
+        ],
+        [
+          { text: "[CBMTO Balcão vendas]", url: "https://t.me/"},
+          { text: "[PMAC Balcão vendas]", url: "https://t.me/"},
+          { text: "[CBMAC Balcão vendas]", url: "https://t.me/F"},
+        ],
+        [
+          { text: "[PMPA Balcão vendas]", url: "https://t.me/"},
+          { text: "[CBMPA Balcão vendas]", url: "https://t.me/"},
+          { text: "[PMRR Balcão vendas]", url: "https://t.me/F"},
+        ],
+        [
+          { text: "[CBMRR Balcão vendas]", url: "https://t.me/"},
+          { text: "[PMPB Balcão vendas]", url: "https://t.me/"},
+          { text: "[CBMPB Balcão vendas]", url: "https://t.me/F"},
         ],
       ],        
       },
@@ -243,10 +413,10 @@ A qual instituição você pertence?
               data:{email: texto}
             })
             bot.sendMessage(id_telegram,`
-            Parabéns: 
+            Prontinho, seu cadastro foi realizado com sucesso!! 🥳
+Segue abaixo os Balcões que você pode acessar para comprar ou vender um produto!
             
-            Grupos.           
-                    ` 
+            ` 
                     ,grupos);
 
             }else{
@@ -254,6 +424,14 @@ A qual instituição você pertence?
             }          
 
             return
+          }
+          else{
+            bot.sendMessage(id_telegram,`
+            Prontinho, seu cadastro foi realizado com sucesso!! 🥳
+Segue abaixo os Balcões que você pode acessar para comprar ou vender um produto!
+            
+            ` 
+                    ,grupos);
           }
 
         }
@@ -264,6 +442,3 @@ A qual instituição você pertence?
 }
 
 export { Bot_bd_mil };
-
-
-
