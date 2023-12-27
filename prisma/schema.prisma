@@ -56,6 +56,7 @@ model Pedidos {
   delete              Int?
   status              String?
   valor               String?
+  categoria           String?
   titulo              String?
   nome                String?
   document            String?      
@@ -63,7 +64,7 @@ model Pedidos {
   id_telegram         String?
   phone               String?
   transacao_id        String?       @unique
-  msg_id              Int
+  msg_id              Int?
   user_id             String
   produto_id          Int
   updated_at          DateTime      @updatedAt @default(now())

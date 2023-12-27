@@ -148,7 +148,11 @@ Para R$ 1 mil reais e vinte centavos -> 1000.20
 `
 
 const produto_criado = `
+<<<<<<< HEAD
 ✔️Oferta de venda cadastrada!
+=======
+✔️ Oferta de venda cadastrada, se quiser cadastrar uma nova me avisa
+>>>>>>> refs/remotes/origin/main
 💡 Quando for decidir em comprar ou vender o produto/serviço, avalie também as recomendações.
 🤝 Gostaria de lembrar a importância de honrar acordos com o vendedor ou comprador no Balcão, depois de selar o acordo até a entrega do produto.
 ❌ O mau comportamento pode acarretar a exclusão do Balcão.
@@ -224,14 +228,61 @@ const produto_criado = `
         })
         bot.sendMessage(id_telegram, descricao, descarta_produto);        
       } catch (error) {
-        bot.sendMessage(id_telegram, `Ops algo deu errado o que você pretende fazer?`, botao_inicial); 
+        bot.sendMessage(id_telegram, `⚠️ Ops algo deu errado o que você pretende fazer?`, botao_inicial); 
       }
-    }    
+    }  
+    
+    if(texto_split[0]==='PAGAR'){ // Listar todo os produtos cadastrados       
+        const produto = await prisma_db.produtos.findUnique({
+          where:{id: parseInt(texto_split[1])}
+        })
+
+        if(produto){   
+          
+          await prisma_db.produtos.update({
+            where:{id:user.produto[0].id},
+            data:{
+              status:true
+            }
+          })
+
+          const dados = {
+            valor: parseFloat(texto_split[2]),
+            titulo: '',
+            nome: user.nome,
+            document: user.document,    
+            email: user.email,
+            id_telegram: id_telegram,
+            phone: '',
+            produto_id: parseInt(texto_split[1]),
+            user_id: user.id,
+          }
+
+          const pagamento = await Pagamento(dados)
+
+          if(pagamento.status==="ok"){
+            bot.sendMessage(id_telegram, `✔️ Escrever uma mensagem de confimação e explicação q precisa fazer para ativer o anúncio!`,  
+            {reply_markup: {
+            inline_keyboard: [
+            [
+            { text: "PAGAR", url: `https://bdmil.vercel.app/pg/${pagamento.url}`},
+            ],
+            ],      
+            },
+            });
+
+          }else{
+            bot.sendMessage(id_telegram, `Ops algo deu errado com seu pedido?`, botao_inicial);
+          }  
+        }else{
+          bot.sendMessage(id_telegram, `Ação?`, botao_inicial);
+        }
+    }  
     }
   });
 
   bot.on('message', async (msg:any) => {
-    // console.log('message', msg.text)    
+    console.log('message', msg.text)    
     const id_telegram = msg.chat.id.toString();
     const texto = msg.text;
     const name = msg.chat.first_name;
@@ -289,7 +340,7 @@ const produto_criado = `
           bot.sendMessage(id_telegram, valor); 
           return       
           } catch (error) {
-            bot.sendMessage(id_telegram, `Ops algo deu errado escreca sua descrição novamente`); 
+            bot.sendMessage(id_telegram, `⚠️ Ops algo deu errado escreva sua descrição novamente.`); 
           } 
           return
         }
@@ -333,7 +384,7 @@ Colocar informações e o preço para expor o anúncio!`,
             }); 
           return       
           } catch (error) {
-            bot.sendMessage(id_telegram, `⚠️ Ops algo deu errado escreva sua descrição novamente.`); 
+            bot.sendMessage(id_telegram, `Ops algo deu errado escreca sua descrição novamente`); 
           } 
           return
         }
