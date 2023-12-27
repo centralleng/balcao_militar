@@ -3,47 +3,39 @@ import { prisma_db } from "../../database/prisma_db";
 import moment from "moment";
 import api from "../api_asaas/api";
 
-export default async function Pagamento (documento:string, valor_produto:number) {     
-    
-    const valor = (valor_produto*0.03).toFixed(2)
-    
-    console.log(valor)
-    
-    const textoBoleto = ``
+interface dados {
+    valor: number;
+    titulo: string;
+    nome: string | null;
+    document: string | null;
+    email: string | null;
+    id_telegram: number;
+    phone: string;
+    produto_id: number;
+    user_id: string;
+}
 
-    let id_cliente
-
-    const data_pagamento = moment().add(1, 'day').format("YYYY-MM-DD")
-
-    try {
-        // Fazer um post no método de pagamento 
-        const {data}  = await api.get(`/customers?cpfCnpj=${documento}`);         
-      
-        id_cliente = data.data[0].id
-       
-        } catch (error) {
-            console.log(error)
-            throw new Error("assas");
+export default async function Pagamento (dados:dados) { 
+  
+    const criarPedido = await prisma_db.pedidos.create({
+        data:{
+            // valor: dados.valor,
+            titulo: dados.titulo,
+            nome: dados.nome,
+            document: dados.document,
+            email: dados.email,
+            id_telegram: dados.id_telegram.toString(),
+            phone: dados.phone,
+            produto_id: dados.produto_id,
+            user_id: dados.user_id,
         }
-
-    const dadosPIx = {
-        "customer": id_cliente,
-        "billingType": "PIX",
-        "value": valor,
-        "dueDate": data_pagamento,
-        // "description": textoBoleto,       
+    })     
+    
+    if(criarPedido) {
+        return {status:'ok', url: criarPedido.id}
+    }else{
+        return {status:'error', url: ''}
     }
-
-    try {
-        // Fazer um post no método de pagamento 
-        const {data}  = await api.post(`/payments`,dadosPIx);      
-
-        return data.invoiceUrl
-        
-        } catch (error) {
-            const dados:any = error
-            console.log(error)  
-        }
    
 }
 

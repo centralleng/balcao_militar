@@ -10,7 +10,7 @@ datasource db {
 model Users {
   id                  String        @id @default(uuid())
   delete              Int?
-  status              Int?
+  status              Boolean?
   nome                String?
   username            String?
   type_document       String?
@@ -26,14 +26,15 @@ model Users {
   created_at          DateTime      @default(now())
 
   produto             Produtos[]
+  pedido              Pedidos[]
 
   @@map("bdmil_users")
 }
 
 model Produtos {
-  id                  Int        @id @default(autoincrement())
+  id                  Int            @id @default(autoincrement())
   delete              Int?
-  status              Int?
+  status              Boolean?
   categoria           String?
   descricao           String?
   valor_produto       Float?
@@ -42,8 +43,35 @@ model Produtos {
   message_id          Int?  // Id quando cirar um produto, vamos precisar quando for deletar um produto             
   updated_at          DateTime      @updatedAt @default(now())
   created_at          DateTime      @default(now())
-  users               Users  @relation(fields: [user_id], references: [id])
+
+  users               Users         @relation(fields: [user_id], references: [id])
+
+  pedido              Pedidos[]
 
   @@map("bdmil_produtos")
+}
+
+model Pedidos {
+  id                  Int          @id @default(autoincrement())
+  delete              Int?
+  status              String?
+  valor               String?
+  titulo              String?
+  nome                String?
+  document            String?      
+  email               String?
+  id_telegram         String?
+  phone               String?
+  transacao_id        String?       @unique
+  msg_id              Int
+  user_id             String
+  produto_id          Int
+  updated_at          DateTime      @updatedAt @default(now())
+  created_at          DateTime      @default(now())
+
+  users               Users         @relation(fields: [user_id], references: [id])
+  produto             Produtos      @relation(fields: [produto_id], references: [id])
+
+  @@map("bdmil_pedidos")
 }
 

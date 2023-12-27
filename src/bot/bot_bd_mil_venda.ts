@@ -148,7 +148,7 @@ Para R$ 1 mil reais e vinte centavos -> 1000.20
 `
 
 const produto_criado = `
-✔️Oferta de venda cadastrada, se quiser cadastrar uma nova me avisa
+✔️Oferta de venda cadastrada!
 💡 Quando for decidir em comprar ou vender o produto/serviço, avalie também as recomendações.
 🤝 Gostaria de lembrar a importância de honrar acordos com o vendedor ou comprador no Balcão, depois de selar o acordo até a entrega do produto.
 ❌ O mau comportamento pode acarretar a exclusão do Balcão.
@@ -226,7 +226,54 @@ const produto_criado = `
       } catch (error) {
         bot.sendMessage(id_telegram, `Ops algo deu errado o que você pretende fazer?`, botao_inicial); 
       }
-    }    
+    }  
+    
+    if(texto_split[0]==='PAGAR'){ // Listar todo os produtos cadastrados       
+        const produto = await prisma_db.produtos.findUnique({
+          where:{id: parseInt(texto_split[1])}
+        })
+
+        if(produto){   
+          
+          await prisma_db.produtos.update({
+            where:{id:user.produto[0].id},
+            data:{
+              status:true
+            }
+          })
+
+          const dados = {
+            valor: parseFloat(texto_split[2]),
+            titulo: '',
+            nome: user.nome,
+            document: user.document,    
+            email: user.email,
+            id_telegram: id_telegram,
+            phone: '',
+            produto_id: parseInt(texto_split[1]),
+            user_id: user.id,
+          }
+
+          const pagamento = await Pagamento(dados)
+
+          if(pagamento.status==="ok"){
+            bot.sendMessage(id_telegram, `✔️ Escrever uma mensagem de confimação e explicação q precisa fazer para ativer o anúncio!`,  
+            {reply_markup: {
+            inline_keyboard: [
+            [
+            { text: "PAGAR", url: `https://bdmil.vercel.app/pg/${pagamento.url}`},
+            ],
+            ],      
+            },
+            });
+
+          }else{
+            bot.sendMessage(id_telegram, `Ops algo deu errado com seu pedido?`, botao_inicial);
+          }  
+        }else{
+          bot.sendMessage(id_telegram, `Ação?`, botao_inicial);
+        }
+    }  
     }
   });
 
@@ -247,7 +294,7 @@ const produto_criado = `
             take: 1, // Apenas o último produto
           },
         },
-      });
+      });  
 
     if(!user){
       bot.sendMessage(id_telegram, `Primeiro precisar fazer seu cadastro`);
@@ -273,46 +320,122 @@ const produto_criado = `
         return
       }
 
-      if(user.produto&&!user.produto[0].status){
-        // if(user.produto&&user.produto[0].descricao===null){
-        //   bot.sendMessage(id_telegram, descricao, descarta_produto); 
-        //   return
-        // }
-        if(user.produto&&user.produto[0].valor_produto===null){        
+      if(user.produto[0].status){
+        bot.sendMessage(id_telegram, 'Escolha sua ação', botao_inicial);
+        return
+      }
+      if(user.produto&&!user.produto[0].status){  
+        if(user.produto&&user.produto[0].descricao===null){        
           try {
             await prisma_db.produtos.update({
               where:{id:user.produto[0].id},
               data:{
-                valor_produto: parseFloat(texto) 
+                descricao: texto,                
               }
-            })            
-          bot.sendMessage(id_telegram, valor, descarta_produto); 
+            })        
+          bot.sendMessage(id_telegram, valor); 
           return       
           } catch (error) {
             bot.sendMessage(id_telegram, `Ops algo deu errado escreca sua descrição novamente`); 
           } 
           return
         }
-        // if(user.produto&&!user.produto[0].status){
 
-        //   const documento = user.document||''
-        //   const valor_produto = parseFloat(texto) 
+        if(user.produto&&user.produto[0].valor_produto===null){        
+          try {
+            await prisma_db.produtos.update({
+              where:{id:user.produto[0].id},
+              data:{
+                valor_produto: parseFloat(texto),   
+                status: true             
+              }
+            })  
+            
+            const valor_anuncio = parseFloat(texto)*0.03
 
-        //   const pagamento = await Pagamento(documento, valor_produto)
-        //   console.log(pagamento)
+            const taxa_empresa =()=>{
 
-        //   bot.sendMessage(id_telegram, 'Faça o pagamento ',           
-        //   {reply_markup: {
-        //     inline_keyboard: [
-        //     [
-        //     { text: "PAGAR", url: pagamento},
-        //     ],
-        //     ],      
-        //     },
-        //   }
-        //   );
+              if(parseFloat(texto)<167){
+                return 3
+              }
+              if(parseFloat(texto)>1000){
+                return 30
+              }
+              return valor_anuncio
+            }
+
+            bot.sendMessage(id_telegram, `
+✔️Dados coletados, ative seu produto!
+
+Valor anúncio R$ ${taxa_empresa()}
+
+Colocar informações e o preço para expor o anúncio!`,  
+            {reply_markup: {
+            inline_keyboard: [
+            [
+            { text: "QUERO ATIVAR", callback_data: `PAGAR_${user.produto[0].id}_${taxa_empresa()}`},
+            ],
+            ],      
+            },
+            }); 
+          return       
+          } catch (error) {
+            bot.sendMessage(id_telegram, `Ops algo deu errado escreca sua descrição novamente`); 
+          } 
+          return
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // if(user.produto&&!user.produto[0].status){        
+        //   try {
+        //     await prisma_db.produtos.update({
+        //       where:{id:user.produto[0].id},
+        //       data:{
+        //         valor_produto: parseFloat(texto),
+        //         status: true 
+        //       }
+        //     })            
+        //   bot.sendMessage(id_telegram, finalizar_cadastro,  
+        //       {reply_markup: {
+        //         inline_keyboard: [
+        //         [
+        //         { text: "PAGAR", callback_data: `PAGAR_${user.produto[0].id}`},
+        //         ],
+        //         ],      
+        //         },
+        //       }); 
+        //   return       
+        //   } catch (error) {
+        //     bot.sendMessage(id_telegram, `Ops algo deu errado escreca sua descrição novamente`); 
+        //   } 
         //   return
-        // }
+        // }   
+        
+        
+
+
+
+
+
+
+
+
+
+
       }else{
         bot.sendMessage(id_telegram, 'Escolha sua ação', botao_inicial);
       }

@@ -26,16 +26,7 @@ async function Cadastro_usersService ( dados: dados, id_user:string) {
     }
 
     const users = await prisma_db.users.create({
-      data:{
-        type               :dados.type,
-        nome               :dados.nome,
-        documento          :dados.type,
-        type_document      :dados.type,
-        email              :dados.type,  
-        ddd_phone          :dados.type,
-        phone              :dados.type,
-        token_auth_password:dados.type,
-        avatar_url         :dados.type
+      data:{      
 
       }
 
