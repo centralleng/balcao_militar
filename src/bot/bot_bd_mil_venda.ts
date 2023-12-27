@@ -101,11 +101,11 @@ const texto_inicial = `
 `
 
 const atencao = `
-❗️O balcão é monitorado e os procedimentos são assistidos. Boas práticas em todo o processo é essencial. Não serão emitidos alertas ou advertências prévias antes de qualquer exclusão de usuário.
+❗️ O balcão é monitorado e os procedimentos são assistidos. Boas práticas em todo o processo é essencial. Não serão emitidos alertas ou advertências prévias antes de qualquer exclusão de usuário.
 `
 
 const categoria = `
-✔️Opa! Qual Departamento se encaixa o produto? (referencial comparativo de artigos civis: Ponto Frio) 
+✔️ Opa! Qual Departamento se encaixa o produto? (referencial comparativo de artigos civis: Ponto Frio) 
 `
 
 const formato_venda = `
@@ -134,13 +134,13 @@ Descreva de forma sucinta o produto que você quer ofertar, incluindo obrigatori
 const valor = `
 Qual valor pretendido? (escreva somente números. Caso haja centavos coloque ponto)
 
-Exemplos:
+💵 Exemplos:
 
 Para R$ 1 real -> 1.00
 Para R$ 10 reais -> 10.00
 Para R$ 1 mil reais -> 1000.00
 
-Exemplos com os centavos:
+🪙 Exemplos com os centavos:
 
 Para R$ 1 real e vinte centavos -> 1.20
 Para R$ 10 reais e vinte centavos -> 10.20
@@ -174,12 +174,12 @@ const produto_criado = `
       });
 
       if(!user){
-        bot.sendMessage(id_telegram, `Primeiro precisar fazer seu cadastro`);
+        bot.sendMessage(id_telegram, `⚠️ Primeiro precisar fazer seu cadastro`);
         return
       }    
   
       if(username===null){
-        bot.sendMessage(id_telegram, `Cadastre um User Name`);
+        bot.sendMessage(id_telegram, `⚠️ Cadastre um User Name`);
       }else{
 
     if(texto==='VENDER'){ // Entra no fluxo de venda basta criar um produto e não finalizar o processo, so vai parar quando finalizar ou cancelar -> cancelar seguinifica apagar o produto.
@@ -195,7 +195,7 @@ const produto_criado = `
         await bot.sendMessage(id_telegram, `Artigos Civis`, artigos_civis);
 
        }else{
-        bot.sendMessage(id_telegram, `Você precisa finalizar o produto que vc deu inicio na criação ou deletar`, msg_deletar_produto);
+        bot.sendMessage(id_telegram, `⚠️ Primeiro você precisa finalizar o produto que deu inicio na criação ou deleta-lo.`, msg_deletar_produto);
        }      
     }
 
@@ -208,9 +208,9 @@ const produto_criado = `
         await prisma_db.produtos.delete({
           where:{id: user.produto[0].id}
         })
-        bot.sendMessage(id_telegram, `Produto deletado com sucesso!`, botao_inicial);
+        bot.sendMessage(id_telegram, `✅ Produto deletado com sucesso!`, botao_inicial);
       }else{
-        bot.sendMessage(id_telegram, `Algo deu errado, entre em contato com o suporte`, suporte);
+        bot.sendMessage(id_telegram, `⚠️ Algo deu errado, entre em contato com o suporte.`, suporte);
       }
     }
 
@@ -226,54 +226,7 @@ const produto_criado = `
       } catch (error) {
         bot.sendMessage(id_telegram, `Ops algo deu errado o que você pretende fazer?`, botao_inicial); 
       }
-    }  
-    
-    if(texto_split[0]==='PAGAR'){ // Listar todo os produtos cadastrados       
-        const produto = await prisma_db.produtos.findUnique({
-          where:{id: parseInt(texto_split[1])}
-        })
-
-        if(produto){   
-          
-          await prisma_db.produtos.update({
-            where:{id:user.produto[0].id},
-            data:{
-              status:true
-            }
-          })
-
-          const dados = {
-            valor: parseFloat(texto_split[2]),
-            titulo: '',
-            nome: user.nome,
-            document: user.document,    
-            email: user.email,
-            id_telegram: id_telegram,
-            phone: '',
-            produto_id: parseInt(texto_split[1]),
-            user_id: user.id,
-          }
-
-          const pagamento = await Pagamento(dados)
-
-          if(pagamento.status==="ok"){
-            bot.sendMessage(id_telegram, `✔️ Escrever uma mensagem de confimação e explicação q precisa fazer para ativer o anúncio!`,  
-            {reply_markup: {
-            inline_keyboard: [
-            [
-            { text: "PAGAR", url: `https://bdmil.vercel.app/pg/${pagamento.url}`},
-            ],
-            ],      
-            },
-            });
-
-          }else{
-            bot.sendMessage(id_telegram, `Ops algo deu errado com seu pedido?`, botao_inicial);
-          }  
-        }else{
-          bot.sendMessage(id_telegram, `Ação?`, botao_inicial);
-        }
-    }  
+    }    
     }
   });
 
@@ -297,12 +250,12 @@ const produto_criado = `
       });  
 
     if(!user){
-      bot.sendMessage(id_telegram, `Primeiro precisar fazer seu cadastro`);
+      bot.sendMessage(id_telegram, `⚠️ Primeiro você precisar se cadastrar!`);
       return
     }
 
     if(username===null){
-      bot.sendMessage(id_telegram, `Cadastre um User Name`);
+      bot.sendMessage(id_telegram, `⚠️ Cadastre um User Name!`);
     }else{
       // Inicio dos comandos /////////////////////////////////////////////
       if(username!=user?.username){ // So estou atualizando o user name no banco de dados mais nada.
@@ -316,7 +269,7 @@ const produto_criado = `
         await bot.sendMessage(id_telegram, texto_inicial);
         await bot.sendMessage(id_telegram, formato_venda);
         await bot.sendMessage(id_telegram, atencao);
-        bot.sendMessage(id_telegram, 'Escolha sua ação', botao_inicial);
+        bot.sendMessage(id_telegram, 'Escolha sua ação:', botao_inicial);
         return
       }
 
@@ -380,7 +333,7 @@ Colocar informações e o preço para expor o anúncio!`,
             }); 
           return       
           } catch (error) {
-            bot.sendMessage(id_telegram, `Ops algo deu errado escreca sua descrição novamente`); 
+            bot.sendMessage(id_telegram, `⚠️ Ops algo deu errado escreva sua descrição novamente.`); 
           } 
           return
         }
@@ -437,7 +390,7 @@ Colocar informações e o preço para expor o anúncio!`,
 
 
       }else{
-        bot.sendMessage(id_telegram, 'Escolha sua ação', botao_inicial);
+        bot.sendMessage(id_telegram, 'Escolha sua ação:', botao_inicial);
       }
 
 

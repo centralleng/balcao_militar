@@ -146,10 +146,10 @@ input{}
 
 FINALIZAÇÃO DO PROCESSO DE CADASTRO DO PRODUTO!!
 :::::::::::::::::::::::::::::::::::::::::::::
-✔️Oferta de venda cadastrada, se quiser cadastrar uma nova me avisa
-▪️ Se quiser excluir a oferta, me envia apenas: Excluir 9999999
-▪️ Se quiser modificar, me envia apenas: modificar 999999
-▪️ Se quiser atualizar, me envia apenas: atualizar 999999
+✔️ Oferta de venda cadastrada, se quiser cadastrar uma nova me avisa
+❌ Se quiser excluir a oferta, me envia apenas: Excluir 9999999
+📝 Se quiser modificar, me envia apenas: modificar 999999
+📝 Se quiser atualizar, me envia apenas: atualizar 999999
 💡 Quando for decidir em comprar ou vender o produto/serviço, avalie também as recomendações.
 🤝 Gostaria de lembrar a importância de honrar acordos com o vendedor ou comprador no Balcão, depois de selar o acordo até a entrega do produto.
 ❌ O mau comportamento pode acarretar a exclusão do Balcão.
