@@ -1,7 +1,4 @@
-import crypto from "crypto";
 import { prisma_db } from "../../database/prisma_db";
-import moment from "moment";
-import api from "../api_asaas/api";
 
 interface dados {
     valor: number;
@@ -18,7 +15,7 @@ interface dados {
 export default async function Pagamento (dados:dados) { 
   
     const criarPedido = await prisma_db.pedidos.create({
-        data:{
+        data: {
             // valor: dados.valor,
             titulo: dados.titulo,
             nome: dados.nome,

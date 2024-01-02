@@ -18,4 +18,7 @@ pagamento_controller.handle);
 router.post("/update_pagamento",
 update_pagamento_controller.handle);
 
+router.post("/consulta_pedido",
+update_pagamento_controller.handle);
+
 export { router };

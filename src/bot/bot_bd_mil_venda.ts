@@ -353,11 +353,11 @@ const produto_criado = `
                 valor_produto: parseFloat(texto),   
                 status: true             
               }
-            })  
+            })         
             
             const valor_anuncio = parseFloat(texto)*0.03
 
-            const taxa_empresa =()=>{
+            const taxa_empresa =()=> {
 
               if(parseFloat(texto)<167){
                 return 3
