@@ -73,6 +73,21 @@ model Pedidos {
   users               Users         @relation(fields: [user_id], references: [id])
   produto             Produtos      @relation(fields: [produto_id], references: [id])
 
+  intencao            intencao_de_compra[]
+
   @@map("bdmil_pedidos")
 }
 
+model intencao_de_compra {
+  id                      Int           @id @default(autoincrement())
+  delete                  Int?
+  vendedor_id_telegram    String
+  comprador_id_telegram   String
+  pedido_id               Int
+  updated_at              DateTime      @updatedAt @default(now())
+  created_at              DateTime      @default(now())
+
+  pedido                  Pedidos       @relation(fields: [pedido_id], references: [id])
+
+  @@map("intencao_de_compra")
+}
