@@ -51,7 +51,7 @@ class Bot_bd_mil_comprar {
             if (pedido) {
               try { console.log("3")
                 // Cadastra a Intenção de compra do Comprador, no sistema.
-                const nova_intencao = await prisma_db.intencao_de_compra.create({
+                const nova_intencao = await prisma_db.intencao_de_compras.create({
                   data: {
                     vendedor_id_telegram:     pedido.user_id,
                     comprador_id_telegram:    id_telegram,
@@ -59,7 +59,7 @@ class Bot_bd_mil_comprar {
                   }
                 })
                 
-                const intencao = await prisma_db.intencao_de_compra.findFirst({
+                const intencao = await prisma_db.intencao_de_compras.findFirst({
                   where:  {pedido_id: pedido.id}
                 })
                 // Envio de mensagem para o vendedor indicando que existe um comprador interessando. Obs.: Mensagem enviada pelo bot BDMilQueroVender
