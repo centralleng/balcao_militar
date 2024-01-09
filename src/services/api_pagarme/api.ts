@@ -2,7 +2,6 @@ import axios from "axios";
 
 const username = process.env.DATABASE_PAGARME
 const password = ''
-console.log('eeeeeeeeeeeeeeeeeeeeeeee',username)
 
 const token = Buffer.from(`${username}:${password}`, 'utf8').toString('base64')
 

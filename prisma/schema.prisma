@@ -96,7 +96,7 @@ model intencao_de_compras {
 model Alertas {
   id                      Int           @id @default(autoincrement())
   delete                  Int?
-  vendedor_id_telegram    String
+  palavra    String
   comprador_id_telegram   String
   pedido_id               Int
   user_id                 String
