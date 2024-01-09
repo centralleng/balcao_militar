@@ -44,9 +44,18 @@ class Bot_bd_mil_comprar {
               where: { id_telegram: id_telegram },
               data: { username: username }
             })
-            const pedido = await prisma_db.pedidos.findUnique({
-              where: { id: Number(texto)}
-            })
+
+            let pedido:any
+
+            if(!Number.isNaN(parseInt(texto || ''))){
+              const pedido_db = await prisma_db.pedidos.findUnique({
+                where: { id: parseInt(texto||'')}
+              })
+              pedido = pedido_db
+            }else{pedido=false}
+
+            console.log(pedido)
+
             // Verifica se existe um produto com aquela ID, cadastrado no banco de dados.
             if (pedido) {
               try { console.log("3")
@@ -98,6 +107,8 @@ class Bot_bd_mil_comprar {
           } else {bot.sendMessage(id_telegram, `Identificamos que você ainda não possui um Username, cadastre um para continuar utilizando nossos serviços.`)}
         } else {bot.sendMessage(id_telegram, `Não foi encontrado seu cadastro em nosso banco de dados. Por favor, realize primeiro o seu cadastro no BOT BDMIL antes de utilizar nossos serviços.`, cadastro) }
       } catch (error) {
+
+        console.log(error)
         
       }
 

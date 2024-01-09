@@ -96,14 +96,12 @@ model intencao_de_compras {
 model Alertas {
   id                      Int           @id @default(autoincrement())
   delete                  Int?
-  palavra    String
-  comprador_id_telegram   String
-  pedido_id               Int
+  palavra_chave           String
   user_id                 String
   updated_at              DateTime      @updatedAt @default(now())
   created_at              DateTime      @default(now())
 
-  users               Users         @relation(fields: [user_id], references: [id])
+  users                   Users         @relation(fields: [user_id], references: [id])
 
   @@map("bdmil_alertas")
 }
