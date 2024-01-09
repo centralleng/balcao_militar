@@ -1,11 +1,12 @@
 import "reflect-metadata";
-import express, { Request, Response, NextFunction, request } from "express";
+import express, { Request, Response, NextFunction } from "express";
 import "express-async-errors";
 import { router } from "./routes";
 import cors from "cors"; // Para permitir utilização de fonte end externo.
 import { cronDiario } from "./cron/cronDiario";
 import { Bot_bd_mil } from "./bot/bot_bd_mil";
 import { Bot_bd_mil_venda } from "./bot/bot_bd_mil_venda";
+import { Bot_bd_mil_alestas } from "./bot/bot_bd_mil_alestas";
 
 const port = process.env.PORT || 4007;
 
@@ -13,9 +14,6 @@ const port = process.env.PORT || 4007;
 const app = express();
 
 app.use(cors()); // Para permitir utilização de fonte end externo.
-
-
-app.use('/files',express.static('src/public')); //pega as requisições e faz um json
 
 app.use(express.json()); //pega as requisições e faz um json
 
@@ -41,5 +39,6 @@ app.listen(port, function () {
 // Bot_bd_mil.execute()
 // Bot_bd_mil_venda.execute()
 // Bot_bd_mil_comprar.execute()
+Bot_bd_mil_alestas.execute()
 // cronDiario.envia()
 

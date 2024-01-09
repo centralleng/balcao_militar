@@ -4,15 +4,20 @@ import crypto from "crypto";
 import api from "../api_pagarme/api";
 
 interface dados {
+  metodo_pagamento: string,
   valor: string,
   nome: string,
   email: string,
-  documento: string,
-  telefone: string,
+  document: string,
   pedido_id: number,
+  telefone: string,
 }
 
 export default async function PagamentoPixServices(dados: dados) {
+
+  const indiceParenteses = dados.telefone.indexOf(')');
+  const telefone = dados.telefone.substring(indiceParenteses + 1).replace(/\D/g, '');
+  const ddd = dados.telefone.split('(')[1].split(')')[0];
 
   const codigo = crypto.randomBytes(3).toString('hex'); // Gera 6 dígitos entre letras e números
 
@@ -31,13 +36,13 @@ export default async function PagamentoPixServices(dados: dados) {
         "email": dados.email,
         "document_type": 'CPF', // : db_cliente.type_document,
         "type": 'Individual', // db_cliente.type,
-        "document": dados.documento.replace(/[^0-9]/g, ''), // db_cliente.documento, 66.917.329/0001-20
+        "document": dados.document, // db_cliente.documento, 66.917.329/0001-20
         
         "phones": {
             "home_phone": {
                 "country_code": '55', // EX. 55
-                "number": '',
-                "area_code": '', // DDD
+                "number": telefone,
+                "area_code": ddd, // DDD
             }
         }
     },
@@ -55,10 +60,13 @@ export default async function PagamentoPixServices(dados: dados) {
         }           
     } 
 
+  console.log(dadosPix.customer.phones)
+
   let dados_pagarme
     try {
     // Fazer um post no método de pagamento 
     const {data}  = await api.post("/orders", dadosPix);
+    console.log(data)
     if(data.status==="failed"){
       throw new Error('error');
     }
