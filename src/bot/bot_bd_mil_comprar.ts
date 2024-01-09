@@ -3,7 +3,7 @@ import TelegramBot from 'node-telegram-bot-api';
 import { prisma_db } from '../database/prisma_db';
 import axios from 'axios';
 
-const token_bot = '6962343359:AAERsmVCjSJczzeQ-ONe_nfVyQxQYDzFYlg'; // Token do bot do telegram... COPPS_START
+const token_bot = '6538633425:AAF8tFZoEjXGDv_yoSxadcYctG0ph_4Em-I'; // Token do bot do telegram... CentrallTest3
 
 const bot = new TelegramBot(token_bot, { polling: true });
 
