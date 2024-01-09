@@ -7,11 +7,11 @@ const token_bot = '6302850791:AAEllHI-dUdbpmhQ30havovumAAXBT1Qnmc'; // Token do 
 
 const bot = new TelegramBot(token_bot, { polling: true });
 
-class Bot_bd_mil_alestas {
+class Bot_bd_mil_alertas {
   static execute() {
 
     bot.on('message', async (msg) => {
-      console.log(msg)
+      // console.log(msg)o
 
       const id_telegram = msg.chat.id.toString();
       const texto = msg.text;
@@ -24,7 +24,35 @@ class Bot_bd_mil_alestas {
       if (user) {
         if (username) {
 
-          bot.sendMessage(id_telegram, ``);       
+          const msg_alerta = texto?texto.split(' '):''
+          console.log('1',msg_alerta[0])
+          console.log('2',msg_alerta[1])
+
+          if(msg_alerta[0]==='alerta'||msg_alerta[0]==='Alerta'){
+
+            if(msg_alerta[1]!=undefined){
+
+              // enviar a palara para função 
+
+              // enviar mensagem de confirmação 
+
+            }else{              
+              bot.sendMessage(id_telegram, `Forneça uma palavra válida`);
+            }
+
+          }else{
+
+          await bot.sendMessage(id_telegram, `
+
+Cadastre seus alertas (criar msg de alerta) - configuração enviar a palavra alerta com espaço e depois colocar uma palavra chave
+
+Exemplo:
+
+Alerta boots
+            
+          `); 
+
+          }      
          
         }else{
           // Precisa ser cirado um usernaime 
@@ -36,6 +64,4 @@ class Bot_bd_mil_alestas {
     )
   }
 }
-
-
-export { Bot_bd_mil_alestas };
+export { Bot_bd_mil_alertas };
