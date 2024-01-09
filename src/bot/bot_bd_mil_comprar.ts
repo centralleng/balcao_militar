@@ -23,17 +23,20 @@ class Bot_bd_mil_comprar {
 
     // Comendo para o Bot escutar mensagens.
     bot.on('message', async (msg) => {
-      console.log(msg)
+      console.log(msg)      
 
       const id_telegram = msg.chat.id.toString();
       const texto = msg.text;
       const name = msg.chat.first_name;
       const username = msg.chat.username;
+      console.log("Antes do Try")
 
       try {
         const user = await prisma_db.users.findUnique({
-          where: { id_telegram: id_telegram?.toString() },
+          where: { id_telegram: id_telegram},
         })
+        console.log("Depois do Try")
+        
         // Verifica se o usuário está cadastrado no Banco de dados.
         if (user) {
           console.log("1")
