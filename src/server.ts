@@ -6,7 +6,7 @@ import cors from "cors"; // Para permitir utilização de fonte end externo.
 import { cronDiario } from "./cron/cronDiario";
 import { Bot_bd_mil } from "./bot/bot_bd_mil";
 import { Bot_bd_mil_venda } from "./bot/bot_bd_mil_venda";
-import { Bot_bd_mil_alestas } from "./bot/bot_bd_mil_alestas";
+import { Bot_bd_mil_comprar } from "./bot/bot_bd_mil_comprar";
 
 const port = process.env.PORT || 4007;
 
@@ -37,8 +37,7 @@ app.listen(port, function () {
 });
 
 // Bot_bd_mil.execute()
-// Bot_bd_mil_venda.execute()
-// Bot_bd_mil_comprar.execute()
-Bot_bd_mil_alestas.execute()
+Bot_bd_mil_venda.execute()
+Bot_bd_mil_comprar.execute()
 // cronDiario.envia()
 
