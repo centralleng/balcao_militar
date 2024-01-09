@@ -34,7 +34,7 @@ class Bot_bd_mil_alertas {
 
               // enviar a palara para função 
 
-              // enviar mensagem de confirmação 
+              // enviar mensagem de confirmação
 
             }else{              
               bot.sendMessage(id_telegram, `Forneça uma palavra válida`);
