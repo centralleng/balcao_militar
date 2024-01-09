@@ -89,5 +89,5 @@ model intencao_de_compra {
 
   pedido                  Pedidos       @relation(fields: [pedido_id], references: [id])
 
-  @@map("intencao_de_compra")
+  @@map("bdmil_intencao_de_compra")
 }
