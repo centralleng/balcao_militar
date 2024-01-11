@@ -393,7 +393,7 @@ Para R$ 1 mil reais e vinte centavos -> 1000.20
                 bot.sendMessage(id_telegram, `
 ✔️Dados coletados, ative seu produto!
 
-Valor anúncio R$ ${taxa_empresa()}
+Valor anúncio ${(taxa_empresa()).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
 
 Colocar informações e o preço para expor o anúncio!`,
                   {
