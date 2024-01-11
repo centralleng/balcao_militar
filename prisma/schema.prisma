@@ -22,9 +22,10 @@ model Users {
   ddd_phone           String?
   phone               String?
   avatar_url          String?
+  recomendado         Int?
+  desaconselhado      Int?
   updated_at          DateTime      @updatedAt @default(now())
   created_at          DateTime      @default(now())
-
   produto             Produtos[]
   pedido              Pedidos[]
   alerta              Alertas[]
@@ -104,4 +105,16 @@ model Alertas {
   users                   Users         @relation(fields: [user_id], references: [id])
 
   @@map("bdmil_alertas")
+}
+
+model Grupos {
+  id                      Int           @id @default(autoincrement())
+  delete                  Int?
+  type                    String        @unique
+  link                    String
+  id_grupo                String
+  updated_at              DateTime      @updatedAt @default(now())
+  created_at              DateTime      @default(now())
+
+  @@map("bdmil_grupos")
 }

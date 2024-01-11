@@ -8,7 +8,7 @@ export default async function Cadastar_palavra_chave_service(palavra_chave:strin
             palavra_chave: palavra_chave,
             user_id: user_id,
         }
-    })
+    }) 
 
-    
+    return alerta  
 }
