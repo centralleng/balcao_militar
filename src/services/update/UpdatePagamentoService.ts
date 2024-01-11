@@ -3,9 +3,9 @@ import { prisma_db } from "../../database/prisma_db";
 import moment from "moment";
 
 interface dados {
-  transacao_id: string,
-  status: string,
-  pedido_id: number
+  pagamento_id: string, 
+  status: string, 
+  porduto_id: number
 }
 
 export default async function UpdatePagamentoService(dados: dados) {
@@ -13,7 +13,7 @@ export default async function UpdatePagamentoService(dados: dados) {
   console.log('Passo 02',dados)
 
 const pedido = await prisma_db.pedidos.findUnique({
-  where:{transacao_id: dados.transacao_id},
+  where:{transacao_id: dados.pagamento_id},
   include:{
     produto:true,
     users:true,
