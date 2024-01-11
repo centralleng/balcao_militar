@@ -288,12 +288,15 @@ Para R$ 1 mil reais e vinte centavos -> 1000.20
     });
 
     bot.on('message', async (msg: any) => {
-      console.log('message', msg.text)
+      // console.log('message', msg.text)
       const id_telegram = msg.chat.id.toString();
       const texto = msg.text;
       const name = msg.chat.first_name;
       const username = msg.chat.username;
       const message_id = msg.message_id;
+
+      const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...'); 
+      const messageId = msg_del.message_id.toString()
 
       // Primeiro verifica se ja axiste esse usuário
       const user = await prisma_db.users.findUnique({
@@ -331,7 +334,8 @@ Para R$ 1 mil reais e vinte centavos -> 1000.20
         }
 
         if (user.produto[0].status) {
-          bot.sendMessage(id_telegram, 'Escolha sua ação', botao_inicial);
+          await bot.deleteMessage(id_telegram, messageId)
+          bot.sendMessage(id_telegram, 'Escolha sua ação:', botao_inicial);         
           return
         }
 
@@ -390,7 +394,7 @@ Para R$ 1 mil reais e vinte centavos -> 1000.20
                   return valor_anuncio
                 }
 
-                bot.sendMessage(id_telegram, `
+              bot.sendMessage(id_telegram, `
 ✔️Dados coletados, ative seu produto!
 
 Valor anúncio ${(taxa_empresa()).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
@@ -400,11 +404,12 @@ Colocar informações e o preço para expor o anúncio!`,
                     reply_markup: {
                       inline_keyboard: [
                         [
-                          { text: "QUERO ATIVAR", callback_data: `PAGAR_${user.produto[0].id}_${taxa_empresa()}` },
+                          { text: "QUERO ATIVAR", callback_data: `PAGAR_${user.produto[0].id}_${Math.round(taxa_empresa() * 100)}` },
                         ],
                       ],
                     },
                   });
+            
                 return
               } catch (error) {
                 bot.sendMessage(id_telegram, `Ops algo deu errado escreca sua descrição novamente`);

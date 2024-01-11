@@ -90,10 +90,6 @@ Código produto ${pedido.produto.id}.
 
 Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor acordado ao comprador.
 
-Conta verificada ✅
-
-Membro desde ${moment(pedido.users.created_at).format('DD-MM-YYYY')}
-
 `,
     });
         
