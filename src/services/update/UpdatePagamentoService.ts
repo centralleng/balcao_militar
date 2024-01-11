@@ -10,8 +10,6 @@ interface dados {
 
 export default async function UpdatePagamentoService(dados: dados) {
 
-console.log('passo 02',dados)
-
 const pedido = await prisma_db.pedidos.findUnique({
   where:{transacao_id: dados.pagamento_id},
   include:{
@@ -20,8 +18,6 @@ const pedido = await prisma_db.pedidos.findUnique({
   }
 })
 
-console.log('pedido',pedido)
-
 const valor = pedido?.produto.valor_produto || 0
 const recomendado = pedido?.users.recomendado || 0
 const desaconselhado = pedido?.users.desaconselhado || 0
@@ -29,12 +25,12 @@ const descricao:any = pedido?.produto.descricao
 
 const alerta = await prisma_db.alertas.findMany()
 
-console.log('001')
-
 const alertas = alerta.filter((item) => descricao.includes(item.palavra_chave));
-const usuarios_id = alertas.map(item => { return item.id})
+const usuarios_idNumeros = alertas.map(item => {item.id})
 
-console.log('alests',alertas)
+const usuarios_id = usuarios_idNumeros.join(',');
+
+console.log('map:', usuarios_idNumeros, 'join', usuarios_id)
 
 if(pedido){
   await prisma_db.pedidos.update({
@@ -46,13 +42,9 @@ if(pedido){
 
   if(dados.status==='pago'){
 
-    console.log('002')
-
     const grupo = await prisma_db.grupos.findUnique({
       where:{type: pedido.produto.categoria||''}
-    })
-
-    console.log('grupos',grupo)
+    }) 
 
     if(grupo){
 
@@ -115,7 +107,7 @@ Membro desde ${moment(pedido.users.created_at).format('DD-MM-YYYY')}
         // Enviar msg para aleras cadastrados 
    await axios.post('https://api.telegram.org/bot6962343359:AAERsmVCjSJczzeQ-ONe_nfVyQxQYDzFYlg/sendMessage', // Bot bdmil_venda
    {
-     chat_id: [usuarios_id],
+     chat_id: usuarios_id,
      text: `
 
      🚨Alerta
