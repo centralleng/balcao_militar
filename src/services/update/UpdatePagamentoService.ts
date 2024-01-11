@@ -38,7 +38,7 @@ console.log('03')
 
 
 console.log(
-  'pedido:', pedido,
+  'pedidos:', pedido,
   'alertas:', alerta,
   'map ids_telegram:', usuarios_id,
 )
