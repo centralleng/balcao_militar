@@ -34,15 +34,6 @@ console.log(
   'map ids_telegram:', usuarios_id,
 )
 
-console.log(
-  'dados compra:',
-valor,
-recomendado,
-desaconselhado,
-descricao,
-)
-
-
 if(pedido){
   await prisma_db.pedidos.update({
     where:{id: pedido.id},
