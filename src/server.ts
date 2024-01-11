@@ -40,6 +40,6 @@ app.listen(port, function () {
 // Bot_bd_mil.execute()
 // Bot_bd_mil_venda.execute()
 // Bot_bd_mil_comprar.execute()
-Bot_bd_mil_alertas.execute()
+// Bot_bd_mil_alertas.execute()
 // cronDiario.envia()
 

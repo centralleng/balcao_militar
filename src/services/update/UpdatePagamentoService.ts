@@ -27,7 +27,11 @@ const recomendado = pedido?.users.recomendado || 0
 const desaconselhado = pedido?.users.desaconselhado || 0
 const descricao:any = pedido?.produto.descricao
 
+console.log('001')
+
 const alerta = await prisma_db.alertas.findMany()
+
+console.log('001',alerta)
 
 const alertas = alerta.filter((item)=> item.palavra_chave in descricao)
 const usuarios_id = alertas.map(item => { return item.id})
@@ -41,6 +45,8 @@ if(pedido){
   })
 
   if(dados.status==='pago'){
+
+    console.log('002')
 
     const grupo = await prisma_db.grupos.findUnique({
       where:{type: pedido.produto.categoria||''}
