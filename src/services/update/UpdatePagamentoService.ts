@@ -10,6 +10,8 @@ interface dados {
 
 export default async function UpdatePagamentoService(dados: dados) {
 
+  console.log('Passo 02',dados)
+
 const pedido = await prisma_db.pedidos.findUnique({
   where:{transacao_id: dados.transacao_id},
   include:{
@@ -18,15 +20,21 @@ const pedido = await prisma_db.pedidos.findUnique({
   }
 })
 
+console.log('01')
+
 const valor = pedido?.produto.valor_produto || 0
 const recomendado = pedido?.users.recomendado || 0
 const desaconselhado = pedido?.users.desaconselhado || 0
 const descricao:any = pedido?.produto.descricao
 
+console.log('02')
+
 const alerta = await prisma_db.alertas.findMany()
 
 const alertas = alerta.filter((item)=> item.palavra_chave in descricao)
 const usuarios_id = alertas.map(item => { return item.id})
+
+console.log('03')
 
 
 console.log(
