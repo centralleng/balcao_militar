@@ -26,11 +26,7 @@ const descricao:any = pedido?.produto.descricao
 const alerta = await prisma_db.alertas.findMany()
 
 const alertas = alerta.filter((item) => descricao.includes(item.palavra_chave));
-const usuarios_idNumeros = alertas.map(item => {item.id})
-
-const usuarios_id = usuarios_idNumeros.join(',');
-
-console.log('map:', usuarios_idNumeros, 'join', usuarios_id)
+const usuarios_id = alertas.map(item => {return item.id_telegram})
 
 if(pedido){
   await prisma_db.pedidos.update({
@@ -102,39 +98,40 @@ Membro desde ${moment(pedido.users.created_at).format('DD-MM-YYYY')}
     });
         
       } catch (error) {console.log('erro 02')}
-      
-      try {
-        // Enviar msg para aleras cadastrados 
-   await axios.post('https://api.telegram.org/bot6962343359:AAERsmVCjSJczzeQ-ONe_nfVyQxQYDzFYlg/sendMessage', // Bot bdmil_venda
-   {
-     chat_id: usuarios_id,
-     text: `
 
-     🚨Alerta
+for await (const i of usuarios_id){
+  try {
+    // Enviar msg para aleras cadastrados 
+await axios.post('https://api.telegram.org/bot6302850791:AAEllHI-dUdbpmhQ30havovumAAXBT1Qnmc/sendMessage', // bot CentrallTest4
+{
+ chat_id: i,
+ text: `
+🚨 Alerta
 
-     Interessado em vender (fardamento)
+Interessado em vender (fardamento)
 
-     ${pedido.produto.descricao}
-     
-     Valor ${(valor/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
-     
-     Envie o código ${pedido.produto.id} para @BDMilquerocomprar para comprar dele.
-     
-     ${recomendado>0?`Recomendado por mais de ${recomendado} pessoas`:`Ainda não recomendado`}
-     
-     ${desaconselhado>0?`desaconselhado por ${desaconselhado} pessoas ${desaconselhado} pessoas`:`Não desaconselhado ainda por ostros usuários`}
-     
-     Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor acordado ao comprador.
-     
-     Conta verificada ✅
-     
-     Membro desde ${moment(pedido.users.created_at).format('DD-MM-YYYY')}
+${pedido.produto.descricao}
+
+Valor ${(valor/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
+
+Envie o código ${pedido.produto.id} para @BDMilquerocomprar para comprar dele.
+
+${recomendado>0?`Recomendado por mais de ${recomendado} pessoas`:`Ainda não recomendado`}
+
+${desaconselhado>0?`desaconselhado por ${desaconselhado} pessoas ${desaconselhado} pessoas`:`Não desaconselhado ainda por ostros usuários`}
+
+Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor acordado ao comprador.
+
+Conta verificada ✅
+
+Membro desde ${moment(pedido.users.created_at).format('DD-MM-YYYY')}
 
 `,
-   });
-       
-     } catch (error) {console.log('erro 03')}   
+});
+   
+ } catch (error) {console.log('erro 03')}
 
+} 
     }else{
       // enviar informação de falha 
     }

@@ -94,7 +94,7 @@ class Bot_bd_mil_alertas {
               const palavra_chave = msg_alerta[1]
               const user_id = user.id
 
-              const alerta = await Cadastar_palavra_chave_service(palavra_chave, user_id) 
+              const alerta = await Cadastar_palavra_chave_service(palavra_chave, user_id, id_telegram) 
               bot.sendMessage(id_telegram, `Alerta: ✅ ${alerta.palavra_chave} ✅ cadastrado com sucesso!`,
               {
                 reply_markup: {

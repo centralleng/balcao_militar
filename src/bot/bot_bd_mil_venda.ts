@@ -162,6 +162,8 @@ Para R$ 1 mil reais e vinte centavos -> 1000.20
       const message_id = msg.message?.message_id;
       const texto_split = texto.split('_')
 
+      console.log(username)
+
       // Primeiro verifica se ja axiste esse usuário
       const user = await prisma_db.users.findUnique({
         where: { id_telegram: id_telegram?.toString() },
@@ -178,12 +180,12 @@ Para R$ 1 mil reais e vinte centavos -> 1000.20
         return
       }
 
-      if (username === null) {
+      if (username === undefined) {
         bot.sendMessage(id_telegram, `⚠️ Cadastre um User Name`);
       } else {
 
         const user_name = await prisma_db.users.update({
-          where: {id_telegram: id_telegram},
+          where: {id_telegram: id_telegram.toString()},
           data: {username: username}
         })
 
@@ -307,7 +309,7 @@ Para R$ 1 mil reais e vinte centavos -> 1000.20
         return
       }
 
-      if (username === null) {
+      if (username === undefined) {
         bot.sendMessage(id_telegram, `⚠️ Cadastre um User Name!`);
       } else {
         // Inicio dos comandos /////////////////////////////////////////////
