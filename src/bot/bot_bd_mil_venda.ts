@@ -250,7 +250,7 @@ Para R$ 1 mil reais e vinte centavos -> 1000.20
             })
 
             const dados = {
-              valor: parseFloat(texto_split[2]),
+              valor: texto_split[2].replace(/\./g, ''),
               titulo: '',
               nome: user.nome,
               document: user.document,
@@ -260,6 +260,8 @@ Para R$ 1 mil reais e vinte centavos -> 1000.20
               produto_id: parseInt(texto_split[1]),
               user_id: user.id,
             }
+
+            console.log(dados)
 
             const pagamento = await Pagamento(dados)
 
@@ -332,6 +334,7 @@ Para R$ 1 mil reais e vinte centavos -> 1000.20
           bot.sendMessage(id_telegram, 'Escolha sua ação', botao_inicial);
           return
         }
+
         if (user.produto && !user.produto[0].status) {
           if (user.produto && user.produto[0].descricao === null) {
 
@@ -362,13 +365,11 @@ Para R$ 1 mil reais e vinte centavos -> 1000.20
 
             if (isValorMonetarioValido(texto)) {
 
-              console.log('teste', parseFloat(texto))
-
               try {
                 await prisma_db.produtos.update({
                   where: { id: user.produto[0].id },
                   data: {
-                    valor_produto: parseFloat(texto),
+                    valor_produto: texto.replace(/\./g, ''),
                     status: true
                   }
                 })
@@ -376,13 +377,16 @@ Para R$ 1 mil reais e vinte centavos -> 1000.20
                 const valor_anuncio = parseFloat(texto) * 0.03
 
             const taxa_empresa =()=>{
+              // Montar condicionais de %
+                  if (user.produto[0].categoria==="VEICULO") {
 
-                  if (parseFloat(texto) < 167) {
-                    return 3
+                    const valor_anuncio = parseFloat(texto) * 0.01
+
+                    return valor_anuncio
                   }
-                  if (parseFloat(texto) > 1000) {
-                    return 30
-                  }
+                  // if (parseFloat(texto) > 1000) {
+                  //   return 30
+                  // }
                   return valor_anuncio
                 }
 

@@ -39,7 +39,7 @@ model Produtos {
   status              Boolean?
   categoria           String?
   descricao           String?
-  valor_produto       Float?
+  valor_produto       String?
   link_pagamento      String?
   user_id             String
   message_id          Int?  // Id quando cirar um produto, vamos precisar quando for deletar um produto             

@@ -18,7 +18,7 @@ const pedido = await prisma_db.pedidos.findUnique({
   }
 })
 
-const valor = pedido?.produto.valor_produto || 0
+const valor = pedido?.produto.valor_produto || ''
 const recomendado = pedido?.users.recomendado || 0
 const desaconselhado = pedido?.users.desaconselhado || 0
 const descricao:any = pedido?.produto.descricao
@@ -55,7 +55,7 @@ Interessado em vender (fardamento)
 
 ${pedido.produto.descricao}
 
-Valor ${(valor/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
+Valor ${(parseInt(valor)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
 
 Envie o código ${pedido.produto.id} para @BDMilquerocomprar para comprar dele.
 
@@ -84,7 +84,7 @@ Membro desde ${moment(pedido.users.created_at).format('DD-MM-YYYY')}
 
 Seu produto ${pedido.produto.descricao} foi ativado com sucesso!
 
-Valor ${(valor/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
+Valor ${(parseInt(valor)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
 
 Código produto ${pedido.produto.id}.
 
@@ -112,7 +112,7 @@ Interessado em vender (fardamento)
 
 ${pedido.produto.descricao}
 
-Valor ${(valor/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
+Valor ${(parseInt(valor)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
 
 Envie o código ${pedido.produto.id} para @BDMilquerocomprar para comprar dele.
 
