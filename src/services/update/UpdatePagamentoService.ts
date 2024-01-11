@@ -27,14 +27,14 @@ const recomendado = pedido?.users.recomendado || 0
 const desaconselhado = pedido?.users.desaconselhado || 0
 const descricao:any = pedido?.produto.descricao
 
-console.log('001')
-
 const alerta = await prisma_db.alertas.findMany()
 
-console.log('001',alerta)
+console.log('001')
 
-const alertas = alerta.filter((item)=> item.palavra_chave in descricao)
+const alertas = alerta.filter((item) => descricao.includes(item.palavra_chave));
 const usuarios_id = alertas.map(item => { return item.id})
+
+console.log('alests',alertas)
 
 if(pedido){
   await prisma_db.pedidos.update({
