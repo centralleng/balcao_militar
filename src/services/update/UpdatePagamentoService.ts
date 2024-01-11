@@ -10,6 +10,8 @@ interface dados {
 
 export default async function UpdatePagamentoService(dados: dados) {
 
+console.log('passo 02',dados)
+
 const pedido = await prisma_db.pedidos.findUnique({
   where:{transacao_id: dados.pagamento_id},
   include:{
@@ -63,7 +65,7 @@ Interessado em vender (fardamento)
 
 ${pedido.produto.descricao}
 
-Valor R$ ${(valor/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
+Valor ${(valor/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
 
 Envie o código ${pedido.produto.id} para @BDMilquerocomprar para comprar dele.
 
@@ -92,7 +94,7 @@ Membro desde ${moment(pedido.users.created_at).format('DD-MM-YYYY')}
 
 Seu produto ${pedido.produto.descricao} foi ativado com sucesso!
 
-Valor R$ ${(valor/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
+Valor ${(valor/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
 
 Código produto ${pedido.produto.id}.
 
@@ -120,7 +122,7 @@ Membro desde ${moment(pedido.users.created_at).format('DD-MM-YYYY')}
 
      ${pedido.produto.descricao}
      
-     Valor R$ ${(valor/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
+     Valor ${(valor/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
      
      Envie o código ${pedido.produto.id} para @BDMilquerocomprar para comprar dele.
      
