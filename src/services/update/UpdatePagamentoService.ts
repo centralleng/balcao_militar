@@ -23,24 +23,25 @@ const recomendado = pedido?.users.recomendado || 0
 const desaconselhado = pedido?.users.desaconselhado || 0
 const descricao:any = pedido?.produto.descricao
 
+const alerta = await prisma_db.alertas.findMany()
+
+const alertas = alerta.filter((item)=> item.palavra_chave in descricao)
+const usuarios_id = alertas.map(item => { return item.id})
+
 console.log(
-  'dados:',
+  'pedidos:', pedido,
+  'alertas:', alerta,
+  'map ids_telegram:', usuarios_id,
+)
+
+console.log(
+  'dados compra:',
 valor,
 recomendado,
 desaconselhado,
 descricao,
 )
 
-const alerta = await prisma_db.alertas.findMany()
-
-const alertas = alerta.filter((item)=> item.palavra_chave in descricao)
-const usuarios_id = alertas.map(item => { return item.id})
-
-// console.log(
-//   'pedidos:', pedido,
-//   'alertas:', alerta,
-//   'map ids_telegram:', usuarios_id,
-// )
 
 if(pedido){
   await prisma_db.pedidos.update({
