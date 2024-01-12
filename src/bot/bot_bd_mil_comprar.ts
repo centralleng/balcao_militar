@@ -128,55 +128,56 @@ function createInlineKeyboard(userTelegramId:any) {
               data: { username: username }
             })
 
-            let pedido:any
+            let produto:any
 
             if(!Number.isNaN(parseInt(texto || ''))){
-              const pedido_db = await prisma_db.pedidos.findUnique({
+              const produto_db = await prisma_db.produtos.findUnique({
                 where: { id: parseInt(texto||'')}
               })
-              pedido = pedido_db
-            }else{pedido=false}
+              produto = produto_db
+            }else{produto=false}
 
-            console.log(pedido)
+            console.log(produto)
 
             // Verifica se existe um produto com aquela ID, cadastrado no banco de dados.
-            if (pedido) {
+            if (produto) {
               try {
                 // Cadastra a Intenção de compra do Comprador, no sistema.
                 const nova_intencao = await prisma_db.intencao_de_compras.create({
                   data: {
-                    vendedor_id_telegram:     pedido.user_id,
+                    vendedor_id_telegram:     produto.user_id,
                     comprador_id_telegram:    id_telegram,
-                    pedido_id:                pedido.id
+                    produto_id:                produto.id
                   }
                 })
                 
                 const intencao = await prisma_db.intencao_de_compras.findFirst({
-                  where:  {pedido_id: pedido.id}
+                  where:  {produto_id: produto.id}
                 })
                 
                 // Envio de mensagem para o vendedor indicando que existe um comprador interessando. Obs.: Mensagem enviada pelo bot BDMilQueroVender
                 await axios.post('https://api.telegram.org/bot6962343359:AAERsmVCjSJczzeQ-ONe_nfVyQxQYDzFYlg/sendMessage',
                   {
-                    chat_id: pedido.id_telegram,
+                    chat_id: produto.id_telegram,
                     text: `
     ---- ✅✅✅ ----
-💡 Informo que ${user.username} quer comprar o seu produto referente a oferta ${pedido.id}, você deve informar para ele a senha ${intencao?.id} para que ele saiba que você é realmente o postador da oferta. Verifique se é a mesma senha.
+💡 Informo que ${user.username} quer comprar o seu produto referente a oferta ${produto.id}, você deve informar para ele a senha ${intencao?.id} para que ele saiba que você é realmente o postador da oferta. Verifique se é a mesma senha.
 
 ▪️ Dicas do Balcão dos militares:
 
 Recomendo que sempre seja confirmado o valor do produto, bem como a forma de entrega, prazos, formas de pagamento e outras coisas que se fizerem necessárias antes de fechar a transação, a fim de evitar transtornos desnecessários e exclusão do Balcão.
+
 ❗️ verifique dados adicionais durante a negociação, para ter a certeza de estar mitigando riscos.
 
-⬆️ recomendado por ${user.recomendado} pessoas 
+⬆️ recomendado por ${user.recomendado} pessoas.
 
-Não recomendado por ${user.desaconselhado} pessoas
+Não recomendado por ${user.desaconselhado} pessoas.
 
 ✅ conta verificada 
 
 ✔️ Membro desde ${moment(user.created_at).format('DD-MM-YYYY')}
 
-❗️ Não esqueça de, após a venda me enviar: vendido 9999999 para excluir a oferta do Balcão.
+❗️ Não esqueça de deletar o produto, após a venda.
     
             `,
 reply_markup: createInlineKeyboard(id_telegram),
@@ -186,7 +187,7 @@ reply_markup: createInlineKeyboard(id_telegram),
                   bot.sendMessage(id_telegram, `
 ✅ Sua intenção de compra foi enviada para o usuário, interessado em vender o produto.
 
-✔️  O vendedor entrará em contato caso se interesse em negociar o produto, enviando uma mensagem para a sua conta informando a senha ${intencao?.id}. Essa é uma forma de certificar que ele é realmente a pessoa que postou a oferta xxxxxxx. Sugiro uma análise de risco no tocante ao vendedor verificando os dados adicionais durante a negociação, para ter a certeza do processo.
+✔️  O vendedor entrará em contato caso se interesse em negociar o produto, enviando uma mensagem para a sua conta informando a senha ${intencao?.id}. Essa é uma forma de certificar que ele é realmente a pessoa que postou a oferta ${produto.id}. Sugiro uma análise de risco no tocante ao vendedor verificando os dados adicionais durante a negociação, para ter a certeza do processo.
 
 ▪️   Dica do Balcão dos militares:
 
@@ -200,8 +201,8 @@ Recomendo que sempre seja confirmado o valor do produto, bem como a forma de ent
                 reply_markup: {
                   inline_keyboard: [
                     [
-                      { text: "Recomendo", callback_data: `recomendo_${pedido.id_telegram}`},
-                      { text: "Desaconselho", callback_data: `desaconselho_${pedido.id_telegram}`},
+                      { text: "Recomendo", callback_data: `recomendo_${produto.id_telegram}`},
+                      { text: "Desaconselho", callback_data: `desaconselho_${produto.id_telegram}`},
                     ],
                   ],
                 },

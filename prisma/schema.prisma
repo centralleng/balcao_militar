@@ -49,6 +49,7 @@ model Produtos {
   users               Users         @relation(fields: [user_id], references: [id])
 
   pedido              Pedidos[]
+  intencao            Intencao_de_compras[]
 
   @@map("bdmil_produtos")
 }
@@ -75,21 +76,19 @@ model Pedidos {
   users               Users         @relation(fields: [user_id], references: [id])
   produto             Produtos      @relation(fields: [produto_id], references: [id])
 
-  intencao            intencao_de_compras[]
-
   @@map("bdmil_pedidos")
 }
 
-model intencao_de_compras {
+model Intencao_de_compras {
   id                      Int           @id @default(autoincrement())
   delete                  Int?
   vendedor_id_telegram    String
   comprador_id_telegram   String
-  pedido_id               Int
+  produto_id               Int
   updated_at              DateTime      @updatedAt @default(now())
   created_at              DateTime      @default(now())
 
-  pedido                  Pedidos       @relation(fields: [pedido_id], references: [id])
+  produto                  Produtos       @relation(fields: [produto_id], references: [id])
 
   @@map("bdmil_intencao_de_compras")
 }
