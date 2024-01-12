@@ -6,9 +6,9 @@ class Update_pagamento_controller {
     
     const dados = request.body
     
-    await UpdatePagamentoService(dados)
+    const req = await UpdatePagamentoService(dados)
  
-    return response.json('ok');
+    return response.json(req);
   }
 }
 

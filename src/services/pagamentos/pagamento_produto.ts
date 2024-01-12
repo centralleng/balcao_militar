@@ -1,7 +1,7 @@
 import { prisma_db } from "../../database/prisma_db";
 
 interface dados {
-    valor: number;
+    valor: string;
     titulo: string;
     nome: string | null;
     document: string | null;
@@ -16,7 +16,7 @@ export default async function Pagamento (dados:dados) {
   
     const criarPedido = await prisma_db.pedidos.create({
         data: {
-            // valor: dados.valor,
+            valor: dados.valor,
             titulo: dados.titulo,
             nome: dados.nome,
             document: dados.document,

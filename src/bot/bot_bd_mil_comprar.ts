@@ -61,7 +61,7 @@ class Bot_bd_mil_comprar {
 
             // Verifica se existe um produto com aquela ID, cadastrado no banco de dados.
             if (pedido) {
-              try { console.log("3")
+              try {
                 // Cadastra a Intenção de compra do Comprador, no sistema.
                 const nova_intencao = await prisma_db.intencao_de_compras.create({
                   data: {

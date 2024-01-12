@@ -22,9 +22,10 @@ model Users {
   ddd_phone           String?
   phone               String?
   avatar_url          String?
+  recomendado         Int?
+  desaconselhado      Int?
   updated_at          DateTime      @updatedAt @default(now())
   created_at          DateTime      @default(now())
-
   produto             Produtos[]
   pedido              Pedidos[]
   alerta              Alertas[]
@@ -38,7 +39,7 @@ model Produtos {
   status              Boolean?
   categoria           String?
   descricao           String?
-  valor_produto       Float?
+  valor_produto       String?
   link_pagamento      String?
   user_id             String
   message_id          Int?  // Id quando cirar um produto, vamos precisar quando for deletar um produto             
@@ -98,10 +99,23 @@ model Alertas {
   delete                  Int?
   palavra_chave           String
   user_id                 String
+  id_telegram             String
   updated_at              DateTime      @updatedAt @default(now())
   created_at              DateTime      @default(now())
 
   users                   Users         @relation(fields: [user_id], references: [id])
 
   @@map("bdmil_alertas")
+}
+
+model Grupos {
+  id                      Int           @id @default(autoincrement())
+  delete                  Int?
+  type                    String        @unique
+  link                    String
+  id_grupo                String
+  updated_at              DateTime      @updatedAt @default(now())
+  created_at              DateTime      @default(now())
+
+  @@map("bdmil_grupos")
 }
