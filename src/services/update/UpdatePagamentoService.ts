@@ -9,6 +9,7 @@ interface dados {
 }
 
 export default async function UpdatePagamentoService(dados: dados) {
+  console.log('1',dados)
 
 const pedido = await prisma_db.pedidos.findUnique({
   where:{transacao_id: dados.pagamento_id},
@@ -18,6 +19,8 @@ const pedido = await prisma_db.pedidos.findUnique({
   }
 })
 
+console.log('2')
+
 const valor = pedido?.produto.valor_produto || ''
 const recomendado = pedido?.users.recomendado || 0
 const desaconselhado = pedido?.users.desaconselhado || 0
@@ -25,8 +28,12 @@ const descricao:any = pedido?.produto.descricao
 
 const alerta = await prisma_db.alertas.findMany()
 
+console.log('3')
+
 const alertas = alerta.filter((item) => descricao.includes(item.palavra_chave));
 const usuarios_id = alertas.map(item => {return item.id_telegram})
+
+console.log('4')
 
 if(pedido){
   await prisma_db.pedidos.update({
@@ -36,13 +43,25 @@ if(pedido){
     }
   })
 
+  console.log('5')
+
   if(dados.status==='pago'){
+
+    console.log('6')
 
     const grupo = await prisma_db.grupos.findUnique({
       where:{type: pedido.produto.categoria||''}
     }) 
 
+    
+    console.log('7')
+
+
     if(grupo){
+
+      
+    console.log('8')
+
 
       try {
              // Enviar msg para os grupos 
