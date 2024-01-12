@@ -294,7 +294,7 @@ class Bot_bd_mil {
           })
           
         bot.sendMessage(id_telegram,`
-Vamos fazer seu cadastro: 
+Vamos fazer seu cadastro:
 
 A qual instituição você pertence?          
         ` 

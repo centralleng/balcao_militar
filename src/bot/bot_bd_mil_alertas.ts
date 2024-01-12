@@ -113,7 +113,7 @@ class Bot_bd_mil_alertas {
 
           }else{
 
-          await bot.sendMessage(id_telegram, `
+          bot.sendMessage(id_telegram, `
 
 Cadastre seus alertas (criar msg de alerta) - configuração enviar a palavra alerta com espaço e depois colocar uma palavra chave
 
@@ -126,7 +126,8 @@ Alerta boots
           }      
          
         }else{
-          // Precisa ser criado um usernaime 
+          // Melhorar msg
+          bot.sendMessage(id_telegram, `Criar userName`);
         }
       }else{
         //fazer cadastro
