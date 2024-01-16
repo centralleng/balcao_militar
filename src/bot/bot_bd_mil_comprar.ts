@@ -3,6 +3,7 @@ import TelegramBot from 'node-telegram-bot-api';
 import { prisma_db } from '../database/prisma_db';
 import axios from 'axios';
 import moment from 'moment';
+import { text } from 'body-parser';
 
 const token_bot = '6538633425:AAF8tFZoEjXGDv_yoSxadcYctG0ph_4Em-I'; // Token do bot do telegram... CentrallTest3
 
@@ -108,21 +109,22 @@ function createInlineKeyboard(userTelegramId:any) {
       const texto = msg.text;
       const name = msg.chat.first_name;
       const username = msg.chat.username;
-      console.log("Antes do Try")
-      console.log(id_telegram)
-
       try {
         const user = await prisma_db.users.findUnique({
           where: { id_telegram: id_telegram},
         })
-        console.log("Depois do Try")
+        if (texto==="/start") {
+          await bot.sendMessage(id_telegram,`
+Olá, seja bem-vindo ao BDMilquerocomprar! Aqui você poderá solicitar uma negociação com o vendedor de um dos produtos anúnciados.
+        ` ),
+          bot.sendMessage(id_telegram, `Basta inserir nesse chat o código informado no anúncio do produto!          `)
+        } else {
+          
         
         // Verifica se o usuário está cadastrado no Banco de dados.
         if (user) {
-          console.log("1")
           // Verifica se o usuário possui um user-name, e atualiza o que está no banco de dados.
           if (username) {
-            console.log("2")
            await prisma_db.users.update({
               where: { id_telegram: id_telegram },
               data: { username: username }
@@ -171,7 +173,7 @@ Recomendo que sempre seja confirmado o valor do produto, bem como a forma de ent
 
 ⬆️ recomendado por ${user.recomendado} pessoas.
 
-Não recomendado por ${user.desaconselhado} pessoas.
+⬇️ Não recomendado por ${user.desaconselhado} pessoas.
 
 ✅ conta verificada 
 
@@ -214,6 +216,7 @@ Recomendo que sempre seja confirmado o valor do produto, bem como a forma de ent
             } else { bot.sendMessage(id_telegram, `ID do produto não encontrada, favor conferir a ID no anúncio.`) }
           } else {bot.sendMessage(id_telegram, `Identificamos que você ainda não possui um Username, cadastre um para continuar utilizando nossos serviços.`)}
         } else {bot.sendMessage(id_telegram, `Não foi encontrado seu cadastro em nosso banco de dados. Por favor, realize primeiro o seu cadastro no BOT BDMIL antes de utilizar nossos serviços.`, cadastro) }
+      }
       } catch (error) {
 
         console.log(error)

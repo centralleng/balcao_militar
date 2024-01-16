@@ -91,13 +91,18 @@ class Bot_bd_mil_venda {
             { text: "Veículo", callback_data: "CADASTRO_VEICULO" },
             { text: "Serviço", callback_data: "CADASTRO_SERVICO" },
             { text: "smartphone", callback_data: "CADASTRO_SMARTPHONE" },
+            
+          ],
+          [
+            { text: "Uniformes", callback_data: "CADASTRO_UNIFORME"},
+            { text: "Material Escolar", callback_data: "CADASTRO_MAT_ESCOLAR"},
           ],
         ],
       },
     };
 
     const texto_inicial = `
-⚠️ Atenção, esse local é feito para ofertar a VENDA de produtos, esse é o formato.
+⚠️ Atenção, esse local é feito para ofertar a VENDA de produtos.
 `
 
     const atencao = `
@@ -105,51 +110,53 @@ class Bot_bd_mil_venda {
 `
 
     const categoria = `
-✔️ Opa! Qual Departamento se encaixa o produto? (referencial comparativo de artigos civis: Ponto Frio) 
+✔️ Opa! Qual Departamento se encaixa o produto?
 `
 
-    const formato_venda = `
-Interessado em vender (fardamento)
+//     const formato_venda = `
+// Interessado em vender (fardamento)
 
-Coturno extra leve, preto, 1 par, bom estado, número 42.
+// Coturno extra leve, preto, 1 par, bom estado, número 42.
 
-Valor R$ 100.50
+// Valor R$ 100.50
 
-Envie o código 1978654 para @BDMilquerocomprar para comprar dele.
-Recomendado por mais de 70 pessoas/ Ainda não recomendado (dados do vendedor)
+// Envie o código 1978654 para @BDMilquerocomprar para comprar dele.
+// Recomendado por mais de 70 pessoas/ Ainda não recomendado (dados do vendedor)
 
-Não desaconselhado ainda por ostros usuários/desaconselhado por 2 pessoas (dados do vendedor)
+// Não desaconselhado ainda por ostros usuários/desaconselhado por 2 pessoas (dados do vendedor)
 
-Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor acordado ao comprador.
+// Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor acordado ao comprador.
 
-Conta verificada
+// Conta verificada
 
-Membro desde 15 mês ano
-`
+// Membro desde 15 mês ano
+// `
 
     const descricao = `
 Descreva de forma sucinta o produto que você quer ofertar, incluindo obrigatoriamente a quantidade (um ou 1 par) e a cor. NÃO coloque o valor nesse momento (máximo 150 caracteres). SÓ coloque ponto no fim.
 `
-
     const valor = `
-Qual valor pretendido? (escreva somente números. Caso haja centavos coloque ponto)
-
-💵 Exemplos:
-
-Para R$ 1 real -> 1.00
-Para R$ 10 reais -> 10.00
-Para R$ 1 mil reais -> 1000.00
-
-🪙 Exemplos com os centavos:
-
-Para R$ 1 real e vinte centavos -> 1.20
-Para R$ 10 reais e vinte centavos -> 10.20
-Para R$ 1 mil reais e vinte centavos -> 1000.20
+Qual o valor pretendido? (escreva somente números. Caso haja centavos, coloque ponto pra separar o real dos centavos.)
 `
+//     const valor = `
+// Qual o valor pretendido? (escreva somente números. Caso haja centavos coloque ponto)
+
+// 💵 Exemplos:
+
+// Para R$ 1 real -> 1.00
+// Para R$ 10 reais -> 10.00
+// Para R$ 1 mil reais -> 1000.00
+
+// 🪙 Exemplos com os centavos:
+
+// Para R$ 1 real e vinte centavos -> 1.20
+// Para R$ 10 reais e vinte centavos -> 10.20
+// Para R$ 1 mil reais e vinte centavos -> 1000.20
+// `
 
     const produto_criado = `
 ✔️Oferta de venda cadastrada!
-💡 Quando for decidir em comprar ou vender o produto/serviço, avalie também as recomendações.
+💡 Quando for decidir entre comprar ou vender o produto/serviço, avalie também as recomendações.
 🤝 Gostaria de lembrar a importância de honrar acordos com o vendedor ou comprador no Balcão, depois de selar o acordo até a entrega do produto.
 ❌ O mau comportamento pode acarretar a exclusão do Balcão.
 `
@@ -176,12 +183,15 @@ Para R$ 1 mil reais e vinte centavos -> 1000.20
       });
 
       if (!user) {
-        bot.sendMessage(id_telegram, `⚠️ Primeiro precisar fazer seu cadastro`);
+        bot.sendMessage(id_telegram, `
+⚠️ Primeiro precisamos realizar o seu cadastro!
+Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
+        `);
         return
       }
 
       if (username === undefined) {
-        bot.sendMessage(id_telegram, `⚠️ Cadastre um User Name`);
+        bot.sendMessage(id_telegram, `⚠️ É necessário cadastrar um UserName do Telegram, para dar continuidade no Balcão.`);
       } else {
 
         const user_name = await prisma_db.users.update({
@@ -231,7 +241,7 @@ Para R$ 1 mil reais e vinte centavos -> 1000.20
             })
             bot.sendMessage(id_telegram, descricao, descarta_produto);
           } catch (error) {
-            bot.sendMessage(id_telegram, `⚠️ Ops algo deu errado o que você pretende fazer?`, botao_inicial);
+            bot.sendMessage(id_telegram, `⚠️ Parece que algo deu errado, o que você pretende fazer?`, botao_inicial);
           }
         }
 
@@ -266,7 +276,7 @@ Para R$ 1 mil reais e vinte centavos -> 1000.20
             const pagamento = await Pagamento(dados)
 
             if (pagamento.status === "ok") {
-              bot.sendMessage(id_telegram, `✔️ Escrever uma mensagem de confimação e explicação q precisa fazer para ativer o anúncio!`,
+              bot.sendMessage(id_telegram, `✔️ Seu produto foi cadastrado com sucesso. Clique no botão [PAGAR] para Ativar seu Anúncio!`,
                 {
                   reply_markup: {
                     inline_keyboard: [
@@ -278,10 +288,10 @@ Para R$ 1 mil reais e vinte centavos -> 1000.20
                 });
 
             } else {
-              bot.sendMessage(id_telegram, `Ops algo deu errado com seu pedido?`, botao_inicial);
+              bot.sendMessage(id_telegram, `Algo deu errado com seu pedido?`, botao_inicial);
             }
           } else {
-            bot.sendMessage(id_telegram, `Ação?`, botao_inicial);
+            bot.sendMessage(id_telegram, `⚠️ Parece que algo deu errado, o que você pretende fazer?`, botao_inicial);
           }
         }
       }
@@ -310,12 +320,15 @@ Para R$ 1 mil reais e vinte centavos -> 1000.20
       });
 
       if (!user) {
-        bot.sendMessage(id_telegram, `⚠️ Primeiro você precisar se cadastrar!`);
+        bot.sendMessage(id_telegram, `
+⚠️ Primeiro precisamos realizar o seu cadastro!
+Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
+        `);
         return
       }
 
       if (username === undefined) {
-        bot.sendMessage(id_telegram, `⚠️ Cadastre um User Name!`);
+        bot.sendMessage(id_telegram, `⚠️ É necessário cadastrar um UserName do Telegram, para dar continuidade no Balcão.`);
       } else {
         // Inicio dos comandos /////////////////////////////////////////////
         if (username != user?.username) { // So estou atualizando o user name no banco de dados mais nada.
@@ -327,7 +340,7 @@ Para R$ 1 mil reais e vinte centavos -> 1000.20
 
         if (user.produto.length === 0) {
           await bot.sendMessage(id_telegram, texto_inicial);
-          await bot.sendMessage(id_telegram, formato_venda);
+          // await bot.sendMessage(id_telegram, formato_venda);
           await bot.sendMessage(id_telegram, atencao);
           bot.sendMessage(id_telegram, 'Escolha sua ação:', botao_inicial);
           return

@@ -265,7 +265,7 @@ class Bot_bd_mil {
           { text: "[CBMRR Balcão vendas]", url: "https://t.me/"},
           { text: "[PMPB Balcão vendas]", url: "https://t.me/"},
           { text: "[CBMPB Balcão vendas]", url: "https://t.me/F"},
-        ],
+        ],        
       ],        
       },
     };
@@ -294,14 +294,14 @@ class Bot_bd_mil {
           })
           
         bot.sendMessage(id_telegram,`
-Vamos fazer seu cadastro:
+Vamos dar início ao seu cadastro:
 
 A qual instituição você pertence?          
         ` 
         ,instituicao);
         }else{
         bot.sendMessage(id_telegram,`
-Vamos fazer seu cadastro: 
+Vamos dar início ao seu cadastro: 
 
 A qual instituição você pertence?      
                   ` 
@@ -353,7 +353,7 @@ A qual instituição você pertence?
           if(req.instituicao===null){              
             // Qual seu cpf
           bot.sendMessage(id_telegram,`
-Vamos fazer seu cadastro: 
+Vamos dar início ao seu cadastro: 
 
 A qual instituição você pertence?           
           `,instituicao);
@@ -413,7 +413,7 @@ A qual instituição você pertence?
               data:{email: texto}
             })
             bot.sendMessage(id_telegram,`
-            Prontinho, seu cadastro foi realizado com sucesso!! 🥳
+Prontinho, seu cadastro foi realizado com sucesso!! 🥳
 Segue abaixo os Balcões que você pode acessar para comprar ou vender um produto!
             
             ` 
@@ -427,7 +427,7 @@ Segue abaixo os Balcões que você pode acessar para comprar ou vender um produt
           }
           else{
             bot.sendMessage(id_telegram,`
-            Prontinho, seu cadastro foi realizado com sucesso!! 🥳
+Prontinho, seu cadastro foi realizado com sucesso!! 🥳
 Segue abaixo os Balcões que você pode acessar para comprar ou vender um produto!
             
             ` 
