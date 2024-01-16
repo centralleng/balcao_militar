@@ -111,7 +111,7 @@ function createInlineKeyboard(userTelegramId:any) {
       const username = msg.chat.username;
       try {
         const user = await prisma_db.users.findUnique({
-          where: { id_telegram: id_telegram},
+          where: { id_telegram: id_telegram.toString()},
         })
         if (texto==="/start") {
           await bot.sendMessage(id_telegram,`
@@ -134,7 +134,7 @@ Olá, seja bem-vindo ao BDMilquerocomprar! Aqui você poderá solicitar uma nego
 
             if(!Number.isNaN(parseInt(texto || ''))){
               const produto_db = await prisma_db.produtos.findUnique({
-                where: { id: parseInt(texto||'')}
+                where: { id: parseInt(texto||'')}                
               })
               produto = produto_db
             }else{produto=false}
@@ -163,7 +163,7 @@ Olá, seja bem-vindo ao BDMilquerocomprar! Aqui você poderá solicitar uma nego
                     chat_id: produto.id_telegram,
                     text: `
     ---- ✅✅✅ ----
-💡 Informo que ${user.username} quer comprar o seu produto referente a oferta ${produto.id}, você deve informar para ele a senha ${intencao?.id} para que ele saiba que você é realmente o postador da oferta. Verifique se é a mesma senha.
+💡 Informo que @${user.username} quer comprar o seu produto referente a oferta ${produto.id}, você deve informar para ele a senha ${intencao?.id} para que ele saiba que você é realmente o postador da oferta. Verifique se é a mesma senha.
 
 ▪️ Dicas do Balcão dos militares:
 
