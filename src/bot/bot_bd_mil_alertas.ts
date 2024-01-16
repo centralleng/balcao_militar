@@ -127,7 +127,7 @@ Alerta boots
          
         }else{
           // Melhorar msg
-          bot.sendMessage(id_telegram, `Criar userName`);
+          bot.sendMessage(id_telegram, `⚠️ É necessário cadastrar um UserName do Telegram, para dar continuidade no Balcão.`);
         }
       }else{
         //fazer cadastro
