@@ -41,6 +41,7 @@ model Produtos {
   descricao           String?
   valor_produto       String?
   link_pagamento      String?
+  id_telegram         String?
   user_id             String
   message_id          Int?  // Id quando cirar um produto, vamos precisar quando for deletar um produto             
   updated_at          DateTime      @updatedAt @default(now())

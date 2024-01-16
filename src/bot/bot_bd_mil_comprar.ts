@@ -113,7 +113,7 @@ function createInlineKeyboard(userTelegramId:any) {
 
       try {
         const user = await prisma_db.users.findUnique({
-          where: { id_telegram: id_telegram},
+          where: { id_telegram: id_telegram.toString()},
         })
         console.log("Depois do Try")
         
@@ -132,7 +132,7 @@ function createInlineKeyboard(userTelegramId:any) {
 
             if(!Number.isNaN(parseInt(texto || ''))){
               const produto_db = await prisma_db.produtos.findUnique({
-                where: { id: parseInt(texto||'')}
+                where: { id: parseInt(texto||'')}                
               })
               produto = produto_db
             }else{produto=false}
@@ -161,7 +161,7 @@ function createInlineKeyboard(userTelegramId:any) {
                     chat_id: produto.id_telegram,
                     text: `
     ---- ✅✅✅ ----
-💡 Informo que ${user.username} quer comprar o seu produto referente a oferta ${produto.id}, você deve informar para ele a senha ${intencao?.id} para que ele saiba que você é realmente o postador da oferta. Verifique se é a mesma senha.
+💡 Informo que @${user.username} quer comprar o seu produto referente a oferta ${produto.id}, você deve informar para ele a senha ${intencao?.id} para que ele saiba que você é realmente o postador da oferta. Verifique se é a mesma senha.
 
 ▪️ Dicas do Balcão dos militares:
 
