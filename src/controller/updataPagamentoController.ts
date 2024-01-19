@@ -5,10 +5,19 @@ class Update_pagamento_controller {
   async handle(request: Request, response: Response) {  
     
     const dados = request.body
-    
+
+    try {
+
     const req = await UpdatePagamentoService(dados)
  
     return response.json(req);
+      
+    } catch (error) {
+
+      throw new Error("erro");    
+
+    }    
+    
   }
 }
 

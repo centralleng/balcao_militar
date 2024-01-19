@@ -18,17 +18,17 @@ class Bot_bd_mil_comprar {
   static execute() {
 
     // Função para criar botões inline
-function createInlineKeyboard(userTelegramId:any) {
+function createInlineKeyboard(userTelegramId:any, senha:any) {
   return {
     inline_keyboard: [
       [
         {
           text: 'Recomendo',
-          callback_data: `recomendo_${userTelegramId}`,
+          callback_data: `RECOMENDO_${userTelegramId}_${senha}`,
         },
         {
           text: 'Desaconselho',
-          callback_data: `desaconselho_${userTelegramId}`,
+          callback_data: `DESACONSELHO_${userTelegramId}_${senha}`,
         },
       ],
     ],
@@ -55,7 +55,9 @@ function createInlineKeyboard(userTelegramId:any) {
         if (user) {
           if (username) {
 
-            if(texto_split[0]==='recomendo'){
+            if(texto_split[0]==='RECOMENDO'){
+
+              
 
               const user = await prisma_db.users.findUnique({
                 where: { id_telegram: texto_split[1].toString()},
@@ -74,7 +76,8 @@ function createInlineKeyboard(userTelegramId:any) {
                 })
               }    
             }
-            if(texto_split[0]==='desaconselho'){
+
+            if(texto_split[0]==='DESACONSELHO'){
               const user = await prisma_db.users.findUnique({
                 where: { id_telegram: texto_split[1].toString()},
               })
@@ -94,33 +97,57 @@ function createInlineKeyboard(userTelegramId:any) {
     
             }             
         }else{
-          //Cadastrar username
+          bot.sendMessage(id_telegram, `⚠️ É necessário cadastrar um UserName do Telegram, para dar continuidade no Balcão.`);
         }
       }else{
-        //fazer cadastro
+        bot.sendMessage(id_telegram, `
+⚠️ Primeiro precisamos realizar o seu cadastro!
+Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
+                  `);
       }     
     })
 
     // Comendo para o Bot escutar mensagens.
-    bot.on('message', async (msg) => {
-      console.log(msg)      
+    bot.on('message', async (msg) => {      
 
       const id_telegram = msg.chat.id.toString();
       const texto = msg.text;
       const name = msg.chat.first_name;
       const username = msg.chat.username;
-      try {
+      
+      function gerarHash() {
+        let hash = '';
+        for (let i = 0; i < 6; i++) {
+            hash += Math.floor(Math.random() * 10);
+        }
+        return hash;
+    }    
+
+    const senha = gerarHash();
+    
         const user = await prisma_db.users.findUnique({
           where: { id_telegram: id_telegram.toString()},
         })
+
+        if (!user) {
+          bot.sendMessage(id_telegram, `
+⚠️ Primeiro precisamos realizar o seu cadastro!
+Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
+          `);
+          return
+        }
+
+        if (username === undefined) {
+          bot.sendMessage(id_telegram, `⚠️ É necessário cadastrar um UserName do Telegram, para dar continuidade no Balcão.`);
+          return
+        }
+
         if (texto==="/start") {
           await bot.sendMessage(id_telegram,`
 Olá, seja bem-vindo ao BDMilquerocomprar! Aqui você poderá solicitar uma negociação com o vendedor de um dos produtos anúnciados.
         ` ),
-          bot.sendMessage(id_telegram, `Basta inserir nesse chat o código informado no anúncio do produto!          `)
-        } else {
-          
-        
+          bot.sendMessage(id_telegram, `Basta inserir nesse chat o código informado no anúncio do produto!`)
+        } else {   
         // Verifica se o usuário está cadastrado no Banco de dados.
         if (user) {
           // Verifica se o usuário possui um user-name, e atualiza o que está no banco de dados.
@@ -147,23 +174,27 @@ Olá, seja bem-vindo ao BDMilquerocomprar! Aqui você poderá solicitar uma nego
                 // Cadastra a Intenção de compra do Comprador, no sistema.
                 const nova_intencao = await prisma_db.intencao_de_compras.create({
                   data: {
-                    vendedor_id_telegram:     produto.user_id,
-                    comprador_id_telegram:    id_telegram,
-                    produto_id:                produto.id
+                    vendedor_id_telegram:    produto.id_telegram,
+                    comprador_id_telegram:    id_telegram.toString(),
+                    produto_id:                produto.id,
+                    senha: parseInt(senha),
                   }
                 })
                 
                 const intencao = await prisma_db.intencao_de_compras.findFirst({
                   where:  {produto_id: produto.id}
                 })
-                
+
+                try {
+                                 
                 // Envio de mensagem para o vendedor indicando que existe um comprador interessando. Obs.: Mensagem enviada pelo bot BDMilQueroVender
                 await axios.post('https://api.telegram.org/bot6962343359:AAERsmVCjSJczzeQ-ONe_nfVyQxQYDzFYlg/sendMessage',
-                  {
-                    chat_id: produto.id_telegram,
-                    text: `
-    ---- ✅✅✅ ----
-💡 Informo que @${user.username} quer comprar o seu produto referente a oferta ${produto.id}, você deve informar para ele a senha ${intencao?.id} para que ele saiba que você é realmente o postador da oferta. Verifique se é a mesma senha.
+                {
+                  chat_id: produto.id_telegram,
+                  text: `
+---- ✅✅✅ ----
+
+💡 Informo que @${user.username} quer comprar o seu produto referente a oferta ${produto.id}, você deve informar para ele a senha ${senha} para que ele saiba que você é realmente o postador da oferta. Verifique se é a mesma senha.
 
 ▪️ Dicas do Balcão dos militares:
 
@@ -180,16 +211,22 @@ Recomendo que sempre seja confirmado o valor do produto, bem como a forma de ent
 ✔️ Membro desde ${moment(user.created_at).format('DD-MM-YYYY')}
 
 ❗️ Não esqueça de deletar o produto, após a venda.
-    
-            `,
-reply_markup: createInlineKeyboard(id_telegram),
-                  },);
+  
+          `,
+reply_markup: createInlineKeyboard(id_telegram,senha),
+                },);
 
+                  
+                } catch (error) {
+                  console.log('erro')
+                  
+                }
+ 
 // Msg enviada ao comprador 
                   bot.sendMessage(id_telegram, `
 ✅ Sua intenção de compra foi enviada para o usuário, interessado em vender o produto.
 
-✔️  O vendedor entrará em contato caso se interesse em negociar o produto, enviando uma mensagem para a sua conta informando a senha ${intencao?.id}. Essa é uma forma de certificar que ele é realmente a pessoa que postou a oferta ${produto.id}. Sugiro uma análise de risco no tocante ao vendedor verificando os dados adicionais durante a negociação, para ter a certeza do processo.
+✔️  O vendedor entrará em contato caso se interesse em negociar o produto, enviando uma mensagem para a sua conta informando a senha ${senha}. Essa é uma forma de certificar que ele é realmente a pessoa que postou a oferta ${produto.id}. Sugiro uma análise de risco no tocante ao vendedor verificando os dados adicionais durante a negociação, para ter a certeza do processo.
 
 ▪️   Dica do Balcão dos militares:
 
@@ -203,8 +240,8 @@ Recomendo que sempre seja confirmado o valor do produto, bem como a forma de ent
                 reply_markup: {
                   inline_keyboard: [
                     [
-                      { text: "Recomendo", callback_data: `recomendo_${produto.id_telegram}`},
-                      { text: "Desaconselho", callback_data: `desaconselho_${produto.id_telegram}`},
+                      { text: "Recomendo", callback_data: `RECOMENDO_${senha}`}, 
+                      { text: "Desaconselho", callback_data: `DESACONSELHO_${senha}`},
                     ],
                   ],
                 },
@@ -216,14 +253,7 @@ Recomendo que sempre seja confirmado o valor do produto, bem como a forma de ent
             } else { bot.sendMessage(id_telegram, `ID do produto não encontrada, favor conferir a ID no anúncio.`) }
           } else {bot.sendMessage(id_telegram, `Identificamos que você ainda não possui um Username, cadastre um para continuar utilizando nossos serviços.`)}
         } else {bot.sendMessage(id_telegram, `Não foi encontrado seu cadastro em nosso banco de dados. Por favor, realize primeiro o seu cadastro no BOT BDMIL antes de utilizar nossos serviços.`, cadastro) }
-      }
-      } catch (error) {
-
-        console.log(error)
-        
-      }
-
-      
+      }   
     }
     )
   }
