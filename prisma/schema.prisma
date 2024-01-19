@@ -124,7 +124,7 @@ model Grupos {
 model Log_recomendacoes {
   id                      Int           @id @default(autoincrement())
   delete                  Int?
-  produto_id              String         
+  produto_id              Int         
   user_id                 String
   status                  String
   descricao               String?
