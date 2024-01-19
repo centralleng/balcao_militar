@@ -168,7 +168,7 @@ class Bot_bd_mil {
       },
     };
 
-    const grupos: TelegramBot.SendMessageOptions = {
+    const artigos_militares: TelegramBot.SendMessageOptions = {
       reply_markup: {
         inline_keyboard: [
         [
@@ -179,93 +179,135 @@ class Bot_bd_mil {
         [
           { text: "[PMERJ Balcão vendas]", url: "https://t.me/"},
           { text: "[CBMERJ Balcão vendas]", url: "https://t.me/"},
-          { text: "[PMDF Balcão vendas]", url: "https://t.me/F"},
+          { text: "[PMDF Balcão vendas]", url: "https://t.me/"},
         ],
         [
           { text: "[CBMDF Balcão vendas]", url: "https://t.me/"},
           { text: "[PMESP Balcão vendas]", url: "https://t.me/"},
-          { text: "[CBMESP Balcão vendas]", url: "https://t.me/F"},
+          { text: "[CBMESP Balcão vendas]", url: "https://t.me/"},
         ],
         [
           { text: "[PMMG Balcão vendas]", url: "https://t.me/"},
           { text: "[CBMMG Balcão vendas]", url: "https://t.me/"},
-          { text: "[PMGO Balcão vendas]", url: "https://t.me/F"},
+          { text: "[PMGO Balcão vendas]", url: "https://t.me/"},
         ],
         [
           { text: "[CBMGO Balcão vendas]", url: "https://t.me/"},
           { text: "[PMPR Balcão vendas]", url: "https://t.me/"},
-          { text: "[CBMPR Balcão vendas]", url: "https://t.me/F"},
+          { text: "[CBMPR Balcão vendas]", url: "https://t.me/"},
         ],
         [
           { text: "[PMSC Balcão vendas]", url: "https://t.me/"},
           { text: "[CBMSC Balcão vendas]", url: "https://t.me/"},
-          { text: "[BRIGADA MILITAR Balcão vendas]", url: "https://t.me/F"},
+          { text: "[BRIGADA MILITAR Balcão vendas]", url: "https://t.me/"},
         ],
         [
           { text: "[CBMRS Balcão vendas]", url: "https://t.me/"},
           { text: "[PMMS Balcão vendas]", url: "https://t.me/"},
-          { text: "[CBMMS Balcão vendas]", url: "https://t.me/F"},
+          { text: "[CBMMS Balcão vendas]", url: "https://t.me/"},
         ],
         [
           { text: "[PMMT Balcão vendas]", url: "https://t.me/"},
           { text: "[CBMMT Balcão vendas]", url: "https://t.me/"},
-          { text: "[PMBA Balcão vendas]", url: "https://t.me/F"},
+          { text: "[PMBA Balcão vendas]", url: "https://t.me/"},
         ],
         [
           { text: "[CBMBA Balcão vendas]", url: "https://t.me/"},
           { text: "[PMES Balcão vendas]", url: "https://t.me/"},
-          { text: "[CBMES Balcão vendas]", url: "https://t.me/F"},
+          { text: "[CBMES Balcão vendas]", url: "https://t.me/"},
         ],
         [
           { text: "[PMAL Balcão vendas]", url: "https://t.me/"},
           { text: "[CBMAL Balcão vendas]", url: "https://t.me/"},
-          { text: "[PMSE Balcão vendas]", url: "https://t.me/F"},
+          { text: "[PMSE Balcão vendas]", url: "https://t.me/"},
         ],
         [
           { text: "[CBMSE Balcão vendas]", url: "https://t.me/"},
           { text: "[PMPE Balcão vendas]", url: "https://t.me/"},
-          { text: "[CBMPE Balcão vendas]", url: "https://t.me/F"},
+          { text: "[CBMPE Balcão vendas]", url: "https://t.me/"},
         ],
         [
           { text: "[PMRN Balcão vendas]", url: "https://t.me/"},
           { text: "[CBMRN Balcão vendas]", url: "https://t.me/"},
-          { text: "[PMCE Balcão vendas]", url: "https://t.me/F"},
+          { text: "[PMCE Balcão vendas]", url: "https://t.me/"},
         ],
         [
           { text: "[CBMCE Balcão vendas]", url: "https://t.me/"},
           { text: "[PMPI Balcão vendas]", url: "https://t.me/"},
-          { text: "[CBMPI Balcão vendas]", url: "https://t.me/F"},
+          { text: "[CBMPI Balcão vendas]", url: "https://t.me/"},
         ],
         [
           { text: "[PMMA Balcão vendas]", url: "https://t.me/"},
           { text: "[CBMMA Balcão vendas]", url: "https://t.me/"},
-          { text: "[PMAM Balcão vendas]", url: "https://t.me/F"},
+          { text: "[PMAM Balcão vendas]", url: "https://t.me/"},
         ],
         [
           { text: "[CBMAM Balcão vendas]", url: "https://t.me/"},
           { text: "[PMAP Balcão vendas]", url: "https://t.me/"},
-          { text: "[CBMAP Balcão vendas]", url: "https://t.me/F"},
+          { text: "[CBMAP Balcão vendas]", url: "https://t.me/"},
         ],
         [
           { text: "[PMRO Balcão vendas]", url: "https://t.me/"},
           { text: "[CBMRO Balcão vendas]", url: "https://t.me/"},
-          { text: "[PMTO Balcão vendas]", url: "https://t.me/F"},
+          { text: "[PMTO Balcão vendas]", url: "https://t.me/"},
         ],
         [
           { text: "[CBMTO Balcão vendas]", url: "https://t.me/"},
           { text: "[PMAC Balcão vendas]", url: "https://t.me/"},
-          { text: "[CBMAC Balcão vendas]", url: "https://t.me/F"},
+          { text: "[CBMAC Balcão vendas]", url: "https://t.me/"},
         ],
         [
           { text: "[PMPA Balcão vendas]", url: "https://t.me/"},
           { text: "[CBMPA Balcão vendas]", url: "https://t.me/"},
-          { text: "[PMRR Balcão vendas]", url: "https://t.me/F"},
+          { text: "[PMRR Balcão vendas]", url: "https://t.me/"},
         ],
         [
           { text: "[CBMRR Balcão vendas]", url: "https://t.me/"},
           { text: "[PMPB Balcão vendas]", url: "https://t.me/"},
-          { text: "[CBMPB Balcão vendas]", url: "https://t.me/F"},
+          { text: "[CBMPB Balcão vendas]", url: "https://t.me/"},
         ],        
+      ],        
+      },
+    };
+
+    const artigos_civis: TelegramBot.SendMessageOptions = {
+      reply_markup: {
+        inline_keyboard: [
+        [
+          { text: "[Fardamento Balcão vendas]", url: "https://t.me/"},
+          { text: "[Veículo vendas]", url: "https://t.me/" },
+          { text: "[Serviço Balcão vendas]", url: "https://t.me/"},
+        ],
+        [
+          { text: "[Smartphone Balcão vendas]", url: "https://t.me/"},
+          { text: "[Acessório Balcão vendas]", url: "https://t.me/"},
+          { text: "[Eletrodoméstico Balcão vendas]", url: "https://t.me/F"},
+        ],
+        [
+          { text: "[Automotivo Balcão vendas]", url: "https://t.me/"},
+          { text: "[Áudio Balcão vendas]", url: "https://t.me/"},
+          { text: "[Eletroportátil Balcão vendas]", url: "https://t.me/F"},
+        ],
+        [
+          { text: "[Ferramenta Balcão vendas]", url: "https://t.me/"},
+          { text: "[Bebida Balcão vendas]", url: "https://t.me/"},
+          { text: "[Bebê Balcão vendas]", url: "https://t.me/F"},
+        ],
+        [
+          { text: "[Esporte Balcão vendas]", url: "https://t.me/"},
+          { text: "[Smart TV Balcão vendas]", url: "https://t.me/"},
+          { text: "[Ar e Ventilação Balcão vendas]", url: "https://t.me/F"},
+        ],
+        [
+          { text: "[Imóvel Balcão vendas]", url: "https://t.me/"},
+          { text: "[Brinquedo Balcão vendas]", url: "https://t.me/"},
+          { text: "[Informática Balcão vendas]", url: "https://t.me/F"},
+        ],
+        [
+          { text: "[Game Balcão vendas]", url: "https://t.me/"},
+          { text: "[Móvel Balcão vendas]", url: "https://t.me/"},
+          { text: "[Utilidade Doméstica Balcão vendas]", url: "https://t.me/F"},
+        ],
       ],        
       },
     };
@@ -417,7 +459,7 @@ Prontinho, seu cadastro foi realizado com sucesso!! 🥳
 Segue abaixo os Balcões que você pode acessar para comprar ou vender um produto!
             
             ` 
-                    ,grupos);
+                    ,artigos_militares);
 
             }else{
               bot.sendMessage(id_telegram, `Você precisa digitar um e-mail válido!`);
@@ -431,7 +473,7 @@ Prontinho, seu cadastro foi realizado com sucesso!! 🥳
 Segue abaixo os Balcões que você pode acessar para comprar ou vender um produto!
             
             ` 
-                    ,grupos);
+                    ,artigos_militares);
           }
 
         }
