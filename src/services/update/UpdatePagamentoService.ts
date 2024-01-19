@@ -19,7 +19,7 @@ const pedido = await prisma_db.pedidos.findUnique({
   }
 })
 
-console.log('2')
+  console.log('2')
 
 const valor = pedido?.produto.valor_produto || ''
 const recomendado = pedido?.users.recomendado || 0
@@ -62,6 +62,23 @@ if(pedido){
       
     console.log('8')
 
+        // Função para criar botões inline
+function createInlineKeyboard(userTelegramId:any) {
+  return {
+    inline_keyboard: [
+      [
+        {
+          text: 'Recomendo',
+          callback_data: `recomendo_${userTelegramId}`,
+        },
+        {
+          text: 'Desaconselho',
+          callback_data: `desaconselho_${userTelegramId}`,
+        },
+      ],
+    ],
+  };
+}
 
       try {
              // Enviar msg para os grupos 
@@ -70,13 +87,11 @@ if(pedido){
         chat_id: grupo.id_grupo,
         text: `
 
-Interessado em vender (fardamento)
-
-${pedido.produto.descricao}
+Interessado em vender ${pedido.produto.descricao}
 
 Valor ${(parseInt(valor)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
 
-Envie o código ${pedido.produto.id} para @BDMilquerocomprar para comprar dele.
+Envie o código [${pedido.produto.id}] para @BDMilquerocomprar para comprar dele.
 
 ${recomendado>0?`Recomendado por mais de ${recomendado} pessoas`:`Ainda não recomendado`}
 
@@ -89,6 +104,7 @@ Conta verificada ✅
 Membro desde ${moment(pedido.users.created_at).format('DD-MM-YYYY')}
 
 `,
+reply_markup: createInlineKeyboard(grupo.id_grupo),
       });
         
       } catch (error) {console.log('erro 01')}
@@ -123,9 +139,7 @@ await axios.post('https://api.telegram.org/bot6302850791:AAEllHI-dUdbpmhQ30havov
  text: `
 🚨 Alerta
 
-Interessado em vender (fardamento)
-
-${pedido.produto.descricao}
+Interessado em vender ${pedido.produto.descricao}
 
 Valor ${(parseInt(valor)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
 

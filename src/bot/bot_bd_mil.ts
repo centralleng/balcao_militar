@@ -3,16 +3,10 @@ import TelegramBot from "node-telegram-bot-api";
 import { prisma_db } from "../database/prisma_db";
 import { cpf } from 'cpf-cnpj-validator'; 
 import validator from 'validator';
-import { text } from "body-parser";
 
 const token_bot = "6886561681:AAEL0_4SPcmWNV3_l9Nys0fe3Q2N2_9b--I"; // CentrallTest1
 
 const bot = new TelegramBot(token_bot, { polling: true });
-
-// export function envioalerta(dados){
-//   console.log(dados)
-//   bot.sendMessage(dados.chatId, dados.adresp);
-// }
 
 class Bot_bd_mil {
   static execute() {
@@ -51,14 +45,6 @@ class Bot_bd_mil {
     
     *15\\)* Lembrando que o Balcão é um facilitador para aquisição ou venda de produtos entre militares, pensionistas\\. Pode ser estendido à *familiares e amigos, porém sempre utilizando a conta do militar*\\. A negociação é livre e de responsabilidade dos usuários, sob pena de exclusão sumária do sistema\\.
         `;
-    // const termos_uso = {
-    //   reply_markup: {
-    //     inline_keyboard: [
-    //       [{ text: 'Opção 1', callback_data: '1' }],
-    //       // Adicione mais opções conforme necessário
-    //     ],
-    //   },
-    // };
 
     const termos_uso: TelegramBot.SendMessageOptions = {
       reply_markup: {
@@ -163,7 +149,7 @@ class Bot_bd_mil {
           { text: "CBMRR", callback_data: "CBMRR"},
           { text: "PMPB", callback_data: "PMPB"},
           { text: "CBMPB", callback_data: "CBMPB"},
-        ],
+        ],        
       ],        
       },
     };
@@ -272,6 +258,7 @@ class Bot_bd_mil {
 
     // Manipular callback_query
     bot.on("callback_query", async (callbackQuery: TelegramBot.CallbackQuery) => {
+      // console.log(callbackQuery)
       const msg = callbackQuery.data;
       const chatId = callbackQuery.message?.chat.id;
       const username = callbackQuery.message?.chat.username; 
@@ -339,6 +326,9 @@ A qual instituição você pertence?
       const name = msg.chat.first_name;
       const username = msg.chat.username;
 
+      const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...');
+      const messageId = msg_del.message_id.toString()
+
       const req = await prisma_db.users.findUnique({
         where:{id_telegram:id_telegram}
       })
@@ -346,17 +336,19 @@ A qual instituição você pertence?
       if(!req){ // Primeiro contato com o bot  
       await bot.sendMessage(id_telegram, termo1, {parse_mode: 'MarkdownV2'});
       await bot.sendMessage(id_telegram, termo2, {parse_mode: 'MarkdownV2'});
-      bot.sendMessage(id_telegram,"Eu li e concordo com os termos de uso:",termos_uso);
+      await bot.sendMessage(id_telegram,"Eu li e concordo com os termos de uso:",termos_uso);
+      bot.deleteMessage(id_telegram, messageId)
       //colocar um botão de OK aqui!!        
       }else{
         if(req.termo){
           if(req.instituicao===null){              
             // Qual seu cpf
-          bot.sendMessage(id_telegram,`
+          await bot.sendMessage(id_telegram,`
 Vamos dar início ao seu cadastro: 
 
 A qual instituição você pertence?           
           `,instituicao);
+          bot.deleteMessage(id_telegram, messageId)
           return
           }     
           if(req.nome===null){  
@@ -366,8 +358,9 @@ A qual instituição você pertence?
               data:{nome: texto}
             })
             // Qual seu cpf
-            await bot.sendMessage(id_telegram, `Ok`);
-            bot.sendMessage(id_telegram, `Qual o seu CPF?`);
+            await bot.sendMessage(id_telegram, `Digite seu CPF`);
+            await bot.sendMessage(id_telegram, `Obs: Colocar somente números`);
+            bot.deleteMessage(id_telegram, messageId)
             return
           }
           if(req.document===null){
@@ -378,7 +371,8 @@ A qual instituição você pertence?
             }        
 
             if(!contemApenasNumeros(texto||'')){
-              bot.sendMessage(id_telegram, `Você precisa digitar somente números!`);
+              await bot.sendMessage(id_telegram, `Você precisa digitar somente números!`);
+              bot.deleteMessage(id_telegram, messageId)
             }else{
                  // verifica se é um número válido
             const verificar_cpf = texto||''
@@ -391,9 +385,11 @@ A qual instituição você pertence?
               data:{type_document:'cpf',document: verificar_cpf.replace(/[^0-9]/g, ''),}
             })
                // quer editar o cadastro
-            bot.sendMessage(id_telegram, `Qual o seu e-mail?`);
+            await bot.sendMessage(id_telegram, `Digite seu melhor e-mail?`);
+            bot.deleteMessage(id_telegram, messageId)
             }else{
-              bot.sendMessage(id_telegram, `Você precisa digitar um CPF válido!`);
+              await bot.sendMessage(id_telegram, `Você precisa digitar um CPF válido!`);
+              bot.deleteMessage(id_telegram, messageId)
             }  
             }
             return
@@ -412,26 +408,65 @@ A qual instituição você pertence?
               where:{id_telegram: id_telegram},
               data:{email: texto}
             })
-            bot.sendMessage(id_telegram,`
-Prontinho, seu cadastro foi realizado com sucesso!! 🥳
-Segue abaixo os Balcões que você pode acessar para comprar ou vender um produto!
-            
-            ` 
-                    ,grupos);
+            await bot.sendMessage(id_telegram,`Digite seu telefone com ddd no padrão abaixo`);
+            await bot.sendMessage(id_telegram,`(99)999999999`);
+            bot.deleteMessage(id_telegram, messageId)
+            return
 
             }else{
-              bot.sendMessage(id_telegram, `Você precisa digitar um e-mail válido!`);
+              await bot.sendMessage(id_telegram, `Você precisa digitar um e-mail válido!`);
+              bot.deleteMessage(id_telegram, messageId)
             }          
 
             return
           }
+          if(req.phone===null){           
+
+            function isTelefoneValido(texto: any) {
+              // Expressão regular para verificar o padrão (99)123456789 ou (99)1234567890
+              const regex = /^\(\d{2}\)\d{8,9}$/;
+            
+              // Testa o texto contra a expressão regular
+              return regex.test(texto);
+            }
+            console.log(isTelefoneValido(texto))
+            // 
+            if(isTelefoneValido(texto)){
+               // updata no banco salvando telefone
+              const partes = texto?.split(/[()]/)||'';
+              // Filtrar apenas os caracteres numéricos
+              const ddd = partes[1].replace(/\D/g, '');
+              const telefone = partes[2].replace(/\D/g, '');
+              console.log(ddd,telefone)
+
+              await prisma_db.users.update({
+                where:{id_telegram: id_telegram},
+                data:{phone: telefone, ddd_phone:ddd}
+              })
+
+              await bot.sendMessage(id_telegram,`
+Prontinho, seu cadastro foi realizado com sucesso!! 🥳
+Segue abaixo os Balcões que você pode acessar para comprar ou vender um produto!          
+          `
+            ,grupos);
+            bot.deleteMessage(id_telegram, messageId)
+            }else{
+              await bot.sendMessage(id_telegram,`Digite seu telefone com ddd no padrão abaixo`);
+              await bot.sendMessage(id_telegram,`ddd com parentes mais número de telefone`);
+              await bot.sendMessage(id_telegram,`(99)999999999`);
+              bot.deleteMessage(id_telegram, messageId)
+            }
+           
+            return
+          }
           else{
-            bot.sendMessage(id_telegram,`
+            await bot.sendMessage(id_telegram,`
 Prontinho, seu cadastro foi realizado com sucesso!! 🥳
 Segue abaixo os Balcões que você pode acessar para comprar ou vender um produto!
             
             ` 
                     ,grupos);
+                    bot.deleteMessage(id_telegram, messageId)
           }
 
         }

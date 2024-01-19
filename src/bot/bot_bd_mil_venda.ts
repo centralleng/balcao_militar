@@ -137,6 +137,8 @@ Descreva de forma sucinta o produto que você quer ofertar, incluindo obrigatori
 `
     const valor = `
 Qual o valor pretendido? (escreva somente números. Caso haja centavos, coloque ponto pra separar o real dos centavos.)
+
+Ex: 00.00
 `
 //     const valor = `
 // Qual o valor pretendido? (escreva somente números. Caso haja centavos coloque ponto)
@@ -162,7 +164,7 @@ Qual o valor pretendido? (escreva somente números. Caso haja centavos, coloque 
 `
     // Manipular callback_query
     bot.on("callback_query", async (msg: any) => {
-      // console.log("callback_query",msg)
+      console.log("callback_query",msg)
       const texto = msg.data;
       const id_telegram = msg.message?.chat.id;
       const username = msg.message?.chat.username;
@@ -204,7 +206,8 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             if (user) {
               await prisma_db.produtos.create({
                 data: {
-                  user_id: user?.id
+                  user_id: user?.id,
+                  id_telegram: id_telegram.toString(),
                 }
               })
             }
@@ -298,7 +301,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
     });
 
     bot.on('message', async (msg: any) => {
-      // console.log('message', msg.text)
+      console.log('message', msg.text)
       const id_telegram = msg.chat.id.toString();
       const texto = msg.text;
       const name = msg.chat.first_name;
@@ -329,6 +332,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
 
       if (username === undefined) {
         bot.sendMessage(id_telegram, `⚠️ É necessário cadastrar um UserName do Telegram, para dar continuidade no Balcão.`);
+        return
       } else {
         // Inicio dos comandos /////////////////////////////////////////////
         if (username != user?.username) { // So estou atualizando o user name no banco de dados mais nada.
@@ -340,20 +344,27 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
 
         if (user.produto.length === 0) {
           await bot.sendMessage(id_telegram, texto_inicial);
-          // await bot.sendMessage(id_telegram, formato_venda);
           await bot.sendMessage(id_telegram, atencao);
           bot.sendMessage(id_telegram, 'Escolha sua ação:', botao_inicial);
           return
         }
 
-        if (user.produto[0].status) {
-          await bot.deleteMessage(id_telegram, messageId)
+        if (user.produto[0].status) {          
           bot.sendMessage(id_telegram, 'Escolha sua ação:', botao_inicial);         
           return
-        }
+        }     
 
         if (user.produto && !user.produto[0].status) {
+          if (user.produto[0].categoria===null) {  // Esse if é somente para não deixar colocar a cateria por aqui
+            await bot.sendMessage(id_telegram, `Artigos Militáres`, artigos_militares);
+            await bot.sendMessage(id_telegram, `Artigos Civis`, artigos_civis);         
+            return
+          }
           if (user.produto && user.produto[0].descricao === null) {
+
+            const verifica_descricao = texto.split('')
+
+            if(verifica_descricao.length<150){
 
             try {
               await prisma_db.produtos.update({
@@ -366,8 +377,15 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               return
             } catch (error) {
               bot.sendMessage(id_telegram, `⚠️ Ops algo deu errado escreva sua descrição novamente.`);
+              return
             }
-            return
+
+            }else{
+              bot.sendMessage(id_telegram, `⚠️ Ops algo coloque no máximo 150 caracteres. SÓ coloque ponto no fim.`);
+              return
+            }
+        
+          
           }
 
           if (user.produto && user.produto[0].valor_produto === null) {
@@ -430,58 +448,6 @@ Colocar informações e o preço para expor o anúncio!`,
               return
             } else { bot.sendMessage(id_telegram, `O valor monetário não é válido.`) }
           }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          // if(user.produto&&!user.produto[0].status){        
-          //   try {
-          //     await prisma_db.produtos.update({
-          //       where:{id:user.produto[0].id},
-          //       data:{
-          //         valor_produto: parseFloat(texto),
-          //         status: true 
-          //       }
-          //     })            
-          //   bot.sendMessage(id_telegram, finalizar_cadastro,  
-          //       {reply_markup: {
-          //         inline_keyboard: [
-          //         [
-          //         { text: "PAGAR", callback_data: `PAGAR_${user.produto[0].id}`},
-          //         ],
-          //         ],      
-          //         },
-          //       }); 
-          //   return       
-          //   } catch (error) {
-          //     bot.sendMessage(id_telegram, `Ops algo deu errado escreca sua descrição novamente`); 
-          //   } 
-          //   return
-          // }   
-
-
-
-
-
-
-
-
-
-
-
-
         } else {
           bot.sendMessage(id_telegram, 'Escolha sua ação:', botao_inicial);
         }
