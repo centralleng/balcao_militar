@@ -490,7 +490,15 @@ A qual instituição você pertence?
 Prontinho, seu cadastro foi realizado com sucesso!! 🥳
 Segue abaixo os Balcões que você pode acessar para comprar ou vender um produto!          
           `
-            ,grupos);
+            ,);
+            await bot.sendMessage(id_telegram,`
+Grupos de Artigo Militar          
+                      `
+                        ,artigos_militares);
+            await bot.sendMessage(id_telegram,`
+Grupos de Artigo Civil          
+                      `
+                        ,artigos_civis);
             bot.deleteMessage(id_telegram, messageId)
             }else{
               await bot.sendMessage(id_telegram,`Digite seu telefone com ddd no padrão abaixo`);
@@ -502,13 +510,20 @@ Segue abaixo os Balcões que você pode acessar para comprar ou vender um produt
             return
           }
           else{
-            await bot.sendMessage(id_telegram,`
+await bot.sendMessage(id_telegram,`
 Prontinho, seu cadastro foi realizado com sucesso!! 🥳
-Segue abaixo os Balcões que você pode acessar para comprar ou vender um produto!
-            
-            ` 
-                    ,grupos);
-                    bot.deleteMessage(id_telegram, messageId)
+Segue abaixo os Balcões que você pode acessar para comprar ou vender um produto!          
+        `
+          ,);
+          await bot.sendMessage(id_telegram,`
+Grupos de Artigo Militar          
+                    `
+                      ,artigos_militares);
+          await bot.sendMessage(id_telegram,`
+Grupos de Artigo Civil          
+                    `
+                      ,artigos_civis);
+          bot.deleteMessage(id_telegram, messageId)
           }
 
         }

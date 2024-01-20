@@ -18,17 +18,17 @@ class Bot_bd_mil_comprar {
   static execute() {
 
     // Função para criar botões inline
-function createInlineKeyboard(userTelegramId:any, senha:any) {
+function createInlineKeyboard(userTelegramId:any, produto_id:any, user_id:any) {
   return {
     inline_keyboard: [
       [
         {
           text: 'Recomendo',
-          callback_data: `RECOMENDO_${userTelegramId}_${senha}`,
+          callback_data: `RECOMENDO_${userTelegramId}_${produto_id}_${user_id}`,
         },
         {
           text: 'Desaconselho',
-          callback_data: `DESACONSELHO_${userTelegramId}_${senha}`,
+          callback_data: `DESACONSELHO_${userTelegramId}_${produto_id}_${user_id}`,
         },
       ],
     ],
@@ -57,45 +57,83 @@ function createInlineKeyboard(userTelegramId:any, senha:any) {
 
             if(texto_split[0]==='RECOMENDO'){
 
-              
-
-              const user = await prisma_db.users.findUnique({
-                where: { id_telegram: texto_split[1].toString()},
+              const log = await prisma_db.log_recomendacoes.findMany({
+                where:{
+                  user_id: user?.id,
+                  produto_id: texto_split[1]
+                }
               })
-              
-              if(user){
 
+              if(log.length>0){
+                bot.sendMessage(id_telegram, `⚠️ Sua recomendação já foi feita.`);
+              }else{
+                const user = await prisma_db.users.findUnique({where:{id:texto_split[2]}})
                 const recomento_db = user?.recomendado || 0
                 const recomento = recomento_db + 1
-                // editar user
-                await prisma_db.users.update({
-                  where:{id_telegram: texto_split[1]},
-                  data:{
-                    recomendado: recomento      
-                  }
-                })
-              }    
-            }
+                
+                if(user){
+                  await prisma_db.users.update({
+                    where:{id_telegram: user?.id_telegram||''},
+                    data:{
+                      recomendado: recomento      
+                    }
+                  })     
+                  bot.sendMessage(id_telegram, `✅ Recomendação feita com sucesso!`);             
+                }
+              }
+            }          
 
             if(texto_split[0]==='DESACONSELHO'){
-              const user = await prisma_db.users.findUnique({
-                where: { id_telegram: texto_split[1].toString()},
-              })
-              
-              if(user){
 
-                const desaconselho_db = user?.recomendado || 0
-                const desaconselho = desaconselho_db + 1
-                // editar user
-                await prisma_db.users.update({
-                  where:{id_telegram: texto_split[1]},
-                  data:{
-                    desaconselhado: desaconselho      
-                  }
-                })
-              }   
+              bot.sendMessage(id_telegram, `Selecione o Motivo`,
+              {
+                reply_markup: {
+                  inline_keyboard: [
+                    [  
+                      { text: "Não entregou o produto", callback_data: `DESACONSELHODB_${texto_split[1]}_${texto_split[2]}_Não entregou o produto`},
+                      { text: "Não efetuou o pagamento", callback_data: `DESACONSELHODB_${texto_split[1]}_${texto_split[2]}_Não efetuou o pagamento`},
+                    ],
+                    [  
+                      { text: "Foi rude", callback_data: `DESACONSELHODB_${texto_split[1]}_${texto_split[2]}_Foi rude`},
+                      { text: "Produto em desacordo com o descrito", callback_data: `DESACONSELHODB_${texto_split[1]}_${texto_split[2]}_Produto em desacordo com o descrito`},
+                    ],
+                    [  
+                      { text: "Não é militar", callback_data: `DESACONSELHODB_${texto_split[1]}_${texto_split[2]}_Não é militar`},
+                      { text: "Outros", callback_data: `DESACONSELHODB_${texto_split[1]}_${texto_split[2]}_Outros`},
+                    ],
+                  ],
+                },
+              });        
     
-            }             
+            } 
+            if(texto_split[0]==='DESACONSELHODB'){
+
+              const log = await prisma_db.log_recomendacoes.findMany({
+                where:{
+                  user_id: user?.id,
+                  produto_id: texto_split[1]
+                }
+              })
+
+              if(log.length>0){
+                bot.sendMessage(id_telegram, `⚠️ Seu desaconselho já foi feito.`);
+              }else{
+
+                const user = await prisma_db.users.findUnique({where:{id:texto_split[2]}})
+                const desaconselhado_db = user?.desaconselhado || 0
+                const desaconselhado = desaconselhado_db + 1
+
+                if(user){
+                  await prisma_db.users.update({
+                    where:{id_telegram: user?.id},
+                    data:{
+                      desaconselhado: desaconselhado      
+                    }
+                  })     
+                  bot.sendMessage(id_telegram, `✅ Desaconselho feita com sucesso!`);
+                }
+              }
+            }            
         }else{
           bot.sendMessage(id_telegram, `⚠️ É necessário cadastrar um UserName do Telegram, para dar continuidade no Balcão.`);
         }
@@ -164,7 +202,11 @@ Olá, seja bem-vindo ao BDMilquerocomprar! Aqui você poderá solicitar uma nego
                 where: { id: parseInt(texto||'')}                
               })
               produto = produto_db
+
             }else{produto=false}
+
+            const produto_id = produto?.id
+            const user_vendedor = produto.user_id
 
             console.log(produto)
 
@@ -172,7 +214,7 @@ Olá, seja bem-vindo ao BDMilquerocomprar! Aqui você poderá solicitar uma nego
             if (produto) {
               try {
                 // Cadastra a Intenção de compra do Comprador, no sistema.
-                const nova_intencao = await prisma_db.intencao_de_compras.create({
+                await prisma_db.intencao_de_compras.create({
                   data: {
                     vendedor_id_telegram:    produto.id_telegram,
                     comprador_id_telegram:    id_telegram.toString(),
@@ -181,9 +223,9 @@ Olá, seja bem-vindo ao BDMilquerocomprar! Aqui você poderá solicitar uma nego
                   }
                 })
                 
-                const intencao = await prisma_db.intencao_de_compras.findFirst({
-                  where:  {produto_id: produto.id}
-                })
+                // const intencao = await prisma_db.intencao_de_compras.findFirst({
+                //   where:  {produto_id: produto.id}
+                // })
 
                 try {
                                  
@@ -213,7 +255,7 @@ Recomendo que sempre seja confirmado o valor do produto, bem como a forma de ent
 ❗️ Não esqueça de deletar o produto, após a venda.
   
           `,
-reply_markup: createInlineKeyboard(id_telegram,senha),
+reply_markup: createInlineKeyboard(id_telegram,produto_id, user.id),
                 },);
 
                   
@@ -240,13 +282,12 @@ Recomendo que sempre seja confirmado o valor do produto, bem como a forma de ent
                 reply_markup: {
                   inline_keyboard: [
                     [
-                      { text: "Recomendo", callback_data: `RECOMENDO_${senha}`}, 
-                      { text: "Desaconselho", callback_data: `DESACONSELHO_${senha}`},
+                      { text: "Recomendo", callback_data: `RECOMENDO_${produto_id}_${user_vendedor}`},  
+                      { text: "Desaconselho", callback_data: `DESACONSELHO_${produto_id}_${user_vendedor}`},
                     ],
                   ],
                 },
-              }
-              )
+              });
               } catch (error) {
                 console.log(error)
               }
