@@ -29,6 +29,7 @@ model Users {
   produto             Produtos[]
   pedido              Pedidos[]
   alerta              Alertas[]
+  log                 Log_recomendacoes[]
 
   @@map("bdmil_users")
 }
@@ -130,6 +131,8 @@ model Log_recomendacoes {
   descricao               String?
   updated_at              DateTime      @updatedAt @default(now())
   created_at              DateTime      @default(now())
+
+  users                   Users         @relation(fields: [user_id], references: [id])
 
   @@map("bdmil_log_recomendacoes")
 }

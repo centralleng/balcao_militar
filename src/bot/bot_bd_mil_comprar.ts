@@ -49,35 +49,44 @@ function createInlineKeyboard(userTelegramId:any, produto_id:any, user_id:any) {
         const id_telegram = chatId || ''
         const texto_split = msg.split('_')
 
-        const user = await prisma_db.users.findUnique({
+        const user_principal = await prisma_db.users.findUnique({
           where: { id_telegram: id_telegram?.toString() },
         })
-        if (user) {
+        if (user_principal) {
           if (username) {
 
             if(texto_split[0]==='RECOMENDO'){
 
               const log = await prisma_db.log_recomendacoes.findMany({
                 where:{
-                  user_id: user?.id,
-                  produto_id: texto_split[1]
+                  user_id: user_principal?.id,
+                  produto_id: parseInt(texto_split[1])
                 }
               })
 
               if(log.length>0){
                 bot.sendMessage(id_telegram, `⚠️ Sua recomendação já foi feita.`);
+                return
               }else{
                 const user = await prisma_db.users.findUnique({where:{id:texto_split[2]}})
-                const recomento_db = user?.recomendado || 0
-                const recomento = recomento_db + 1
+                const recomendo_db = user?.recomendado || 0
+                const recomendo = recomendo_db + 1
                 
                 if(user){
                   await prisma_db.users.update({
-                    where:{id_telegram: user?.id_telegram||''},
+                    where:{id: user?.id},
                     data:{
-                      recomendado: recomento      
+                      recomendado: recomendo      
                     }
-                  })     
+                  }) 
+                  await prisma_db.log_recomendacoes.create({
+                    data:{
+                      status: 'recomendado',
+                      produto_id: parseInt(texto_split[1]),
+                      user_id: user_principal.id,
+                      descricao: 'recomendado',
+                    }
+                  })    
                   bot.sendMessage(id_telegram, `✅ Recomendação feita com sucesso!`);             
                 }
               }
@@ -88,18 +97,18 @@ function createInlineKeyboard(userTelegramId:any, produto_id:any, user_id:any) {
               bot.sendMessage(id_telegram, `Selecione o Motivo`,
               {
                 reply_markup: {
-                  inline_keyboard: [
+                  inline_keyboard: [                  
                     [  
-                      { text: "Não entregou o produto", callback_data: `DESACONSELHODB_${texto_split[1]}_${texto_split[2]}_Não entregou o produto`},
-                      { text: "Não efetuou o pagamento", callback_data: `DESACONSELHODB_${texto_split[1]}_${texto_split[2]}_Não efetuou o pagamento`},
+                      { text: "Não entregou o produto", callback_data: `DESACONSELHODB_${texto_split[1]}_${texto_split[2]}_1`},
+                      { text: "Não efetuou o pagamento", callback_data: `DESACONSELHODB_${texto_split[1]}_${texto_split[2]}_2`},
                     ],
                     [  
-                      { text: "Foi rude", callback_data: `DESACONSELHODB_${texto_split[1]}_${texto_split[2]}_Foi rude`},
-                      { text: "Produto em desacordo com o descrito", callback_data: `DESACONSELHODB_${texto_split[1]}_${texto_split[2]}_Produto em desacordo com o descrito`},
+                      { text: "Foi rude", callback_data: `DESACONSELHODB_${texto_split[1]}_${texto_split[2]}_3`},
+                      { text: "Produto em desacordo com o descrito", callback_data: `DESACONSELHODB_${texto_split[1]}_${texto_split[2]}_4`},
                     ],
                     [  
-                      { text: "Não é militar", callback_data: `DESACONSELHODB_${texto_split[1]}_${texto_split[2]}_Não é militar`},
-                      { text: "Outros", callback_data: `DESACONSELHODB_${texto_split[1]}_${texto_split[2]}_Outros`},
+                      { text: "Não é militar", callback_data: `DESACONSELHODB_${texto_split[1]}_${texto_split[2]}_5`},
+                      { text: "Outros", callback_data: `DESACONSELHODB_${texto_split[1]}_${texto_split[2]}_6`},
                     ],
                   ],
                 },
@@ -110,8 +119,8 @@ function createInlineKeyboard(userTelegramId:any, produto_id:any, user_id:any) {
 
               const log = await prisma_db.log_recomendacoes.findMany({
                 where:{
-                  user_id: user?.id,
-                  produto_id: texto_split[1]
+                  user_id: user_principal?.id,
+                  produto_id: parseInt(texto_split[1]) 
                 }
               })
 
@@ -125,12 +134,58 @@ function createInlineKeyboard(userTelegramId:any, produto_id:any, user_id:any) {
 
                 if(user){
                   await prisma_db.users.update({
-                    where:{id_telegram: user?.id},
+                    where:{id: user?.id},
                     data:{
                       desaconselhado: desaconselhado      
                     }
-                  })     
-                  bot.sendMessage(id_telegram, `✅ Desaconselho feita com sucesso!`);
+                  });
+                  let descricao 
+                  switch (texto_split[3]) {
+                    case '1':  
+                    descricao = 'Não entregou o produto'                    
+                      break;
+                    case '2':  
+                    descricao = 'Não efetuou o pagamento'                    
+                      break;
+                    case '3':  
+                    descricao = 'Foi rude'                    
+                      break;
+                    case '4':  
+                    descricao = 'Produto em desacordo com o descrito'                    
+                      break;
+                    case '5':  
+                    descricao = 'Não é militar'                    
+                      break;
+                    case '6':  
+                    descricao = ''                    
+                      break;  
+                  }
+
+                  if(descricao===''){
+                    await prisma_db.log_recomendacoes.create({
+                      data:{
+                        status: 'desaconselhado',
+                        produto_id: parseInt(texto_split[1]),
+                        user_id: user_principal.id,
+                        descricao: '',
+                      }
+                    })
+                    bot.sendMessage(id_telegram, `
+⚠️ Descreva o motivo
+
+Obs: Coloque no máximo 150 caracteres
+`);
+                  }else{
+                    await prisma_db.log_recomendacoes.create({
+                      data:{
+                        status: 'desaconselhado',
+                        produto_id: parseInt(texto_split[1]),
+                        user_id: user_principal.id,
+                        descricao: descricao,
+                      }
+                    })     
+                    bot.sendMessage(id_telegram, `✅ Desaconselho feita com sucesso!`);
+                  }
                 }
               }
             }            
@@ -151,7 +206,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
       const id_telegram = msg.chat.id.toString();
       const texto = msg.text;
       const name = msg.chat.first_name;
-      const username = msg.chat.username;
+      const username = msg.chat.username;  
       
       function gerarHash() {
         let hash = '';
@@ -163,9 +218,16 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
 
     const senha = gerarHash();
     
-        const user = await prisma_db.users.findUnique({
-          where: { id_telegram: id_telegram.toString()},
-        })
+    const user = await prisma_db.users.findUnique({
+      where: { id_telegram: id_telegram.toString() },
+      include: {
+        log: {
+          where: {
+            descricao: ""
+          }
+        }
+      }
+    });
 
         if (!user) {
           bot.sendMessage(id_telegram, `
@@ -188,6 +250,24 @@ Olá, seja bem-vindo ao BDMilquerocomprar! Aqui você poderá solicitar uma nego
         } else {   
         // Verifica se o usuário está cadastrado no Banco de dados.
         if (user) {
+
+        if(user.log.length>0){
+
+            const texto_prit = texto || ''
+            const verifica_descricao = texto_prit.split('')
+
+            if(verifica_descricao.length<150){
+              await prisma_db.log_recomendacoes.update({
+                where:{id:user.log[0].id},
+                data:{descricao: texto}         
+              })     
+              bot.sendMessage(id_telegram, `✅ Desaconselho feita com sucesso!`);
+              return
+            }else{
+              bot.sendMessage(id_telegram, `⚠️ Ops! coloque no máximo 150 caracteres.`);
+              return
+            }         
+        }
           // Verifica se o usuário possui um user-name, e atualiza o que está no banco de dados.
           if (username) {
            await prisma_db.users.update({
@@ -265,10 +345,10 @@ reply_markup: createInlineKeyboard(id_telegram,produto_id, user.id),
                 }
  
 // Msg enviada ao comprador 
-                  bot.sendMessage(id_telegram, `
+bot.sendMessage(id_telegram, `
 ✅ Sua intenção de compra foi enviada para o usuário, interessado em vender o produto.
 
-✔️  O vendedor entrará em contato caso se interesse em negociar o produto, enviando uma mensagem para a sua conta informando a senha ${senha}. Essa é uma forma de certificar que ele é realmente a pessoa que postou a oferta ${produto.id}. Sugiro uma análise de risco no tocante ao vendedor verificando os dados adicionais durante a negociação, para ter a certeza do processo.
+✔️  O vendedor entrará em contato caso se interesse em negociar o produto, enviando uma mensagem para a sua conta informando a senha ${senha} . Essa é uma forma de certificar que ele é realmente a pessoa que postou a oferta ${produto.id}. Sugiro uma análise de risco no tocante ao vendedor verificando os dados adicionais durante a negociação, para ter a certeza do processo.
 
 ▪️   Dica do Balcão dos militares:
 
@@ -277,17 +357,16 @@ Recomendo que sempre seja confirmado o valor do produto, bem como a forma de ent
 🤝  Gostaríamos de lembrar da importância de honrar acordos com vendedor ou comprador no Balcão, depois de selar um acordo, a negociação não deve ser alterada. Honre sua palavra e cumpra seus acordos.
 
 ❌  O mau comportamento pode acarretar na exclusão do balcão.
-              `,
-              {
-                reply_markup: {
-                  inline_keyboard: [
-                    [
-                      { text: "Recomendo", callback_data: `RECOMENDO_${produto_id}_${user_vendedor}`},  
-                      { text: "Desaconselho", callback_data: `DESACONSELHO_${produto_id}_${user_vendedor}`},
-                    ],
-                  ],
-                },
-              });
+`, {
+  reply_markup: {
+    inline_keyboard: [
+      [
+        { text: "Recomendo", callback_data: `RECOMENDO_${produto_id}_${user_vendedor}` },  
+        { text: "Desaconselho", callback_data: `DESACONSELHO_${produto_id}_${user_vendedor}` },
+      ],
+    ],
+  },
+});
               } catch (error) {
                 console.log(error)
               }

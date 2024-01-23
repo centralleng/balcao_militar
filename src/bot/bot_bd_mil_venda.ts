@@ -164,14 +164,12 @@ Ex: 00.00
 `
     // Manipular callback_query
     bot.on("callback_query", async (msg: any) => {
-      console.log("callback_query",msg)
+      // console.log("callback_query",msg)
       const texto = msg.data;
       const id_telegram = msg.message?.chat.id;
       const username = msg.message?.chat.username;
       const message_id = msg.message?.message_id;
-      const texto_split = texto.split('_')
-
-      console.log(username)
+      const texto_split = texto.split('_')    
 
       // Primeiro verifica se ja axiste esse usuário
       const user = await prisma_db.users.findUnique({
@@ -274,8 +272,6 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               user_id: user.id,
             }
 
-            console.log(dados)
-
             const pagamento = await Pagamento(dados)
 
             if (pagamento.status === "ok") {
@@ -288,7 +284,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                       ],
                     ],
                   },
-                });
+                });                        
 
             } else {
               bot.sendMessage(id_telegram, `Algo deu errado com seu pedido?`, botao_inicial);
@@ -298,6 +294,144 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           }
         }
       }
+
+      if(texto_split[0]==='RECOMENDO'){
+
+        const log = await prisma_db.log_recomendacoes.findMany({
+          where:{
+            user_id: user.id,
+            produto_id: parseInt(texto_split[2])
+          }
+        })
+
+        if(log.length>0){
+          bot.sendMessage(id_telegram, `⚠️ Sua recomendação já foi feita.`);
+          return
+        }else{
+          const user_req = await prisma_db.users.findUnique({where:{id:texto_split[3]}})
+          const recomendo_db = user?.recomendado || 0
+          const recomendo = recomendo_db + 1
+          
+          if(user_req){
+            await prisma_db.users.update({
+              where:{id: texto_split[3]},
+              data:{
+                recomendado: recomendo      
+              }
+            }) 
+            await prisma_db.log_recomendacoes.create({
+              data:{
+                status: 'recomendado',
+                produto_id: parseInt(texto_split[2]),
+                user_id: user.id,
+                descricao: 'recomendado',
+              }
+            })    
+            bot.sendMessage(id_telegram, `✅ Recomendação feita com sucesso!`);             
+          }
+        }
+      };
+
+      if(texto_split[0]==='DESACONSELHO'){
+
+        bot.sendMessage(id_telegram, `Selecione o Motivo`,
+        {
+          reply_markup: {
+            inline_keyboard: [                  
+              [  
+                { text: "Não entregou o produto", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_1`},
+                { text: "Não efetuou o pagamento", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_2`},
+              ],
+              [  
+                { text: "Foi rude", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_3`},
+                { text: "Produto em desacordo com o descrito", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_4`},
+              ],
+              [  
+                { text: "Não é militar", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_5`},
+                { text: "Outros", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_6`},
+              ],
+            ],
+          },
+        });        
+
+      } 
+
+  if(texto_split[0]==='DESACONSELHODB'){
+    console.log('obj-text',texto_split)
+
+    const log = await prisma_db.log_recomendacoes.findMany({
+      where:{
+        user_id: user?.id,
+        produto_id: parseInt(texto_split[1])
+      }
+    })
+
+    if(log.length>0){
+      bot.sendMessage(id_telegram, `⚠️ Seu desaconselho já foi feito.`);
+    }else{
+
+      const user_req = await prisma_db.users.findUnique({where:{id:texto_split[2]}})
+      const desaconselhado_db = user?.desaconselhado || 0
+      const desaconselhado = desaconselhado_db + 1
+
+      if(user_req){
+        await prisma_db.users.update({
+          where:{id: user_req?.id},
+          data:{
+            desaconselhado: desaconselhado      
+          }
+        });
+
+        let descricao 
+        switch (texto_split[3]) {
+          case '1':  
+          descricao = 'Não entregou o produto'                    
+            break;
+          case '2':  
+          descricao = 'Não efetuou o pagamento'                    
+            break;
+          case '3':  
+          descricao = 'Foi rude'                    
+            break;
+          case '4':  
+          descricao = 'Produto em desacordo com o descrito'                    
+            break;
+          case '5':  
+          descricao = 'Não é militar'                    
+            break;
+          case '6':  
+          descricao = 'Outros'                    
+            break;  
+        }
+
+        if(descricao===''){
+          await prisma_db.log_recomendacoes.create({
+            data:{
+              status: 'desaconselhado',
+              produto_id: parseInt(texto_split[1]),
+              user_id: user.id,
+              descricao: '',
+            }
+          })
+          bot.sendMessage(id_telegram, `
+⚠️ Descreva o motivo
+
+Obs: Coloque no máximo 150 caracteres
+`);
+        }else{
+          await prisma_db.log_recomendacoes.create({
+            data:{
+              status: 'desaconselhado',
+              produto_id: parseInt(texto_split[1]),
+              user_id: user.id,
+              descricao: descricao,
+            }
+          })     
+          bot.sendMessage(id_telegram, `✅ Desaconselho feita com sucesso!`);
+        }
+      }
+    }
+  }        
     });
 
     bot.on('message', async (msg: any) => {
