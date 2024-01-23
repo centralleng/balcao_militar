@@ -29,6 +29,7 @@ model Users {
   produto             Produtos[]
   pedido              Pedidos[]
   alerta              Alertas[]
+  log                 Log_recomendacoes[]
 
   @@map("bdmil_users")
 }
@@ -85,7 +86,8 @@ model Intencao_de_compras {
   delete                  Int?
   vendedor_id_telegram    String
   comprador_id_telegram   String
-  produto_id               Int
+  produto_id              Int
+  senha                   Int
   updated_at              DateTime      @updatedAt @default(now())
   created_at              DateTime      @default(now())
 
@@ -118,4 +120,19 @@ model Grupos {
   created_at              DateTime      @default(now())
 
   @@map("bdmil_grupos")
+}
+
+model Log_recomendacoes {
+  id                      Int           @id @default(autoincrement())
+  delete                  Int?
+  produto_id              Int         
+  user_id                 String
+  status                  String
+  descricao               String?
+  updated_at              DateTime      @updatedAt @default(now())
+  created_at              DateTime      @default(now())
+
+  users                   Users         @relation(fields: [user_id], references: [id])
+
+  @@map("bdmil_log_recomendacoes")
 }

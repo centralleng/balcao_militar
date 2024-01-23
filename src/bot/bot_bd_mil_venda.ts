@@ -120,6 +120,8 @@ Descreva de forma sucinta o produto que você quer ofertar, incluindo obrigatori
 `
     const valor = `
 Qual o valor pretendido? (escreva somente números. Caso haja centavos, coloque ponto pra separar o real dos centavos.)
+
+Ex: 00.00
 `
 //     const valor = `
 // Qual o valor pretendido? (escreva somente números. Caso haja centavos coloque ponto)
@@ -150,9 +152,7 @@ Qual o valor pretendido? (escreva somente números. Caso haja centavos, coloque 
       const id_telegram = msg.message?.chat.id;
       const username = msg.message?.chat.username;
       const message_id = msg.message?.message_id;
-      const texto_split = texto.split('_')
-
-      console.log(username)
+      const texto_split = texto.split('_')    
 
       // Primeiro verifica se ja axiste esse usuário
       const user = await prisma_db.users.findUnique({
@@ -187,7 +187,8 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             if (user) {
               await prisma_db.produtos.create({
                 data: {
-                  user_id: user?.id
+                  user_id: user?.id,
+                  id_telegram: id_telegram.toString(),
                 }
               })
             }
@@ -254,8 +255,6 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               user_id: user.id,
             }
 
-            console.log(dados)
-
             const pagamento = await Pagamento(dados)
 
             if (pagamento.status === "ok") {
@@ -268,7 +267,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                       ],
                     ],
                   },
-                });
+                });                        
 
             } else {
               bot.sendMessage(id_telegram, `Algo deu errado com seu pedido?`, botao_inicial);
@@ -278,10 +277,148 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           }
         }
       }
+
+      if(texto_split[0]==='RECOMENDO'){
+
+        const log = await prisma_db.log_recomendacoes.findMany({
+          where:{
+            user_id: user.id,
+            produto_id: parseInt(texto_split[2])
+          }
+        })
+
+        if(log.length>0){
+          bot.sendMessage(id_telegram, `⚠️ Sua recomendação já foi feita.`);
+          return
+        }else{
+          const user_req = await prisma_db.users.findUnique({where:{id:texto_split[3]}})
+          const recomendo_db = user?.recomendado || 0
+          const recomendo = recomendo_db + 1
+          
+          if(user_req){
+            await prisma_db.users.update({
+              where:{id: texto_split[3]},
+              data:{
+                recomendado: recomendo      
+              }
+            }) 
+            await prisma_db.log_recomendacoes.create({
+              data:{
+                status: 'recomendado',
+                produto_id: parseInt(texto_split[2]),
+                user_id: user.id,
+                descricao: 'recomendado',
+              }
+            })    
+            bot.sendMessage(id_telegram, `✅ Recomendação feita com sucesso!`);             
+          }
+        }
+      };
+
+      if(texto_split[0]==='DESACONSELHO'){
+
+        bot.sendMessage(id_telegram, `Selecione o Motivo`,
+        {
+          reply_markup: {
+            inline_keyboard: [                  
+              [  
+                { text: "Não entregou o produto", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_1`},
+                { text: "Não efetuou o pagamento", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_2`},
+              ],
+              [  
+                { text: "Foi rude", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_3`},
+                { text: "Produto em desacordo com o descrito", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_4`},
+              ],
+              [  
+                { text: "Não é militar", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_5`},
+                { text: "Outros", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_6`},
+              ],
+            ],
+          },
+        });        
+
+      } 
+
+  if(texto_split[0]==='DESACONSELHODB'){
+    console.log('obj-text',texto_split)
+
+    const log = await prisma_db.log_recomendacoes.findMany({
+      where:{
+        user_id: user?.id,
+        produto_id: parseInt(texto_split[1])
+      }
+    })
+
+    if(log.length>0){
+      bot.sendMessage(id_telegram, `⚠️ Seu desaconselho já foi feito.`);
+    }else{
+
+      const user_req = await prisma_db.users.findUnique({where:{id:texto_split[2]}})
+      const desaconselhado_db = user?.desaconselhado || 0
+      const desaconselhado = desaconselhado_db + 1
+
+      if(user_req){
+        await prisma_db.users.update({
+          where:{id: user_req?.id},
+          data:{
+            desaconselhado: desaconselhado      
+          }
+        });
+
+        let descricao 
+        switch (texto_split[3]) {
+          case '1':  
+          descricao = 'Não entregou o produto'                    
+            break;
+          case '2':  
+          descricao = 'Não efetuou o pagamento'                    
+            break;
+          case '3':  
+          descricao = 'Foi rude'                    
+            break;
+          case '4':  
+          descricao = 'Produto em desacordo com o descrito'                    
+            break;
+          case '5':  
+          descricao = 'Não é militar'                    
+            break;
+          case '6':  
+          descricao = 'Outros'                    
+            break;  
+        }
+
+        if(descricao===''){
+          await prisma_db.log_recomendacoes.create({
+            data:{
+              status: 'desaconselhado',
+              produto_id: parseInt(texto_split[1]),
+              user_id: user.id,
+              descricao: '',
+            }
+          })
+          bot.sendMessage(id_telegram, `
+⚠️ Descreva o motivo
+
+Obs: Coloque no máximo 150 caracteres
+`);
+        }else{
+          await prisma_db.log_recomendacoes.create({
+            data:{
+              status: 'desaconselhado',
+              produto_id: parseInt(texto_split[1]),
+              user_id: user.id,
+              descricao: descricao,
+            }
+          })     
+          bot.sendMessage(id_telegram, `✅ Desaconselho feita com sucesso!`);
+        }
+      }
+    }
+  }        
     });
 
     bot.on('message', async (msg: any) => {
-      // console.log('message', msg.text)
+      console.log('message', msg.text)
       const id_telegram = msg.chat.id.toString();
       const texto = msg.text;
       const name = msg.chat.first_name;
@@ -312,6 +449,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
 
       if (username === undefined) {
         bot.sendMessage(id_telegram, `⚠️ É necessário cadastrar um UserName do Telegram, para dar continuidade no Balcão.`);
+        return
       } else {
         // Inicio dos comandos /////////////////////////////////////////////
         if (username != user?.username) { // So estou atualizando o user name no banco de dados mais nada.
@@ -323,20 +461,27 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
 
         if (user.produto.length === 0) {
           await bot.sendMessage(id_telegram, texto_inicial);
-          // await bot.sendMessage(id_telegram, formato_venda);
           await bot.sendMessage(id_telegram, atencao);
           bot.sendMessage(id_telegram, 'Escolha sua ação:', botao_inicial);
           return
         }
 
-        if (user.produto[0].status) {
-          await bot.deleteMessage(id_telegram, messageId)
+        if (user.produto[0].status) {          
           bot.sendMessage(id_telegram, 'Escolha sua ação:', botao_inicial);         
           return
-        }
+        }     
 
         if (user.produto && !user.produto[0].status) {
+          if (user.produto[0].categoria===null) {  // Esse if é somente para não deixar colocar a cateria por aqui
+            await bot.sendMessage(id_telegram, `Artigos Militáres`, artigos_militares);
+            await bot.sendMessage(id_telegram, `Artigos Civis`, artigos_civis);         
+            return
+          }
           if (user.produto && user.produto[0].descricao === null) {
+
+            const verifica_descricao = texto.split('')
+
+            if(verifica_descricao.length<150){
 
             try {
               await prisma_db.produtos.update({
@@ -349,8 +494,15 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               return
             } catch (error) {
               bot.sendMessage(id_telegram, `⚠️ Ops algo deu errado escreva sua descrição novamente.`);
+              return
             }
-            return
+
+            }else{
+              bot.sendMessage(id_telegram, `⚠️ Ops algo coloque no máximo 150 caracteres. SÓ coloque ponto no fim.`);
+              return
+            }
+        
+          
           }
 
           if (user.produto && user.produto[0].valor_produto === null) {
@@ -413,58 +565,6 @@ Colocar informações e o preço para expor o anúncio!`,
               return
             } else { bot.sendMessage(id_telegram, `O valor monetário não é válido.`) }
           }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          // if(user.produto&&!user.produto[0].status){        
-          //   try {
-          //     await prisma_db.produtos.update({
-          //       where:{id:user.produto[0].id},
-          //       data:{
-          //         valor_produto: parseFloat(texto),
-          //         status: true 
-          //       }
-          //     })            
-          //   bot.sendMessage(id_telegram, finalizar_cadastro,  
-          //       {reply_markup: {
-          //         inline_keyboard: [
-          //         [
-          //         { text: "PAGAR", callback_data: `PAGAR_${user.produto[0].id}`},
-          //         ],
-          //         ],      
-          //         },
-          //       }); 
-          //   return       
-          //   } catch (error) {
-          //     bot.sendMessage(id_telegram, `Ops algo deu errado escreca sua descrição novamente`); 
-          //   } 
-          //   return
-          // }   
-
-
-
-
-
-
-
-
-
-
-
-
         } else {
           bot.sendMessage(id_telegram, 'Escolha sua ação:', botao_inicial);
         }
