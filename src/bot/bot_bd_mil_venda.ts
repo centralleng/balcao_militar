@@ -10,23 +10,6 @@ const bot = new TelegramBot(token_bot, { polling: true });
 class Bot_bd_mil_venda {
   static execute() {
 
-    const instituicao: TelegramBot.SendMessageOptions = {
-      reply_markup: {
-        inline_keyboard: [
-          [
-            { text: "EB", callback_data: "EB" },
-            { text: "MB", callback_data: "MB" },
-            { text: "FAB", callback_data: "FAB" },
-          ],
-          [
-            { text: "PMERJ", callback_data: "PMERJ" },
-            { text: "CBMERJ", callback_data: "CBMERJ" },
-            { text: "PMDF", callback_data: "PMDF" },
-          ],
-        ],
-      },
-    };
-
     const botao_inicial: TelegramBot.SendMessageOptions = {
       reply_markup: {
         inline_keyboard: [
