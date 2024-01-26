@@ -59,10 +59,100 @@ class Bot_bd_mil_venda {
       reply_markup: {
         inline_keyboard: [
           [
-            { text: "EB", callback_data: "CADASTRO_EB" },
-            { text: "MB", callback_data: "CADASTRO_MB" },
-            { text: "FAB", callback_data: "CADASTRO_FAB" },
+            { text: "[EB] Balcão de vendas", callback_data: "CADASTRO_[EB]" },
+            { text: "[MB] Balcão de vendas", callback_data: "CADASTRO_[MB]" },
+            { text: "[FAB] Balcão de vendas", callback_data: "CADASTRO_[FAB]" },
           ],
+          [
+            { text: "[PMRJ] Balcão de vendas", callback_data: "CADASTRO_[PMRJ]" },
+            { text: "[CBMRJ] Balcão de vendas", callback_data: "CADASTRO_[CBMRJ]" },
+            { text: "[PMDF] Balcão de vendas", callback_data: "CADASTRO_[PMDF]" },
+          ],
+          [
+            { text: "[CBMDF] Balcão de vendas", callback_data: "CADASTRO_[CBMDF]" },
+            { text: "[PMESP] Balcão de vendas", callback_data: "CADASTRO_[PMESP]" },
+            { text: "[CBMESP] Balcão de vendas", callback_data: "CADASTRO_[CBMESP]" },
+          ],
+          [
+            { text: "[PMMG] Balcão de vendas", callback_data: "CADASTRO_[PMMG]" },
+            { text: "[CBMMG] Balcão de vendas", callback_data: "CADASTRO_[CBMMG]" },
+            { text: "[PMGO] Balcão de vendas", callback_data: "CADASTRO_[PMGO]" },
+          ],
+          [
+            { text: "[CBMGO] Balcão de vendas", callback_data: "CADASTRO_[CBMGO]" },
+            { text: "[PMPR] Balcão de vendas", callback_data: "CADASTRO_[PMPR]" },
+            { text: "[CBMPR] Balcão de vendas", callback_data: "CADASTRO_[CBMPR]" },
+          ],
+          [
+            { text: "[PMSC] Balcão de vendas", callback_data: "CADASTRO_[PMSC]" },
+            { text: "[CBMSC] Balcão de vendas", callback_data: "CADASTRO_[CBMSC]" },
+            { text: "[BRIGADA MILITAR] Balcão de vendas", callback_data: "CADASTRO_[BRIGADA_MILITAR]" },
+          ],
+          [
+            { text: "[CBMRS] Balcão de vendas", callback_data: "CADASTRO_[CBMRS]" },
+            { text: "[PMMS] Balcão de vendas", callback_data: "CADASTRO_[PMMS]" },
+            { text: "[CBMMS] Balcão de vendas", callback_data: "CADASTRO_[CBMMS]" },
+          ],
+          [
+            { text: "[PMMT] Balcão de vendas", callback_data: "CADASTRO_[PMMT]" },
+            { text: "[CBMMT] Balcão de vendas", callback_data: "CADASTRO_[CBMMT]" },
+            { text: "[PMBA] Balcão de vendas", callback_data: "CADASTRO_[PMBA]" },
+          ],
+          [
+            { text: "[CBMBA] Balcão de vendas", callback_data: "CADASTRO_[CBMBA]" },
+            { text: "[PMES] Balcão de vendas", callback_data: "CADASTRO_[PMES]" },
+            { text: "[CBMES] Balcão de vendas", callback_data: "CADASTRO_[CBMES]" },
+          ],
+          [
+            { text: "[PMAL] Balcão de vendas", callback_data: "CADASTRO_[PMAL]" },
+            { text: "[CBMAL] Balcão de vendas", callback_data: "CADASTRO_[CBMAL]" },
+            { text: "[PMSE] Balcão de vendas", callback_data: "CADASTRO_[PMSE]" },
+          ],
+          [
+            { text: "[CBMSE] Balcão de vendas", callback_data: "CADASTRO_[CBMSE]" },
+            { text: "[PMPE] Balcão de vendas", callback_data: "CADASTRO_[PMPE]" },
+            { text: "[CBMPE] Balcão de vendas", callback_data: "CADASTRO_[CBMPE]" },
+          ],
+          [
+            { text: "[PMRN] Balcão de vendas", callback_data: "CADASTRO_[PMRN]" },
+            { text: "[CBMRN] Balcão de vendas", callback_data: "CADASTRO_[CBMRN]" },
+            { text: "[PMCE] Balcão de vendas", callback_data: "CADASTRO_[PMCE]" },
+          ],
+          [
+            { text: "[CBMCE] Balcão de vendas", callback_data: "CADASTRO_[CBMCE]" },
+            { text: "[PMPI] Balcão de vendas", callback_data: "CADASTRO_[PMPI]" },
+            { text: "[CBMPI] Balcão de vendas", callback_data: "CADASTRO_[CBMPI]" },
+          ],
+          [
+            { text: "[PMMA] Balcão de vendas", callback_data: "CADASTRO_[PMMA]" },
+            { text: "[CBMMA] Balcão de vendas", callback_data: "CADASTRO_[CBMMA]" },
+            { text: "[PMAM] Balcão de vendas", callback_data: "CADASTRO_[PMAM]" },
+          ],
+          [
+            { text: "[CBMAM] Balcão de vendas", callback_data: "CADASTRO_[CBMAM]" },
+            { text: "[PMAP] Balcão de vendas", callback_data: "CADASTRO_[PMAP]" },
+            { text: "[CBMAP] Balcão de vendas", callback_data: "CADASTRO_[CBMAP]" },
+          ],
+          [
+            { text: "[PMRO] Balcão de vendas", callback_data: "CADASTRO_[PMRO]" },
+            { text: "[CBMRO] Balcão de vendas", callback_data: "CADASTRO_[CBMRO]" },
+            { text: "[PMTO] Balcão de vendas", callback_data: "CADASTRO_[PMTO]" },
+          ],
+          [
+            { text: "[CBMTO] Balcão de vendas", callback_data: "CADASTRO_[CBMTO]" },
+            { text: "[PMAC] Balcão de vendas", callback_data: "CADASTRO_[PMAC]" },
+            { text: "[CBMAC] Balcão de vendas", callback_data: "CADASTRO_[CBMAC]" },
+          ],
+          [
+            { text: "[PMPA] Balcão de vendas", callback_data: "CADASTRO_[PMPA]" },
+            { text: "[CBMPA] Balcão de vendas", callback_data: "CADASTRO_[CBMPA]" },
+            { text: "[PMRR] Balcão de vendas", callback_data: "CADASTRO_[PMRR]" },
+          ],
+          [
+            { text: "[CBMRR] Balcão de vendas", callback_data: "CADASTRO_[CBMRR]" },
+            { text: "[PMPB] Balcão de vendas", callback_data: "CADASTRO_[PMPB]" },
+            { text: "[CBMPB] Balcão de vendas", callback_data: "CADASTRO_[CBMPB]" },
+          ],          
         ],
       },
     };
@@ -71,14 +161,39 @@ class Bot_bd_mil_venda {
       reply_markup: {
         inline_keyboard: [
           [
-            { text: "Veículo", callback_data: "CADASTRO_VEICULO" },
-            { text: "Serviço", callback_data: "CADASTRO_SERVICO" },
-            { text: "smartphone", callback_data: "CADASTRO_SMARTPHONE" },
-            
+            { text: "[Fardamento] Balcão de vendas", callback_data: "CADASTRO_[Fardamento]" },
+            { text: "[Veículo] Balcão de vendas", callback_data: "CADASTRO_[Veiculo]" },
+            { text: "[Serviço] Balcão de vendas", callback_data: "CADASTRO_[Servico]" },
           ],
           [
-            { text: "Uniformes", callback_data: "CADASTRO_UNIFORME"},
-            { text: "Material Escolar", callback_data: "CADASTRO_MAT_ESCOLAR"},
+            { text: "[Smartphone] Balcão de vendas", callback_data: "CADASTRO_[Smartphone]" },
+            { text: "[Acessório] Balcão de vendas", callback_data: "CADASTRO_[Acessorio]" },
+            { text: "[Eletrodoméstico] Balcão de vendas", callback_data: "CADASTRO_[Eletrodomestico]" },
+          ],
+          [
+            { text: "[Automotivo] Balcão de vendas", callback_data: "CADASTRO_[Automotivo]" },
+            { text: "[Audio] Balcão de vendas", callback_data: "CADASTRO_[Audio]" },
+            { text: "[Eletroportátil] Balcão de vendas", callback_data: "CADASTRO_[Eletroportatil]" },
+          ],
+          [
+            { text: "[Ferramenta] Balcão de vendas", callback_data: "CADASTRO_[Ferramenta]" },
+            { text: "[Bebida] Balcão de vendas", callback_data: "CADASTRO_[Bebida]" },
+            { text: "[Bebê] Balcão de vendas", callback_data: "CADASTRO_[Bebe]" },
+          ],
+          [
+            { text: "[Esporte] Balcão de vendas", callback_data: "CADASTRO_[Esporte]" },
+            { text: "[Smart TV] Balcão de vendas", callback_data: "CADASTRO_[Smart_TV]" },
+            { text: "[Ar e Ventilação] Balcão de vendas", callback_data: "CADASTRO_[Ar_e_Ventilacao]" },
+          ],
+          [
+            { text: "[Imóvel] Balcão de vendas", callback_data: "CADASTRO_[Imovel]" },
+            { text: "[Brinquedo] Balcão de vendas", callback_data: "CADASTRO_[Brinquedo]" },
+            { text: "[Informática] Balcão de vendas", callback_data: "CADASTRO_[Informatica]" },
+          ],
+          [
+            { text: "[Game] Balcão de vendas", callback_data: "CADASTRO_[Game]" },
+            { text: "[Móvel] Balcão de vendas", callback_data: "CADASTRO_[Movel]" },
+            { text: "[Utilidade Doméstica] Balcão de vendas", callback_data: "CADASTRO_[Utilidade_Domestica]" },
           ],
         ],
       },
