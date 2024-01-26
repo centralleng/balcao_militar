@@ -6,7 +6,7 @@ import Cadastar_palavra_chave_service from '../services/cadastro/palavaChaveServ
 import Deletar_alerta_service from '../services/deletar/alertaService';
 import { Consultas_alertasService } from '../services/consultas/alertaService';
 
-const token_bot = '6302850791:AAEllHI-dUdbpmhQ30havovumAAXBT1Qnmc'; // Token do bot do telegram... CentrallTest4
+const token_bot = process.env.API_BOT_BDMIL_ALERTA ||'' // '6302850791:AAEllHI-dUdbpmhQ30havovumAAXBT1Qnmc'; // Token do bot do telegram... CentrallTest4
 
 const bot = new TelegramBot(token_bot, { polling: true });
 

@@ -3,32 +3,39 @@ import { prisma_db } from "../../database/prisma_db";
 import api from "../api_pagarme/api";
 
 interface dados {        
-      valor: string;
-      pedido_id: number;
-      // Dados user
-      name: string;
-      email: string;
-      document: string;
-      telefone: string; // Número
+  valor: string;
+  pedido_id: number;
+  // Dados user
+  nome: string;
+  email: string;
+  document: string;
+  telefone: string; // Número
 
-      // Dados Pagamento
-      holder_name: string;
-      number_card: string;
-      exp_month: number; // MÊs
-      exp_year: number; // Ano
-      cvv: string;
+  // Dados Pagamento
+  holder_name: string;
+  number_card: string;
+  exp_month: number; // MÊs
+  exp_year: number; // Ano
+  cvv: string;
 
-      // Endereço
-      endereco: string;
-      endereco_number: string;
-      complemento: string;
-      cep: string;
-      city: string; // Cidade
-      state: string; // Eatado     
-
+  // Endereço
+  endereco: string;
+  endereco_number: string;
+  complemento: string;
+  cep: string;
+  city: string; // Cidade
+  state: string; // Eatado  
 }
 
 async function PagamentoCardServices(dados: dados) {
+
+  console.log(dados)
+
+  const indiceParenteses = dados.telefone.indexOf(')');
+  const telefone = dados.telefone.substring(indiceParenteses + 1).replace(/\D/g, '');
+  const ddd = dados.telefone.split('(')[1].split(')')[0];
+
+  const cartao_card = dados.number_card.replace(/-/g, '');
 
   const codigo = `ped_${crypto.randomBytes(7).toString("hex")}`; // Gera 6 digitos entre letras e numeros para criar codigo da venda.
 
@@ -49,7 +56,7 @@ async function PagamentoCardServices(dados: dados) {
             zip_code: dados.cep,
             city: dados.city,
             state: dados.state,
-            country: 'BRL',
+            country: 'BR',
           },
         },
       },
@@ -57,7 +64,7 @@ async function PagamentoCardServices(dados: dados) {
 
     customer: {
       code: codigo,
-      name: dados.name,
+      name: dados.nome,
       email: dados.email,
       document_type: "CPF",
       document: dados.document,
@@ -67,13 +74,13 @@ async function PagamentoCardServices(dados: dados) {
         zip_code: dados.cep,
         city: dados.city,
         state: dados.state,
-        country: 'BRL',
+        country: 'BR',
       },
       phones: {
         home_phone: {
           country_code: '55', // EX. 55
-          number: '',
-          area_code: '', // DDD
+          number: telefone,
+          area_code: ddd, // DDD
         },
       },
     },
@@ -88,7 +95,7 @@ async function PagamentoCardServices(dados: dados) {
           statement_descriptor: "BDMIL",
           card: {
             holder_name: dados.holder_name,
-            number: dados.number_card,
+            number: cartao_card,
             exp_month: dados.exp_month,
             exp_year: dados.exp_year,
             cvv: dados.cvv,
@@ -97,7 +104,7 @@ async function PagamentoCardServices(dados: dados) {
               zip_code: dados.cep,
               city: dados.city,
               state: dados.state,
-              country: 'BRL',
+              country: 'BR',
             },
           },
         },
@@ -107,6 +114,8 @@ async function PagamentoCardServices(dados: dados) {
       empresa: "bdmil",
     },
   };
+
+  // console.log('dados',dadosCredit)
 
   let dados_pagarme;
 
@@ -125,8 +134,11 @@ async function PagamentoCardServices(dados: dados) {
       throw new Error(`error`);
     }
   } catch (error) {
+    console.log(error)
     throw new Error("erro_pagarme");
   }
+
+  console.log('pagamento', dados_pagarme)
 
   if(dados_pagarme){
 

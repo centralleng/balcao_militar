@@ -5,7 +5,7 @@ import axios from 'axios';
 import moment from 'moment';
 import { text } from 'body-parser';
 
-const token_bot = '6538633425:AAF8tFZoEjXGDv_yoSxadcYctG0ph_4Em-I'; // Token do bot do telegram... CentrallTest3
+const token_bot = process.env.API_BOT_BDMIL_COMPRA ||'' // '6538633425:AAF8tFZoEjXGDv_yoSxadcYctG0ph_4Em-I'; // Token do bot do telegram... CentrallTest3
 
 const bot = new TelegramBot(token_bot, { polling: true });
 
