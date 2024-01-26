@@ -4,7 +4,7 @@ import { prisma_db } from "../database/prisma_db";
 import { cpf } from 'cpf-cnpj-validator'; 
 import validator from 'validator';
 
-const token_bot = "6886561681:AAEL0_4SPcmWNV3_l9Nys0fe3Q2N2_9b--I"; // CentrallTest1
+const token_bot = process.env.API_BOT_BDMIL ||'' // "6886561681:AAEL0_4SPcmWNV3_l9Nys0fe3Q2N2_9b--I"; // CentrallTest1
 
 const bot = new TelegramBot(token_bot, { polling: true });
 

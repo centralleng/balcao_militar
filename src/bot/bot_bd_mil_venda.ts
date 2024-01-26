@@ -3,7 +3,7 @@ import TelegramBot from 'node-telegram-bot-api';
 import { prisma_db } from '../database/prisma_db';
 import Pagamento from '../services/pagamentos/pagamento_produto';
 
-const token_bot = '6962343359:AAERsmVCjSJczzeQ-ONe_nfVyQxQYDzFYlg'; // Token do bot do telegram... CentrallTest2_Bot
+const token_bot = process.env.API_BOT_BDMIL_VENDA ||'' //'6962343359:AAERsmVCjSJczzeQ-ONe_nfVyQxQYDzFYlg'; // Token do bot do telegram... CentrallTest2_Bot
 
 const bot = new TelegramBot(token_bot, { polling: true });
 
