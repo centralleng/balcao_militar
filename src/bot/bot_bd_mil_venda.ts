@@ -269,6 +269,9 @@ Ex: 00.00
       const message_id = msg.message?.message_id;
       const texto_split = texto.split('_')    
 
+      const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...'); 
+      const messageId = msg_del.message_id.toString()
+
       // Primeiro verifica se ja axiste esse usuário
       const user = await prisma_db.users.findUnique({
         where: { id_telegram: id_telegram?.toString() },
@@ -279,6 +282,8 @@ Ex: 00.00
           },
         },
       });
+
+      await bot.deleteMessage(id_telegram, messageId)
 
       if (!user) {
         bot.sendMessage(id_telegram, `
@@ -542,6 +547,7 @@ Obs: Coloque no máximo 150 caracteres
 
       const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...'); 
       const messageId = msg_del.message_id.toString()
+      
 
       // Primeiro verifica se ja axiste esse usuário
       const user = await prisma_db.users.findUnique({
@@ -553,6 +559,8 @@ Obs: Coloque no máximo 150 caracteres
           },
         },
       });
+
+      await bot.deleteMessage(id_telegram, messageId)      
 
       if (!user) {
         bot.sendMessage(id_telegram, `

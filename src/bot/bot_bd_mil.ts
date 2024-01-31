@@ -427,7 +427,7 @@ A qual instituição você pertence?
               data:{type_document:'cpf',document: verificar_cpf.replace(/[^0-9]/g, ''),}
             })
                // quer editar o cadastro
-            await bot.sendMessage(id_telegram, `Digite seu melhor e-mail?`);
+            await bot.sendMessage(id_telegram, `Digite seu melhor E-mail:`);
             bot.deleteMessage(id_telegram, messageId)
             }else{
               await bot.sendMessage(id_telegram, `Você precisa digitar um CPF válido!`);
@@ -450,13 +450,13 @@ A qual instituição você pertence?
               where:{id_telegram: id_telegram},
               data:{email: texto}
             })
-            await bot.sendMessage(id_telegram,`Digite seu telefone com ddd no padrão abaixo`);
+            await bot.sendMessage(id_telegram,`Digite seu telefone com DDD no padrão abaixo:`);
             await bot.sendMessage(id_telegram,`(99)999999999`);
             bot.deleteMessage(id_telegram, messageId)
             return
 
             }else{
-              await bot.sendMessage(id_telegram, `Você precisa digitar um e-mail válido!`);
+              await bot.sendMessage(id_telegram, `Você precisa digitar um E-mail válido!`);
               bot.deleteMessage(id_telegram, messageId)
             }          
 
@@ -501,8 +501,8 @@ Grupos de Artigo Civil
                         ,artigos_civis);
             bot.deleteMessage(id_telegram, messageId)
             }else{
-              await bot.sendMessage(id_telegram,`Digite seu telefone com ddd no padrão abaixo`);
-              await bot.sendMessage(id_telegram,`ddd com parentes mais número de telefone`);
+              await bot.sendMessage(id_telegram,`Digite seu telefone com DDD no padrão abaixo:`);
+              await bot.sendMessage(id_telegram,`DDD com parênteses, mais número de telefone:`);
               await bot.sendMessage(id_telegram,`(99)999999999`);
               bot.deleteMessage(id_telegram, messageId)
             }
