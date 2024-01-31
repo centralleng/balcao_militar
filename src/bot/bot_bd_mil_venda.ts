@@ -281,20 +281,20 @@ Ex: 00.00
             take: 1, // Apenas o último produto
           },
         },
-      });
-
-      await bot.deleteMessage(id_telegram, messageId)
+      });      
 
       if (!user) {
-        bot.sendMessage(id_telegram, `
+        await bot.sendMessage(id_telegram, `
 ⚠️ Primeiro precisamos realizar o seu cadastro!
 Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
         `);
+        bot.deleteMessage(id_telegram, messageId)
         return
       }
 
       if (username === undefined) {
-        bot.sendMessage(id_telegram, `⚠️ É necessário cadastrar um UserName do Telegram, para dar continuidade no Balcão.`);
+        await bot.sendMessage(id_telegram, `⚠️ É necessário cadastrar um UserName do Telegram, para dar continuidade no Balcão.`);
+        bot.deleteMessage(id_telegram, messageId)
       } else {
 
         const user_name = await prisma_db.users.update({
@@ -314,9 +314,10 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             }
             await bot.sendMessage(id_telegram, `Artigos Militáres`, artigos_militares);
             await bot.sendMessage(id_telegram, `Artigos Civis`, artigos_civis);
-
+            bot.deleteMessage(id_telegram, messageId)
           } else {
-            bot.sendMessage(id_telegram, `⚠️ Primeiro você precisa finalizar o produto que deu inicio na criação ou deleta-lo.`, msg_deletar_produto);
+            await bot.sendMessage(id_telegram, `⚠️ Primeiro você precisa finalizar o produto que deu inicio na criação ou deleta-lo.`, msg_deletar_produto);
+            bot.deleteMessage(id_telegram, messageId)
           }
         }
 
@@ -329,9 +330,11 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             await prisma_db.produtos.delete({
               where: { id: user.produto[0].id }
             })
-            bot.sendMessage(id_telegram, `✅ Produto deletado com sucesso!`, botao_inicial);
+            await bot.sendMessage(id_telegram, `✅ Produto deletado com sucesso!`, botao_inicial);
+            bot.deleteMessage(id_telegram, messageId)
           } else {
-            bot.sendMessage(id_telegram, `⚠️ Algo deu errado, entre em contato com o suporte.`, suporte);
+            await bot.sendMessage(id_telegram, `⚠️ Algo deu errado, entre em contato com o suporte.`, suporte);
+            bot.deleteMessage(id_telegram, messageId)
           }
         }
 
@@ -343,9 +346,11 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                 categoria: texto_split[1]
               }
             })
-            bot.sendMessage(id_telegram, descricao, descarta_produto);
+            await bot.sendMessage(id_telegram, descricao, descarta_produto);
+            bot.deleteMessage(id_telegram, messageId)
           } catch (error) {
-            bot.sendMessage(id_telegram, `⚠️ Parece que algo deu errado, o que você pretende fazer?`, botao_inicial);
+            await bot.sendMessage(id_telegram, `⚠️ Parece que algo deu errado, o que você pretende fazer?`, botao_inicial);
+            bot.deleteMessage(id_telegram, messageId)
           }
         }
 
@@ -378,7 +383,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             const pagamento = await Pagamento(dados)
 
             if (pagamento.status === "ok") {
-              bot.sendMessage(id_telegram, `✔️ Seu produto foi cadastrado com sucesso. Clique no botão [PAGAR] para Ativar seu Anúncio!`,
+              await bot.sendMessage(id_telegram, `✔️ Seu produto foi cadastrado com sucesso. Clique no botão [PAGAR] para Ativar seu Anúncio!`,
                 {
                   reply_markup: {
                     inline_keyboard: [
@@ -387,13 +392,16 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                       ],
                     ],
                   },
-                });                        
+                });   
+                bot.deleteMessage(id_telegram, messageId)                     
 
             } else {
-              bot.sendMessage(id_telegram, `Algo deu errado com seu pedido?`, botao_inicial);
+              await bot.sendMessage(id_telegram, `Algo deu errado com seu pedido?`, botao_inicial);
+              bot.deleteMessage(id_telegram, messageId)
             }
           } else {
-            bot.sendMessage(id_telegram, `⚠️ Parece que algo deu errado, o que você pretende fazer?`, botao_inicial);
+            await bot.sendMessage(id_telegram, `⚠️ Parece que algo deu errado, o que você pretende fazer?`, botao_inicial);
+            bot.deleteMessage(id_telegram, messageId)
           }
         }
       }
@@ -408,7 +416,8 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
         })
 
         if(log.length>0){
-          bot.sendMessage(id_telegram, `⚠️ Sua recomendação já foi feita.`);
+          await bot.sendMessage(id_telegram, `⚠️ Sua recomendação já foi feita.`);
+          bot.deleteMessage(id_telegram, messageId)
           return
         }else{
           const user_req = await prisma_db.users.findUnique({where:{id:texto_split[3]}})
@@ -430,14 +439,15 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                 descricao: 'recomendado',
               }
             })    
-            bot.sendMessage(id_telegram, `✅ Recomendação feita com sucesso!`);             
+            await bot.sendMessage(id_telegram, `✅ Recomendação feita com sucesso!`);
+            bot.deleteMessage(id_telegram, messageId)             
           }
         }
       };
 
       if(texto_split[0]==='DESACONSELHO'){
 
-        bot.sendMessage(id_telegram, `Selecione o Motivo`,
+        await bot.sendMessage(id_telegram, `Selecione o Motivo`,
         {
           reply_markup: {
             inline_keyboard: [                  
@@ -455,7 +465,8 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               ],
             ],
           },
-        });        
+        });   
+        bot.deleteMessage(id_telegram, messageId)     
 
       } 
 
@@ -470,7 +481,8 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
     })
 
     if(log.length>0){
-      bot.sendMessage(id_telegram, `⚠️ Seu desaconselho já foi feito.`);
+      await bot.sendMessage(id_telegram, `⚠️ Seu desaconselho já foi feito.`);
+      bot.deleteMessage(id_telegram, messageId)
     }else{
 
       const user_req = await prisma_db.users.findUnique({where:{id:texto_split[2]}})
@@ -516,11 +528,12 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               descricao: '',
             }
           })
-          bot.sendMessage(id_telegram, `
+          await bot.sendMessage(id_telegram, `
 ⚠️ Descreva o motivo
 
 Obs: Coloque no máximo 150 caracteres
 `);
+bot.deleteMessage(id_telegram, messageId)
         }else{
           await prisma_db.log_recomendacoes.create({
             data:{
@@ -530,7 +543,8 @@ Obs: Coloque no máximo 150 caracteres
               descricao: descricao,
             }
           })     
-          bot.sendMessage(id_telegram, `✅ Desaconselho feita com sucesso!`);
+          await bot.sendMessage(id_telegram, `✅ Desaconselho feita com sucesso!`);
+          bot.deleteMessage(id_telegram, messageId)
         }
       }
     }
@@ -548,7 +562,6 @@ Obs: Coloque no máximo 150 caracteres
       const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...'); 
       const messageId = msg_del.message_id.toString()
       
-
       // Primeiro verifica se ja axiste esse usuário
       const user = await prisma_db.users.findUnique({
         where: { id_telegram: id_telegram?.toString() },
@@ -558,20 +571,20 @@ Obs: Coloque no máximo 150 caracteres
             take: 1, // Apenas o último produto
           },
         },
-      });
-
-      await bot.deleteMessage(id_telegram, messageId)      
+      });    
 
       if (!user) {
-        bot.sendMessage(id_telegram, `
+        await bot.sendMessage(id_telegram, `
 ⚠️ Primeiro precisamos realizar o seu cadastro!
 Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
         `);
+        bot.deleteMessage(id_telegram, messageId)
         return
       }
 
       if (username === undefined) {
-        bot.sendMessage(id_telegram, `⚠️ É necessário cadastrar um UserName do Telegram, para dar continuidade no Balcão.`);
+        await bot.sendMessage(id_telegram, `⚠️ É necessário cadastrar um UserName do Telegram, para dar continuidade no Balcão.`);
+        bot.deleteMessage(id_telegram, messageId)
         return
       } else {
         // Inicio dos comandos /////////////////////////////////////////////
@@ -585,19 +598,22 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
         if (user.produto.length === 0) {
           await bot.sendMessage(id_telegram, texto_inicial);
           await bot.sendMessage(id_telegram, atencao);
-          bot.sendMessage(id_telegram, 'Escolha sua ação:', botao_inicial);
+          await bot.sendMessage(id_telegram, 'Escolha sua ação:', botao_inicial);
+          bot.deleteMessage(id_telegram, messageId)
           return
         }
 
         if (user.produto[0].status) {          
-          bot.sendMessage(id_telegram, 'Escolha sua ação:', botao_inicial);         
+          await bot.sendMessage(id_telegram, 'Escolha sua ação:', botao_inicial);  
+          bot.deleteMessage(id_telegram, messageId)       
           return
         }     
 
         if (user.produto && !user.produto[0].status) {
           if (user.produto[0].categoria===null) {  // Esse if é somente para não deixar colocar a cateria por aqui
             await bot.sendMessage(id_telegram, `Artigos Militáres`, artigos_militares);
-            await bot.sendMessage(id_telegram, `Artigos Civis`, artigos_civis);         
+            await bot.sendMessage(id_telegram, `Artigos Civis`, artigos_civis);  
+            bot.deleteMessage(id_telegram, messageId)       
             return
           }
           if (user.produto && user.produto[0].descricao === null) {
@@ -613,15 +629,18 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                   descricao: texto,
                 }
               })
-              bot.sendMessage(id_telegram, valor);
+              await bot.sendMessage(id_telegram, valor);
+              bot.deleteMessage(id_telegram, messageId)
               return
             } catch (error) {
-              bot.sendMessage(id_telegram, `⚠️ Ops algo deu errado escreva sua descrição novamente.`);
+              await bot.sendMessage(id_telegram, `⚠️ Ops algo deu errado escreva sua descrição novamente.`);
+              bot.deleteMessage(id_telegram, messageId)
               return
             }
 
             }else{
-              bot.sendMessage(id_telegram, `⚠️ Ops algo coloque no máximo 150 caracteres. SÓ coloque ponto no fim.`);
+              await bot.sendMessage(id_telegram, `⚠️ Ops algo coloque no máximo 150 caracteres. SÓ coloque ponto no fim.`);
+              bot.deleteMessage(id_telegram, messageId)
               return
             }
         
@@ -647,25 +666,37 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                     valor_produto: texto.replace(/\./g, ''),
                     status: true
                   }
-                })
+                })              
 
-                const valor_anuncio = parseFloat(texto) * 0.03
+            const taxa_empresa = () => {
 
-            const taxa_empresa =()=>{
-              // Montar condicionais de %
-                  if (user.produto[0].categoria==="VEICULO") {
+              let valor_anuncio
 
-                    const valor_anuncio = parseFloat(texto) * 0.01
+              switch (user.produto[0].categoria) {
+                case "[Veiculo]":
+                  valor_anuncio = parseFloat(texto) * 0.01                  
+                  break;
+                case "[Movel]":
+                  valor_anuncio = parseFloat(texto) * 0.01                  
+                  break;
+                case "[Imovel]":
+                  valor_anuncio = parseFloat(texto) * 0.01                  
+                  break;
+                case "[Automotivo]":
+                  valor_anuncio = parseFloat(texto) * 0.01                  
+                  break;
+                case "[Servico]":
+                  valor_anuncio = parseFloat(texto) * 10                  
+                  break;
+              
+                default:
+                  valor_anuncio = parseFloat(texto) * 0.03
+                  break;
+              }
+                return valor_anuncio
+              }
 
-                    return valor_anuncio
-                  }
-                  // if (parseFloat(texto) > 1000) {
-                  //   return 30
-                  // }
-                  return valor_anuncio
-                }
-
-              bot.sendMessage(id_telegram, `
+              await bot.sendMessage(id_telegram, `
 ✔️Dados coletados, ative seu produto!
 
 Valor anúncio ${(taxa_empresa()).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
@@ -680,47 +711,23 @@ Colocar informações e o preço para expor o anúncio!`,
                       ],
                     },
                   });
+                  bot.deleteMessage(id_telegram, messageId)
             
                 return
               } catch (error) {
-                bot.sendMessage(id_telegram, `Ops algo deu errado escreca sua descrição novamente`);
+                await bot.sendMessage(id_telegram, `Ops algo deu errado escreca sua descrição novamente`);
+                bot.deleteMessage(id_telegram, messageId)
               }
               return
-            } else { bot.sendMessage(id_telegram, `O valor monetário não é válido.`) }
+            } else { 
+              await bot.sendMessage(id_telegram, `O valor monetário não é válido.`) 
+              bot.deleteMessage(id_telegram, messageId)
+            }
           }
         } else {
-          bot.sendMessage(id_telegram, 'Escolha sua ação:', botao_inicial);
+          await bot.sendMessage(id_telegram, 'Escolha sua ação:', botao_inicial);
+          bot.deleteMessage(id_telegram, messageId)
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       }
     });
   }

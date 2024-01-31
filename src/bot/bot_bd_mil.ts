@@ -306,6 +306,9 @@ class Bot_bd_mil {
       const username = callbackQuery.message?.chat.username; 
       const id_telegram = chatId || ''
 
+      const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...');
+      const messageId = msg_del.message_id.toString()
+
       if(msg==='sim'){ // Aceita o termo de uso 
 
         // Primeiro verifica se ja axiste esse usuário
@@ -322,19 +325,21 @@ class Bot_bd_mil {
             }  
           })
           
-        bot.sendMessage(id_telegram,`
+        await bot.sendMessage(id_telegram,`
 Vamos dar início ao seu cadastro:
 
 A qual instituição você pertence?          
         ` 
         ,instituicao);
+        await bot.deleteMessage(id_telegram, messageId)
         }else{
-        bot.sendMessage(id_telegram,`
+        await bot.sendMessage(id_telegram,`
 Vamos dar início ao seu cadastro: 
 
 A qual instituição você pertence?      
                   ` 
         ,instituicao);
+        bot.deleteMessage(id_telegram, messageId)
         }   
       }
 
@@ -352,7 +357,8 @@ A qual instituição você pertence?
             data:{instituicao: msg}
           })
          
-          bot.sendMessage(id_telegram, `Digite seu nome completo:`);
+          await bot.sendMessage(id_telegram, `Digite seu nome completo:`);
+          bot.deleteMessage(id_telegram, messageId)
                      
         }else{
           // Fazer varredura em todas as condicionais
@@ -400,8 +406,7 @@ A qual instituição você pertence?
               data:{nome: texto}
             })
             // Qual seu cpf
-            await bot.sendMessage(id_telegram, `Digite seu CPF`);
-            await bot.sendMessage(id_telegram, `Obs: Colocar somente números`);
+            await bot.sendMessage(id_telegram, `Digite seu CPF Obs: Colocar somente números`);
             bot.deleteMessage(id_telegram, messageId)
             return
           }
@@ -413,7 +418,7 @@ A qual instituição você pertence?
             }        
 
             if(!contemApenasNumeros(texto||'')){
-              await bot.sendMessage(id_telegram, `Você precisa digitar somente números!`);
+              await bot.sendMessage(id_telegram, `Você precisa digitar somente números do CPF!`);
               bot.deleteMessage(id_telegram, messageId)
             }else{
                  // verifica se é um número válido
