@@ -15,6 +15,8 @@ interface dados {
 
 export default async function PagamentoPixServices(dados: dados) {
 
+  console.log(dados)
+
   const indiceParenteses = dados.telefone.indexOf(')');
   const telefone = dados.telefone.substring(indiceParenteses + 1).replace(/\D/g, '');
   const ddd = dados.telefone.split('(')[1].split(')')[0];

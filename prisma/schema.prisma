@@ -67,7 +67,8 @@ model Pedidos {
   document            String?      
   email               String?
   id_telegram         String?
-  phone               String?
+  telefone            String?
+  ddd                 String?
   transacao_id        String?       @unique
   msg_id              Int?
   user_id             String
