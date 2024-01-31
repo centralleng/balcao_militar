@@ -9,7 +9,7 @@ import { Bot_bd_mil_venda } from "./bot/bot_bd_mil_venda";
 import { Bot_bd_mil_comprar } from "./bot/bot_bd_mil_comprar";
 import { Bot_bd_mil_alertas } from "./bot/bot_bd_mil_alertas";
 
-const port = process.env.PORT || 4007;
+const port = process.env.PORT || 4002;
 
 //@ypes/express -- Chama todas as funcionalidades do exprees ela é colocada na constante app.
 const app = express();
