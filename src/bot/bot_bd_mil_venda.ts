@@ -2,6 +2,7 @@ process.env['NTBA_FIX_319'] = "0";
 import TelegramBot from 'node-telegram-bot-api';
 import { prisma_db } from '../database/prisma_db';
 import Pagamento from '../services/pagamentos/pagamento_produto';
+import Criar_pedido from '../services/cadastro/criar_pedido';
 
 const token_bot = process.env.API_BOT_BDMIL_VENDA ||'' //'6962343359:AAERsmVCjSJczzeQ-ONe_nfVyQxQYDzFYlg'; // Token do bot do telegram... CentrallTest2_Bot
 
@@ -359,6 +360,33 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           const produto = await prisma_db.produtos.findUnique({
             where: { id: parseInt(texto_split[1]) }
           })
+
+          const pedido = await prisma_db.pedidos.findMany()
+
+          if(pedido.length<1){ 
+            
+            const dados = {
+              valor: texto_split[2].replace(/\./g, ''),
+              titulo: '',
+              nome: user.nome,
+              document: user.document,
+              email: user.email,
+              id_telegram: id_telegram,
+              ddd: user.ddd_phone,
+              telefone: user.phone,
+              produto_id: parseInt(texto_split[1]),
+              user_id: user.id,
+            }
+
+            try {
+              Criar_pedido(dados)              
+            } catch (error) { 
+              await bot.sendMessage(id_telegram, `⚠️ Parece que algo deu errado, o que você pretende fazer?`, botao_inicial);
+              bot.deleteMessage(id_telegram, messageId)             
+            }   
+
+            return
+          }
 
           if (produto) {
 
