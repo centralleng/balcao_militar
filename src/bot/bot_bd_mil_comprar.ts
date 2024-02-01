@@ -310,7 +310,7 @@ Olá, seja bem-vindo ao BDMilquerocomprar! Aqui você poderá solicitar uma nego
                 try {
                                  
                 // Envio de mensagem para o vendedor indicando que existe um comprador interessando. Obs.: Mensagem enviada pelo bot BDMilQueroVender
-                await axios.post('https://api.telegram.org/bot6962343359:AAERsmVCjSJczzeQ-ONe_nfVyQxQYDzFYlg/sendMessage',
+                await axios.post('https://api.telegram.org/bot6474193602:AAG4YQVqQzCzTE2KvtXjgc0OMQbYOK3brno/sendMessage',
                 {
                   chat_id: produto.id_telegram,
                   text: `
