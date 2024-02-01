@@ -16,8 +16,7 @@ class Update_pagamento_controller {
 
       throw new Error("erro");    
 
-    }    
-    
+    }        
   }
 }
 
