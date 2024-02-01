@@ -71,7 +71,7 @@ Interessado em vender ${pedido.produto.descricao}
 
 Valor ${(parseInt(valor)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
 
-Envie o código ${pedido.produto.id} para @BDMilquerocomprar para comprar dele.
+Envie o código ${pedido.produto.id} para @BDMilquerocomprar_bot para comprar dele.
 
 ${recomendado>0?`Recomendado por mais de ${recomendado} pessoas`:`Ainda não recomendado`}
 
@@ -127,7 +127,7 @@ Interessado em vender ${pedido.produto.descricao}
 
 Valor ${(parseInt(valor)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
 
-Envie o código ${pedido.produto.id} para @BDMilquerocomprar para comprar dele.
+Envie o código ${pedido.produto.id} para @BDMilquerocomprar_bot para comprar dele.
 
 ${recomendado>0?`Recomendado por mais de ${recomendado} pessoas`:`Ainda não recomendado`}
 
