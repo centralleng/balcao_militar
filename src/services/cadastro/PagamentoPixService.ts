@@ -10,16 +10,15 @@ interface dados {
   email: string,
   document: string,
   pedido_id: number,
+  ddd: string,
   telefone: string,
 }
 
 export default async function PagamentoPixServices(dados: dados) {
 
-  console.log(dados)
-
-  const indiceParenteses = dados.telefone.indexOf(')');
-  const telefone = dados.telefone.substring(indiceParenteses + 1).replace(/\D/g, '');
-  const ddd = dados.telefone.split('(')[1].split(')')[0];
+  // const indiceParenteses = dados.telefone.indexOf(')');
+  // const telefone = dados.telefone.substring(indiceParenteses + 1).replace(/\D/g, '');
+  // const ddd = dados.telefone.split('(')[1].split(')')[0];
 
   const codigo = crypto.randomBytes(3).toString('hex'); // Gera 6 dígitos entre letras e números
 
@@ -43,8 +42,8 @@ export default async function PagamentoPixServices(dados: dados) {
         "phones": {
             "home_phone": {
                 "country_code": '55', // EX. 55
-                "number": telefone,
-                "area_code": ddd, // DDD
+                "number": dados.telefone,
+                "area_code": dados.ddd, // DDD
             }
         }
     },
@@ -62,14 +61,11 @@ export default async function PagamentoPixServices(dados: dados) {
         }           
     } 
 
-  console.log(dadosPix.customer.phones)
-
   let dados_pagarme
     try {
     // Fazer um post no método de pagamento 
     const {data}  = await api.post("/orders", dadosPix);
-    console.log(data)
-    if(data.status==="failed"){
+      if(data.status==="failed"){
       throw new Error('error');
     }
     dados_pagarme = data
@@ -85,7 +81,6 @@ export default async function PagamentoPixServices(dados: dados) {
       data:{
         status: dados_pagarme.status,
         transacao_id: dados_pagarme.charges[0].id,
-        phone: dados.telefone
       }
     })   
 

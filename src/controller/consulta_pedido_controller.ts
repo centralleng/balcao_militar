@@ -6,7 +6,7 @@ class Consulta_pedido_controller {
 
     const {id_checkout} = request.body;
 
-    console.log('veio teset')
+    console.log(id_checkout)
 
     const pedido = await Consultas_pedidoService(id_checkout)
 

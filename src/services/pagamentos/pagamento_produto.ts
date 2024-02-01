@@ -7,7 +7,8 @@ interface dados {
     document: string | null;
     email: string | null;
     id_telegram: number;
-    phone: string;
+    ddd: string | null;
+    telefone: string | null;
     produto_id: number;
     user_id: string;
 }
@@ -22,7 +23,8 @@ export default async function Pagamento (dados:dados) {
             document: dados.document,
             email: dados.email,
             id_telegram: dados.id_telegram.toString(),
-            phone: dados.phone,
+            ddd: dados.ddd,
+            telefone: dados.telefone,
             produto_id: dados.produto_id,
             user_id: dados.user_id,
         }

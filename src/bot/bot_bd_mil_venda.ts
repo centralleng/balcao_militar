@@ -376,7 +376,8 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               document: user.document,
               email: user.email,
               id_telegram: id_telegram,
-              phone: '',
+              ddd: user.ddd_phone,
+              telefone: user.phone,
               produto_id: parseInt(texto_split[1]),
               user_id: user.id,
             }

@@ -9,8 +9,9 @@ interface dados {
   nome: string;
   email: string;
   document: string;
+  ddd: string;
   telefone: string; // Número
-
+ 
   // Dados Pagamento
   holder_name: string;
   number_card: string;
@@ -31,9 +32,9 @@ async function PagamentoCardServices(dados: dados) {
 
   console.log(dados)
 
-  const indiceParenteses = dados.telefone.indexOf(')');
-  const telefone = dados.telefone.substring(indiceParenteses + 1).replace(/\D/g, '');
-  const ddd = dados.telefone.split('(')[1].split(')')[0];
+  // const indiceParenteses = dados.telefone.indexOf(')');
+  // const telefone = dados.telefone.substring(indiceParenteses + 1).replace(/\D/g, '');
+  // const ddd = dados.telefone.split('(')[1].split(')')[0];
 
   const cartao_card = dados.number_card.replace(/-/g, '');
 
@@ -79,8 +80,8 @@ async function PagamentoCardServices(dados: dados) {
       phones: {
         home_phone: {
           country_code: '55', // EX. 55
-          number: telefone,
-          area_code: ddd, // DDD
+          number: dados.telefone,
+          area_code: dados.ddd, // DDD
         },
       },
     },
@@ -147,7 +148,6 @@ async function PagamentoCardServices(dados: dados) {
       data:{
         status: dados_pagarme.status,
         transacao_id: dados_pagarme.charges[0].id,
-        phone: dados.telefone
       }
     })
 

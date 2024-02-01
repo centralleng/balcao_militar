@@ -2,7 +2,6 @@ import { prisma_db } from "../../database/prisma_db";
 
 
 async function Consultas_pedidoService(id_checkout:number) {
-  console.log('testes', id_checkout);
 
   if (id_checkout) {
     // Certifique-se de que id_checkout seja um número antes de chamar parseInt
@@ -12,8 +11,6 @@ async function Consultas_pedidoService(id_checkout:number) {
       const pedido = await prisma_db.pedidos.findUnique({
         where: { id: parsedId },
       });
-
-      console.log(pedido);
 
       if (pedido) {
         return pedido;

@@ -3,7 +3,7 @@ import PagamentoPixService from "../services/cadastro/PagamentoPixService";
 import PagamentoCardServices from "../services/cadastro/PagamentoCardServices";
 
 class Pagamento_controller {
-  async handle(request: Request, response: Response) { 
+  async handle(request: Request, response: Response) {
 
     const {dados} = request.body;
 
