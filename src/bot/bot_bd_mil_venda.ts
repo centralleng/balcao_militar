@@ -361,10 +361,11 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             where: { id: parseInt(texto_split[1]) }
           })
 
-          const pedido = await prisma_db.pedidos.findMany()
+          const pedido = await prisma_db.pedidos.findMany({
+            where:{user_id:user.id}
+          })
 
-          if(pedido.length<1){ 
-            
+          if(pedido.length<=0){             
             const dados = {
               valor: texto_split[2].replace(/\./g, ''),
               titulo: '',
@@ -379,7 +380,8 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             }
 
             try {
-              Criar_pedido(dados)              
+              Criar_pedido(dados) 
+              bot.deleteMessage(id_telegram, messageId)             
             } catch (error) { 
               await bot.sendMessage(id_telegram, `⚠️ Parece que algo deu errado, o que você pretende fazer?`, botao_inicial);
               bot.deleteMessage(id_telegram, messageId)             
