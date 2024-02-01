@@ -86,7 +86,7 @@ Interessado em vender ${produto?.descricao}
 
 Valor ${(parseInt(valor)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
 
-Envie o código ${produto?.id} para @BDMilquerocompra_bot para comprar dele.
+Envie o código ${produto?.id} para @BDMilquerocomprar_bot para comprar dele.
 
 ${recomendado>0?`Recomendado por mais de ${recomendado} pessoas`:`Ainda não recomendado`}
 

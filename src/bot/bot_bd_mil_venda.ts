@@ -482,7 +482,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
         await bot.sendMessage(id_telegram, `Selecione o Motivo`,
         {
           reply_markup: {
-            inline_keyboard: [                  
+            inline_keyboard: [               
               [  
                 { text: "Não entregou o produto", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_1`},
                 { text: "Não efetuou o pagamento", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_2`},
