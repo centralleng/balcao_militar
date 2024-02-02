@@ -81,13 +81,8 @@ class Bot_bd_mil_alertas {
           const msg_alerta = texto?texto.split(' '):''
         
           if(
-            msg_alerta[0]==='alerta'||
-            msg_alerta[0]==='Alerta'||
-            msg_alerta[0]==='ALERTA'||
-            msg_alerta[0]==='alertas'||
-            msg_alerta[0]==='Alertas'||
-            msg_alerta[0]==='ALERTAS'&&
-            msg_alerta[1]!=''
+            ['alerta','alertas'].includes(msg_alerta[0].toLowerCase())
+            &&msg_alerta[1]!=''
             ){
 
             if(msg_alerta[1]!=undefined){
