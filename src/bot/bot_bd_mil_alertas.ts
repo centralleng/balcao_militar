@@ -14,7 +14,7 @@ class Bot_bd_mil_alertas {
   static execute() {
 
     bot.on('callback_query', async (msg:any) => {
-        // console.log("callback_query",msg)
+        console.log("callback_query",msg)
         const texto = msg.data;
         const id_telegram = msg.message?.chat.id;
         const username = msg.message?.chat.username;
@@ -65,7 +65,7 @@ class Bot_bd_mil_alertas {
     });
 
     bot.on('message', async (msg) => {
-      // console.log(msg)
+      console.log(msg)
       const id_telegram = msg.chat.id.toString();
       const texto = msg.text;
       const name = msg.chat.first_name;
@@ -74,6 +74,7 @@ class Bot_bd_mil_alertas {
       const user = await prisma_db.users.findUnique({
         where: { id_telegram: id_telegram?.toString() },
       })
+      
       if (user) {
         if (username) {
 
