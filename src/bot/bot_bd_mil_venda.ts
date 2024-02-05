@@ -317,7 +317,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               })
             }
             await bot.sendMessage(id_telegram, `Onde você gostaria de divulgar a sua oferta?`);
-            await bot.sendMessage(id_telegram, `Artigos Militares`, artigos_militares);
+            await bot.sendMessage(id_telegram, `Artigos Militáres`, artigos_militares);
             await bot.sendMessage(id_telegram, `Artigos Civis`, artigos_civis);
             bot.deleteMessage(id_telegram, messageId)
           } else {
@@ -647,7 +647,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
         if (user.produto && !user.produto[0].status) {
           if (user.produto[0].categoria===null) {  // Esse if é somente para não deixar colocar a cateria por aqui
             await bot.sendMessage(id_telegram, `Onde você gostaria de divulgar a sua oferta?`);
-            await bot.sendMessage(id_telegram, `Artigos Militares`, artigos_militares);
+            await bot.sendMessage(id_telegram, `Artigos Militáres`, artigos_militares);
             await bot.sendMessage(id_telegram, `Artigos Civis`, artigos_civis);  
             bot.deleteMessage(id_telegram, messageId)       
             return
