@@ -419,8 +419,6 @@ A qual instituição você pertence?
       }
     });
 
-
-
     bot.on("message", async (msg) => {
       // console.log(msg);
 
@@ -433,22 +431,8 @@ A qual instituição você pertence?
       const messageId = msg_del.message_id.toString()
 
       const req = await prisma_db.users.findUnique({
-        where:{id_telegram:id_telegram}
-      })
-
-      const user_dados = await prisma_db.users.findUnique({
-        where: {id_telegram: id_telegram}})
-      const user_instituicao = user_dados?.instituicao || '';
-      const link_group = await prisma_db.grupos.findUnique({
-        where: { type: user_instituicao}
-      })
-      const user_group = link_group?.link
-
-      const artigos_militares: TelegramBot.SendMessageOptions = {
-        reply_markup: {
-          inline_keyboard: [[{ text: user_instituicao+"Balcão de vendas", url: user_group}]]}}
-
-
+        where:{id_telegram:id_telegram.toString()}
+      }) 
 
       if(!req){ // Primeiro contato com o bot  
       await bot.sendMessage(id_telegram, termo1, {parse_mode: 'Markdown'});
@@ -550,6 +534,14 @@ A qual instituição você pertence?
             console.log(isTelefoneValido(texto))
             // 
             if(isTelefoneValido(texto)){
+
+              const link_group = await prisma_db.grupos.findUnique({
+                where: { type: req?.instituicao||''}
+              })
+              
+              const artigos_militares: TelegramBot.SendMessageOptions = {
+                reply_markup: {
+                  inline_keyboard: [[{ text: req?.instituicao+"Balcão de vendas", url: link_group?.link}]]}}
                // updata no banco salvando telefone
               const partes = texto?.split(/[()]/)||'';
               // Filtrar apenas os caracteres numéricos
@@ -588,6 +580,14 @@ Grupo de Artigo Militar:
             return
           }
           else{
+            const link_group = await prisma_db.grupos.findUnique({
+              where: { type: req?.instituicao||''}
+            })
+            
+            const artigos_militares: TelegramBot.SendMessageOptions = {
+              reply_markup: {
+                inline_keyboard: [[{ text: req?.instituicao+"Balcão de vendas", url: link_group?.link}]]}}
+                
 await bot.sendMessage(id_telegram,`
 Prontinho, seu cadastro foi realizado com sucesso!! 🥳
 Segue abaixo os Balcões que você pode acessar para comprar ou vender um produto!          
