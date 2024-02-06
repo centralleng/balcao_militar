@@ -102,7 +102,7 @@ model Alertas {
   delete                  Int?
   palavra_chave           String
   user_id                 String
-  grupo                   String
+  grupo                   String?
   id_telegram             String
   updated_at              DateTime      @updatedAt @default(now())
   created_at              DateTime      @default(now())
