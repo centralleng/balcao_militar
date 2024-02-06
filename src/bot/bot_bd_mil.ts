@@ -351,14 +351,13 @@ Esse balcão tem por objetivo facilitar a transação comercial de artigos milit
     //   },
     // };
     
-
     // Manipular callback_query
     bot.on("callback_query", async (callbackQuery: TelegramBot.CallbackQuery) => {
-      // console.log(callbackQuery)
+      console.log(callbackQuery)
       const msg = callbackQuery.data;
       const chatId = callbackQuery.message?.chat.id;
       const username = callbackQuery.message?.chat.username; 
-      const id_telegram = chatId || ''
+      const id_telegram = chatId || ''    
 
       const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...');
       const messageId = msg_del.message_id.toString()
