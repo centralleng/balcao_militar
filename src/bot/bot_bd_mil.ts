@@ -302,54 +302,51 @@ Esse balcão tem por objetivo facilitar a transação comercial de artigos milit
     //   ],        
     //   },
     // };
-
-
-
   
-    // const artigos_civis: TelegramBot.SendMessageOptions = {
-    //   reply_markup: {
-    //     inline_keyboard: [
-    //     [
-    //       { text: "[Uniforme Balcão de vendas]", url: "https://t.me/+07bigcW1r4syMjRh"},
-    //       { text: "[Veículo Balcão de vendas]", url: "https://t.me/+CcK6KcqceLRkZjhh" },
-    //       { text: "[Serviço Balcão de vendas]", url: "https://t.me/+0ni_n2uu5wQwNDYx"},
-    //     ],
-    //     [
-    //       { text: "[Smartphone Balcão de vendas]", url: "https://t.me/+oTtGpdSVjZJjMzkx"},
-    //       { text: "[Acessório Balcão de vendas]", url: "https://t.me/+jV7ioExY8XRkMGYx"},
-    //       { text: "[Eletrodoméstico Balcão de vendas]", url: "https://t.me/+lafHsTpLYLM0NTgx"},
-    //     ],
-    //     [
-    //       { text: "[Automotivo Balcão de vendas]", url: "https://t.me/+UaJaV4ey4Z43YzQx"},
-    //       { text: "[Áudio Balcão de vendas]", url: "https://t.me/+HtkbigIaR6YzNmIx"},
-    //       { text: "[Eletroportátil Balcão de vendas]", url: "https://t.me/+8qvV2dgSEdNkZTgx"},
-    //     ],
-    //     [
-    //       { text: "[Ferramenta Balcão de vendas]", url: "https://t.me/+Qe4AWjFnm4BiYmJh"},
-    //       { text: "[Bebida Balcão de vendas]", url: "https://t.me/+FtkZD1h-GAk2OTJh"},
-    //       { text: "[Bebê Balcão de vendas]", url: "https://t.me/+mYGNUwXiyb8wYzcx"},
-    //     ],
-    //     [
-    //       { text: "[Esporte Balcão de vendas]", url: "https://t.me/+giWAHbN3AuQ4NmYx"},
-    //       { text: "[Smart TV Balcão de vendas]", url: "https://t.me/+nt5pJ_-m2HoxNGYx"},
-    //       { text: "[Ar e Ventilação Balcão de vendas]", url: "https://t.me/+tr2ws_c0hnQwNmIx"},
-    //     ],
-    //     [
-    //       { text: "[Imóvel Balcão de vendas]", url: "https://t.me/+dTc2DriyCCZmNDUx"},
-    //       { text: "[Brinquedo Balcão de vendas]", url: "https://t.me/+sEunOn7qodJhMWYx"},
-    //       { text: "[Informática Balcão de vendas]", url: "https://t.me/+31XlqHxWcfA0YWVh"},
-    //     ],
-    //     [
-    //       { text: "[Game Balcão de vendas]", url: "https://t.me/+6jF7Q3oL8-BjMjkx"},
-    //       { text: "[Móvel Balcão de vendas]", url: "https://t.me/+MlaeVILmRR84MzNh"},
-    //       { text: "[Utilidade Doméstica Balcão de vendas]", url: "https://t.me/+UKKjuOU36ylmZjhh"},
-    //     ],
-    //     [
-    //       {text: "[Material Escolar Balcão de vendas]", url: ""}
-    //     ]
-    //   ],        
-    //   },
-    // };
+    const artigos_civis: TelegramBot.SendMessageOptions = {
+      reply_markup: {
+        inline_keyboard: [
+        [
+          { text: "[Uniforme Balcão de vendas]", url: "https://t.me/+07bigcW1r4syMjRh"},
+          { text: "[Veículo Balcão de vendas]", url: "https://t.me/+CcK6KcqceLRkZjhh" },
+          { text: "[Serviço Balcão de vendas]", url: "https://t.me/+0ni_n2uu5wQwNDYx"},
+        ],
+        [
+          { text: "[Smartphone Balcão de vendas]", url: "https://t.me/+oTtGpdSVjZJjMzkx"},
+          { text: "[Acessório Balcão de vendas]", url: "https://t.me/+jV7ioExY8XRkMGYx"},
+          { text: "[Eletrodoméstico Balcão de vendas]", url: "https://t.me/+lafHsTpLYLM0NTgx"},
+        ],
+        [
+          { text: "[Automotivo Balcão de vendas]", url: "https://t.me/+UaJaV4ey4Z43YzQx"},
+          { text: "[Áudio Balcão de vendas]", url: "https://t.me/+HtkbigIaR6YzNmIx"},
+          { text: "[Eletroportátil Balcão de vendas]", url: "https://t.me/+8qvV2dgSEdNkZTgx"},
+        ],
+        [
+          { text: "[Ferramenta Balcão de vendas]", url: "https://t.me/+Qe4AWjFnm4BiYmJh"},
+          { text: "[Bebida Balcão de vendas]", url: "https://t.me/+FtkZD1h-GAk2OTJh"},
+          { text: "[Bebê Balcão de vendas]", url: "https://t.me/+mYGNUwXiyb8wYzcx"},
+        ],
+        [
+          { text: "[Esporte Balcão de vendas]", url: "https://t.me/+giWAHbN3AuQ4NmYx"},
+          { text: "[Smart TV Balcão de vendas]", url: "https://t.me/+nt5pJ_-m2HoxNGYx"},
+          { text: "[Ar e Ventilação Balcão de vendas]", url: "https://t.me/+tr2ws_c0hnQwNmIx"},
+        ],
+        [
+          { text: "[Imóvel Balcão de vendas]", url: "https://t.me/+dTc2DriyCCZmNDUx"},
+          { text: "[Brinquedo Balcão de vendas]", url: "https://t.me/+sEunOn7qodJhMWYx"},
+          { text: "[Informática Balcão de vendas]", url: "https://t.me/+31XlqHxWcfA0YWVh"},
+        ],
+        [
+          { text: "[Game Balcão de vendas]", url: "https://t.me/+6jF7Q3oL8-BjMjkx"},
+          { text: "[Móvel Balcão de vendas]", url: "https://t.me/+MlaeVILmRR84MzNh"},
+          { text: "[Utilidade Doméstica Balcão de vendas]", url: "https://t.me/+UKKjuOU36ylmZjhh"},
+        ],
+        [
+          {text: "[Material Escolar Balcão de vendas]", url: ""}
+        ]
+      ],        
+      },
+    };
     
     // Manipular callback_query
     bot.on("callback_query", async (callbackQuery: TelegramBot.CallbackQuery) => {
@@ -565,10 +562,10 @@ Grupo de Artigo Militar:
                       `
                         ,artigos_militares);
 // EXIBE OS ARTIGOS CIVIS.
-//             await bot.sendMessage(id_telegram,`
-// Grupos de Artigo Civil          
-//                       `
-//                         ,artigos_civis);
+            await bot.sendMessage(id_telegram,`
+Grupos de Artigo Civil          
+                      `
+                        ,artigos_civis);
             bot.deleteMessage(id_telegram, messageId)
             }else{
               await bot.sendMessage(id_telegram,`Digite seu telefone com DDD no padrão abaixo:`);
@@ -600,10 +597,10 @@ Grupo de Artigo Militar:
                       ,artigos_militares);
 // EXIBE OS ARTIGOS CIVIS.
 // Foi feito um pedido para que os artigos civis apareçam apenas dentro dos canais do BDMil.
-//           await bot.sendMessage(id_telegram,`
-// Grupos de Artigo Civil          
-//                     `
-//                       ,artigos_civis);
+          await bot.sendMessage(id_telegram,`
+Grupos de Artigo Civil          
+                    `
+                      ,artigos_civis);
           bot.deleteMessage(id_telegram, messageId)
           }
 
