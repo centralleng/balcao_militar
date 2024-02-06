@@ -205,152 +205,158 @@ Esse balcão tem por objetivo facilitar a transação comercial de artigos milit
     //   reply_markup: {
     //     inline_keyboard: [
     //     [
-    //       { text: "[EB Balcão de vendas]", url: "https://t.me/+tEE2IKh78Nk0N2Y5"},
-    //       { text: "[MB Balcão de vendas]", url: "https://t.me/+22FaI9_9sHQ0YTUx" },
-    //       { text: "[FAB Balcão de vendas]", url: "https://t.me/+Y1pkY-yAViFiOWRh"},
+    //       { text: "[EB vendas]", url: "https://t.me/+tEE2IKh78Nk0N2Y5"},
+    //       { text: "[MB vendas]", url: "https://t.me/+22FaI9_9sHQ0YTUx" },
+    //       { text: "[FAB vendas]", url: "https://t.me/+Y1pkY-yAViFiOWRh"},
     //     ],
     //     [
-    //       { text: "[PMERJ Balcão de vendas]", url: "https://t.me/+fP6eI1-pNI8zYWYx"},
-    //       { text: "[CBMERJ Balcão de vendas]", url: "https://t.me/+AWxwCs0q-KszNjQx"},
-    //       { text: "[PMDF Balcão de vendas]", url: "https://t.me/+ke1Nii3UYfM0MDNh"},
+    //       { text: "[PMERJ vendas]", url: "https://t.me/+fP6eI1-pNI8zYWYx"},
+    //       { text: "[CBMERJ vendas]", url: "https://t.me/+AWxwCs0q-KszNjQx"},
+    //       { text: "[PMDF vendas]", url: "https://t.me/+ke1Nii3UYfM0MDNh"},
     //     ],
     //     [
-    //       { text: "[CBMDF Balcão de vendas]", url: "https://t.me/+5wzf1jsJf_k3YTZh"},
-    //       { text: "[PMESP Balcão de vendas]", url: "https://t.me/+RlDSnR8X9ZY2YTRh"},
-    //       { text: "[CBMESP Balcão de vendas]", url: "https://t.me/+5cJH6yQ5SUkwNjUx"},
+    //       { text: "[CBMDF vendas]", url: "https://t.me/+5wzf1jsJf_k3YTZh"},
+    //       { text: "[PMESP vendas]", url: "https://t.me/+RlDSnR8X9ZY2YTRh"},
+    //       { text: "[CBMESP vendas]", url: "https://t.me/+5cJH6yQ5SUkwNjUx"},
     //     ],
     //     [
-    //       { text: "[PMMG Balcão de vendas]", url: "https://t.me/+0ZOmYGzHcQEzYjI5"},
-    //       { text: "[CBMMG Balcão de vendas]", url: "https://t.me/+MPElU7fWtDFkNWQx"},
-    //       { text: "[PMGO Balcão de vendas]", url: "https://t.me/+0z-tgSR7KMNlMjc5"},
+    //       { text: "[PMMG vendas]", url: "https://t.me/+0ZOmYGzHcQEzYjI5"},
+    //       { text: "[CBMMG vendas]", url: "https://t.me/+MPElU7fWtDFkNWQx"},
+    //       { text: "[PMGO vendas]", url: "https://t.me/+0z-tgSR7KMNlMjc5"},
     //     ],
     //     [
-    //       { text: "[CBMGO Balcão de vendas]", url: "https://t.me/+TpBNm-JXd-w1MGJh"},
-    //       { text: "[PMPR Balcão de vendas]", url: "https://t.me/+bUxKjoIbMP00YzIx"},
-    //       { text: "[CBMPR Balcão de vendas]", url: "https://t.me/+l0cJOmgSkeM3ODdh"},
+    //       { text: "[CBMGO vendas]", url: "https://t.me/+TpBNm-JXd-w1MGJh"},
+    //       { text: "[PMPR vendas]", url: "https://t.me/+bUxKjoIbMP00YzIx"},
+    //       { text: "[CBMPR vendas]", url: "https://t.me/+l0cJOmgSkeM3ODdh"},
     //     ],
     //     [
-    //       { text: "[PMSC Balcão de vendas]", url: "https://t.me/+kHO9rt65F6tmYTMx"},
-    //       { text: "[CBMSC Balcão de vendas]", url: "https://t.me/+uEKOo1wogGU2ZTE5"},
-    //       { text: "[BRIGADA MILITAR Balcão de vendas]", url: "https://t.me/+4m4PvEaQrlA3OWVh"},
+    //       { text: "[PMSC vendas]", url: "https://t.me/+kHO9rt65F6tmYTMx"},
+    //       { text: "[CBMSC vendas]", url: "https://t.me/+uEKOo1wogGU2ZTE5"},
+    //       { text: "[BRIGADA MILITAR vendas]", url: "https://t.me/+4m4PvEaQrlA3OWVh"},
     //     ],
     //     [
-    //       { text: "[CBMRS Balcão de vendas]", url: "https://t.me/+wLVXBuI9tLZlYjgx"},
-    //       { text: "[PMMS Balcão de vendas]", url: "https://t.me/+pFQKi0_RGrc1N2Yx"},
-    //       { text: "[CBMMS Balcão de vendas]", url: "https://t.me/+eea7o4K99wMzMGYx"},
+    //       { text: "[CBMRS vendas]", url: "https://t.me/+wLVXBuI9tLZlYjgx"},
+    //       { text: "[PMMS vendas]", url: "https://t.me/+pFQKi0_RGrc1N2Yx"},
+    //       { text: "[CBMMS vendas]", url: "https://t.me/+eea7o4K99wMzMGYx"},
     //     ],
     //     [
-    //       { text: "[PMMT Balcão de vendas]", url: "https://t.me/+iLnUYKOUoLY2MzQx"},
-    //       { text: "[CBMMT Balcão de vendas]", url: "https://t.me/+bKPgl8N8OwQxOGU5"},
-    //       { text: "[PMBA Balcão de vendas]", url: "https://t.me/+q3usbyJGEygyZTI5"},
+    //       { text: "[PMMT vendas]", url: "https://t.me/+iLnUYKOUoLY2MzQx"},
+    //       { text: "[CBMMT vendas]", url: "https://t.me/+bKPgl8N8OwQxOGU5"},
+    //       { text: "[PMBA vendas]", url: "https://t.me/+q3usbyJGEygyZTI5"},
     //     ],
     //     [
-    //       { text: "[CBMBA Balcão de vendas]", url: "https://t.me/+7Y_EbXi8lYRkN2Ex"},
-    //       { text: "[PMES Balcão de vendas]", url: "https://t.me/+JV13TdCOHTtiNzUx"},
-    //       { text: "[CBMES Balcão de vendas]", url: "https://t.me/+FDp4Wnnvcww2NWFh"},
+    //       { text: "[CBMBA vendas]", url: "https://t.me/+7Y_EbXi8lYRkN2Ex"},
+    //       { text: "[PMES vendas]", url: "https://t.me/+JV13TdCOHTtiNzUx"},
+    //       { text: "[CBMES vendas]", url: "https://t.me/+FDp4Wnnvcww2NWFh"},
     //     ],
     //     [
-    //       { text: "[PMAL Balcão de vendas]", url: "https://t.me/+B3aLTGTJcv1lMDUx"},
-    //       { text: "[CBMAL Balcão de vendas]", url: "https://t.me/+Hc5se9g2xyo1ZGIx"},
-    //       { text: "[PMSE Balcão de vendas]", url: "https://t.me/+XfvUCQjlkFM4YTIx"},
+    //       { text: "[PMAL vendas]", url: "https://t.me/+B3aLTGTJcv1lMDUx"},
+    //       { text: "[CBMAL vendas]", url: "https://t.me/+Hc5se9g2xyo1ZGIx"},
+    //       { text: "[PMSE vendas]", url: "https://t.me/+XfvUCQjlkFM4YTIx"},
     //     ],
     //     [
-    //       { text: "[CBMSE Balcão de vendas]", url: "https://t.me/+5h3gnKyUcy8zYWZh"},
-    //       { text: "[PMPE Balcão de vendas]", url: "https://t.me/+tM5arpf0v7VhYTMx"},
-    //       { text: "[CBMPE Balcão de vendas]", url: "https://t.me/+L22WPiHuO3BhMmMx"},
+    //       { text: "[CBMSE vendas]", url: "https://t.me/+5h3gnKyUcy8zYWZh"},
+    //       { text: "[PMPE vendas]", url: "https://t.me/+tM5arpf0v7VhYTMx"},
+    //       { text: "[CBMPE vendas]", url: "https://t.me/+L22WPiHuO3BhMmMx"},
     //     ],
     //     [
-    //       { text: "[PMRN Balcão de vendas]", url: "https://t.me/+v0S0DcDy0QkxYTFh"},
-    //       { text: "[CBMRN Balcão de vendas]", url: "https://t.me/+mtohgUmaWIc2Mzdh"},
-    //       { text: "[PMCE Balcão de vendas]", url: "https://t.me/+5C7aqMfBTBIzNDZh"},
+    //       { text: "[PMRN vendas]", url: "https://t.me/+v0S0DcDy0QkxYTFh"},
+    //       { text: "[CBMRN vendas]", url: "https://t.me/+mtohgUmaWIc2Mzdh"},
+    //       { text: "[PMCE vendas]", url: "https://t.me/+5C7aqMfBTBIzNDZh"},
     //     ],
     //     [
-    //       { text: "[CBMCE Balcão de vendas]", url: "https://t.me/+tOrjCxMj9q8zOGZh"},
-    //       { text: "[PMPI Balcão de vendas]", url: "https://t.me/+s-ZZoXIHK7MwYjJh"},
-    //       { text: "[CBMPI Balcão de vendas]", url: "https://t.me/+a2nMvkzqghs3ODgx"},
+    //       { text: "[CBMCE vendas]", url: "https://t.me/+tOrjCxMj9q8zOGZh"},
+    //       { text: "[PMPI vendas]", url: "https://t.me/+s-ZZoXIHK7MwYjJh"},
+    //       { text: "[CBMPI vendas]", url: "https://t.me/+a2nMvkzqghs3ODgx"},
     //     ],
     //     [
-    //       { text: "[PMMA Balcão de vendas]", url: "https://t.me/+XiwfKrnun89mNDBh"},
-    //       { text: "[CBMMA Balcão de vendas]", url: "https://t.me/+mneokjSq4ps4M2Ex"},
-    //       { text: "[PMAM Balcão de vendas]", url: "https://t.me/+4Eeqv2ozfj1kYzJh"},
+    //       { text: "[PMMA vendas]", url: "https://t.me/+XiwfKrnun89mNDBh"},
+    //       { text: "[CBMMA vendas]", url: "https://t.me/+mneokjSq4ps4M2Ex"},
+    //       { text: "[PMAM vendas]", url: "https://t.me/+4Eeqv2ozfj1kYzJh"},
     //     ],
     //     [
-    //       { text: "[CBMAM Balcão de vendas]", url: "https://t.me/+cDVMXWkD-KQzOWEx"},
-    //       { text: "[PMAP Balcão de vendas]", url: "https://t.me/+HjRdxZJ67-dkNDhh"},
-    //       { text: "[CBMAP Balcão de vendas]", url: "https://t.me/+vTqnwRleGJ80MjQx"},
+    //       { text: "[CBMAM vendas]", url: "https://t.me/+cDVMXWkD-KQzOWEx"},
+    //       { text: "[PMAP vendas]", url: "https://t.me/+HjRdxZJ67-dkNDhh"},
+    //       { text: "[CBMAP vendas]", url: "https://t.me/+vTqnwRleGJ80MjQx"},
     //     ],
     //     [
-    //       { text: "[PMRO Balcão de vendas]", url: "https://t.me/+Tm-64V_q9UBiMzBh"},
-    //       { text: "[CBMRO Balcão de vendas]", url: "https://t.me/+FPD7RiIuZTViNDhh"},
-    //       { text: "[PMTO Balcão de vendas]", url: "https://t.me/+r6UUjs46txhkMWYx"},
+    //       { text: "[PMRO vendas]", url: "https://t.me/+Tm-64V_q9UBiMzBh"},
+    //       { text: "[CBMRO vendas]", url: "https://t.me/+FPD7RiIuZTViNDhh"},
+    //       { text: "[PMTO vendas]", url: "https://t.me/+r6UUjs46txhkMWYx"},
     //     ],
     //     [
-    //       { text: "[CBMTO Balcão de vendas]", url: "https://t.me/+7zTSApKXHKU5YmRh"},
-    //       { text: "[PMAC Balcão de vendas]", url: "https://t.me/+36pWf9eJyro0YWVh"},
-    //       { text: "[CBMAC Balcão de vendas]", url: "https://t.me/+1awWjaRF0oNhOTYx"},
+    //       { text: "[CBMTO vendas]", url: "https://t.me/+7zTSApKXHKU5YmRh"},
+    //       { text: "[PMAC vendas]", url: "https://t.me/+36pWf9eJyro0YWVh"},
+    //       { text: "[CBMAC vendas]", url: "https://t.me/+1awWjaRF0oNhOTYx"},
     //     ],
     //     [
-    //       { text: "[PMPA Balcão de vendas]", url: "https://t.me/+FwfafSnUETdkMjgx"},
-    //       { text: "[CBMPA Balcão de vendas]", url: "https://t.me/+-tmrxVAwTFJjZmQx"},
-    //       { text: "[PMRR Balcão de vendas]", url: "https://t.me/+ozYpjtkqsxZlOWNh"},
+    //       { text: "[PMPA vendas]", url: "https://t.me/+FwfafSnUETdkMjgx"},
+    //       { text: "[CBMPA vendas]", url: "https://t.me/+-tmrxVAwTFJjZmQx"},
+    //       { text: "[PMRR vendas]", url: "https://t.me/+ozYpjtkqsxZlOWNh"},
     //     ],
     //     [
-    //       { text: "[CBMRR Balcão de vendas]", url: "https://t.me/+xuF17ilK2qVhZDQx"},
-    //       { text: "[PMPB Balcão de vendas]", url: "https://t.me/+O39pUzjayrEyMjY5"},
-    //       { text: "[CBMPB Balcão de vendas]", url: "https://t.me/+KQWkzjvExhA2N2Ex"},
+    //       { text: "[CBMRR vendas]", url: "https://t.me/+xuF17ilK2qVhZDQx"},
+    //       { text: "[PMPB vendas]", url: "https://t.me/+O39pUzjayrEyMjY5"},
+    //       { text: "[CBMPB vendas]", url: "https://t.me/+KQWkzjvExhA2N2Ex"},
     //     ],        
     //   ],        
     //   },
     // };
+
+    // const artigos_civis: TelegramBot.SendMessageOptions = {
+    //   reply_markup: {
+    //     inline_keyboard: [
+          
+    //     ]}}
   
     const artigos_civis: TelegramBot.SendMessageOptions = {
       reply_markup: {
         inline_keyboard: [
         [
-          { text: "[Uniforme Balcão de vendas]", url: "https://t.me/+07bigcW1r4syMjRh"},
-          { text: "[Veículo Balcão de vendas]", url: "https://t.me/+CcK6KcqceLRkZjhh" },
-          { text: "[Serviço Balcão de vendas]", url: "https://t.me/+0ni_n2uu5wQwNDYx"},
+          { text: "[Uniforme vendas]", url: "https://t.me/+07bigcW1r4syMjRh"},
+          { text: "[Veículo vendas]", url: "https://t.me/+CcK6KcqceLRkZjhh" },
+          { text: "[Serviço vendas]", url: "https://t.me/+0ni_n2uu5wQwNDYx"},
         ],
         [
-          { text: "[Smartphone Balcão de vendas]", url: "https://t.me/+oTtGpdSVjZJjMzkx"},
-          { text: "[Acessório Balcão de vendas]", url: "https://t.me/+jV7ioExY8XRkMGYx"},
-          { text: "[Eletrodoméstico Balcão de vendas]", url: "https://t.me/+lafHsTpLYLM0NTgx"},
+          { text: "[Smartphone vendas]", url: "https://t.me/+oTtGpdSVjZJjMzkx"},
+          { text: "[Acessório vendas]", url: "https://t.me/+jV7ioExY8XRkMGYx"},
+          { text: "[Eletrodoméstico vendas]", url: "https://t.me/+lafHsTpLYLM0NTgx"},
         ],
         [
-          { text: "[Automotivo Balcão de vendas]", url: "https://t.me/+UaJaV4ey4Z43YzQx"},
-          { text: "[Áudio Balcão de vendas]", url: "https://t.me/+HtkbigIaR6YzNmIx"},
-          { text: "[Eletroportátil Balcão de vendas]", url: "https://t.me/+8qvV2dgSEdNkZTgx"},
+          { text: "[Automotivo vendas]", url: "https://t.me/+UaJaV4ey4Z43YzQx"},
+          { text: "[Áudio vendas]", url: "https://t.me/+HtkbigIaR6YzNmIx"},
+          { text: "[Eletroportátil vendas]", url: "https://t.me/+8qvV2dgSEdNkZTgx"},
         ],
         [
-          { text: "[Ferramenta Balcão de vendas]", url: "https://t.me/+Qe4AWjFnm4BiYmJh"},
-          { text: "[Bebida Balcão de vendas]", url: "https://t.me/+FtkZD1h-GAk2OTJh"},
-          { text: "[Bebê Balcão de vendas]", url: "https://t.me/+mYGNUwXiyb8wYzcx"},
+          { text: "[Ferramenta vendas]", url: "https://t.me/+Qe4AWjFnm4BiYmJh"},
+          { text: "[Bebida vendas]", url: "https://t.me/+FtkZD1h-GAk2OTJh"},
+          { text: "[Bebê vendas]", url: "https://t.me/+mYGNUwXiyb8wYzcx"},
         ],
         [
-          { text: "[Esporte Balcão de vendas]", url: "https://t.me/+giWAHbN3AuQ4NmYx"},
-          { text: "[Smart TV Balcão de vendas]", url: "https://t.me/+nt5pJ_-m2HoxNGYx"},
-          { text: "[Ar e Ventilação Balcão de vendas]", url: "https://t.me/+tr2ws_c0hnQwNmIx"},
+          { text: "[Esporte vendas]", url: "https://t.me/+giWAHbN3AuQ4NmYx"},
+          { text: "[Smart TV vendas]", url: "https://t.me/+nt5pJ_-m2HoxNGYx"},
+          { text: "[Ar e Ventilação vendas]", url: "https://t.me/+tr2ws_c0hnQwNmIx"},
         ],
         [
-          { text: "[Imóvel Balcão de vendas]", url: "https://t.me/+dTc2DriyCCZmNDUx"},
-          { text: "[Brinquedo Balcão de vendas]", url: "https://t.me/+sEunOn7qodJhMWYx"},
-          { text: "[Informática Balcão de vendas]", url: "https://t.me/+31XlqHxWcfA0YWVh"},
+          { text: "[Imóvel vendas]", url: "https://t.me/+dTc2DriyCCZmNDUx"},
+          { text: "[Brinquedo vendas]", url: "https://t.me/+sEunOn7qodJhMWYx"},
+          { text: "[Informática vendas]", url: "https://t.me/+31XlqHxWcfA0YWVh"},
         ],
         [
-          { text: "[Game Balcão de vendas]", url: "https://t.me/+6jF7Q3oL8-BjMjkx"},
-          { text: "[Móvel Balcão de vendas]", url: "https://t.me/+MlaeVILmRR84MzNh"},
-          { text: "[Utilidade Doméstica Balcão de vendas]", url: "https://t.me/+UKKjuOU36ylmZjhh"},
+          { text: "[Game vendas]", url: "https://t.me/+6jF7Q3oL8-BjMjkx"},
+          { text: "[Móvel vendas]", url: "https://t.me/+MlaeVILmRR84MzNh"},
+          { text: "[Utilidade Doméstica vendas]", url: "https://t.me/+UKKjuOU36ylmZjhh"},
         ],
         [
-          {text: "[Material Escolar Balcão de vendas]", url: ""}
-        ]
+          {text: "[Material Escolar vendas]", url: "https://t.me/+xPsCdljf7FtkZTYx"}
+        ],
       ],        
       },
     };
     
     // Manipular callback_query
     bot.on("callback_query", async (callbackQuery: TelegramBot.CallbackQuery) => {
-      console.log(callbackQuery)
+      // console.log(callbackQuery)
       const msg = callbackQuery.data;
       const chatId = callbackQuery.message?.chat.id;
       const username = callbackQuery.message?.chat.username; 
@@ -457,8 +463,10 @@ A qual instituição você pertence?
               data:{nome: texto}
             })
             // Qual seu cpf
-            await bot.sendMessage(id_telegram, `Digite seu CPF: 
-            Obs.: Colocar somente números.`);
+            await bot.sendMessage(id_telegram, `
+Digite seu CPF: 
+
+Obs.: Colocar somente números.`);
             bot.deleteMessage(id_telegram, messageId)
             return
           }
@@ -507,8 +515,7 @@ A qual instituição você pertence?
               where:{id_telegram: id_telegram},
               data:{email: texto}
             })
-            await bot.sendMessage(id_telegram,`Digite seu telefone com DDD no padrão abaixo:`);
-            await bot.sendMessage(id_telegram,`(99)999999999`);
+            await bot.sendMessage(id_telegram,`Digite seu telefone com DDD:`);
             bot.deleteMessage(id_telegram, messageId)
             return
 
@@ -519,18 +526,53 @@ A qual instituição você pertence?
 
             return
           }
-          if(req.phone===null){           
+          if(req.phone===null){          
 
             function isTelefoneValido(texto: any) {
-              // Expressão regular para verificar o padrão (99)123456789 ou (99)1234567890
-              const regex = /^\(\d{2}\)\d{8,9}$/;
-            
-              // Testa o texto contra a expressão regular
-              return regex.test(texto);
-            }
-            console.log(isTelefoneValido(texto))
-            // 
-            if(isTelefoneValido(texto)){
+              const regex0 = /^\(\d{2}\)\d{8,9}$/; // (99)999999999
+              const regex1 = /^\d{10,11}$/;  // 99999999999 || 9999999999
+              const regex2 = /^\d{2} \d{8,9}$/;  // 99 999999999 || 99 99999999
+              const regex3 = /^\d{2} 9 \d{8,9}$/; // 99 9 99999999 || 99 99999999
+              const regex4 = /^(\d{2})-(\d{8,9})$/; // 99-99999999 || 99-99999999
+
+              if(regex0.test(texto)){            
+                const partes = texto?.split(/[()]/)||'';
+                const ddd = partes[1].replace(/\D/g, '');
+                const telefone = partes[2].replace(/\D/g, ''); 
+                const status = true
+                return {ddd,telefone,status}
+              }
+              if(regex1.test(texto)){  
+                const ddd = texto.substring(0, 2);;
+                const telefone = texto.substring(2); 
+                const status = true
+                return {ddd,telefone,status}
+              }
+              if(regex2.test(texto)){   
+                const ddd = texto.replace(/\s/g, '').substring(0, 2);
+                const telefone = texto.replace(/\s/g, '').substring(2); 
+                const status = true
+                return {ddd,telefone,status}
+              }
+              if(regex3.test(texto)){  
+                const ddd = texto.replace(/\s/g, '').substring(0, 2);;
+                const telefone = texto.replace(/\s/g, '').substring(2);; 
+                const status = true
+                return {ddd,telefone,status}
+              }
+              if(regex4.test(texto)){
+                const [, texto1, texto2] = texto.match(regex4);  
+                const ddd = texto1;
+                const telefone = texto2; 
+                const status = true
+                return {ddd,telefone,status}
+              }
+
+              return {ddd:'',telefone:'',status:false}
+            }              
+       
+            // // verificar as opões válidas
+            if(isTelefoneValido(texto).status){ 
 
               const link_group = await prisma_db.grupos.findUnique({
                 where: { type: req?.instituicao||''}
@@ -538,13 +580,13 @@ A qual instituição você pertence?
               
               const artigos_militares: TelegramBot.SendMessageOptions = {
                 reply_markup: {
-                  inline_keyboard: [[{ text: req?.instituicao+"Balcão de vendas", url: link_group?.link}]]}}
-               // updata no banco salvando telefone
-              const partes = texto?.split(/[()]/)||'';
+                  inline_keyboard: [
+                    [{ text: req?.instituicao + " Balcão de vendas", url: link_group?.link}],
+                  ]}}
+             
               // Filtrar apenas os caracteres numéricos
-              const ddd = partes[1].replace(/\D/g, '');
-              const telefone = partes[2].replace(/\D/g, '');
-              console.log(ddd,telefone)
+              const ddd = isTelefoneValido(texto).ddd;
+              const telefone = isTelefoneValido(texto).telefone;              
 
               await prisma_db.users.update({
                 where:{id_telegram: id_telegram},
@@ -556,23 +598,22 @@ Prontinho, seu cadastro foi realizado com sucesso!! 🥳
 Segue abaixo o Balcão que você pode acessar para comprar ou vender um produto!          
           `
             ,);
+            await bot.sendMessage(id_telegram,`Grupo de Artigo Militar:`,artigos_militares);
 
-            await bot.sendMessage(id_telegram,`
-Grupo de Artigo Militar:
-                      `
-                        ,artigos_militares);
-// EXIBE OS ARTIGOS CIVIS.
-            await bot.sendMessage(id_telegram,`
-Grupos de Artigo Civil          
-                      `
-                        ,artigos_civis);
+            await bot.sendMessage(id_telegram, `Grupo de Artigos Civis`, artigos_civis);
+
             bot.deleteMessage(id_telegram, messageId)
-            }else{
-              await bot.sendMessage(id_telegram,`Digite seu telefone com DDD no padrão abaixo:`);
-              await bot.sendMessage(id_telegram,`DDD com parênteses, mais número de telefone:`);
-              await bot.sendMessage(id_telegram,`(99)999999999`);
-              bot.deleteMessage(id_telegram, messageId)
+
+              
+              return  
             }
+
+            // Caso não pare em nenhum if
+            await bot.sendMessage(id_telegram,`Digite seu telefone com DDD no padrão abaixo:`);
+            await bot.sendMessage(id_telegram,`DDD mais número de telefone:`);
+            await bot.sendMessage(id_telegram,`99999999999 ou 99 999999999`);
+            bot.deleteMessage(id_telegram, messageId)
+           
            
             return
           }
@@ -583,7 +624,9 @@ Grupos de Artigo Civil
             
             const artigos_militares: TelegramBot.SendMessageOptions = {
               reply_markup: {
-                inline_keyboard: [[{ text: req?.instituicao+"Balcão de vendas", url: link_group?.link}]]}}
+                inline_keyboard: [
+                  [{ text: req?.instituicao+ " Balcão de vendas", url: link_group?.link}],
+                ]}}
                 
 await bot.sendMessage(id_telegram,`
 Prontinho, seu cadastro foi realizado com sucesso!! 🥳
@@ -591,16 +634,10 @@ Segue abaixo os Balcões que você pode acessar para comprar ou vender um produt
         `
           ,);
 
-          await bot.sendMessage(id_telegram,`
-Grupo de Artigo Militar:
-                    `
-                      ,artigos_militares);
-// EXIBE OS ARTIGOS CIVIS.
-// Foi feito um pedido para que os artigos civis apareçam apenas dentro dos canais do BDMil.
-          await bot.sendMessage(id_telegram,`
-Grupos de Artigo Civil          
-                    `
-                      ,artigos_civis);
+          await bot.sendMessage(id_telegram,`Grupo de Artigo Militar:`,artigos_militares);
+
+          await bot.sendMessage(id_telegram, `Grupo de Artigos Civis`, artigos_civis);
+
           bot.deleteMessage(id_telegram, messageId)
           }
 
