@@ -15,7 +15,10 @@ interface dados {
     user_id: string;
 }
 
-export default async function Criar_pedido (dados:dados) { 
+export default async function Criar_pedido (dados:dados) {
+  
+    const botVenda = process.env.API_BOT_BDMIL_VENDA ||''
+    const botAlerta = process.env.API_BOT_BDMIL_ALERTA ||''
   
     const pedido = await prisma_db.pedidos.create({
         data: {
@@ -43,9 +46,6 @@ export default async function Criar_pedido (dados:dados) {
 
 if(pedido){
 
-    const botVenda = process.env.API_BOT_BDMIL_VENDA ||''
-const botAlerta = process.env.API_BOT_BDMIL_ALERTA ||''
-
 const valor = produto?.valor_produto || ''
 const recomendado = user?.recomendado || 0
 const desaconselhado = user?.desaconselhado || 0
@@ -70,6 +70,10 @@ function createInlineKeyboard(userTelegramId:any) {
         {
           text: 'Quero Vender',
           url: `https://t.me/BDMilCVbot`,
+        },
+        {
+          text: 'Bot Alertas',
+          url: `https://t.me/BDMilALERTAS_bot`,
         },
       ],
     ],

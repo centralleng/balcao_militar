@@ -56,6 +56,10 @@ function createInlineKeyboard(userTelegramId:any) {
           text: 'Quero Vender',
           url: `https://t.me/BDMilCVbot`,
         },
+        {
+          text: 'Bot Alertas',
+          url: `https://t.me/BDMilALERTAS_bot`,
+        },
       ],
     ],
   };

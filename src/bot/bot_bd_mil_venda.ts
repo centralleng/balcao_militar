@@ -22,6 +22,10 @@ class Bot_bd_mil_venda {
             { text: "SUPORTE", url: "https://t.me/" },
             { text: "TUTORIAL", callback_data: "https://t.me/" },
           ],
+          [
+            { text: "DELETAR", callback_data: "DELETAR_PRODUTO" },
+            { text: "EDITAR", callback_data: "EDITAR" },
+          ],
         ],
       },
     };
@@ -261,10 +265,11 @@ Ex: 00.00
 
     const produto_criado = `
 ✔️Oferta de venda cadastrada!
+
 💡 Quando for decidir entre comprar ou vender o produto/serviço, avalie também as recomendações.
 🤝 Gostaria de lembrar a importância de honrar acordos com o vendedor ou comprador no Balcão, depois de selar o acordo até a entrega do produto.
 ❌ O mau comportamento pode acarretar a exclusão do Balcão.
-`
+` 
     // Manipular callback_query
     bot.on("callback_query", async (msg: any) => {
       // console.log("callback_query",msg)
@@ -688,7 +693,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               await bot.sendMessage(id_telegram, `⚠️ Ops algo coloque no máximo 150 caracteres. SÓ coloque ponto no fim.`);
               bot.deleteMessage(id_telegram, messageId)
               return
-            } 
+            }
           }
 
           if (user.produto && user.produto[0].valor_produto === null) {
@@ -745,7 +750,8 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                 where:{user_id:user.id}
               })
 
-              if(pedido.length<=0){             
+              if(pedido.length<=0){    
+                console.log('veio')         
                 const dados = {
                   valor: ((Math.round(taxa_empresa() * 100)).toString()).replace(/\./g, ''),
                   titulo: '',
