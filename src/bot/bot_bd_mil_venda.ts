@@ -296,28 +296,6 @@ Ex: 00.00
         },
       });   
 
-      if(user?.produto[0].status===null){
-        await bot.sendMessage(id_telegram, `⚠️ Finalize a criação do produto anterior.`, suporte);
-        bot.deleteMessage(id_telegram, messageId)
-        return
-      }
-      
-      const editar_produtos = await prisma_db.produtos.findMany({
-        where: {
-          user_id: user?.id,
-          NOT: [
-            { editar: null },
-            { editar: '0' }
-          ]
-        }
-      });
-
-      if(editar_produtos.length>0){ // Tem produtos para ser editado
-        await bot.sendMessage(id_telegram, `⚠️ Finalize a edição do produto anterior.`, suporte);
-        bot.deleteMessage(id_telegram, messageId)
-        return
-      }
-
       if (!user) {
         await bot.sendMessage(id_telegram, `
 ⚠️ Primeiro precisamos realizar o seu cadastro!
@@ -326,13 +304,40 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
         bot.deleteMessage(id_telegram, messageId)
         return
       }
-
+    
       if (username === undefined) {
         await bot.sendMessage(id_telegram, `⚠️ É necessário cadastrar um UserName do Telegram, para dar continuidade no Balcão.`);
         bot.deleteMessage(id_telegram, messageId)
       } else {
 
-        const user_name = await prisma_db.users.update({
+        if(user.produto.length>0){     
+
+        if(user?.produto[0].status===null){
+          await bot.sendMessage(id_telegram, `⚠️ Finalize a criação do produto anterior.`, suporte);
+          bot.deleteMessage(id_telegram, messageId)
+          return
+        }
+        
+        const editar_produtos = await prisma_db.produtos.findMany({
+          where: {
+            user_id: user?.id,
+            NOT: [
+              { editar: null },
+              { editar: '0' }
+            ]
+          }
+        });
+  
+        if(editar_produtos.length>0){ // Tem produtos para ser editado
+          await bot.sendMessage(id_telegram, `⚠️ Finalize a edição do produto anterior.`, suporte);
+          bot.deleteMessage(id_telegram, messageId)
+          return
+        } 
+
+      }
+  
+
+        await prisma_db.users.update({
           where: {id_telegram: id_telegram.toString()},
           data: {username: username}
         })
