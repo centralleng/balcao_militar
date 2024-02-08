@@ -374,7 +374,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
 `
 Interessado em vender ${produto_pedido.descricao}
 
-Valor ${(parseInt(valor)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
+Valor ${(parseInt(produto_pedido.valor_produto||'')/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
 
 Envie o código ${produto_pedido.id} para @BDMilquerocomprar_bot para comprar dele.
 
@@ -439,7 +439,7 @@ Membro desde ${moment(user.created_at).format('DD-MM-YYYY')}
               bot.deleteMessage(id_telegram, messageId)
             }else{
               await bot.sendMessage(id_telegram, `⚠️ Produto não encontrado.`, suporte);
-              bot.deleteMessage(id_telegram, messageId)            }
+              bot.deleteMessage(id_telegram, messageId)}
 
           }else{
           await bot.sendMessage(id_telegram, `⚠️ Finalize a edição do produto.`, suporte);
@@ -447,7 +447,7 @@ Membro desde ${moment(user.created_at).format('DD-MM-YYYY')}
           }                          
         }
 
-        if (texto_split[0] === 'DELETAR') { // Listar todo os produtos cadastrados   
+        if (texto_split[0] === 'DELETAR') { // Listar todo os produtos cadastrados  
           
           const produto_pedido = await prisma_db.produtos.findUnique({
             where:{id: parseInt(texto_split[1])},
@@ -458,9 +458,6 @@ Membro desde ${moment(user.created_at).format('DD-MM-YYYY')}
           try {
             const grupo = await prisma_db.grupos.findUnique({
               where:{type: produto_pedido?.categoria||''}
-            })
-            await prisma_db.pedidos.deleteMany({
-              where: { produto_id: parseInt(texto_split[1])}
             })
             await prisma_db.produtos.delete({
               where: { id: parseInt(texto_split[1]) }
