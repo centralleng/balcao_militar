@@ -64,6 +64,18 @@ function createInlineKeyboard(userTelegramId:any) {
     ],
   };
 }
+
+function enviarMsg(id_produto:any) {
+  return {
+    inline_keyboard: [
+        [
+          { text: "ATUALIZAR", callback_data: `ATUALIZAR_${id_produto}` },
+          { text: "EDITAR", callback_data: `EDITAR_${id_produto}` },
+          { text: "DELETAR", callback_data: `DELETAR_${id_produto}` },
+        ],
+    ],
+  };
+}
       try {
              // Enviar msg para os grupos 
       const msg_grupo = await axios.post(`https://api.telegram.org/bot${botVenda}/sendMessage`, // Bot bdmil_venda
@@ -89,7 +101,7 @@ Membro desde ${moment(pedido.users.created_at).format('DD-MM-YYYY')}
 
 `,
 reply_markup: createInlineKeyboard(grupo.id_grupo),
-      });     
+      });    
 
       await prisma_db.pedidos.update({
         where:{id:pedido.id},
@@ -97,6 +109,7 @@ reply_markup: createInlineKeyboard(grupo.id_grupo),
       })
         
       } catch (error) {console.log('erro 01')}
+
 
       try {
          // Enviar msg para o vendedor 
@@ -114,6 +127,8 @@ Código produto ${pedido.produto.id}.
 Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor acordado ao comprador.
 
 `,
+reply_markup: enviarMsg(pedido.produto.id),
+
     });
         
       } catch (error) {console.log('erro 02')}
