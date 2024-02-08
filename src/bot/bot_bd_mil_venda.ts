@@ -14,17 +14,19 @@ class Bot_bd_mil_venda {
     const botao_inicial: TelegramBot.SendMessageOptions = {
       reply_markup: {
         inline_keyboard: [
+          // [
+          //   { text: "VENDER", callback_data: "VENDER" },
+          //   // { text: "MEUS PRODUTOS", callback_data: "MEUS_PRODUTOS"},
+          // ],
+          // [
+          //   { text: "SUPORTE", url: "https://t.me/" },
+          //   { text: "TUTORIAL", callback_data: "https://t.me/" },
+          //   { text: "DELETAR", callback_data: "DELETAR_PRODUTO" },
+          // ],
           [
-            { text: "VENDER", callback_data: "VENDER" },
-            // { text: "MEUS PRODUTOS", callback_data: "MEUS_PRODUTOS"},
-          ],
-          [
-            { text: "SUPORTE", url: "https://t.me/" },
-            { text: "TUTORIAL", callback_data: "https://t.me/" },
-          ],
-          [
-            { text: "DELETAR", callback_data: "DELETAR_PRODUTO" },
+            { text: "ATUALIZAR", callback_data: "ATUALIZAR" },
             { text: "EDITAR", callback_data: "EDITAR" },
+            { text: "DELETAR", callback_data: "DELETAR_PRODUTO" },
           ],
         ],
       },
@@ -653,14 +655,24 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           return
         }
 
-        if (user.produto[0].status) {          
-          await bot.sendMessage(id_telegram, 'Escolha sua ação:', botao_inicial);  
+        if (user.produto[0].status) {  
+          await prisma_db.produtos.create({
+            data: {
+              user_id: user?.id,
+              id_telegram: id_telegram.toString(),
+            }
+          })        
+          await bot.sendMessage(id_telegram, texto_inicial , botao_inicial); 
+          await bot.sendMessage(id_telegram, `Onde você gostaria de divulgar a sua oferta?`);
+          await bot.sendMessage(id_telegram, `Artigos Militáres`, artigos_militares);
+          await bot.sendMessage(id_telegram, `Artigos Civis`, artigos_civis); 
           bot.deleteMessage(id_telegram, messageId)       
           return
         }     
 
         if (user.produto && !user.produto[0].status) {
           if (user.produto[0].categoria===null) {  // Esse if é somente para não deixar colocar a cateria por aqui
+            await bot.sendMessage(id_telegram, texto_inicial , botao_inicial);
             await bot.sendMessage(id_telegram, `Onde você gostaria de divulgar a sua oferta?`);
             await bot.sendMessage(id_telegram, `Artigos Militáres`, artigos_militares);
             await bot.sendMessage(id_telegram, `Artigos Civis`, artigos_civis);  
@@ -723,20 +735,20 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
 
               switch (user.produto[0].categoria) {
                 case "[Veiculo]":
-                  valor_anuncio = parseFloat(texto) * 0.001                  
+                  valor_anuncio = ((Math.round((parseFloat(texto) * 0.001) * 100)).toString()).replace(/\./g, '')                
                   break;
                 case "[Imovel]":
-                  valor_anuncio = parseFloat(texto) * 0.001                  
+                  valor_anuncio = ((Math.round((parseFloat(texto) * 0.001) * 100)).toString()).replace(/\./g, '')                  
                   break;
                 // case "[Automotivo]":
-                //   valor_anuncio = parseFloat(texto) * 0.001                  
+                //   valor_anuncio = ((Math.round((parseFloat(texto) * 0.001) * 100)).toString()).replace(/\./g, '')                  
                 //   break;
                 case "[Servico]":
-                  valor_anuncio = parseFloat(texto) * 10                  
+                  valor_anuncio = '600'           
                   break;
               
                 default:
-                  valor_anuncio = parseFloat(texto) * 0.03
+                  valor_anuncio = ((Math.round((parseFloat(texto) * 0.03) * 100)).toString()).replace(/\./g, '')
                   break;
               }
                 return valor_anuncio
@@ -753,7 +765,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               if(pedido.length<=0){    
                 console.log('veio')         
                 const dados = {
-                  valor: ((Math.round(taxa_empresa() * 100)).toString()).replace(/\./g, ''),
+                  valor: taxa_empresa(),
                   titulo: '',
                   nome: user.nome,
                   document: user.document,
@@ -784,7 +796,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                 })
     
                 const dados = {
-                  valor: ((Math.round(taxa_empresa() * 100)).toString()).replace(/\./g, ''),
+                  valor: taxa_empresa(),
                   titulo: '',
                   nome: user.nome,
                   document: user.document,
