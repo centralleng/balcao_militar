@@ -726,27 +726,25 @@ bot.deleteMessage(id_telegram, messageId)
         },
       });
       
-      const editar_produtos = await prisma_db.produtos.findMany({
-        where: {
-          user_id: user?.id,
-          NOT: [
-            { editar: null },
-            { editar: '0' }
-          ]
-        }
-      });
+      // const editar_produtos = await prisma_db.produtos.findMany({
+      //   where: {
+      //     user_id: user?.id,
+      //     NOT: [
+      //       { editar: null },
+      //       { editar: '0' }
+      //     ]
+      //   }
+      // });
 
-      if(editar_produtos.length>0){ // Tem produtos para ser editado
+      // if(editar_produtos.length>0){ // Tem produtos para ser editado
 
-        if(editar_produtos[0].editar==='1'){
-          console.log('1')
-        }
-        if(editar_produtos[0].editar==='2'){
-          console.log('2')
-        }
-      }    
-
-
+      //   if(editar_produtos[0].editar==='1'){
+      //     console.log('1')
+      //   }
+      //   if(editar_produtos[0].editar==='2'){
+      //     console.log('2')
+      //   }
+      // }    
 
       if (!user) {
         await bot.sendMessage(id_telegram, `
@@ -768,9 +766,9 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             where: { id: user?.id },
             data: { username: username }
           })
-        }   
+        }       
 
-        if (user.produto[0].status||user.produto.length === 0) {                   
+        if (user.produto.length === 0) {                   
           await bot.sendMessage(id_telegram, texto_inicial); 
           await bot.sendMessage(id_telegram, atencao);
           await bot.sendMessage(id_telegram, `Onde você gostaria de divulgar a sua oferta?`);
