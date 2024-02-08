@@ -433,7 +433,7 @@ Membro desde ${moment(user.created_at).format('DD-MM-YYYY')}
                 }
               })
 
-              await bot.sendMessage(id_telegram, `Digite sua nova descrição: ${produto.id}.`);
+              await bot.sendMessage(id_telegram, `Digite sua nova descrição para o produto: ${produto.id}.`);
               await bot.sendMessage(id_telegram, `⬇️ Descrição anterior`);
               await bot.sendMessage(id_telegram, `${produto.descricao}.`);
               bot.deleteMessage(id_telegram, messageId)
