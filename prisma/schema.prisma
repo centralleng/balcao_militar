@@ -39,6 +39,7 @@ model Produtos {
   delete              Int?
   status              Boolean?
   categoria           String?
+  editar              String?
   descricao           String?
   valor_produto       String?
   link_pagamento      String?

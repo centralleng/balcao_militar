@@ -294,7 +294,7 @@ Ex: 00.00
             take: 1, // Apenas o último produto
           },
         },
-      });      
+      });    
 
       if (!user) {
         await bot.sendMessage(id_telegram, `
@@ -387,8 +387,42 @@ Membro desde ${moment(user.created_at).format('DD-MM-YYYY')}
         }
         
         if (texto_split[0] === 'EDITAR') {
-          await bot.sendMessage(id_telegram, `⚠️ Essa função ainda esta em desenvolvimento.`, suporte);
-          bot.deleteMessage(id_telegram, messageId)          
+
+          const produtos = await prisma_db.produtos.findMany({
+            where: {
+              user_id: user?.id,
+              NOT: [
+                { editar: null },
+                { editar: '0' }
+              ]
+            }
+          });
+
+          if(produtos.length<1){
+            const produto = await prisma_db.produtos.findUnique({
+              where:{id:parseInt(texto_split[1])}
+            })
+
+            if(produto){
+              await prisma_db.produtos.update({
+                where:{id: parseInt(texto_split[1])},
+                data:{
+                  editar: '1'
+                }
+              })
+
+              await bot.sendMessage(id_telegram, `Editar descrição do produto: ${produto.id}.`);
+              await bot.sendMessage(id_telegram, `Você pode copiar colar e fazer suas alterações: ${produto.id}.`);
+              await bot.sendMessage(id_telegram, `${produto.descricao}.`);
+              bot.deleteMessage(id_telegram, messageId)
+            }else{
+              await bot.sendMessage(id_telegram, `⚠️ Produto não encontrado.`, suporte);
+              bot.deleteMessage(id_telegram, messageId)            }
+
+          }else{
+          await bot.sendMessage(id_telegram, `⚠️ Finalize a edição do produto.`, suporte);
+          bot.deleteMessage(id_telegram, messageId)
+          }                          
         }
 
         if (texto_split[0] === 'DELETAR') { // Listar todo os produtos cadastrados   
@@ -690,7 +724,29 @@ bot.deleteMessage(id_telegram, messageId)
             take: 1, // Apenas o último produto
           },
         },
-      });    
+      });
+      
+      const editar_produtos = await prisma_db.produtos.findMany({
+        where: {
+          user_id: user?.id,
+          NOT: [
+            { editar: null },
+            { editar: '0' }
+          ]
+        }
+      });
+
+      if(editar_produtos.length>0){ // Tem produtos para ser editado
+
+        if(editar_produtos[0].editar==='1'){
+          console.log('1')
+        }
+        if(editar_produtos[0].editar==='2'){
+          console.log('2')
+        }
+      }    
+
+
 
       if (!user) {
         await bot.sendMessage(id_telegram, `

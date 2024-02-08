@@ -2,6 +2,4 @@
 
 export async function produtoGrupo() {
 
-    
-    
 } 
