@@ -116,9 +116,7 @@ Membro desde ${moment(user?.created_at).format('DD-MM-YYYY')}
 
 `,
 reply_markup: createInlineKeyboard(grupo.id_grupo),
-      });    
-      
-      
+      });         
 
       await prisma_db.pedidos.update({
         where:{id:pedido.id},

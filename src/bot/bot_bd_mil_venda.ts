@@ -294,7 +294,23 @@ Ex: 00.00
             take: 1, // Apenas o último produto
           },
         },
-      });    
+      });   
+      
+      const editar_produtos = await prisma_db.produtos.findMany({
+        where: {
+          user_id: user?.id,
+          NOT: [
+            { editar: null },
+            { editar: '0' }
+          ]
+        }
+      });
+
+      if(editar_produtos.length>0){ // Tem produtos para ser editado
+        await bot.sendMessage(id_telegram, `⚠️ Finalize a edição do produto anterior.`, suporte);
+        bot.deleteMessage(id_telegram, messageId)
+        return
+      }
 
       if (!user) {
         await bot.sendMessage(id_telegram, `
@@ -330,7 +346,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             await bot.sendMessage(id_telegram, `Artigos Civis`, artigos_civis);
             bot.deleteMessage(id_telegram, messageId)
           } else {
-            await bot.sendMessage(id_telegram, `⚠️ Primeiro você precisa finalizar o produto que deu inicio na criação ou deleta-lo.`, msg_deletar_produto);
+            await bot.sendMessage(id_telegram, `⚠️ Primeiro você precisa finalizar o produto que deu inicio na criação.`,);
             bot.deleteMessage(id_telegram, messageId)
           }
         }
@@ -354,7 +370,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             if(grupo){
               
               await bot.deleteMessage(grupo.id_grupo, produto_pedido.pedido[0].msg_id.toString())
-              await bot.sendMessage(grupo.id_grupo, 
+              const editar_msg = await bot.sendMessage(grupo.id_grupo, 
 `
 Interessado em vender ${produto_pedido.descricao}
 
@@ -373,7 +389,13 @@ Conta verificada ✅
 Membro desde ${moment(user.created_at).format('DD-MM-YYYY')}
 
 `
-                ,)
+                ,);
+
+              await prisma_db.pedidos.updateMany({
+                where:{produto_id: produto_pedido.id},
+                data:{msg_id:editar_msg.message_id}
+              })
+
               await bot.sendMessage(id_telegram, `✔️ Seu produto foi atualizado com sucesso.`);
               bot.deleteMessage(id_telegram, messageId)
             }else{
@@ -411,8 +433,8 @@ Membro desde ${moment(user.created_at).format('DD-MM-YYYY')}
                 }
               })
 
-              await bot.sendMessage(id_telegram, `Editar descrição do produto: ${produto.id}.`);
-              await bot.sendMessage(id_telegram, `Você pode copiar colar e fazer suas alterações: ${produto.id}.`);
+              await bot.sendMessage(id_telegram, `Digite sua nova descrição: ${produto.id}.`);
+              await bot.sendMessage(id_telegram, `⬇️ Descrição anterior`);
               await bot.sendMessage(id_telegram, `${produto.descricao}.`);
               bot.deleteMessage(id_telegram, messageId)
             }else{
@@ -704,8 +726,8 @@ bot.deleteMessage(id_telegram, messageId)
   }        
     });
 
-    bot.on('message', async (msg: any) => {
-      console.log('message', msg.text)
+bot.on('message', async (msg: any) => {
+      // console.log('message', msg)
       const id_telegram = msg.chat.id.toString();
       const texto = msg.text;
       const name = msg.chat.first_name;
@@ -733,17 +755,77 @@ bot.deleteMessage(id_telegram, messageId)
             { editar: null },
             { editar: '0' }
           ]
-        }
+        },
+        include:{pedido:true}
       });
 
       if(editar_produtos.length>0){ // Tem produtos para ser editado
 
         if(editar_produtos[0].editar==='1'){
-          console.log('1')
+          await prisma_db.produtos.update({where:{id:editar_produtos[0].id},data:{descricao:texto,editar:'2'}})
+          await bot.sendMessage(id_telegram, valor);
+          bot.deleteMessage(id_telegram, messageId)
+          return
         }
         if(editar_produtos[0].editar==='2'){
-          console.log('2')
+
+           // Função para verificar se o texto é um valor monetário válido
+           function isValorMonetarioValido(texto: string) {
+            // Expressão regular para verificar o padrão
+            const regex = /^[0-9]+(\.[0-9]{2}){1}$/;
+
+            // Testa o texto contra a expressão regular
+            return regex.test(texto);
+          }
+          
+          if (isValorMonetarioValido(texto)) { 
+
+            const grupo = await prisma_db.grupos.findUnique({
+              where:{type: editar_produtos[0].categoria||''}
+            })
+
+            if(grupo){  
+            await prisma_db.produtos.update({where:{id:editar_produtos[0].id},data:{valor_produto:texto.replace(/\./g, ''),editar:'0'}})            
+            await bot.deleteMessage(grupo.id_grupo, editar_produtos[0].pedido[0].msg_id?.toString()||'')
+            const editar_msg = await bot.sendMessage(grupo.id_grupo, 
+`
+Interessado em vender ${editar_produtos[0].descricao}
+
+Valor ${(parseInt(valor)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
+
+Envie o código ${editar_produtos[0].id} para @BDMilquerocomprar_bot para comprar dele.
+
+${user?.recomendado||0>0?`Recomendado por mais de ${user?.recomendado} pessoas`:`Ainda não recomendado`}
+
+${user?.desaconselhado||0>0?`desaconselhado por ${user?.desaconselhado} pessoas ${user?.desaconselhado} pessoas`:`Não desaconselhado ainda por ostros usuários`}
+
+Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor acordado ao comprador.
+
+Conta verificada ✅
+
+Membro desde ${moment(user?.created_at).format('DD-MM-YYYY')}
+
+`
+              ,);
+
+            await prisma_db.pedidos.updateMany({
+              where:{produto_id: editar_produtos[0].id},
+              data:{msg_id:editar_msg.message_id}
+            })
+
+            await bot.sendMessage(id_telegram, `✔️ Seu produto foi editado com sucesso.`);
+            bot.deleteMessage(id_telegram, messageId)
+          }else{
+            await bot.sendMessage(id_telegram, `⚠️ Algo deu errado, entre em contato com o suporte.`, suporte);
+            bot.deleteMessage(id_telegram, messageId)
+          }
+          return
+          }else{
+            await bot.sendMessage(id_telegram, `O valor monetário não é válido.`) 
+            bot.deleteMessage(id_telegram, messageId)
+          }
         }
+        return
       }    
 
       if (!user) {
@@ -776,7 +858,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           await bot.sendMessage(id_telegram, `Artigos Civis`, artigos_civis); 
           bot.deleteMessage(id_telegram, messageId)       
           return
-        }     
+        }         
 
         if (user.produto && !user.produto[0].status) {
           if (user.produto[0].categoria===null) {  // Esse if é somente para não deixar colocar a cateria por aqui
@@ -971,8 +1053,12 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             }
           }
         } else {
-          await bot.sendMessage(id_telegram, 'Escolha sua ação:', botao_inicial);
-          bot.deleteMessage(id_telegram, messageId)
+          await bot.sendMessage(id_telegram, texto_inicial); 
+          await bot.sendMessage(id_telegram, atencao);
+          await bot.sendMessage(id_telegram, `Onde você gostaria de divulgar a sua oferta?`);
+          await bot.sendMessage(id_telegram, `Artigos Militáres`, artigos_militares);
+          await bot.sendMessage(id_telegram, `Artigos Civis`, artigos_civis); 
+          bot.deleteMessage(id_telegram, messageId) 
         }
       }
     });
