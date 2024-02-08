@@ -295,6 +295,12 @@ Ex: 00.00
           },
         },
       });   
+
+      if(user?.produto[0].status===null){
+        await bot.sendMessage(id_telegram, `⚠️ Finalize a criação do produto anterior.`, suporte);
+        bot.deleteMessage(id_telegram, messageId)
+        return
+      }
       
       const editar_produtos = await prisma_db.produtos.findMany({
         where: {
@@ -642,8 +648,7 @@ Membro desde ${moment(user.created_at).format('DD-MM-YYYY')}
 
       } 
 
-  if(texto_split[0]==='DESACONSELHODB'){
-    console.log('obj-text',texto_split)
+  if(texto_split[0]==='DESACONSELHODB'){    
 
     const log = await prisma_db.log_recomendacoes.findMany({
       where:{
@@ -724,7 +729,7 @@ bot.deleteMessage(id_telegram, messageId)
     });
 
 bot.on('message', async (msg: any) => {
-      // console.log('message', msg)
+ 
       const id_telegram = msg.chat.id.toString();
       const texto = msg.text;
       const name = msg.chat.first_name;
@@ -788,7 +793,7 @@ bot.on('message', async (msg: any) => {
 `
 Interessado em vender ${editar_produtos[0].descricao}
 
-Valor ${(parseInt(valor)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
+Valor ${(parseInt(editar_produtos[0].valor_produto||'')/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
 
 Envie o código ${editar_produtos[0].id} para @BDMilquerocomprar_bot para comprar dele.
 
@@ -951,7 +956,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               })
 
               if(pedido.length<=0){    
-                console.log('veio')         
+                 
                 const dados = {
                   valor: taxa_empresa(),
                   titulo: '',

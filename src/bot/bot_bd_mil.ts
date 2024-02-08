@@ -485,21 +485,28 @@ Obs.: Colocar somente números.`);
             const verificar_cpf = texto||''
             const status_cpf = cpf.isValid(verificar_cpf);
 
+            try {
             if(status_cpf){
               // updata no banco cpf
-            await prisma_db.users.update({
-              where:{id_telegram: id_telegram},
-              data:{type_document:'cpf',document: verificar_cpf.replace(/[^0-9]/g, ''),}
-            })
+                await prisma_db.users.update({
+                  where:{id_telegram: id_telegram},
+                  data:{type_document:'cpf',document: verificar_cpf.replace(/[^0-9]/g, ''),}
+                })                
+            
                // quer editar o cadastro
             await bot.sendMessage(id_telegram, `Digite seu melhor E-mail:`);
             bot.deleteMessage(id_telegram, messageId)
             }else{
               await bot.sendMessage(id_telegram, `Você precisa digitar um CPF válido!`);
               bot.deleteMessage(id_telegram, messageId)
-            }  
-            }
-            return
+            } 
+          } catch (error) {
+            await bot.sendMessage(id_telegram, `⚠️ Já existe um usuário com o CPF digitado.`);  
+            bot.deleteMessage(id_telegram, messageId)              
+          }         
+            
+          }
+          return
           }
           if(req.email===null||req.email===''){  
 
@@ -510,11 +517,13 @@ Obs.: Colocar somente números.`);
               return emailValido
             }
 
-            if(Validador_email(email)){          
-            await prisma_db.users.update({
-              where:{id_telegram: id_telegram},
-              data:{email: texto}
-            })
+            try {
+            if(Validador_email(email)){  
+              await prisma_db.users.update({
+                where:{id_telegram: id_telegram},
+                data:{email: texto}
+              })              
+                
             await bot.sendMessage(id_telegram,`Digite seu telefone com DDD:`);
             bot.deleteMessage(id_telegram, messageId)
             return
@@ -525,6 +534,11 @@ Obs.: Colocar somente números.`);
             }          
 
             return
+          } catch (error) {
+            await bot.sendMessage(id_telegram, `⚠️ Já existe um usuário com o email digitado.`);  
+            bot.deleteMessage(id_telegram, messageId)  
+            return 
+          }  
           }
           if(req.phone===null){          
 
