@@ -287,24 +287,6 @@ pre-formatted fixed-width code block written in the Python programming language
       const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...'); 
       const messageId = msg_del.message_id.toString()
 
-
-
-
-
-
-
-// Número que você deseja tornar clicável
-const numero = '111';  // ou substitua por uma variável ou número de telefone real
-
-// Criando a mensagem com link clicável
-const mensagem = `Clique [aqui](tel:${numero}) para ligar para o número ${numero}.`;
-
-// Tenta enviar a mensagem com 'MarkdownV2' e fallback para 'markdown' se necessário
-bot.sendMessage(id_telegram, mensagem, { parse_mode: 'MarkdownV2' })
-    .catch(() => {
-        bot.sendMessage(id_telegram, mensagem, { parse_mode: 'Markdown' });
-    });
-    
       const user = await prisma_db.users.findUnique({
         where: { id_telegram: id_telegram?.toString() },
       })
