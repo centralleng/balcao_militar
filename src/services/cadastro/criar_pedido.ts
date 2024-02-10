@@ -53,7 +53,9 @@ const descricao:any = produto?.descricao
 
 const alerta = await prisma_db.alertas.findMany()
 
-const alertas = alerta.filter((item) => descricao.includes(item.palavra_chave));
+const alertas_db = alerta.filter((item) => descricao.includes(item.palavra_chave));
+const alertas = alertas_db.filter((item) => item.tipo_grupo===produto?.categoria);
+
 const usuarios_id = alertas.map(item => {return item.id_telegram})
 
     const grupo = await prisma_db.grupos.findUnique({
@@ -65,7 +67,7 @@ const usuarios_id = alertas.map(item => {return item.id_telegram})
         // Função para criar botões inline
 function createInlineKeyboard(userTelegramId:any) {
   return {
-    inline_keyboard: [
+    inline_keyboard: [                                                               
       [
         {
           text: 'Quero Vender',
@@ -102,7 +104,7 @@ Interessado em vender ${produto?.descricao}
 
 Valor ${(parseInt(valor)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
 
-Envie o código ${produto?.id} para @BDMilquerocomprar_bot para comprar dele.
+Envie o código [*_${produto?.id}_*](https://t.me/BDMilquerocomprar_bot?start=${produto?.id}) para @BDMilquerocomprar_bot para comprar dele.
 
 ${recomendado>0?`Recomendado por mais de ${recomendado} pessoas`:`Ainda não recomendado`}
 
@@ -114,7 +116,8 @@ Conta verificada ✅
 
 Membro desde ${moment(user?.created_at).format('DD-MM-YYYY')}
 
-`,
+`
+,parse_mode:"MarkdownV2",
 reply_markup: createInlineKeyboard(grupo.id_grupo),
       });         
 
@@ -124,8 +127,6 @@ reply_markup: createInlineKeyboard(grupo.id_grupo),
       })
         
       } catch (error) {console.log('erro 01')}
-
-
 
       try {
          // Enviar msg para o vendedor 
@@ -162,7 +163,7 @@ Interessado em vender ${produto?.descricao}
 
 Valor ${(parseInt(valor)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
 
-Envie o código ${produto?.id} para @BDMilquerocomprar_bot para comprar dele.
+Envie o código [*_${produto?.id}_*](https://t.me/BDMilquerocomprar_bot?start=${produto?.id}) para @BDMilquerocomprar_bot para comprar dele.
 
 ${recomendado>0?`Recomendado por mais de ${recomendado} pessoas`:`Ainda não recomendado`}
 
@@ -175,6 +176,7 @@ Conta verificada ✅
 Membro desde ${moment(user?.created_at).format('DD-MM-YYYY')}
 
 `,
+parse_mode:"MarkdownV2",
 });
    
  } catch (error) {console.log('erro 03')}

@@ -28,7 +28,9 @@ const descricao:any = pedido?.produto.descricao
 
 const alerta = await prisma_db.alertas.findMany()
 
-const alertas = alerta.filter((item) => descricao.includes(item.palavra_chave));
+const alertas_db = alerta.filter((item) => descricao.includes(item.palavra_chave));
+const alertas = alertas_db.filter((item) => item.tipo_grupo=== pedido?.produto.categoria);
+
 const usuarios_id = alertas.map(item => {return item.id_telegram})
 
 if(pedido){
@@ -87,7 +89,7 @@ Interessado em vender ${pedido.produto.descricao}
 
 Valor ${(parseInt(valor)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
 
-Envie o código ${pedido.produto.id} para @BDMilquerocomprar_bot para comprar dele.
+Envie o código [*_${pedido.produto.id}_*](https://t.me/BDMilquerocomprar_bot?start=${pedido.produto.id}) para @BDMilquerocomprar_bot para comprar dele.
 
 ${recomendado>0?`Recomendado por mais de ${recomendado} pessoas`:`Ainda não recomendado`}
 
@@ -100,6 +102,7 @@ Conta verificada ✅
 Membro desde ${moment(pedido.users.created_at).format('DD-MM-YYYY')}
 
 `,
+parse_mode:"MarkdownV2",
 reply_markup: createInlineKeyboard(grupo.id_grupo),
       });    
 
@@ -146,7 +149,7 @@ Interessado em vender ${pedido.produto.descricao}
 
 Valor ${(parseInt(valor)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
 
-Envie o código ${pedido.produto.id} para @BDMilquerocomprar_bot para comprar dele.
+Envie o código [*_${pedido.produto.id}_*](https://t.me/BDMilquerocomprar_bot?start=${pedido.produto.id}) para @BDMilquerocomprar_bot para comprar dele.
 
 ${recomendado>0?`Recomendado por mais de ${recomendado} pessoas`:`Ainda não recomendado`}
 
@@ -159,6 +162,7 @@ Conta verificada ✅
 Membro desde ${moment(pedido.users.created_at).format('DD-MM-YYYY')}
 
 `,
+parse_mode:"MarkdownV2",
 });
    
  } catch (error) {console.log('erro 03')}

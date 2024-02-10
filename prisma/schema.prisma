@@ -102,6 +102,7 @@ model Alertas {
   id                      Int           @id @default(autoincrement())
   delete                  Int?
   palavra_chave           String
+  tipo_grupo              String?
   user_id                 String
   grupo                   String?
   id_telegram             String

@@ -7,6 +7,8 @@ import { text } from 'body-parser';
 
 const token_bot = process.env.API_BOT_BDMIL_COMPRA ||'' // '6538633425:AAF8tFZoEjXGDv_yoSxadcYctG0ph_4Em-I'; // Token do bot do telegram... CentrallTest3
 
+const bot_quero_vender = process.env.API_BOT_BDMIL_VENDA
+
 const bot = new TelegramBot(token_bot, { polling: true });
 
 // export function envioalerta(dados){
@@ -204,7 +206,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
     bot.on('message', async (msg) => {      
 
       const id_telegram = msg.chat.id.toString();
-      const texto = msg.text;
+      const texto = msg.text||'';
       const name = msg.chat.first_name;
       const username = msg.chat.username;  
       
@@ -241,6 +243,98 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           bot.sendMessage(id_telegram, `⚠️ É necessário cadastrar um UserName do Telegram, para dar continuidade no Balcão.`);
           return
         }
+
+
+      // verificar se id pasado tem o produto informado
+      const textomsg = texto.split(' ')
+      if(textomsg[0]==='/start'&&textomsg[1]){
+        const produto_consut = await prisma_db.produtos.findUnique({
+          where: { id: parseInt(textomsg[1]||'')}                
+        }) 
+        if(produto_consut){
+          try {
+            // Cadastra a Intenção de compra do Comprador, no sistema.
+            await prisma_db.intencao_de_compras.create({
+              data: {
+                vendedor_id_telegram:    produto_consut.id_telegram||'',
+                comprador_id_telegram:    id_telegram.toString(),
+                produto_id:                produto_consut.id,
+                senha: parseInt(senha),
+              }
+            })
+            
+            // const intencao = await prisma_db.intencao_de_compras.findFirst({
+            //   where:  {produto_id: produto_consut.id}
+            // })
+
+            try {
+                             
+            // Envio de mensagem para o vendedor indicando que existe um comprador interessando. Obs.: Mensagem enviada pelo bot BDMilQueroVender
+            await axios.post(`https://api.telegram.org/bot${bot_quero_vender}/sendMessage`,
+            {
+              chat_id: produto_consut.id_telegram,
+              text: `
+---- ✅✅✅ ----
+
+💡 Informo que @${user.username} quer comprar o seu produto referente a oferta ${produto_consut.id}, você deve informar para ele a senha ${senha} para que ele saiba que você é realmente o postador da oferta. Verifique se é a mesma senha.
+
+▪️ Dicas do Balcão dos militares:
+
+Recomendo que sempre seja confirmado o valor do produto, bem como a forma de entrega, prazos, formas de pagamento e outras coisas que se fizerem necessárias antes de fechar a transação, a fim de evitar transtornos desnecessários e exclusão do Balcão.
+
+❗️ verifique dados adicionais durante a negociação, para ter a certeza de estar mitigando riscos.
+
+⬆️ recomendado por ${user.recomendado} pessoas.
+
+⬇️ Não recomendado por ${user.desaconselhado} pessoas.
+
+✅ conta verificada 
+
+✔️ Membro desde ${moment(user.created_at).format('DD-MM-YYYY')}
+
+❗️ Não esqueça de deletar o produto, após a venda.
+
+      `,
+reply_markup: createInlineKeyboard(id_telegram,produto_consut.id, user.id),
+            },);
+
+              
+            } catch (error) {
+              console.log('erro')
+              
+            }
+
+// Msg enviada ao comprador 
+bot.sendMessage(id_telegram, `
+✅ Sua intenção de compra foi enviada para o usuário, interessado em vender o produto.
+
+✔️  O vendedor entrará em contato caso se interesse em negociar o produto, enviando uma mensagem para a sua conta informando a senha ${senha} . Essa é uma forma de certificar que ele é realmente a pessoa que postou a oferta ${produto_consut.id}. Sugiro uma análise de risco no tocante ao vendedor verificando os dados adicionais durante a negociação, para ter a certeza do processo.
+
+▪️   Dica do Balcão dos militares:
+
+Recomendo que sempre seja confirmado o valor do produto, bem como a forma de entrega, prazos, formas de pagamento e outras coisas que se fizerem necessárias antes de fechar a transação, a fim de evitar transtornos desnecessários e exclusão do Balcão.
+
+🤝  Gostaríamos de lembrar da importância de honrar acordos com vendedor ou comprador no Balcão, depois de selar um acordo, a negociação não deve ser alterada. Honre sua palavra e cumpra seus acordos.
+
+❌  O mau comportamento pode acarretar na exclusão do balcão.
+`, {
+reply_markup: {
+inline_keyboard: [
+  [
+    { text: "Recomendo", callback_data: `RECOMENDO_${produto_consut.id}_${produto_consut.user_id}` },  
+    { text: "Desaconselho", callback_data: `DESACONSELHO_${produto_consut.id}_${produto_consut.user_id}` },
+  ],
+],
+},
+});
+          } catch (error) {
+            console.log(error)
+          }
+
+        }else{bot.sendMessage(id_telegram, `ID do produto não encontrada, favor conferir a ID no anúncio.`)} 
+
+        return
+      }
 
         if (texto==="/start") {
           await bot.sendMessage(id_telegram,`
@@ -286,9 +380,7 @@ Olá, seja bem-vindo ao BDMilquerocomprar! Aqui você poderá solicitar uma nego
             }else{produto=false}
 
             const produto_id = produto?.id
-            const user_vendedor = produto.user_id
-
-            console.log(produto)
+            const user_vendedor = produto.user_id           
 
             // Verifica se existe um produto com aquela ID, cadastrado no banco de dados.
             if (produto) {
@@ -310,7 +402,7 @@ Olá, seja bem-vindo ao BDMilquerocomprar! Aqui você poderá solicitar uma nego
                 try {
                                  
                 // Envio de mensagem para o vendedor indicando que existe um comprador interessando. Obs.: Mensagem enviada pelo bot BDMilQueroVender
-                await axios.post('https://api.telegram.org/bot6474193602:AAG4YQVqQzCzTE2KvtXjgc0OMQbYOK3brno/sendMessage',
+                await axios.post(`https://api.telegram.org/bot${bot_quero_vender}/sendMessage`,
                 {
                   chat_id: produto.id_telegram,
                   text: `

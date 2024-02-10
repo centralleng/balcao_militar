@@ -4,6 +4,7 @@ import { prisma_db } from '../database/prisma_db';
 import Pagamento from '../services/pagamentos/pagamento_produto';
 import Criar_pedido from '../services/cadastro/criar_pedido';
 import moment from 'moment';
+import Alerta_pedido from '../services/update/alerta_pedido';
 
 const token_bot = process.env.API_BOT_BDMIL_VENDA ||'' //'6962343359:AAERsmVCjSJczzeQ-ONe_nfVyQxQYDzFYlg'; // Token do bot do telegram... CentrallTest2_Bot
 
@@ -95,7 +96,7 @@ class Bot_bd_mil_venda {
           [
             { text: "[PMSC] vendas", callback_data: "CADASTRO_[PMSC]" },
             { text: "[CBMSC] vendas", callback_data: "CADASTRO_[CBMSC]" },
-            { text: "[BRIGADA MILITAR] vendas", callback_data: "CADASTRO_[BRIGADA_MILITAR]" },
+            { text: "[BRIGADA MILITAR] vendas", callback_data: "CADASTRO_[BRIGADA-MILITAR]" },
           ],
           [
             { text: "[CBMRS] vendas", callback_data: "CADASTRO_[CBMRS]" },
@@ -191,8 +192,8 @@ class Bot_bd_mil_venda {
           ],
           [
             { text: "[Esporte] vendas", callback_data: "CADASTRO_[Esporte]" },
-            { text: "[Smart TV] vendas", callback_data: "CADASTRO_[Smart_TV]" },
-            { text: "[Ar e Ventilação] vendas", callback_data: "CADASTRO_[Ar_e_Ventilacao]" },
+            { text: "[Smart TV] vendas", callback_data: "CADASTRO_[Smart-TV]" },
+            { text: "[Ar e Ventilação] vendas", callback_data: "CADASTRO_[Ar-e-Ventilacao]" },
           ],
           [
             { text: "[Imóvel] vendas", callback_data: "CADASTRO_[Imovel]" },
@@ -202,10 +203,10 @@ class Bot_bd_mil_venda {
           [
             { text: "[Game] vendas", callback_data: "CADASTRO_[Game]" },
             { text: "[Móvel] vendas", callback_data: "CADASTRO_[Movel]" },
-            { text: "[Utilidade Doméstica] vendas", callback_data: "CADASTRO_[Utilidade_Domestica]" },
+            { text: "[Utilidade Doméstica] vendas", callback_data: "CADASTRO_[Utilidade-Domestica]" },
           ],
           [
-            { text: "[Material Escolar] vendas", callback_data: "CADASTRO_[Material_Escolar]" },
+            { text: "[Material Escolar] vendas", callback_data: "CADASTRO_[Material-Escolar]" },
           ],
         ],
       },
@@ -335,7 +336,6 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
         } 
 
       }
-  
 
         await prisma_db.users.update({
           where: {id_telegram: id_telegram.toString()},
@@ -353,7 +353,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               })
             }
             await bot.sendMessage(id_telegram, `Onde você gostaria de divulgar a sua oferta?`);
-            await bot.sendMessage(id_telegram, `Artigos Militáres`, artigos_militares);
+            await bot.sendMessage(id_telegram, `Artigos Militares`, artigos_militares);
             await bot.sendMessage(id_telegram, `Artigos Civis`, artigos_civis);
             bot.deleteMessage(id_telegram, messageId)
           } else {
@@ -379,6 +379,12 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             })
 
             if(grupo){
+
+              try {
+                Alerta_pedido(produto_pedido.id,user.id)                
+              } catch (error) {
+                console.log('erro pedido')                
+              }
               
               await bot.deleteMessage(grupo.id_grupo, produto_pedido.pedido[0].msg_id.toString())
               const editar_msg = await bot.sendMessage(grupo.id_grupo, 
@@ -399,8 +405,22 @@ Conta verificada ✅
 
 Membro desde ${moment(user.created_at).format('DD-MM-YYYY')}
 
-`
-                ,);
+`,
+{reply_markup: {
+  inline_keyboard: [
+    [
+      {
+        text: 'Quero Vender',
+        url: `https://t.me/BDMilCVbot`,
+      },
+      {
+        text: 'Bot Alertas',
+        url: `https://t.me/BDMilALERTAS_bot`,
+      },
+    ],
+  ],
+}},
+        );
 
               await prisma_db.pedidos.updateMany({
                 where:{produto_id: produto_pedido.id},
@@ -787,6 +807,15 @@ bot.on('message', async (msg: any) => {
           
           if (isValorMonetarioValido(texto)) { 
 
+            const valor_db = parseInt(editar_produtos[0].valor_produto||'') 
+            const valor_novo = parseInt(texto)
+
+            if(valor_novo>valor_db){
+            await bot.sendMessage(id_telegram, `⚠️ O valor atual não pode ultrapassar o valor anterior.`, suporte);
+            bot.deleteMessage(id_telegram, messageId)
+              return
+            }
+
             const grupo = await prisma_db.grupos.findUnique({
               where:{type: editar_produtos[0].categoria||''}
             })
@@ -812,9 +841,22 @@ Conta verificada ✅
 
 Membro desde ${moment(user?.created_at).format('DD-MM-YYYY')}
 
-`
-              ,);
-
+`,
+{reply_markup: {
+  inline_keyboard: [
+    [
+      {
+        text: 'Quero Vender',
+        url: `https://t.me/BDMilCVbot`,
+      },
+      {
+        text: 'Bot Alertas',
+        url: `https://t.me/BDMilALERTAS_bot`,
+      },
+    ],
+  ],
+}},
+       );
             await prisma_db.pedidos.updateMany({
               where:{produto_id: editar_produtos[0].id},
               data:{msg_id:editar_msg.message_id}
@@ -861,7 +903,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           await bot.sendMessage(id_telegram, texto_inicial); 
           await bot.sendMessage(id_telegram, atencao);
           await bot.sendMessage(id_telegram, `Onde você gostaria de divulgar a sua oferta?`);
-          await bot.sendMessage(id_telegram, `Artigos Militáres`, artigos_militares);
+          await bot.sendMessage(id_telegram, `Artigos Militares`, artigos_militares);
           await bot.sendMessage(id_telegram, `Artigos Civis`, artigos_civis); 
           bot.deleteMessage(id_telegram, messageId)       
           return
@@ -872,7 +914,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             await bot.sendMessage(id_telegram, texto_inicial);
             await bot.sendMessage(id_telegram, atencao);
             await bot.sendMessage(id_telegram, `Onde você gostaria de divulgar a sua oferta?`);
-            await bot.sendMessage(id_telegram, `Artigos Militáres`, artigos_militares);
+            await bot.sendMessage(id_telegram, `Artigos Militares`, artigos_militares);
             await bot.sendMessage(id_telegram, `Artigos Civis`, artigos_civis);  
             bot.deleteMessage(id_telegram, messageId)       
             return
@@ -1063,7 +1105,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           await bot.sendMessage(id_telegram, texto_inicial); 
           await bot.sendMessage(id_telegram, atencao);
           await bot.sendMessage(id_telegram, `Onde você gostaria de divulgar a sua oferta?`);
-          await bot.sendMessage(id_telegram, `Artigos Militáres`, artigos_militares);
+          await bot.sendMessage(id_telegram, `Artigos Militares`, artigos_militares);
           await bot.sendMessage(id_telegram, `Artigos Civis`, artigos_civis); 
           bot.deleteMessage(id_telegram, messageId) 
         }

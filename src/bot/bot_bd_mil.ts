@@ -130,7 +130,7 @@ Esse balcão tem por objetivo facilitar a transação comercial de artigos milit
         [
           { text: "[PMSC]", callback_data: "[PMSC]" },
           { text: "[CBMSC]", callback_data: "[CBMSC]" },
-          { text: "[BRIGADA MILITAR]", callback_data: "[BRIGADA MILITAR]" },
+          { text: "[BRIGADA MILITAR]", callback_data: "[BRIGADA-MILITAR]" },
         ],
         [
           { text: "[CBMRS]", callback_data: "[CBMRS]" },
