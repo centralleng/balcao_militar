@@ -101,7 +101,7 @@ Conta verificada ✅
 
 Membro desde ${moment(pedido.users.created_at).format('DD-MM-YYYY')}      
 `,
-
+reply_markup: createInlineKeyboard(grupo.id_grupo),
   });
 
   await prisma_db.pedidos.update({

@@ -59,9 +59,10 @@ Conta verificada ✅
 Membro desde ${moment(user?.created_at).format('DD-MM-YYYY')}      
 `,
 
+
 });
    
- } catch (error) {console.log('erro 03')}
+ } catch (error) {console.log('erro 01')}
 
 } 
     }else{

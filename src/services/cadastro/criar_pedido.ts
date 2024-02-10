@@ -116,6 +116,7 @@ Conta verificada ✅
 
 Membro desde ${moment(user?.created_at).format('DD-MM-YYYY')}      
 `,
+reply_markup: createInlineKeyboard(grupo.id_grupo),
 
   });
 
