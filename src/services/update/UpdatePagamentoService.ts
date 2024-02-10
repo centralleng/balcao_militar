@@ -78,19 +78,18 @@ function enviarMsg(id_produto:any) {
     ],
   };
 }
-      try {
-             // Enviar msg para os grupos 
-      const msg_grupo = await axios.post(`https://api.telegram.org/bot${botVenda}/sendMessage`, // Bot bdmil_venda
-      {
-        parse_mode: 'Markdown',
-        chat_id: grupo.id_grupo,
-        text: `
 
-Interessado em vender ${pedido.produto.descricao}
+try {      
+  // Enviar msg para os grupos
+  const msg_grupo = await axios.post(`https://api.telegram.org/bot${botVenda}/sendMessage`, {
+    parse_mode: 'Markdown',
+    chat_id: grupo.id_grupo,
+    text: `
+Interessado em vender ${pedido.produto?.descricao}
 
 Valor ${(parseInt(valor)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
 
-Envie o código [*_${pedido.produto.id}_*](https://t.me/BDMilquerocomprar_bot?start=${pedido.produto.id}) para @BDMilquerocomprar_bot para comprar dele.
+Clique [${123}](https://t.me/BDMilquerocomprar_bot?start=${111}) para visitar o site de exemplo.
 
 ${recomendado>0?`Recomendado por mais de ${recomendado} pessoas`:`Ainda não recomendado`}
 
@@ -100,19 +99,19 @@ Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor 
 
 Conta verificada ✅
 
-Membro desde ${moment(pedido.users.created_at).format('DD-MM-YYYY')}
-
+Membro desde ${moment(pedido.users.created_at).format('DD-MM-YYYY')}      
 `,
-reply_markup: createInlineKeyboard(grupo.id_grupo),
-      });    
 
-      await prisma_db.pedidos.update({
-        where:{id:pedido.id},
-        data:{msg_id:msg_grupo.data.result.message_id}
-      })
-        
-      } catch (error) {console.log('erro 01')}
+  });
 
+  await prisma_db.pedidos.update({
+    where:{id:pedido.id},
+    data:{msg_id:msg_grupo.data.result.message_id}
+  })         
+
+} catch (error) {
+  console.log('Erro 01');
+}
 
       try {
          // Enviar msg para o vendedor 

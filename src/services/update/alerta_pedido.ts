@@ -39,16 +39,14 @@ for await (const i of usuarios_id){
     // Enviar msg para aleras cadastrados 
 await axios.post(`https://api.telegram.org/bot${botAlerta}/sendMessage`, // bot CentrallTest4
 {
- parse_mode: 'Markdown',
- chat_id: i,
- text: `
-🚨 Alerta
-
+  parse_mode: 'Markdown',
+  chat_id: grupo.id_grupo,
+  text: `
 Interessado em vender ${produto?.descricao}
 
 Valor ${(parseInt(valor)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
 
-Envie o código [*_${produto.id}_*](https://t.me/BDMilquerocomprar_bot?start=${produto.id}) para @BDMilquerocomprar_bot para comprar dele.
+Clique [${123}](https://t.me/BDMilquerocomprar_bot?start=${111}) para visitar o site de exemplo.
 
 ${recomendado>0?`Recomendado por mais de ${recomendado} pessoas`:`Ainda não recomendado`}
 
@@ -58,9 +56,9 @@ Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor 
 
 Conta verificada ✅
 
-Membro desde ${moment(user?.created_at).format('DD-MM-YYYY')}
-
+Membro desde ${moment(user?.created_at).format('DD-MM-YYYY')}      
 `,
+
 });
    
  } catch (error) {console.log('erro 03')}

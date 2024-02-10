@@ -287,6 +287,57 @@ pre-formatted fixed-width code block written in the Python programming language
       const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...'); 
       const messageId = msg_del.message_id.toString()
 
+
+
+
+//       try {      
+//         // Enviar msg para os grupos
+//         const msg_grupo = await axios.post(`https://api.telegram.org/bot${botVenda}/sendMessage`, {
+//           parse_mode: 'Markdown',
+//           chat_id: grupo.id_grupo,
+//           text: `
+// Interessado em vender ${produto?.descricao}
+
+// Valor ${(parseInt(valor)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
+      
+// Clique [${123}](https://t.me/BDMilquerocomprar_bot?start=${111}) para visitar o site de exemplo.
+
+// ${recomendado>0?`Recomendado por mais de ${recomendado} pessoas`:`Ainda não recomendado`}
+
+// ${desaconselhado>0?`desaconselhado por ${desaconselhado} pessoas ${desaconselhado} pessoas`:`Não desaconselhado ainda por ostros usuários`}
+
+// Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor acordado ao comprador.
+
+// Conta verificada ✅
+
+// Membro desde ${moment(user?.created_at).format('DD-MM-YYYY')}      
+//       `,
+      
+//         });
+
+//         await prisma_db.pedidos.update({
+//           where:{id:pedido.id},
+//           data:{msg_id:msg_grupo.data.result.message_id}
+//         })         
+      
+//       } catch (error) {
+//         console.log('Erro 01');
+//       }
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+
+
       const user = await prisma_db.users.findUnique({
         where: { id_telegram: id_telegram?.toString() },
       })
