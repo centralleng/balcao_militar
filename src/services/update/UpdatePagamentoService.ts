@@ -89,7 +89,7 @@ Interessado em vender ${pedido.produto?.descricao}
 
 Valor ${(parseInt(valor)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
 
-Clique [${123}](https://t.me/BDMilquerocomprar_bot?start=${111}) para visitar o site de exemplo.
+Clique [${pedido.produto.id}](https://t.me/BDMilquerocomprar_bot?start=${pedido.produto.id}) para visitar o site de exemplo.
 
 ${recomendado>0?`Recomendado por mais de ${recomendado} pessoas`:`Ainda não recomendado`}
 
