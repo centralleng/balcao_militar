@@ -39,6 +39,7 @@ for await (const i of usuarios_id){
     // Enviar msg para aleras cadastrados 
 await axios.post(`https://api.telegram.org/bot${botAlerta}/sendMessage`, // bot CentrallTest4
 {
+ parse_mode: 'Markdown',
  chat_id: i,
  text: `
 🚨 Alerta
@@ -60,7 +61,6 @@ Conta verificada ✅
 Membro desde ${moment(user?.created_at).format('DD-MM-YYYY')}
 
 `,
-parse_mode:"MarkdownV2",
 });
    
  } catch (error) {console.log('erro 03')}

@@ -97,6 +97,7 @@ function enviarMsg(id_produto:any) {
              // Enviar msg para os grupos 
       const msg_grupo = await axios.post(`https://api.telegram.org/bot${botVenda}/sendMessage`, // Bot bdmil_venda
       {
+        parse_mode: 'Markdown',
         chat_id: grupo.id_grupo,
         text: `
 
@@ -117,7 +118,7 @@ Conta verificada ✅
 Membro desde ${moment(user?.created_at).format('DD-MM-YYYY')}
 
 `
-,parse_mode:"MarkdownV2",
+,
 reply_markup: createInlineKeyboard(grupo.id_grupo),
       });         
 
@@ -144,7 +145,6 @@ Código produto ${produto?.id}.
 Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor acordado ao comprador.
 
 `,
-
 reply_markup: enviarMsg(produto?.id),
     });
         
@@ -155,6 +155,7 @@ for await (const i of usuarios_id){
     // Enviar msg para aleras cadastrados 
 await axios.post(`https://api.telegram.org/bot${botAlerta}/sendMessage`, // bot CentrallTest4
 {
+ parse_mode: 'Markdown',
  chat_id: i,
  text: `
 🚨 Alerta
@@ -176,7 +177,6 @@ Conta verificada ✅
 Membro desde ${moment(user?.created_at).format('DD-MM-YYYY')}
 
 `,
-parse_mode:"MarkdownV2",
 });
    
  } catch (error) {console.log('erro 03')}
