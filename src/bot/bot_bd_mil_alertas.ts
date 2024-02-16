@@ -287,33 +287,37 @@ pre-formatted fixed-width code block written in the Python programming language
       const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...'); 
       const messageId = msg_del.message_id.toString()  
 
+//       bot.sendMessage(id_telegram, 
+// `
+// Clique [${123}](https://t.me/BDMilquerocomprar_bot?start=${111}) para visitar o site de exemplo.
+// `,
+// {reply_markup: {
+//   inline_keyboard: [
+//     [
+//       {
+//         text: 'Quero Vender',
+//         url: `https://t.me/BDMilCVbot?start=1`,
+//       },
+//       {
+//         text: 'Bot Alertas',
+//         url: `https://t.me/BDMilALERTAS_bot?start=1`,
+//       },
+//     ],
+//   ],
+// },parse_mode: 'Markdown'},
+//     );
+
 //       try {      
 //         // Enviar msg para os grupos
-//         const msg_grupo = await axios.post(`https://api.telegram.org/bot${botVenda}/sendMessage`, {
+//         const msg_grupo = await axios.post(`https://api.telegram.org/bot6970220346:AAFcSb9H-gNAMXSKakv0hf3F6FwLkQ2fN5g/sendMessage`, {
 //           parse_mode: 'Markdown',
-//           chat_id: grupo.id_grupo,
+//           chat_id: '1805743086',
 //           text: `
-// Interessado em vender ${produto?.descricao}
-
-// Valor ${(parseInt(valor)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
       
-// Clique [${123}](https://t.me/BDMilquerocomprar_bot?start=${111}) para visitar o site de exemplo.
-
-// ${recomendado>0?`Recomendado por mais de ${recomendado} pessoas`:`Ainda não recomendado`}
-
-// ${desaconselhado>0?`desaconselhado por ${desaconselhado} pessoas ${desaconselhado} pessoas`:`Não desaconselhado ainda por ostros usuários`}
-
-// Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor acordado ao comprador.
-
-// Conta verificada ✅
-
-// Membro desde ${moment(user?.created_at).format('DD-MM-YYYY')}      
+// Clique [${123}](https://t.me/BDMilquerocomprar_bot?start=${111}) para visitar o site de exemplo.     
 //       `,    
 //         });
-//         await prisma_db.pedidos.update({
-//           where:{id:pedido.id},
-//           data:{msg_id:msg_grupo.data.result.message_id}
-//         })     
+         
 //       } catch (error) {
 //         console.log('Erro 01');
 //       }

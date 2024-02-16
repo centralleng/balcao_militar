@@ -406,21 +406,20 @@ Conta verificada ✅
 Membro desde ${moment(user.created_at).format('DD-MM-YYYY')}
 
 `,
-{ parse_mode: 'MarkdownV2',
-  reply_markup: {
+{reply_markup: {
   inline_keyboard: [
     [
       {
         text: 'Quero Vender',
-        url: `https://t.me/BDMilCVbot`,
+        url: `https://t.me/BDMilCVbot?start=1`,
       },
       {
         text: 'Bot Alertas',
-        url: `https://t.me/BDMilALERTAS_bot`,
+        url: `https://t.me/BDMilALERTAS_bot?start=1`,
       },
     ],
   ],
-}},     );
+},parse_mode: 'Markdown'},);
 
               await prisma_db.pedidos.updateMany({
                 where:{produto_id: produto_pedido.id},
@@ -842,21 +841,20 @@ Conta verificada ✅
 Membro desde ${moment(user?.created_at).format('DD-MM-YYYY')}
 
 `,
-{parse_mode: 'MarkdownV2',
-  reply_markup: {
+{reply_markup: {
   inline_keyboard: [
     [
       {
         text: 'Quero Vender',
-        url: `https://t.me/BDMilCVbot`,
+        url: `https://t.me/BDMilCVbot?start=1`,
       },
       {
         text: 'Bot Alertas',
-        url: `https://t.me/BDMilALERTAS_bot`,
+        url: `https://t.me/BDMilALERTAS_bot?start=1`,
       },
     ],
   ],
-}},
+},parse_mode: 'Markdown'},
        );
             await prisma_db.pedidos.updateMany({
               where:{produto_id: editar_produtos[0].id},
