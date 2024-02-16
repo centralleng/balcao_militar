@@ -326,21 +326,19 @@ pre-formatted fixed-width code block written in the Python programming language
 // },parse_mode: 'Markdown'},
 //     );
 
-//       try {      
-//         // Enviar msg para os grupos
-//         const msg_grupo = await axios.post(`https://api.telegram.org/bot6970220346:AAFcSb9H-gNAMXSKakv0hf3F6FwLkQ2fN5g/sendMessage`, {
-//           parse_mode: 'Markdown',
-//           chat_id: '1805743086',
-//           text: `
-      
-// Clique [${123}](https://t.me/BDMilquerocomprar_bot?start=${111}) para visitar o site de exemplo.     
-//       `,
-//       reply_markup: createInlineKeyboard(123),    
-//         });
-         
-//       } catch (error) {
-//         console.log('Erro 01');
-//       }
+// try {      
+//   // Enviar msg para os grupos
+//   const msg_grupo = await axios.post(`https://api.telegram.org/bot6970220346:AAFcSb9H-gNAMXSKakv0hf3F6FwLkQ2fN5g/sendMessage`, {
+//     parse_mode: 'HTML',
+//     chat_id: '1805743086',
+//     text: `
+// Clique <a href="https://t.me/BDMilquerocomprar_bot?start=${1234}">${1234}</a> para visitar o site de exemplo.    
+// `,
+//     reply_markup: createInlineKeyboard(123),    
+//   });
+// } catch (error) {
+//   console.log('Erro:', error);
+// }
 
 
 
