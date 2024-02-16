@@ -97,7 +97,7 @@ export default async function Criar_pedido(dados: dados) {
       try {
         // Enviar msg para os grupos
         const msg_grupo = await axios.post(`https://api.telegram.org/bot${botVenda}/sendMessage`, {
-          parse_mode: 'Markdown',  
+          // parse_mode: 'Markdown',  
           chat_id: grupo.id_grupo,
           text: `
 Interessado em vender ${produto?.descricao}
