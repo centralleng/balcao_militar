@@ -82,14 +82,14 @@ function enviarMsg(id_produto:any) {
 try {      
   // Enviar msg para os grupos
   const msg_grupo = await axios.post(`https://api.telegram.org/bot${botVenda}/sendMessage`, {
-    parse_mode: 'Markdown',
+    parse_mode: 'HTML',
     chat_id: grupo.id_grupo,
     text: `
 Interessado em vender ${pedido.produto?.descricao}
 
 Valor ${(parseInt(valor)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
 
-Envie o código [${pedido.produto.id}](https://t.me/BDMilquerocomprar_bot?start=${pedido.produto.id}) para @BDMilquerocomprar_bot para comprar dele.
+Envie o código <a href="https://t.me/BDMilquerocomprar_bot?start=${pedido.produto.id}">${pedido.produto.id}</a> para @BDMilquerocomprar_bot para comprar dele.
 
 ${recomendado>0?`Recomendado por mais de ${recomendado} pessoas`:`Ainda não recomendado`}
 
