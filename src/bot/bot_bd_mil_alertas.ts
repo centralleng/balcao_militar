@@ -13,6 +13,24 @@ const bot = new TelegramBot(token_bot, { polling: true });
 class Bot_bd_mil_alertas {
   static execute() {
 
+            // Função para criar botões inline
+function createInlineKeyboard(userTelegramId:any) {
+  return {
+    inline_keyboard: [                                                               
+      [
+        {
+          text: 'Quero Vender',
+          url: `https://t.me/BDMilCVbot?start`,
+        },
+        {
+          text: 'Bot Alertas',
+          url: `https://t.me/BDMilALERTAS_bot?start`,
+        },
+      ],
+    ],
+  };
+}
+
     function artigos_militares(id:any) {
       return {
       reply_markup: {
@@ -287,6 +305,7 @@ pre-formatted fixed-width code block written in the Python programming language
       const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...'); 
       const messageId = msg_del.message_id.toString()  
 
+ 
 //       bot.sendMessage(id_telegram, 
 // `
 // Clique [${123}](https://t.me/BDMilquerocomprar_bot?start=${111}) para visitar o site de exemplo.
@@ -315,12 +334,15 @@ pre-formatted fixed-width code block written in the Python programming language
 //           text: `
       
 // Clique [${123}](https://t.me/BDMilquerocomprar_bot?start=${111}) para visitar o site de exemplo.     
-//       `,    
+//       `,
+//       reply_markup: createInlineKeyboard(123),    
 //         });
          
 //       } catch (error) {
 //         console.log('Erro 01');
 //       }
+
+
 
       const user = await prisma_db.users.findUnique({
         where: { id_telegram: id_telegram?.toString() },

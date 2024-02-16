@@ -97,6 +97,7 @@ export default async function Criar_pedido(dados: dados) {
       try {
         // Enviar msg para os grupos
         const msg_grupo = await axios.post(`https://api.telegram.org/bot${botVenda}/sendMessage`, {
+          parse_mode: 'Markdown',  
           chat_id: grupo.id_grupo,
           text: `
 Interessado em vender ${produto?.descricao}
@@ -116,7 +117,6 @@ Conta verificada ✅
 Membro desde ${moment(user?.created_at).format('DD-MM-YYYY')}      
 `,
           reply_markup: createInlineKeyboard(grupo.id_grupo),
-          parse_mode: 'MarkdownV2',
         });
 
         await prisma_db.pedidos.update({
