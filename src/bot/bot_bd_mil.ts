@@ -13,50 +13,59 @@ class Bot_bd_mil {
     const termo1 = `
 *Olá! Bem-vindo ao Balcão dos militares (BDMil).*
 
-As orientações abaixo são de suma importância para o usuário. Está um pouco extensa, porém se faz necessário.
-
 Esse balcão tem por objetivo facilitar a transação comercial de artigos militares e de “artigos civis”, novos ou usados, entre os integrantes das FFAA e Forças Singulares de todo o Brasil, da ativa (de carreira ou temporários) e da reserva (remunerada ou não), incluindo os pensionistas e os reformados.
 
-1) O balcão encontra-se no Telegram e é operacionalizado por intermédio de Bots. Os usuários devem possuir uma conta na plataforma com seu respectivo Nome de usuário e com uma foto atualizada.
+As orientações abaixo são de suma importância para o usuário. Está um pouco extensa, porém se faz necessário:
+    
+1) O balcão será encontrado na plataforma Telegram, sendo operacionalizado por intermédio de Bots.
 
-2) Dentro dos canais/balcões o Sr encontrará diversas ofertas de vendas de produtos/serviços com as orientações para comprá-los e/ou vende-los.
+2) Os usuários deverão possuir uma conta na plataforma com seu respectivo nome de usuário e, se possível, com uma foto atualizada.
 
-3) O cadastro no @BDMil é GRATUITO E VOLUNTÁRIO. É só seguir as orientações constantes no mesmo para validá-lo.
+3) Dentro dos canais (balcões) você encontrará diversas ofertas de vendas de produtos/serviços onde terá as opções de comprar e vender.
 
-4) Após o cadastro no BDMil, será disponibilizado o canal de cada Instituição/Corporação para a venda de artigos militares e os demais canais para a venda dos diversos produtos e serviços
+4) O cadastro no @BDMil é GRATUITO E VOLUNTÁRIO. É só seguir as orientações constantes no bot para validá-lo.
 
-5) No final de cada oferta terão links para cadastrar uma venda ou uma compra
+5) Após o cadastro, serão disponibilizados os canais correspondentes para a venda de artigos militares e dos demais produtos e serviços.
 
-6) No robô de cadastro de vendas (@BDMilquerovender), o cadastro da PRIMEIRA oferta de venda de CADA USUÁRIO será GRATUITA, a fim de familiarizar o vendedor com o processo e para criar o fluxo de negócios nos balcões. Essa oferta permanecerá ativa por 2(dois) meses. 
+6) No final de cada oferta terá o link para cadastrar uma venda.
+
+7) No robô de cadastro de vendas (@BDMilquerovender), o cadastro da PRIMEIRA oferta de venda de CADA USUÁRIO será GRATUITA, a fim de familiarizar o vendedor com o processo e para criar o fluxo de negócios nos canais. Essa oferta permanecerá ativa por 2(dois) meses.
         `;
     const termo2 = `
-7) Do segundo cadastro em diante, será cobrada uma comissão de 3% sobre o valor total de cada oferta. A oferta ficará disponível no respectivo balcão por 2 (dois) meses, podendo o usuário, nesse período, MODIFICAR, EXCLUIR e ATUALIZAR a mesma, a fim de trazê-la para o dia em questão. Caso o vendedor exclua ou mude o preço, não poderá solicitar reembolso do valor pago. 
+8) Do segundo cadastro em diante, será cobrada uma comissão de apenas 3% sobre o valor total de cada oferta. A mesma ficará disponível no respectivo balcão também por 2 (dois) meses, podendo o usuário, nesse período, EDITAR, ATUALIZAR e DELETAR. O botão ATUALIZAR serve para trazer a proposta de venda para o dia D. Caso o vendedor exclua ou mude o preço( somente para baixo), não poderá solicitar reembolso do valor pago.
 
-8) Para ofertar a VENDA de veículos e imóveis, a comissão será de 0,1%, sobre o valor ofertado, UMA ÚNICA VEZ. A oferta ficará disponível por um período de 4 (quatro) meses. Da mesma forma que o processo anterior, o ofertante poderá realizar as alterações que achar necessárias.
+9) Para ofertar a VENDA de veículos e imóveis, a comissão será de 0,1%, sobre o valor ofertado,. A oferta ficará disponível por um período de 4 (quatro) meses. Da mesma forma que o processo anterior, o ofertante poderá realizar as alterações que achar necessárias.
 
-9) Para a oferta de serviços, será cobrada uma comissão única de 6 (seis) reais para cada item. O processo se dá da mesma forma que o de veículos e imóveis.
+10) Para a oferta de serviços, será cobrada uma comissão única de 6 (seis) reais para cada item oferecido. O processo se dará da mesma forma que o de veículos e de imóveis.
 
-10) Caso o comprador aceite negociar a oferta, clicando no @BDMilquerocomprar, o vendedor e o comprador receberão um alerta da negociação nos robôs correspondentes, que darão as instruções para dar continuidade da negociação.
+11) Caso o comprador aceite negociar a oferta, clicando no @BDMilquerocomprar, as partes receberão um alerta da negociação nos robôs correspondentes, que fornecerão as instruções necessárias para dar continuidade à respectiva negociação.
 
-11) No robô de cadastro de compras (@BDMilquerocomprar), o cadastro da oferta será GRATUITA, permanecendo ativa por também por 2(dois) meses. Caso haja um vendedor interessado, ele clicará no link @BDMilquero vender. Para começar a negociação será cobrada uma taxa de apenas 1 (um) real.
+12) O comprador de um produto, poderá buscar as ofertas de forma mais específica, por intermédio do @BDMilALERTAS. Após seguir as orientações do robô, o interessado receberá o alerta de todas as ofertas lançadas do produto pretendido, em tempo real. 
 
-12) O comprador e o vendedor de um produto, poderão buscar as ofertas de forma mais específica, por intermédio do @BDMilALERTAS. Ato contínuo, receberá em sua conta todas as ofertas lançadas do produto pretendido, em tempo real. Poderão ser realizadas buscas mais refinadas dentro do link “buscar” do respectivo canal. O acesso ao @BDMilALERTAS estará na mensagem pré-fixada nos canais.
-            `;
+13) O acesso ao @BDMilALERTAS estará no link de cada mensagem de venda.
+
+14) Outra opção que será oferecida ao comprador é de realizar buscas mais refinadas de um produto, por intermédio do link “buscar” do respectivo canal
+`;
     const termo3 = `
-13) Existem três formas de pagamento: Pix, débito e crédito. O usuário poderá comprar créditos, a fim de facilitar as vendas de diversos itens de uma vez, como por exemplo um enxoval inteiro. 
+15) Existem três formas de pagamento: Pix, débito e crédito.
 
-14) Caso ainda haja dúvidas sobre algum processo, teremos nas mensagens pré-fixadas nos canais e o link TUTORIAIS, contendo vídeos com os todos os procedimentos do balcão.
+16) O usuário terá a opção de comprar créditos, usando um dos métodos de pagamento acima citados, evitando a entrada no link de pagamento diversas vezes quando da oferta de um enxoval inteiro, por exemplo. 
 
-15) A negociação é LIVRE, conforme várias plataformas de marketplace. É nesse momento que as partes procuram refinar as informações, a fim de realizar uma negociação segura. É nesse momento também a hora de expor vídeos e mais descrições do produto, bem como ajustar forma de pagamento e da entrega. 
+17) Caso ainda haja dúvidas sobre algum processo, será disponibilizado o link TUTORIAIS, contendo vídeos com os todos os procedimentos do balcão.
 
-16) No final de cada negociação os usuários devem aconselhar ou desaconselhar o vendedor ou o comprador, nos bots correspondentes, para dar cada vez mais credibilidade às negociações.
+18) Será disponibilizado também ao usuário o bot @BDMilsuporte, para sanar alguma dúvida que por ventura ainda possa existir.
 
-17) Será disponibilizado também ao usuário o @BDMilsuporte para dúvidas que ainda existam.
+19) Será oferecido o bot SUGESTÕES para que o usuário possa contribuir com a melhoria do sistema.
 
-18) Teremos também o bot SUGESTÕES para que a equipe possa melhorar cada vez mais o sistema.
+20) A negociação no Balcão é LIVRE, conforme várias plataformas de marketplace. É nesse momento que as partes procuram refinar as informações, a fim de realizar uma negociação segura. É nesse momento também a hora de expor possíveis vídeos e mais descrições do produto, bem como ajustar a forma de pagamento e da entrega. 
 
-19) Lembrando que o Balcão é um facilitador para aquisição ou venda de produtos entre militares, pensionistas. Pode ser estendido à familiares, amigos e lojistas, porém sempre utilizando a conta do militar. A negociação é livre e de responsabilidade dos usuários, sob pena de exclusão sumária do sistema.
-    `
+21) No final de cada negociação, os usuários podem recomendar ou desaconselhar nos bots correspondentes, proporcionando maior credibilidade e segurança às negociações.
+
+22) O Balcão é apenas um facilitador para aquisição ou venda de produtos entre os militares, podendo estender à familiares, amigos e lojistas, porém sempre utilizando a conta do militar e sob total responsabilidade do mesmo.
+
+23) Por fim, lembrando mais uma vez que a negociação é livre e de responsabilidade dos usuários. Caso haja má fé, o transgressor será excluído do sistema de forma permanente.
+Boas negociações!
+`
         // const termo1 = `
         // Olá, bem\\-vindo ao Balcão dos militares *\\(BDMil\\)*\\. Esse Balcão tem por objetivo facilitar a transação comercial de artigos militares e de “artigos civis”, novos ou usados, entre os integrantes das FFAA e Forças Singulares, da ativa \\(de carreira ou temporários\\) e da reserva \\(remunerada ou não\\), incluindo os pensionistas e os reformados de todo o Brasil\\.
     
