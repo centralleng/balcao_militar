@@ -406,7 +406,7 @@ Conta verificada ✅
 Membro desde ${moment(user.created_at).format('DD-MM-YYYY')}
 
 `,
-{ parse_mode: 'Markdown',
+{ parse_mode: 'MarkdownV2',
   reply_markup: {
   inline_keyboard: [
     [
@@ -842,7 +842,7 @@ Conta verificada ✅
 Membro desde ${moment(user?.created_at).format('DD-MM-YYYY')}
 
 `,
-{parse_mode: 'Markdown',
+{parse_mode: 'MarkdownV2',
   reply_markup: {
   inline_keyboard: [
     [
