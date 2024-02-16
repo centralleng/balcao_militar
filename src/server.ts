@@ -8,6 +8,10 @@ import { Bot_bd_mil } from "./bot/bot_bd_mil";
 import { Bot_bd_mil_venda } from "./bot/bot_bd_mil_venda";
 import { Bot_bd_mil_comprar } from "./bot/bot_bd_mil_comprar";
 import { Bot_bd_mil_alertas } from "./bot/bot_bd_mil_alertas";
+import { Bot_bd_mil_news } from "./bot/bot_bd_mil_news";
+import { Bot_bd_mil_suporte } from "./bot/bot_bd_mil_suporte";
+import { Bot_bd_mil_coronel } from "./bot/bot_bd_mil_coronel";
+import { Bot_bd_mil_sugestoes } from "./bot/bot_bd_mil_sugestoes";
 
 const port = process.env.PORT || 4002;
 
@@ -41,5 +45,11 @@ Bot_bd_mil.execute()
 Bot_bd_mil_venda.execute()
 Bot_bd_mil_comprar.execute()
 Bot_bd_mil_alertas.execute()
+
+// Bot_bd_mil_news.execute()
+// Bot_bd_mil_suporte.execute()
+// Bot_bd_mil_sugestoes.execute()
+// Bot_bd_mil_coronel.execute()
+
 // cronDiario.envia()
 

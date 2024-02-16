@@ -285,10 +285,7 @@ pre-formatted fixed-width code block written in the Python programming language
       const username = msg.chat.username;
 
       const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...'); 
-      const messageId = msg_del.message_id.toString()
-
-
-
+      const messageId = msg_del.message_id.toString()  
 
 //       try {      
 //         // Enviar msg para os grupos
@@ -311,32 +308,15 @@ pre-formatted fixed-width code block written in the Python programming language
 // Conta verificada ✅
 
 // Membro desde ${moment(user?.created_at).format('DD-MM-YYYY')}      
-//       `,
-      
+//       `,    
 //         });
-
 //         await prisma_db.pedidos.update({
 //           where:{id:pedido.id},
 //           data:{msg_id:msg_grupo.data.result.message_id}
-//         })         
-      
+//         })     
 //       } catch (error) {
 //         console.log('Erro 01');
 //       }
-      
-      
-      
-      
-
-
-
-
-
-
-
-
-
-
 
       const user = await prisma_db.users.findUnique({
         where: { id_telegram: id_telegram?.toString() },

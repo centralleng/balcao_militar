@@ -89,7 +89,7 @@ Interessado em vender ${pedido.produto?.descricao}
 
 Valor ${(parseInt(valor)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
 
-Clique [${pedido.produto.id}](https://t.me/BDMilquerocomprar_bot?start=${pedido.produto.id}) para visitar o site de exemplo.
+Envie o código [${pedido.produto.id}](https://t.me/BDMilquerocomprar_bot?start=${pedido.produto.id}) para @BDMilquerocomprar_bot para comprar dele.
 
 ${recomendado>0?`Recomendado por mais de ${recomendado} pessoas`:`Ainda não recomendado`}
 
@@ -149,7 +149,7 @@ Interessado em vender ${pedido.produto.descricao}
 
 Valor ${(parseInt(valor)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
 
-Envie o código [*_${pedido.produto.id}_*](https://t.me/BDMilquerocomprar_bot?start=${pedido.produto.id}) para @BDMilquerocomprar_bot para comprar dele.
+Envie o código [${pedido.produto.id}](https://t.me/BDMilquerocomprar_bot?start=${pedido.produto.id}) para @BDMilquerocomprar_bot para comprar dele.
 
 ${recomendado>0?`Recomendado por mais de ${recomendado} pessoas`:`Ainda não recomendado`}
 

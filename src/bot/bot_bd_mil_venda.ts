@@ -393,7 +393,7 @@ Interessado em vender ${produto_pedido.descricao}
 
 Valor ${(parseInt(produto_pedido.valor_produto||'')/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
 
-Envie o código ${produto_pedido.id} para @BDMilquerocomprar_bot para comprar dele.
+Envie o código [${produto_pedido.id}](https://t.me/BDMilquerocomprar_bot?start=${produto_pedido.id}) para @BDMilquerocomprar_bot para comprar dele.
 
 ${user.recomendado||0>0?`Recomendado por mais de ${user.recomendado} pessoas`:`Ainda não recomendado`}
 
@@ -406,7 +406,8 @@ Conta verificada ✅
 Membro desde ${moment(user.created_at).format('DD-MM-YYYY')}
 
 `,
-{reply_markup: {
+{ parse_mode: 'Markdown',
+  reply_markup: {
   inline_keyboard: [
     [
       {
@@ -419,8 +420,7 @@ Membro desde ${moment(user.created_at).format('DD-MM-YYYY')}
       },
     ],
   ],
-}},
-        );
+}},     );
 
               await prisma_db.pedidos.updateMany({
                 where:{produto_id: produto_pedido.id},
@@ -842,7 +842,8 @@ Conta verificada ✅
 Membro desde ${moment(user?.created_at).format('DD-MM-YYYY')}
 
 `,
-{reply_markup: {
+{parse_mode: 'Markdown',
+  reply_markup: {
   inline_keyboard: [
     [
       {
