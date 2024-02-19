@@ -8,12 +8,13 @@ import { Consultas_alertasService } from '../services/consultas/alertaService';
 
 const token_bot = process.env.API_BDMIL_CORONEL ||''
 
-const bot = new TelegramBot(token_bot, { polling: true });
+// const bot = new TelegramBot(token_bot, { polling: true });
 
 class Bot_bd_mil_coronel {
-  static execute() {  
+  bot = new TelegramBot(token_bot, { polling: true })
+  execute() {  
     
-    bot.on('callback_query', async (msg:any) => {
+    this.bot.on('callback_query', async (msg:any) => {
         // console.log("callback_query",msg)
         const texto = msg.data;
         const id_telegram = msg.message?.chat.id;
@@ -21,23 +22,28 @@ class Bot_bd_mil_coronel {
         const message_id = msg.message?.message_id;
         const texto_split = texto.split('_')
 
-        const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...'); 
+        const msg_del = await this.bot.sendMessage(id_telegram, 'Aguarde...'); 
         const messageId = msg_del.message_id.toString()
 
     });   
     
-    bot.on('message', async (msg) => {
+    this.bot.on('message', async (msg) => {
       // console.log(msg)
       const id_telegram = msg.chat.id.toString();
       const texto = msg.text ||' ';
       const name = msg.chat.first_name;
       const username = msg.chat.username;
 
-      const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...'); 
+      const msg_del = await this.enviar_mensagem(id_telegram, "aguarde...", )
+      
       const messageId = msg_del.message_id.toString()
 
 
     });
+  }
+
+  async enviar_mensagem (contato: any, texto: any) {
+    return await this.bot.sendMessage(contato,texto)
   }
 }
 export { Bot_bd_mil_coronel };

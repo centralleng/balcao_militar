@@ -822,13 +822,13 @@ bot.on('message', async (msg: any) => {
             if(grupo){  
             await prisma_db.produtos.update({where:{id:editar_produtos[0].id},data:{valor_produto:texto.replace(/\./g, ''),editar:'0'}})            
             await bot.deleteMessage(grupo.id_grupo, editar_produtos[0].pedido[0].msg_id?.toString()||'')
-            const editar_msg = await bot.sendMessage(grupo.id_grupo, 
+            const editar_msg = await bot.sendMessage(grupo.id_grupo,
 `
 Interessado em vender ${editar_produtos[0].descricao}
 
 Valor ${(parseInt(editar_produtos[0].valor_produto||'')/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}
 
-Envie o código ${editar_produtos[0].id} para @BDMilquerocomprar_bot para comprar dele.
+Envie o código [${editar_produtos[0].id}](https://t.me/BDMilquerocomprar_bot?start=${editar_produtos[0].id}) para comprar dele.
 
 ${user?.recomendado||0>0?`Recomendado por mais de ${user?.recomendado} pessoas`:`Ainda não recomendado`}
 

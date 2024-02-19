@@ -272,11 +272,12 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             // Envio de mensagem para o vendedor indicando que existe um comprador interessando. Obs.: Mensagem enviada pelo bot BDMilQueroVender
             await axios.post(`https://api.telegram.org/bot${bot_quero_vender}/sendMessage`,
             {
+              parse_mode: 'HTML',
               chat_id: produto_consut.id_telegram,
               text: `
 ---- ✅✅✅ ----
 
-💡 Informo que @${user.username} quer comprar o seu produto referente a oferta ${produto_consut.id}, você deve informar para ele a senha ${senha} para que ele saiba que você é realmente o postador da oferta. Verifique se é a mesma senha.
+💡 Informo que @${user.username} quer comprar o seu produto referente a oferta ${produto_consut.id}, você deve informar para ele a senha <a href='tel: ${senha}'>${senha}</a> para que ele saiba que você é realmente o postador da oferta. Verifique se é a mesma senha.
 
 ▪️ Dicas do Balcão dos militares:
 
@@ -297,7 +298,6 @@ Recomendo que sempre seja confirmado o valor do produto, bem como a forma de ent
       `,
 reply_markup: createInlineKeyboard(id_telegram,produto_consut.id, user.id),
             },);
-
               
             } catch (error) {
               console.log('erro')
