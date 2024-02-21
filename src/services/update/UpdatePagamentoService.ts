@@ -43,9 +43,18 @@ if(pedido){
 
   if(dados.status==='pago'){
 
+    if(pedido.tipo==="credito"){
+      await prisma_db.users.update({
+        where:{id:pedido.user_id},
+        data:{
+          creditos: parseInt(pedido.valor||'')
+        }
+      })
+    }
+
     const grupo = await prisma_db.grupos.findUnique({
       where:{type: pedido.produto.categoria||''}
-    }) 
+    })      
 
     if(grupo){
 

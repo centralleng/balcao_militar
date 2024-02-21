@@ -24,6 +24,7 @@ model Users {
   avatar_url          String?
   recomendado         Int?
   desaconselhado      Int?
+  creditos            Int?
   updated_at          DateTime      @updatedAt @default(now())
   created_at          DateTime      @default(now())
   produto             Produtos[]
@@ -62,7 +63,7 @@ model Pedidos {
   delete              Int?
   status              String?
   valor               String?
-  categoria           String?
+  tipo                String?
   titulo              String?
   nome                String?
   document            String?      

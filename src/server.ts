@@ -41,13 +41,13 @@ app.listen(port, function () {
     console.log(`O servidor está rodando da porta ${port}...`);
 });
 
-Bot_bd_mil.execute()
-Bot_bd_mil_venda.execute()
-Bot_bd_mil_comprar.execute()
-Bot_bd_mil_alertas.execute()
+// Bot_bd_mil.execute()
+// Bot_bd_mil_venda.execute()
+// Bot_bd_mil_comprar.execute()
+// Bot_bd_mil_alertas.execute()
 
 // Bot_bd_mil_news.execute()
-// Bot_bd_mil_suporte.execute()
+Bot_bd_mil_suporte.execute()
 // Bot_bd_mil_sugestoes.execute()
 // Bot_bd_mil_coronel.execute()
 

@@ -9,7 +9,6 @@ import { Consultas_alertasService } from '../services/consultas/alertaService';
 const token_bot = process.env.API_BDMIL_SUPORTE ||''
 
 const bot = new TelegramBot(token_bot, { polling: true });
-
 class Bot_bd_mil_suporte {
   static execute() { 
     
@@ -23,7 +22,6 @@ class Bot_bd_mil_suporte {
 
         const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...'); 
         const messageId = msg_del.message_id.toString()
-
     });   
     
     bot.on('message', async (msg) => {
@@ -36,6 +34,13 @@ class Bot_bd_mil_suporte {
       const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...'); 
       const messageId = msg_del.message_id.toString()
 
+      const msg_resp:any = {'1':'1','2':'2','3':'3','4':'4','5':'5'}
+
+      if(msg_resp[texto]){
+        await bot.sendMessage(id_telegram, msg_resp[texto]);
+      }else{
+        await bot.sendMessage(id_telegram, '36');
+      }
 
     });
   }
