@@ -46,7 +46,9 @@ Bot_bd_mil.execute()
 const bot_venda = new Bot_bd_mil_venda
 bot_venda.execute()
 
-Bot_bd_mil_comprar.execute()
+const bot_comprar = new Bot_bd_mil_comprar
+bot_comprar.execute()
+
 Bot_bd_mil_alertas.execute()
 
 // Bot_bd_mil_news.execute()

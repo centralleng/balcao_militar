@@ -1,6 +1,7 @@
 import axios from "axios";
 import { prisma_db } from "../../database/prisma_db";
 import moment from "moment";
+import { mensagens } from "../../utils/msg_bot";
 
 interface dados {
   valor: string;
@@ -99,23 +100,13 @@ export default async function Criar_pedido(dados: dados) {
         const msg_grupo = await axios.post(`https://api.telegram.org/bot${botVenda}/sendMessage`, {
           parse_mode: 'HTML',  
           chat_id: grupo.id_grupo,
-          text: `
-Interessado em vender ${produto?.descricao}
-
-Valor ${(parseInt(valor) / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-
-Envie o código <a href="https://t.me/BDMilquerocomprar_bot?start=${produto?.id}">${produto?.id}</a> para @BDMilquerocomprar_bot para comprar dele.
-
-${recomendado > 0 ? `Recomendado por mais de ${recomendado} pessoas` : `Ainda não recomendado`}
-
-${desaconselhado > 0 ? `desaconselhado por ${desaconselhado} pessoas ${desaconselhado} pessoas` : `Não desaconselhado ainda por ostros usuários`}
-
-Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor acordado ao comprador.
-
-Conta verificada ✅
-
-Membro desde ${moment(user?.created_at).format('DD-MM-YYYY')}      
-`,
+          text: mensagens.msg_pagamento_grupo({ 
+            descricao_produto: produto?.descricao || '', 
+            valor_produto: valor || '', 
+            produto_id: produto?.id||0, 
+            recomendado: user?.recomendado || 0, 
+            desaconselhado: user?.desaconselhado || 0, 
+            data_criacao_user: user?.created_at }),
           reply_markup: createInlineKeyboard(grupo.id_grupo),
         });
 
@@ -133,18 +124,11 @@ Membro desde ${moment(user?.created_at).format('DD-MM-YYYY')}
         await axios.post(`https://api.telegram.org/bot${botVenda}/sendMessage`, // Bot bdmil_venda
           {
             chat_id: user?.id_telegram,
-            text: `
-
-Seu produto ${produto?.descricao} foi ativado com sucesso!
-
-Valor ${(parseInt(valor) / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-
-Código produto ${produto?.id}.
-
-Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor acordado ao comprador.
-
-`,
-            reply_markup: enviarMsg(produto?.id),
+            text: mensagens.msg_pagamento_vendedor({ 
+              descricao_produto: produto?.descricao || '', 
+              valor_produto: valor || '', 
+              produto_id: produto?.id||0,}),
+              reply_markup: enviarMsg(produto?.id),
           });
 
       } catch (error) { console.log('erro 02') }
@@ -154,32 +138,18 @@ Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor 
           // Enviar msg para aleras cadastrados 
           await axios.post(`https://api.telegram.org/bot${botAlerta}/sendMessage`, // bot CentrallTest4
             {
-              parse_mode: 'Markdown',
-              chat_id: i,
-              text: `
-🚨 Alerta
-
-Interessado em vender ${produto?.descricao}
-
-Valor ${(parseInt(valor) / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-
-Envie o código [${produto?.id}](https://t.me/BDMilquerocomprar_bot?start=${produto?.id}) para @BDMilquerocomprar_bot para comprar dele.
-
-${recomendado > 0 ? `Recomendado por mais de ${recomendado} pessoas` : `Ainda não recomendado`}
-
-${desaconselhado > 0 ? `desaconselhado por ${desaconselhado} pessoas ${desaconselhado} pessoas` : `Não desaconselhado ainda por ostros usuários`}
-
-Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor acordado ao comprador.
-
-Conta verificada ✅
-
-Membro desde ${moment(user?.created_at).format('DD-MM-YYYY')}
-
-`,
+            parse_mode: 'HTML',
+            chat_id: i,
+            text: mensagens.msg_pagamento_grupo({ 
+            descricao_produto: produto?.descricao || '', 
+            valor_produto: valor || '', 
+            produto_id: produto?.id||0, 
+            recomendado: user?.recomendado || 0, 
+            desaconselhado: user?.desaconselhado || 0, 
+            data_criacao_user: user?.created_at }),
             });
 
         } catch (error) { console.log('erro 03') }
-
       }
     } else {
       // enviar informação de falha 

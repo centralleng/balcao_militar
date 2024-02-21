@@ -164,48 +164,47 @@ class Botoes {
         reply_markup: {
             inline_keyboard: [
                 [
-                    { text: "[Uniforme] vendas", callback_data: "CADASTRO_[Uniforme]" },
-                    { text: "[Veículo] vendas", callback_data: "CADASTRO_[Veiculo]" },
-                    { text: "[Serviço] vendas", callback_data: "CADASTRO_[Servico]" },
+                    { text: "[Uniforme] vendas", callback_data: "CADASTRO_[Uniforme]_APAGAR" },
+                    { text: "[Veículo] vendas", callback_data: "CADASTRO_[Veiculo]_APAGAR" },
+                    { text: "[Serviço] vendas", callback_data: "CADASTRO_[Servico]_APAGAR" },
                 ],
                 [
-                    { text: "[Smartphone] vendas", callback_data: "CADASTRO_[Smartphone]" },
-                    { text: "[Acessório] vendas", callback_data: "CADASTRO_[Acessorio]" },
-                    { text: "[Eletrodoméstico] vendas", callback_data: "CADASTRO_[Eletrodomestico]" },
+                    { text: "[Smartphone] vendas", callback_data: "CADASTRO_[Smartphone]_APAGAR" },
+                    { text: "[Acessório] vendas", callback_data: "CADASTRO_[Acessorio]_APAGAR" },
+                    { text: "[Eletrodoméstico] vendas", callback_data: "CADASTRO_[Eletrodomestico]_APAGAR" },
                 ],
                 [
-                    { text: "[Automotivo] vendas", callback_data: "CADASTRO_[Automotivo]" },
-                    { text: "[Audio] vendas", callback_data: "CADASTRO_[Audio]" },
-                    { text: "[Eletroportátil] vendas", callback_data: "CADASTRO_[Eletroportatil]" },
+                    { text: "[Automotivo] vendas", callback_data: "CADASTRO_[Automotivo]_APAGAR" },
+                    { text: "[Audio] vendas", callback_data: "CADASTRO_[Audio]_APAGAR" },
+                    { text: "[Eletroportátil] vendas", callback_data: "CADASTRO_[Eletroportatil]_APAGAR" },
                 ],
                 [
-                    { text: "[Ferramenta] vendas", callback_data: "CADASTRO_[Ferramenta]" },
-                    { text: "[Bebida] vendas", callback_data: "CADASTRO_[Bebida]" },
-                    { text: "[Bebê] vendas", callback_data: "CADASTRO_[Bebe]" },
+                    { text: "[Ferramenta] vendas", callback_data: "CADASTRO_[Ferramenta]_APAGAR" },
+                    { text: "[Bebida] vendas", callback_data: "CADASTRO_[Bebida]_APAGAR" },
+                    { text: "[Bebê] vendas", callback_data: "CADASTRO_[Bebe]_APAGAR" },
                 ],
                 [
-                    { text: "[Esporte] vendas", callback_data: "CADASTRO_[Esporte]" },
-                    { text: "[Smart TV] vendas", callback_data: "CADASTRO_[Smart-TV]" },
-                    { text: "[Ar e Ventilação] vendas", callback_data: "CADASTRO_[Ar-e-Ventilacao]" },
+                    { text: "[Esporte] vendas", callback_data: "CADASTRO_[Esporte]_APAGAR" },
+                    { text: "[Smart TV] vendas", callback_data: "CADASTRO_[Smart-TV]_APAGAR" },
+                    { text: "[Ar e Ventilação] vendas", callback_data: "CADASTRO_[Ar-e-Ventilacao]_APAGAR" },
                 ],
                 [
-                    { text: "[Imóvel] vendas", callback_data: "CADASTRO_[Imovel]" },
-                    { text: "[Brinquedo] vendas", callback_data: "CADASTRO_[Brinquedo]" },
-                    { text: "[Informática] vendas", callback_data: "CADASTRO_[Informatica]" },
+                    { text: "[Imóvel] vendas", callback_data: "CADASTRO_[Imovel]_APAGAR" },
+                    { text: "[Brinquedo] vendas", callback_data: "CADASTRO_[Brinquedo]_APAGAR" },
+                    { text: "[Informática] vendas", callback_data: "CADASTRO_[Informatica]_APAGAR" },
                 ],
                 [
-                    { text: "[Game] vendas", callback_data: "CADASTRO_[Game]" },
-                    { text: "[Móvel] vendas", callback_data: "CADASTRO_[Movel]" },
-                    { text: "[Utilidade Doméstica] vendas", callback_data: "CADASTRO_[Utilidade-Domestica]" },
+                    { text: "[Game] vendas", callback_data: "CADASTRO_[Game]_APAGAR" },
+                    { text: "[Móvel] vendas", callback_data: "CADASTRO_[Movel]_APAGAR" },
+                    { text: "[Utilidade Doméstica] vendas", callback_data: "CADASTRO_[Utilidade-Domestica]_APAGAR" },
                 ],
                 [
-                    { text: "[Material Escolar] vendas", callback_data: "CADASTRO_[Material-Escolar]" },
+                    { text: "[Material Escolar] vendas", callback_data: "CADASTRO_[Material-Escolar]_APAGAR" },
                 ],
             ],
         },
     }
 }
-
 
 export const botao = new Botoes
 

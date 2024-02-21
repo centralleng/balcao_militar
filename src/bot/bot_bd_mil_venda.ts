@@ -12,6 +12,7 @@ import { taxa_empresa } from '../utils/taxas';
 // const token_bot = process.env.API_BOT_BDMIL_VENDA ||'' //'6962343359:AAERsmVCjSJczzeQ-ONe_nfVyQxQYDzFYlg'; // Token do bot do telegram... CentrallTest2_Bot
 
 class Bot_bd_mil_venda {
+
   bot: TelegramBot = new TelegramBot(process.env.API_BOT_BDMIL_VENDA || '', { polling: true });
   execute() {
     // Manipular callback_query
@@ -20,7 +21,7 @@ class Bot_bd_mil_venda {
       const id_telegram = msg.message?.chat.id;
       const username = msg.message?.chat.username;
       const message_id = msg.message?.message_id;
-      const texto_split = texto.split('_')
+      const texto_split = texto.split('_');
 
       const msg_del = await this.bot.sendMessage(id_telegram, 'Aguarde...');
       const messageId = msg_del.message_id.toString()
@@ -118,7 +119,14 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               }
 
               await this.bot.deleteMessage(grupo.id_grupo, produto_pedido.pedido[0].msg_id.toString())
-              const editar_msg = await this.bot.sendMessage(grupo.id_grupo, mensagens.msg_pagamento_grupo({ descricao_produto: produto_pedido.descricao || '', valor_produto: produto_pedido.valor_produto || '', produto_id: produto_pedido.id, recomendado: user.recomendado || 0, desaconselhado: user.desaconselhado || 0, data_criacao_user: user.created_at }),
+              const editar_msg = await this.bot.sendMessage(grupo.id_grupo, 
+                mensagens.msg_pagamento_grupo({ 
+                  descricao_produto: produto_pedido.descricao || '', 
+                  valor_produto: produto_pedido.valor_produto || '', 
+                  produto_id: produto_pedido.id, 
+                  recomendado: user.recomendado || 0, 
+                  desaconselhado: user.desaconselhado || 0, 
+                  data_criacao_user: user.created_at }),
                 {
                   reply_markup: {
                     inline_keyboard: [
@@ -227,7 +235,21 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           }
         }
 
-        if (texto_split[0] === 'CADASTRO') { // Listar todo os produtos cadastrados         
+        if (texto_split[0] === 'CADASTRO') { // Listar todo os produtos cadastrados 
+
+          if(texto_split[2]==='APAGAR'){
+            await this.bot.deleteMessage(id_telegram, (message_id-4).toString())
+            await this.bot.deleteMessage(id_telegram, (message_id-3).toString())
+            await this.bot.deleteMessage(id_telegram, (message_id-2).toString()) 
+            await this.bot.deleteMessage(id_telegram, (message_id-1).toString())
+            await this.bot.deleteMessage(id_telegram, (message_id).toString())
+          }else{
+            await this.bot.deleteMessage(id_telegram, (message_id-3).toString())
+            await this.bot.deleteMessage(id_telegram, (message_id-2).toString()) 
+            await this.bot.deleteMessage(id_telegram, (message_id-1).toString())
+            await this.bot.deleteMessage(id_telegram, (message_id).toString())
+            await this.bot.deleteMessage(id_telegram, (message_id+1).toString())
+          }
 
           try {
             await prisma_db.produtos.create({
@@ -237,94 +259,13 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                 categoria: texto_split[1]
               }
             })
-            await this.bot.sendMessage(id_telegram, mensagens.descricao); // , {suporte_tutorial} para aparecer botão suporte e tutorial
+            await this.bot.sendMessage(id_telegram, mensagens.descricao); // , {suporte_tutorial} para aparecer botão suporte e tutorial           
             this.bot.deleteMessage(id_telegram, messageId)
           } catch (error) {
             await this.bot.sendMessage(id_telegram, `⚠️ Parece que algo deu errado, o que você pretende fazer?`, botao.botao_inicial);
             this.bot.deleteMessage(id_telegram, messageId)
           }
-        }
-
-        // if (texto_split[0] === 'PAGAR') { // Listar todo os produtos cadastrados       
-        //   const produto = await prisma_db.produtos.findUnique({
-        //     where: { id: parseInt(texto_split[1]) }
-        //   })
-
-        //   const pedido = await prisma_db.pedidos.findMany({
-        //     where:{user_id:user.id}
-        //   })
-
-        //   if(pedido.length<=0){             
-        //     const dados = {
-        //       valor: texto_split[2].replace(/\./g, ''),
-        //       titulo: '',
-        //       nome: user.nome,
-        //       document: user.document,
-        //       email: user.email,
-        //       id_telegram: id_telegram,
-        //       ddd: user.ddd_phone,
-        //       telefone: user.phone,
-        //       produto_id: parseInt(texto_split[1]),
-        //       user_id: user.id,
-        //     }
-
-        //     try {
-        //       Criar_pedido(dados) 
-        //       this.bot.deleteMessage(id_telegram, messageId)             
-        //     } catch (error) { 
-        //       await this.bot.sendMessage(id_telegram, `⚠️ Parece que algo deu errado, o que você pretende fazer?`, botao_inicial);
-        //       this.bot.deleteMessage(id_telegram, messageId)             
-        //     }   
-
-        //     return
-        //   }
-
-        //   if (produto) {
-
-        //     await prisma_db.produtos.update({
-        //       where: { id: user.produto[0].id },
-        //       data: {
-        //         status: true
-        //       }
-        //     })
-
-        //     const dados = {
-        //       valor: texto_split[2].replace(/\./g, ''),
-        //       titulo: '',
-        //       nome: user.nome,
-        //       document: user.document,
-        //       email: user.email,
-        //       id_telegram: id_telegram,
-        //       ddd: user.ddd_phone,
-        //       telefone: user.phone,
-        //       produto_id: parseInt(texto_split[1]),
-        //       user_id: user.id,
-        //     }
-
-        //     const pagamento = await Pagamento(dados)
-
-        //     if (pagamento.status === "ok") {
-        //       await this.bot.sendMessage(id_telegram, `✔️ Seu produto foi cadastrado com sucesso. Clique no botão [PAGAR] para Ativar seu Anúncio!`,
-        //         {
-        //           reply_markup: {
-        //             inline_keyboard: [
-        //               [
-        //                 { text: "PAGAR", url: `https://bdmil.vercel.app/pg/${pagamento.url}` },
-        //               ],
-        //             ],
-        //           },
-        //         });   
-        //         this.bot.deleteMessage(id_telegram, messageId)                     
-
-        //     } else {
-        //       await this.bot.sendMessage(id_telegram, `Algo deu errado com seu pedido?`, botao_inicial);
-        //       this.bot.deleteMessage(id_telegram, messageId)
-        //     }
-        //   } else {
-        //     await this.bot.sendMessage(id_telegram, `⚠️ Parece que algo deu errado, o que você pretende fazer?`, botao_inicial);
-        //     this.bot.deleteMessage(id_telegram, messageId)
-        //   }
-        // }
+        }       
       }
 
       if (texto_split[0] === 'RECOMENDO') {
@@ -364,7 +305,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             this.bot.deleteMessage(id_telegram, messageId)
           }
         }
-      };
+      }
 
       if (texto_split[0] === 'DESACONSELHO') {
 
@@ -417,13 +358,13 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               }
             });
 
-            const descricao: any = {'1':'Não entregou o produto', 
+            const descricao: any = {
+            '1': 'Não entregou o produto', 
             '2': 'Não efetuou o pagamento',
             '3': 'Foi rude',
             '4': 'Produto em desacordo com o descrito',
             '5': 'Não é militar',
             '6': 'Outros'
-
           } 
             if (texto_split[3] === '') {
               await prisma_db.log_recomendacoes.create({
@@ -521,27 +462,18 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             })
 
             if (grupo) {
-              await prisma_db.produtos.update({ where: { id: editar_produtos[0].id }, data: { valor_produto: texto.replace(/\./g, ''), editar: '0' } })
+              const produto_pedido = await prisma_db.produtos.update({ where: { id: editar_produtos[0].id }, data: { valor_produto: texto.replace(/\./g, ''), editar: '0' } })
               await this.bot.deleteMessage(grupo.id_grupo, editar_produtos[0].pedido[0].msg_id?.toString() || '')
+
               const editar_msg = await this.bot.sendMessage(grupo.id_grupo,
-                `
-Interessado em vender ${editar_produtos[0].descricao}
 
-Valor ${(parseInt(editar_produtos[0].valor_produto || '') / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-
-Envie o código [${editar_produtos[0].id}](https://t.me/BDMilquerocomprar_bot?start=${editar_produtos[0].id}) para comprar dele.
-
-${user?.recomendado || 0 > 0 ? `Recomendado por mais de ${user?.recomendado} pessoas` : `Ainda não recomendado`}
-
-${user?.desaconselhado || 0 > 0 ? `desaconselhado por ${user?.desaconselhado} pessoas ${user?.desaconselhado} pessoas` : `Não desaconselhado ainda por ostros usuários`}
-
-Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor acordado ao comprador.
-
-Conta verificada ✅
-
-Membro desde ${moment(user?.created_at).format('DD-MM-YYYY')}
-
-`,
+                mensagens.msg_pagamento_grupo({ 
+                  descricao_produto: produto_pedido.descricao || '', 
+                  valor_produto: produto_pedido.valor_produto || '', 
+                  produto_id: produto_pedido.id, 
+                  recomendado: user?.recomendado || 0, 
+                  desaconselhado: user?.desaconselhado || 0, 
+                  data_criacao_user: user?.created_at}),
                 {
                   reply_markup: {
                     inline_keyboard: [
@@ -790,6 +722,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
       }
     });
   }
+
   async enviar_mensagem(id_chat: string, texto: string) {
     return await this.bot.sendMessage(id_chat, texto)
   }
@@ -801,6 +734,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
   async deletar_mensagem(id_chat: string, id_message: string) {
     return await this.bot.deleteMessage(id_chat, id_message)
   }
+  
   async verificar_usuario(id_telegram: number) {
     const user = await prisma_db.users.findUnique({
       where: { id_telegram: id_telegram?.toString() },
