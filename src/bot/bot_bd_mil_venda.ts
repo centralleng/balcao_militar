@@ -18,7 +18,9 @@ class Bot_bd_mil_venda {
   execute() {
     // Manipular callback_query
     this.bot.on("callback_query", async (msg: any) => {
+      // console.log(msg)
       const texto = msg.data;
+      console.log(texto)
       const id_telegram = msg.message?.chat.id;
       const username = msg.message?.chat.username;
       const message_id = msg.message?.message_id;
@@ -32,14 +34,15 @@ class Bot_bd_mil_venda {
         await this.bot.deleteMessage(id_telegram, (message_id-3).toString())
         await this.bot.deleteMessage(id_telegram, (message_id-2).toString()) 
         await this.bot.deleteMessage(id_telegram, (message_id-1).toString())
-        await this.bot.deleteMessage(id_telegram, (message_id).toString())
-      }else{
+        await this.bot.deleteMessage(id_telegram, (message_id).toString())  
+      }      
+      if(texto_split[0]==='CADASTRO'&&texto_split[2]==='APAGAR-01'){    
         await this.bot.deleteMessage(id_telegram, (message_id-3).toString())
         await this.bot.deleteMessage(id_telegram, (message_id-2).toString()) 
         await this.bot.deleteMessage(id_telegram, (message_id-1).toString())
         await this.bot.deleteMessage(id_telegram, (message_id).toString())
         await this.bot.deleteMessage(id_telegram, (message_id+1).toString())
-      }
+      } 
 
       // Primeiro verifica se ja axiste esse usuário
       const user = await this.verificar_usuario(id_telegram)
@@ -403,6 +406,8 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
         const valor_credito = user.creditos || 0
         const valor_pedido = parseInt(texto_split[1]) 
 
+        console.log(valor_credito,valor_pedido)
+
         if(valor_credito<valor_pedido){
 
           const dados = {
@@ -748,14 +753,16 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
 ✔️ Seu produto foi cadastrado com sucesso.
 Clique no botão PAGAR para Ativar seu Anúncio!
 
-Valor ${(parseInt(dados.valor) / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+Ou pode pagar com seus créditos!
+
+Valor para anunciar! ${(parseInt(dados.valor) / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
 `,
                       {
                         reply_markup: {
                           inline_keyboard: [
                             [
-                              { text: "PAGAR COM CRÉDITO", callback_data: `CREDITO_${dados.valor}_${pagamento.url}` },
-                              { text: "PAGAR", url: `https://bdmil.vercel.app/pg/${pagamento.url}` }
+                              { text: "PAGAR", url: `https://bdmil.vercel.app/pg/${pagamento.url}` },
+                              { text: "PAGAR CRÉDITO", callback_data: `CREDITO_${dados.valor}_${pagamento.url}` },
                             ],
                           ],
                         },
