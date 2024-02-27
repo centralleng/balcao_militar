@@ -169,7 +169,7 @@ Membro desde ${moment(dados.data_criacao_user).format('DD-MM-YYYY')}
     return `  
 ---- ✅✅✅ ----
 
-💡 Informo que @${dados.username} quer comprar o seu produto referente a oferta <a href="tel:${dados.produto_id}">${dados.produto_id}</a>, você deve informar para ele a senha ${dados.senha} para que ele saiba que você é realmente o postador da oferta. Verifique se é a mesma senha.
+💡 Informo que @${dados.username} quer comprar o seu produto referente a oferta ${dados.produto_id}, você deve informar para ele a senha ${dados.senha} para que ele saiba que você é realmente o postador da oferta. Verifique se é a mesma senha.
 
 ▪️ Dicas do Balcão dos militares:
 

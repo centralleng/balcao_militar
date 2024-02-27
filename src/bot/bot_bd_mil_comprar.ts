@@ -13,7 +13,7 @@ const bot_quero_vender = process.env.API_BOT_BDMIL_VENDA
   //   console.log(dados)
   //   this.bot.sendMessage(dados.chatId, dados.adresp);
   // }
-  
+
 class Bot_bd_mil_comprar {
 
 bot: TelegramBot = new TelegramBot(process.env.API_BOT_BDMIL_COMPRA||'', { polling: true });
@@ -231,6 +231,28 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
         }
       }
     });
+
+    // try {
+                             
+    //   // Envio de mensagem para o vendedor indicando que existe um comprador interessando. Obs.: Mensagem enviada pelo bot BDMilQueroVender
+    //   await axios.post(`https://api.telegram.org/bot${bot_quero_vender}/sendMessage`,
+    //   {
+    //     parse_mode: 'HTML',
+    //     chat_id: id_telegram,
+    //     text: mensagens.msg_interesse_compra_vendedor({ 
+    //       username: 'miqueiasmars',
+    //       senha: '21986189945',
+    //       produto_id: 123,
+    //       recomendado: 0,
+    //       desaconselhado: 0,
+    //       created_at: '2023-02-01'}),
+    //       reply_markup: createInlineKeyboard(id_telegram,'123', '98b05905-9a6d-403f-a746-0c9f303f9069'),
+    //   })
+        
+    //   } catch (error) {
+    //     console.log('erro')
+        
+    //   }
 
         if (!user) {
           this.bot.sendMessage(id_telegram, `

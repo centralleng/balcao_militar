@@ -303,7 +303,9 @@ pre-formatted fixed-width code block written in the Python programming language
       const username = msg.chat.username;
 
       const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...'); 
-      const messageId = msg_del.message_id.toString()  
+      const messageId = msg_del.message_id.toString()
+      
+      
 
  
 //       bot.sendMessage(id_telegram, 
