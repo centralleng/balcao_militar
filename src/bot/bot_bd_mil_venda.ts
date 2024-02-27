@@ -8,6 +8,7 @@ import Alerta_pedido from '../services/update/alerta_pedido';
 import { botao } from '../utils/msg_bot_botao';
 import { mensagens } from '../utils/msg_bot';
 import { taxa_empresa } from '../utils/taxas';
+import { recomendado_desaconsenho } from '../utils/recomendo_desaconselho'
 
 // const token_bot = process.env.API_BOT_BDMIL_VENDA ||'' //'6962343359:AAERsmVCjSJczzeQ-ONe_nfVyQxQYDzFYlg'; // Token do bot do telegram... CentrallTest2_Bot
 
@@ -25,6 +26,20 @@ class Bot_bd_mil_venda {
 
       const msg_del = await this.bot.sendMessage(id_telegram, 'Aguarde...');
       const messageId = msg_del.message_id.toString()
+
+      if(texto_split[0]==='CADASTRO'&&texto_split[2]==='APAGAR'){
+        await this.bot.deleteMessage(id_telegram, (message_id-4).toString())
+        await this.bot.deleteMessage(id_telegram, (message_id-3).toString())
+        await this.bot.deleteMessage(id_telegram, (message_id-2).toString()) 
+        await this.bot.deleteMessage(id_telegram, (message_id-1).toString())
+        await this.bot.deleteMessage(id_telegram, (message_id).toString())
+      }else{
+        await this.bot.deleteMessage(id_telegram, (message_id-3).toString())
+        await this.bot.deleteMessage(id_telegram, (message_id-2).toString()) 
+        await this.bot.deleteMessage(id_telegram, (message_id-1).toString())
+        await this.bot.deleteMessage(id_telegram, (message_id).toString())
+        await this.bot.deleteMessage(id_telegram, (message_id+1).toString())
+      }
 
       // Primeiro verifica se ja axiste esse usuário
       const user = await this.verificar_usuario(id_telegram)
@@ -149,7 +164,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                 data: { msg_id: editar_msg.message_id }
               })
 
-              await this.bot.sendMessage(id_telegram, `✔️ Seu produto foi atualizado com sucesso.`);
+              await this.bot.sendMessage(id_telegram, `✔️ Seu produto foi atualizado com sucesso.`, botao.suporte);
               this.bot.deleteMessage(id_telegram, messageId)
             } else {
               await this.bot.sendMessage(id_telegram, `⚠️ Algo deu errado, entre em contato com o suporte.`, botao.suporte);
@@ -236,21 +251,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
         }
 
         if (texto_split[0] === 'CADASTRO') { // Listar todo os produtos cadastrados 
-
-          if(texto_split[2]==='APAGAR'){
-            await this.bot.deleteMessage(id_telegram, (message_id-4).toString())
-            await this.bot.deleteMessage(id_telegram, (message_id-3).toString())
-            await this.bot.deleteMessage(id_telegram, (message_id-2).toString()) 
-            await this.bot.deleteMessage(id_telegram, (message_id-1).toString())
-            await this.bot.deleteMessage(id_telegram, (message_id).toString())
-          }else{
-            await this.bot.deleteMessage(id_telegram, (message_id-3).toString())
-            await this.bot.deleteMessage(id_telegram, (message_id-2).toString()) 
-            await this.bot.deleteMessage(id_telegram, (message_id-1).toString())
-            await this.bot.deleteMessage(id_telegram, (message_id).toString())
-            await this.bot.deleteMessage(id_telegram, (message_id+1).toString())
-          }
-
+        
           try {
             await prisma_db.produtos.create({
               data: {
@@ -259,7 +260,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                 categoria: texto_split[1]
               }
             })
-            await this.bot.sendMessage(id_telegram, mensagens.descricao); // , {suporte_tutorial} para aparecer botão suporte e tutorial           
+            await this.bot.sendMessage(id_telegram, mensagens.descricao, botao.suporte); // , {suporte_tutorial} para aparecer botão suporte e tutorial    
             this.bot.deleteMessage(id_telegram, messageId)
           } catch (error) {
             await this.bot.sendMessage(id_telegram, `⚠️ Parece que algo deu errado, o que você pretende fazer?`, botao.botao_inicial);
@@ -278,7 +279,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
         })
 
         if (log.length > 0) {
-          await this.bot.sendMessage(id_telegram, `⚠️ Sua recomendação já foi feita.`);
+          await this.bot.sendMessage(id_telegram, `⚠️ Sua recomendação já foi feita.`, botao.sugestao);
           this.bot.deleteMessage(id_telegram, messageId)
           return
         } else {
@@ -287,7 +288,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           const recomendo = recomendo_db + 1
 
           if (user_req) {
-            await prisma_db.users.update({
+            const user_db = await prisma_db.users.update({
               where: { id: texto_split[3] },
               data: {
                 recomendado: recomendo
@@ -301,7 +302,10 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                 descricao: 'recomendado',
               }
             })
-            await this.bot.sendMessage(id_telegram, `✅ Recomendação feita com sucesso!`);
+           
+            recomendado_desaconsenho.recomendo_comprador(user_db.id_telegram)
+
+            await this.bot.sendMessage(id_telegram, `✅ Recomendação feita com sucesso!`, botao.sugestao);
             this.bot.deleteMessage(id_telegram, messageId)
           }
         }
@@ -342,7 +346,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
         })
 
         if (log.length > 0) {
-          await this.bot.sendMessage(id_telegram, `⚠️ Seu desaconselho já foi feito.`);
+          await this.bot.sendMessage(id_telegram, `⚠️ Seu desaconselho já foi feito.`, botao.sugestao);
           this.bot.deleteMessage(id_telegram, messageId)
         } else {
 
@@ -351,7 +355,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           const desaconselhado = desaconselhado_db + 1
 
           if (user_req) {
-            await prisma_db.users.update({
+            const user_db = await prisma_db.users.update({
               where: { id: user_req?.id },
               data: {
                 desaconselhado: desaconselhado
@@ -375,6 +379,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                   descricao: '',
                 }
               })
+              recomendado_desaconsenho.desaconselho_comprador(user_db.id_telegram)
               await this.bot.sendMessage(id_telegram, mensagens.motivo);
               this.bot.deleteMessage(id_telegram, messageId)
             } else {
@@ -386,11 +391,90 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                   descricao: descricao[texto_split[3]],
                 }
               })
-              await this.bot.sendMessage(id_telegram, mensagens.desaconselho_sucesso);
+              await this.bot.sendMessage(id_telegram, mensagens.desaconselho_sucesso, botao.sugestao);
               this.bot.deleteMessage(id_telegram, messageId)
             }
           }
         }
+      }
+
+      if(texto_split[0] === 'CREDITO'){
+
+        const valor_credito = user.creditos || 0
+        const valor_pedido = parseInt(texto_split[1]) 
+
+        if(valor_credito<valor_pedido){
+
+          const dados = {
+            valor: taxa_empresa(texto_split[1], texto),
+            titulo: '',
+            nome: user.nome,
+            document: user.document,
+            email: user.email,
+            id_telegram: id_telegram,
+            ddd: user.ddd_phone,
+            telefone: user.phone,
+            produto_id: user.produto[0].id,
+            user_id: user.id,
+          }
+
+          const pagamento = await Pagamento(dados)
+          if (pagamento.status === "ok") {
+            await this.bot.sendMessage(id_telegram, `
+⚠️ Saldo insuficiente.
+
+Para continuar adicionando produtos, por favor, adicione mais créditos à sua conta.
+
+Seus Créditos: ${(user.creditos||0 / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+`,
+              {
+                reply_markup: {
+                  inline_keyboard: [
+                    [
+                      { text: "ADICIONAR CRÉDITOS", url: `https://bdmil.vercel.app/ac/${pagamento.url}` }
+                    ],
+                  ],
+                },
+              });
+
+            this.bot.deleteMessage(id_telegram, messageId)
+
+          } else {
+            await this.bot.sendMessage(id_telegram, `Algo deu errado com seu pedido?`, botao.botao_inicial);
+            this.bot.deleteMessage(id_telegram, messageId)
+          }
+          return
+        }
+
+        const novo_crédito = valor_credito-valor_pedido
+
+        await prisma_db.users.update({
+          where:{id:user.id},
+          data:{
+            creditos: novo_crédito
+          }
+        })
+
+        const dados = {
+          valor: taxa_empresa(texto_split[1], texto),
+          titulo: '',
+          nome: user.nome,
+          document: user.document,
+          email: user.email,
+          id_telegram: id_telegram,
+          ddd: user.ddd_phone,
+          telefone: user.phone,
+          produto_id: user.produto[0].id,
+          user_id: user.id,
+        }
+        try {
+          Criar_pedido(dados)
+          this.bot.deleteMessage(id_telegram, messageId)
+        } catch (error) {
+          await this.bot.sendMessage(id_telegram, `⚠️ Parece que algo deu errado, o que você pretende fazer?`, botao.botao_inicial);
+          this.bot.deleteMessage(id_telegram, messageId)
+        }
+
       }
     });
 
@@ -431,7 +515,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
 
         if (editar_produtos[0].editar === '1') {
           await prisma_db.produtos.update({ where: { id: editar_produtos[0].id }, data: { descricao: texto, editar: '2' } })
-          await this.bot.sendMessage(id_telegram, mensagens.valor);
+          await this.bot.sendMessage(id_telegram, mensagens.valor, botao.suporte);
           this.bot.deleteMessage(id_telegram, messageId)
           return
         }
@@ -496,7 +580,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                 data: { msg_id: editar_msg.message_id }
               })
 
-              await this.bot.sendMessage(id_telegram, `✔️ Seu produto foi editado com sucesso.`);
+              await this.bot.sendMessage(id_telegram, `✔️ Seu produto foi editado com sucesso.`, botao.suporte);
               this.bot.deleteMessage(id_telegram, messageId)
             } else {
               await this.bot.sendMessage(id_telegram, `⚠️ Algo deu errado, entre em contato com o suporte.`, botao.suporte);
@@ -566,7 +650,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                     descricao: texto,
                   }
                 })
-                await this.bot.sendMessage(id_telegram, mensagens.valor);
+                await this.bot.sendMessage(id_telegram, mensagens.valor, botao.suporte);
                 this.bot.deleteMessage(id_telegram, messageId)
                 return
               } catch (error) {
@@ -660,12 +744,18 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                   const pagamento = await Pagamento(dados)
 
                   if (pagamento.status === "ok") {
-                    await this.bot.sendMessage(id_telegram, `✔️ Seu produto foi cadastrado com sucesso. Clique no botão PAGAR para Ativar seu Anúncio!`,
+                    await this.bot.sendMessage(id_telegram, `
+✔️ Seu produto foi cadastrado com sucesso.
+Clique no botão PAGAR para Ativar seu Anúncio!
+
+Valor ${(parseInt(dados.valor) / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+`,
                       {
                         reply_markup: {
                           inline_keyboard: [
                             [
-                              { text: "PAGAR", url: `https://bdmil.vercel.app/pg/${pagamento.url}` },
+                              { text: "PAGAR COM CRÉDITO", callback_data: `CREDITO_${dados.valor}_${pagamento.url}` },
+                              { text: "PAGAR", url: `https://bdmil.vercel.app/pg/${pagamento.url}` }
                             ],
                           ],
                         },

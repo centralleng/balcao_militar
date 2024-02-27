@@ -204,7 +204,7 @@ Recomendo que sempre seja confirmado o valor do produto, bem como a forma de ent
         
         ❌  O mau comportamento pode acarretar na exclusão do balcão.
         `
-        }
+    }
 
     necessario_username = `⚠️ É necessário cadastrar um UserName do Telegram, para dar continuidade no Balcão.`
 

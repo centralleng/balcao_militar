@@ -1,6 +1,7 @@
 import TelegramBot from 'node-telegram-bot-api';
 
 class Botoes {
+
     botao_inicial = {
         reply_markup: {
             inline_keyboard: [
@@ -45,12 +46,21 @@ class Botoes {
         },
     }
 
-
     suporte = {
         reply_markup: {
             inline_keyboard: [
                 [
-                    { text: "SUPORTE", url: "https://t.me/" },
+                    { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot" },
+                ],
+            ],
+        },
+    }
+
+    sugestao = {
+        reply_markup: {
+            inline_keyboard: [
+                [
+                    { text: "SUGESTÕES", url: "https://t.me/BDMilSUGESTOES_bot" },
                 ],
             ],
         },
@@ -200,6 +210,8 @@ class Botoes {
                 ],
                 [
                     { text: "[Material Escolar] vendas", callback_data: "CADASTRO_[Material-Escolar]_APAGAR" },
+                    { text: "[Passagens Aéreas] vendas", callback_data: "CADASTRO_[Passagens-Aereas]_APAGAR" },
+                    { text: "[Tudo Pet] vendas", callback_data: "CADASTRO_[Tudo-Pet]_APAGAR" },
                 ],
             ],
         },

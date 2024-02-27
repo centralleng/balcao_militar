@@ -4,6 +4,8 @@ import { prisma_db } from '../database/prisma_db';
 import axios from 'axios';
 import moment from 'moment';
 import { mensagens } from '../utils/msg_bot';
+import { recomendado_desaconsenho } from '../utils/recomendo_desaconselho'
+import { botao } from '../utils/msg_bot_botao';
 
 const bot_quero_vender = process.env.API_BOT_BDMIL_VENDA
 
@@ -63,7 +65,7 @@ function createInlineKeyboard(userTelegramId:any, produto_id:any, user_id:any) {
               })
 
               if(log.length>0){
-                this.bot.sendMessage(id_telegram, `⚠️ Sua recomendação já foi feita.`);
+                this.bot.sendMessage(id_telegram, `⚠️ Sua recomendação já foi feita.`, botao.sugestao);
                 return
               }else{
                 const user = await prisma_db.users.findUnique({where:{id:texto_split[2]}})
@@ -71,7 +73,7 @@ function createInlineKeyboard(userTelegramId:any, produto_id:any, user_id:any) {
                 const recomendo = recomendo_db + 1
                 
                 if(user){
-                  await prisma_db.users.update({
+                  const user_db = await prisma_db.users.update({
                     where:{id: user?.id},
                     data:{
                       recomendado: recomendo      
@@ -84,8 +86,10 @@ function createInlineKeyboard(userTelegramId:any, produto_id:any, user_id:any) {
                       user_id: user_principal.id,
                       descricao: 'recomendado',
                     }
-                  })    
-                  this.bot.sendMessage(id_telegram, `✅ Recomendação feita com sucesso!`);             
+                  })   
+                  
+                  recomendado_desaconsenho.desaconselho_vendedor(user_db.id_telegram)
+                  this.bot.sendMessage(id_telegram, `✅ Recomendação feita com sucesso!`, botao.sugestao);             
                 }
               }
             }          
@@ -123,7 +127,7 @@ function createInlineKeyboard(userTelegramId:any, produto_id:any, user_id:any) {
               })
 
               if(log.length>0){
-                this.bot.sendMessage(id_telegram, `⚠️ Seu desaconselho já foi feito.`);
+                this.bot.sendMessage(id_telegram, `⚠️ Seu desaconselho já foi feito.`, botao.sugestao);
               }else{
 
                 const user = await prisma_db.users.findUnique({where:{id:texto_split[2]}})
@@ -131,7 +135,7 @@ function createInlineKeyboard(userTelegramId:any, produto_id:any, user_id:any) {
                 const desaconselhado = desaconselhado_db + 1
 
                 if(user){
-                  await prisma_db.users.update({
+                  const user_db = await prisma_db.users.update({
                     where:{id: user?.id},
                     data:{
                       desaconselhado: desaconselhado      
@@ -181,8 +185,9 @@ Obs: Coloque no máximo 150 caracteres
                         user_id: user_principal.id,
                         descricao: descricao,
                       }
-                    })     
-                    this.bot.sendMessage(id_telegram, `✅ Desaconselho feita com sucesso!`);
+                    })  
+                    recomendado_desaconsenho.desaconselho_vendedor(user_db.id_telegram)   
+                    this.bot.sendMessage(id_telegram, `✅ Desaconselho feita com sucesso!`, botao.sugestao);
                   }
                 }
               }
