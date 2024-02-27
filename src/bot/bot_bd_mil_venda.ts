@@ -429,7 +429,9 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             await this.bot.sendMessage(id_telegram, `
 ⚠️ Saldo insuficiente.
 
-Para continuar adicionando produtos, por favor, adicione mais créditos à sua conta.
+Para continuar adicionando produtos você precisa comprar mais créditos.
+
+Pressione o botão ADICIONAR CRÉDITOS.
 
 Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
 `,
