@@ -48,7 +48,7 @@ if(pedido){
       await prisma_db.users.update({
         where:{id:pedido.user_id},  
         data:{
-          creditos: parseInt(pedido.valor||'')
+          creditos: (pedido.users.creditos||0)+parseInt(pedido.valor||'')
         }
       })
     }

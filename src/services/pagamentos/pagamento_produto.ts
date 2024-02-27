@@ -3,6 +3,7 @@ import { prisma_db } from "../../database/prisma_db";
 interface dados {
     valor: string;
     titulo: string;
+    tipo?: string;
     nome: string | null;
     document: string | null;
     email: string | null;
@@ -20,6 +21,7 @@ export default async function Pagamento (dados:dados) {
             valor: dados.valor,
             titulo: dados.titulo,
             nome: dados.nome,
+            tipo: dados.tipo,
             document: dados.document,
             email: dados.email,
             id_telegram: dados.id_telegram.toString(),

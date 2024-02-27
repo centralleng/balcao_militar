@@ -413,6 +413,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           const dados = {
             valor: taxa_empresa(texto_split[1], texto),
             titulo: '',
+            tipo: 'credito',
             nome: user.nome,
             document: user.document,
             email: user.email,
