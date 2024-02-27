@@ -169,7 +169,6 @@ class Botoes {
         },
     }
 
-
     artigos_civis = {
         reply_markup: {
             inline_keyboard: [
@@ -212,6 +211,10 @@ class Botoes {
                     { text: "[Material Escolar] vendas", callback_data: "CADASTRO_[Material-Escolar]_APAGAR" },
                     { text: "[Passagens Aéreas] vendas", callback_data: "CADASTRO_[Passagens-Aereas]_APAGAR" },
                     { text: "[Tudo Pet] vendas", callback_data: "CADASTRO_[Tudo-Pet]_APAGAR" },
+                ],
+                [
+                    { text: "[Ferramenta] vendas", callback_data: "CADASTRO_[Ferramenta]_APAGAR" },
+                    { text: "[Mat. Construção] vendas", callback_data: "CADASTRO_[Mat_Construcao]_APAGAR" },
                 ],
             ],
         },

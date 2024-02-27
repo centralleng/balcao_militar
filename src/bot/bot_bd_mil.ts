@@ -357,7 +357,13 @@ Boas negociações!
           { text: "[Utilidade Doméstica vendas]", url: "https://t.me/+UKKjuOU36ylmZjhh"},
         ],
         [
-          {text: "[Material Escolar vendas]", url: "https://t.me/+xPsCdljf7FtkZTYx"}
+          {text: "[Material Escolar vendas]", url: "https://t.me/+xPsCdljf7FtkZTYx"},
+          { text: "[Tudo Pet] vendas",  url: "https://t.me/+ycJBfYd0ub84ZjZh" },
+          { text: "[Passagens Aéreas] vendas",  url: "https://t.me/+URd2yP1W80o3MTQx" },
+       ],
+        [
+          { text: "[Ferramenta] vendas",  url: "https://t.me/+B6SXBxIhSxczYzNh" },
+          { text: "[Mat. Construção] vendas",  url: "https://t.me/+Kh9k9ns1hSkzMjAx" },
         ],
       ],        
       },
