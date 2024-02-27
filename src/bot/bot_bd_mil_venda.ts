@@ -430,7 +430,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
 
 Para continuar adicionando produtos, por favor, adicione mais créditos à sua conta.
 
-Seus Créditos: ${(user.creditos||0 / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
 `,
               {
                 reply_markup: {
