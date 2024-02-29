@@ -285,7 +285,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                   inline_keyboard: [
                       [
                           { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot" },
-                          { text: "Voltar ao Início", callback_data: `DELETAR_${produto_db.id}` },
+                          { text: "Voltar ao Início", callback_data: `DELETAR-PRODUTO_${produto_db.id}` },
                       ],
                   ],
               },
