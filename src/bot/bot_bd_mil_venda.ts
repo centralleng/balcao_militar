@@ -61,7 +61,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
         this.bot.deleteMessage(id_telegram, messageId)
       } else {
 
-        if (user.produto.length > 0) {
+        if (user.produto.length > 0){
 
           if (user?.produto[0].status === null) {
             await this.bot.sendMessage(id_telegram, mensagens.finalizar_pruduto, botao.suporte);
@@ -84,7 +84,6 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             this.bot.deleteMessage(id_telegram, messageId)
             return
           }
-
         }
 
         await prisma_db.users.update({
@@ -92,7 +91,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           data: { username: username }
         })
 
-        if (texto === 'VENDER') { // Entra no fluxo de venda basta criar um produto e não finalizar o processo, so vai parar quando finalizar ou cancelar -> cancelar seguinifica apagar o produto.
+        if (texto === 'VENDER'){ // Entra no fluxo de venda basta criar um produto e não finalizar o processo, so vai parar quando finalizar ou cancelar -> cancelar seguinifica apagar o produto.
           if (!user.produto[0] || user.produto[0].status) { // so vai criar um produto se ele não estiver nenhum pendente.
             if (user) {
               await prisma_db.produtos.create({
@@ -111,12 +110,12 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             this.bot.deleteMessage(id_telegram, messageId)
           }
         }
-
-        if (texto === 'MEUS_PRODUTOS') { // Listar todo os produtos cadastrados 
+        
+        if (texto === 'MEUS_PRODUTOS'){ // Listar todo os produtos cadastrados 
 
         }
 
-        if (texto_split[0] === 'ATUALIZAR') {
+        if (texto_split[0] === 'ATUALIZAR'){
 
           const produto_pedido = await prisma_db.produtos.findUnique({
             where: { id: parseInt(texto_split[1]) },
@@ -179,7 +178,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           }
         }
 
-        if (texto_split[0] === 'EDITAR') {
+        if (texto_split[0] === 'EDITAR'){
 
           const produtos = await prisma_db.produtos.findMany({
             where: {
@@ -219,7 +218,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           }
         }
 
-        if (texto_split[0] === 'DELETAR') { // Listar todo os produtos cadastrados  
+        if (texto_split[0] === 'DELETAR'){ // Listar todo os produtos cadastrados  
 
           const produto_pedido = await prisma_db.produtos.findUnique({
             where: { id: parseInt(texto_split[1]) },
@@ -253,7 +252,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           }
         }
 
-        if (texto_split[0] === 'CADASTRO') { // Listar todo os produtos cadastrados 
+        if (texto_split[0] === 'CADASTRO'){ // Listar todo os produtos cadastrados 
         
           try {
             await prisma_db.produtos.create({
@@ -271,149 +270,200 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           }
         }       
       }
+        if (texto_split[0] === 'RECOMENDO'){
 
-      if (texto_split[0] === 'RECOMENDO') {
+          const log = await prisma_db.log_recomendacoes.findMany({
+            where: {
+              user_id: user.id,
+              produto_id: parseInt(texto_split[2])
+            }
+          })
 
-        const log = await prisma_db.log_recomendacoes.findMany({
-          where: {
-            user_id: user.id,
-            produto_id: parseInt(texto_split[2])
-          }
-        })
-
-        if (log.length > 0) {
-          await this.bot.sendMessage(id_telegram, `⚠️ Sua recomendação já foi feita.`, botao.sugestao);
-          this.bot.deleteMessage(id_telegram, messageId)
-          return
-        } else {
-          const user_req = await prisma_db.users.findUnique({ where: { id: texto_split[3] } })
-          const recomendo_db = user?.recomendado || 0
-          const recomendo = recomendo_db + 1
-
-          if (user_req) {
-            const user_db = await prisma_db.users.update({
-              where: { id: texto_split[3] },
-              data: {
-                recomendado: recomendo
-              }
-            })
-            await prisma_db.log_recomendacoes.create({
-              data: {
-                status: 'recomendado',
-                produto_id: parseInt(texto_split[2]),
-                user_id: user.id,
-                descricao: 'recomendado',
-              }
-            })
-           
-            recomendado_desaconsenho.recomendo_comprador(user_db.id_telegram)
-
-            await this.bot.sendMessage(id_telegram, `✅ Recomendação feita com sucesso!`, botao.sugestao);
+          if (log.length > 0) {
+            await this.bot.sendMessage(id_telegram, `⚠️ Sua recomendação já foi feita.`, botao.sugestao);
             this.bot.deleteMessage(id_telegram, messageId)
-          }
-        }
-      }
+            return
+          } else {
+            const user_req = await prisma_db.users.findUnique({ where: { id: texto_split[3] } })
+            const recomendo_db = user?.recomendado || 0
+            const recomendo = recomendo_db + 1
 
-      if (texto_split[0] === 'DESACONSELHO') {
-
-        await this.bot.sendMessage(id_telegram, `Selecione o Motivo`,
-          {
-            reply_markup: {
-              inline_keyboard: [
-                [
-                  { text: "Não entregou o produto", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_1` },
-                  { text: "Não efetuou o pagamento", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_2` },
-                ],
-                [
-                  { text: "Foi rude", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_3` },
-                  { text: "Produto em desacordo com o descrito", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_4` },
-                ],
-                [
-                  { text: "Não é militar", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_5` },
-                  { text: "Outros", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_6` },
-                ],
-              ],
-            },
-          });
-        this.bot.deleteMessage(id_telegram, messageId)
-
-      }
-
-      if (texto_split[0] === 'DESACONSELHODB') {
-
-        const log = await prisma_db.log_recomendacoes.findMany({
-          where: {
-            user_id: user?.id,
-            produto_id: parseInt(texto_split[1])
-          }
-        })
-
-        if (log.length > 0) {
-          await this.bot.sendMessage(id_telegram, `⚠️ Seu desaconselho já foi feito.`, botao.sugestao);
-          this.bot.deleteMessage(id_telegram, messageId)
-        } else {
-
-          const user_req = await prisma_db.users.findUnique({ where: { id: texto_split[2] } })
-          const desaconselhado_db = user?.desaconselhado || 0
-          const desaconselhado = desaconselhado_db + 1
-
-          if (user_req) {
-            const user_db = await prisma_db.users.update({
-              where: { id: user_req?.id },
-              data: {
-                desaconselhado: desaconselhado
-              }
-            });
-
-            const descricao: any = {
-            '1': 'Não entregou o produto', 
-            '2': 'Não efetuou o pagamento',
-            '3': 'Foi rude',
-            '4': 'Produto em desacordo com o descrito',
-            '5': 'Não é militar',
-            '6': 'Outros'
-          } 
-            if (texto_split[3] === '') {
-              await prisma_db.log_recomendacoes.create({
+            if (user_req) {
+              const user_db = await prisma_db.users.update({
+                where: { id: texto_split[3] },
                 data: {
-                  status: 'desaconselhado',
-                  produto_id: parseInt(texto_split[1]),
-                  user_id: user.id,
-                  descricao: '',
+                  recomendado: recomendo
                 }
               })
-              recomendado_desaconsenho.desaconselho_comprador(user_db.id_telegram)
-              await this.bot.sendMessage(id_telegram, mensagens.motivo);
-              this.bot.deleteMessage(id_telegram, messageId)
-            } else {
               await prisma_db.log_recomendacoes.create({
                 data: {
-                  status: 'desaconselhado',
-                  produto_id: parseInt(texto_split[1]),
+                  status: 'recomendado',
+                  produto_id: parseInt(texto_split[2]),
                   user_id: user.id,
-                  descricao: descricao[texto_split[3]],
+                  descricao: 'recomendado',
                 }
               })
-              await this.bot.sendMessage(id_telegram, mensagens.desaconselho_sucesso, botao.sugestao);
+            
+              recomendado_desaconsenho.recomendo_comprador(user_db.id_telegram)
+
+              await this.bot.sendMessage(id_telegram, `✅ Recomendação feita com sucesso!`, botao.sugestao);
               this.bot.deleteMessage(id_telegram, messageId)
             }
           }
         }
-      }
 
-      if(texto_split[0] === 'CREDITO'){
+        if (texto_split[0] === 'DESACONSELHO'){
 
-        const valor_credito = user.creditos || 0
-        const valor_pedido = parseInt(texto_split[1]) 
+          await this.bot.sendMessage(id_telegram, `Selecione o Motivo`,
+            {
+              reply_markup: {
+                inline_keyboard: [
+                  [
+                    { text: "Não entregou o produto", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_1` },
+                    { text: "Não efetuou o pagamento", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_2` },
+                  ],
+                  [
+                    { text: "Foi rude", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_3` },
+                    { text: "Produto em desacordo com o descrito", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_4` },
+                  ],
+                  [
+                    { text: "Não é militar", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_5` },
+                    { text: "Outros", callback_data: `DESACONSELHODB_${texto_split[2]}_${texto_split[3]}_6` },
+                  ],
+                ],
+              },
+            });
+          this.bot.deleteMessage(id_telegram, messageId)
 
-        console.log(valor_credito,valor_pedido)
+        }
 
-        if(valor_credito<valor_pedido){
+        if (texto_split[0] === 'DESACONSELHODB'){
+
+          const log = await prisma_db.log_recomendacoes.findMany({
+            where: {
+              user_id: user?.id,
+              produto_id: parseInt(texto_split[1])
+            }
+          })
+
+          if (log.length > 0) {
+            await this.bot.sendMessage(id_telegram, `⚠️ Seu desaconselho já foi feito.`, botao.sugestao);
+            this.bot.deleteMessage(id_telegram, messageId)
+          } else {
+
+            const user_req = await prisma_db.users.findUnique({ where: { id: texto_split[2] } })
+            const desaconselhado_db = user?.desaconselhado || 0
+            const desaconselhado = desaconselhado_db + 1
+
+            if (user_req) {
+              const user_db = await prisma_db.users.update({
+                where: { id: user_req?.id },
+                data: {
+                  desaconselhado: desaconselhado
+                }
+              });
+
+              const descricao: any = {
+              '1': 'Não entregou o produto', 
+              '2': 'Não efetuou o pagamento',
+              '3': 'Foi rude',
+              '4': 'Produto em desacordo com o descrito',
+              '5': 'Não é militar',
+              '6': 'Outros'
+            } 
+              if (texto_split[3] === '') {
+                await prisma_db.log_recomendacoes.create({
+                  data: {
+                    status: 'desaconselhado',
+                    produto_id: parseInt(texto_split[1]),
+                    user_id: user.id,
+                    descricao: '',
+                  }
+                })
+                recomendado_desaconsenho.desaconselho_comprador(user_db.id_telegram)
+                await this.bot.sendMessage(id_telegram, mensagens.motivo);
+                this.bot.deleteMessage(id_telegram, messageId)
+              } else {
+                await prisma_db.log_recomendacoes.create({
+                  data: {
+                    status: 'desaconselhado',
+                    produto_id: parseInt(texto_split[1]),
+                    user_id: user.id,
+                    descricao: descricao[texto_split[3]],
+                  }
+                })
+                await this.bot.sendMessage(id_telegram, mensagens.desaconselho_sucesso, botao.sugestao);
+                this.bot.deleteMessage(id_telegram, messageId)
+              }
+            }
+          }
+        }
+
+        if(texto_split[0] === 'CREDITO'){
+
+          const valor_credito = user.creditos || 0
+          const valor_pedido = parseInt(texto_split[1]) 
+
+          console.log(valor_credito,valor_pedido)
+
+          if(valor_credito<valor_pedido){
+
+            const dados = {
+              valor: taxa_empresa(texto_split[1], texto),
+              titulo: '',
+              tipo: 'credito',
+              nome: user.nome,
+              document: user.document,
+              email: user.email,
+              id_telegram: id_telegram,
+              ddd: user.ddd_phone,
+              telefone: user.phone,
+              produto_id: user.produto[0].id,
+              user_id: user.id,
+            }
+
+            const pagamento = await Pagamento(dados)
+            if (pagamento.status === "ok") {
+              await this.bot.sendMessage(id_telegram, `
+  ⚠️ Saldo insuficiente.
+
+  Para continuar adicionando produtos você precisa comprar mais créditos.
+
+  Pressione o botão ADICIONAR CRÉDITOS.
+
+  Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+  `,
+                {
+                  reply_markup: {
+                    inline_keyboard: [
+                      [
+                        { text: "ADICIONAR CRÉDITOS", url: `https://bdmil.vercel.app/ac/${pagamento.url}` }
+                      ],
+                    ],
+                  },
+                });
+
+              this.bot.deleteMessage(id_telegram, messageId)
+
+            } else {
+              await this.bot.sendMessage(id_telegram, `Algo deu errado com seu pedido?`, botao.botao_inicial);
+              this.bot.deleteMessage(id_telegram, messageId)
+            }
+            return
+          }
+
+          const novo_crédito = valor_credito-valor_pedido
+
+          await prisma_db.users.update({
+            where:{id:user.id},
+            data:{
+              creditos: novo_crédito
+            }
+          })
 
           const dados = {
             valor: taxa_empresa(texto_split[1], texto),
             titulo: '',
-            tipo: 'credito',
             nome: user.nome,
             document: user.document,
             email: user.email,
@@ -423,69 +473,17 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             produto_id: user.produto[0].id,
             user_id: user.id,
           }
-
-          const pagamento = await Pagamento(dados)
-          if (pagamento.status === "ok") {
-            await this.bot.sendMessage(id_telegram, `
-⚠️ Saldo insuficiente.
-
-Para continuar adicionando produtos você precisa comprar mais créditos.
-
-Pressione o botão ADICIONAR CRÉDITOS.
-
-Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-`,
-              {
-                reply_markup: {
-                  inline_keyboard: [
-                    [
-                      { text: "ADICIONAR CRÉDITOS", url: `https://bdmil.vercel.app/ac/${pagamento.url}` }
-                    ],
-                  ],
-                },
-              });
-
+          try {
+            Criar_pedido(dados)
             this.bot.deleteMessage(id_telegram, messageId)
-
-          } else {
-            await this.bot.sendMessage(id_telegram, `Algo deu errado com seu pedido?`, botao.botao_inicial);
+          } catch (error) {
+            await this.bot.sendMessage(id_telegram, `⚠️ Parece que algo deu errado, o que você pretende fazer?`, botao.botao_inicial);
             this.bot.deleteMessage(id_telegram, messageId)
           }
-          return
+
         }
-
-        const novo_crédito = valor_credito-valor_pedido
-
-        await prisma_db.users.update({
-          where:{id:user.id},
-          data:{
-            creditos: novo_crédito
-          }
-        })
-
-        const dados = {
-          valor: taxa_empresa(texto_split[1], texto),
-          titulo: '',
-          nome: user.nome,
-          document: user.document,
-          email: user.email,
-          id_telegram: id_telegram,
-          ddd: user.ddd_phone,
-          telefone: user.phone,
-          produto_id: user.produto[0].id,
-          user_id: user.id,
-        }
-        try {
-          Criar_pedido(dados)
-          this.bot.deleteMessage(id_telegram, messageId)
-        } catch (error) {
-          await this.bot.sendMessage(id_telegram, `⚠️ Parece que algo deu errado, o que você pretende fazer?`, botao.botao_inicial);
-          this.bot.deleteMessage(id_telegram, messageId)
-        }
-
-      }
     });
-
+ 
     this.bot.on('message', async (msg: any) => {
 
       const id_telegram = msg.chat.id.toString();

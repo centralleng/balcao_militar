@@ -214,7 +214,7 @@ class Botoes {
                 ],
                 [
                     { text: "[Ferramenta] vendas", callback_data: "CADASTRO_[Ferramenta]_APAGAR" },
-                    { text: "[Mat. Construção] vendas", callback_data: "CADASTRO_[Mat_Construcao]_APAGAR" },
+                    { text: "[Mat. Construção] vendas", callback_data: "CADASTRO_[Mat-Construcao]_APAGAR" },
                 ],
             ],
         },
