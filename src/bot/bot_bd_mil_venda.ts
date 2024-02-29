@@ -60,6 +60,24 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
         this.bot.deleteMessage(id_telegram, messageId)
       } else {
 
+        if (texto_split[0] === 'DELETAR-PRODUTO'){
+          try {
+            await prisma_db.produtos.delete({
+              where:{id: parseInt(texto_split[1])}
+            })   
+            
+            await this.bot.sendMessage(id_telegram, mensagens.texto_inicial);           
+            await this.bot.sendMessage(id_telegram, `Onde você gostaria de divulgar a sua oferta?`);
+            await this.bot.sendMessage(id_telegram, `Artigos Militares`, botao.artigos_militares);
+            await this.bot.sendMessage(id_telegram, `Artigos Civis`, botao.artigos_civis);
+            this.bot.deleteMessage(id_telegram, messageId)
+            
+          } catch (error) {
+            await this.bot.sendMessage(id_telegram, `⚠️ O produto não existe.`, botao.suporte);
+            this.bot.deleteMessage(id_telegram, messageId)            
+          }
+        }
+
         if (user.produto.length > 0){
 
           if (user?.produto[0].status === null) {
@@ -249,25 +267,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             await this.bot.sendMessage(id_telegram, `⚠️ O produto já foi deletado.`);
             this.bot.deleteMessage(id_telegram, messageId)
           }
-        }
-
-        if (texto_split[0] === 'DELETAR-PRODUTO'){
-          try {
-            await prisma_db.produtos.delete({
-              where:{id: parseInt(texto_split[1])}
-            })   
-            
-            await this.bot.sendMessage(id_telegram, mensagens.texto_inicial);           
-            await this.bot.sendMessage(id_telegram, `Onde você gostaria de divulgar a sua oferta?`);
-            await this.bot.sendMessage(id_telegram, `Artigos Militares`, botao.artigos_militares);
-            await this.bot.sendMessage(id_telegram, `Artigos Civis`, botao.artigos_civis);
-            this.bot.deleteMessage(id_telegram, messageId)
-            
-          } catch (error) {
-            await this.bot.sendMessage(id_telegram, `⚠️ O produto não existe.`, botao.suporte);
-            this.bot.deleteMessage(id_telegram, messageId)            
-          }
-        }
+        }       
 
         if (texto_split[0] === 'CADASTRO'){ // Listar todo os produtos cadastrados 
         
