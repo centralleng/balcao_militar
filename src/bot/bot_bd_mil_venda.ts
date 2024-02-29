@@ -31,14 +31,12 @@ class Bot_bd_mil_venda {
       const messageId = msg_del.message_id.toString()
 
       if(texto_split[0]==='CADASTRO'&&texto_split[2]==='APAGAR'){
-        await this.bot.deleteMessage(id_telegram, (message_id-4).toString())
         await this.bot.deleteMessage(id_telegram, (message_id-3).toString())
         await this.bot.deleteMessage(id_telegram, (message_id-2).toString()) 
         await this.bot.deleteMessage(id_telegram, (message_id-1).toString())
         await this.bot.deleteMessage(id_telegram, (message_id).toString())  
       }      
-      if(texto_split[0]==='CADASTRO'&&texto_split[2]==='APAGAR-01'){    
-        await this.bot.deleteMessage(id_telegram, (message_id-3).toString())
+      if(texto_split[0]==='CADASTRO'&&texto_split[2]==='APAGAR-01'){  
         await this.bot.deleteMessage(id_telegram, (message_id-2).toString()) 
         await this.bot.deleteMessage(id_telegram, (message_id-1).toString())
         await this.bot.deleteMessage(id_telegram, (message_id).toString())
@@ -250,6 +248,24 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           } else {
             await this.bot.sendMessage(id_telegram, `⚠️ O produto já foi deletado.`);
             this.bot.deleteMessage(id_telegram, messageId)
+          }
+        }
+
+        if (texto_split[0] === 'DELETAR-PRODUTO'){
+          try {
+            await prisma_db.produtos.delete({
+              where:{id: parseInt(texto_split[1])}
+            })   
+            
+            await this.bot.sendMessage(id_telegram, mensagens.texto_inicial);           
+            await this.bot.sendMessage(id_telegram, `Onde você gostaria de divulgar a sua oferta?`);
+            await this.bot.sendMessage(id_telegram, `Artigos Militares`, botao.artigos_militares);
+            await this.bot.sendMessage(id_telegram, `Artigos Civis`, botao.artigos_civis);
+            this.bot.deleteMessage(id_telegram, messageId)
+            
+          } catch (error) {
+            await this.bot.sendMessage(id_telegram, `⚠️ O produto não existe.`, botao.suporte);
+            this.bot.deleteMessage(id_telegram, messageId)            
           }
         }
 
@@ -622,8 +638,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
         }
 
         if (user.produto.length === 0) {
-          await this.bot.sendMessage(id_telegram, mensagens.texto_inicial);
-          await this.bot.sendMessage(id_telegram, mensagens.atencao);
+          await this.bot.sendMessage(id_telegram, mensagens.texto_inicial);         
           await this.bot.sendMessage(id_telegram, `Onde você gostaria de divulgar a sua oferta?`);
           await this.bot.sendMessage(id_telegram, `Artigos Militares`, botao.artigos_militares);
           await this.bot.sendMessage(id_telegram, `Artigos Civis`, botao.artigos_civis);
@@ -633,8 +648,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
 
         if (user.produto && !user.produto[0].status) {
           if (user.produto[0].categoria === null) {  // Esse if é somente para não deixar colocar a cateria por aqui
-            await this.bot.sendMessage(id_telegram, mensagens.texto_inicial);
-            await this.bot.sendMessage(id_telegram, mensagens.atencao);
+            await this.bot.sendMessage(id_telegram, mensagens.texto_inicial);           
             await this.bot.sendMessage(id_telegram, `Onde você gostaria de divulgar a sua oferta?`);
             await this.bot.sendMessage(id_telegram, `Artigos Militares`, botao.artigos_militares);
             await this.bot.sendMessage(id_telegram, `Artigos Civis`, botao.artigos_civis);
@@ -660,7 +674,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                       inline_keyboard: [
                           [
                               { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot" },
-                              { text: "Voltar ao Início", callback_data: `DELETAR_${produto_db.id}` },
+                              { text: "Voltar ao Início", callback_data: `DELETAR-PRODUTO_${produto_db.id}` },
                           ],
                       ],
                   },
@@ -821,8 +835,7 @@ Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'cur
             }
           }
         } else {
-          await this.bot.sendMessage(id_telegram, mensagens.texto_inicial);
-          await this.bot.sendMessage(id_telegram, mensagens.atencao);
+          await this.bot.sendMessage(id_telegram, mensagens.texto_inicial);         
           await this.bot.sendMessage(id_telegram, `Onde você gostaria de divulgar a sua oferta?`);
           await this.bot.sendMessage(id_telegram, `Artigos Militares`, botao.artigos_militares);
           await this.bot.sendMessage(id_telegram, `Artigos Civis`, botao.artigos_civis);
