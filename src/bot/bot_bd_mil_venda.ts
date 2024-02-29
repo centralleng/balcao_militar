@@ -9,6 +9,7 @@ import { botao } from '../utils/msg_bot_botao';
 import { mensagens } from '../utils/msg_bot';
 import { taxa_empresa } from '../utils/taxas';
 import { recomendado_desaconsenho } from '../utils/recomendo_desaconselho'
+import Update_pedido from '../services/update/criar_pedido';
 
 // const token_bot = process.env.API_BOT_BDMIL_VENDA ||'' //'6962343359:AAERsmVCjSJczzeQ-ONe_nfVyQxQYDzFYlg'; // Token do bot do telegram... CentrallTest2_Bot
 
@@ -402,12 +403,9 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
         if(texto_split[0] === 'CREDITO'){
 
           const valor_credito = user.creditos || 0
-          const valor_pedido = parseInt(texto_split[1]) 
-
-          console.log(valor_credito,valor_pedido)
+          const valor_pedido = parseInt(texto_split[1])          
 
           if(valor_credito<valor_pedido){
-
             const dados = {
               valor: taxa_empresa(texto_split[1], texto),
               titulo: '',
@@ -422,33 +420,40 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               user_id: user.id,
             }
 
-            const pagamento = await Pagamento(dados)
-            if (pagamento.status === "ok") {
+            try {
+              const pedido_edit = prisma_db.pedidos.update({
+                where:{id: parseInt(texto_split[1])},
+                data:{
+                  tipo: 'credito',                  
+                }
+              })
+
               await this.bot.sendMessage(id_telegram, `
-  ⚠️ Saldo insuficiente.
-
-  Para continuar adicionando produtos você precisa comprar mais créditos.
-
-  Pressione o botão ADICIONAR CRÉDITOS.
-
-  Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-  `,
-                {
-                  reply_markup: {
-                    inline_keyboard: [
-                      [
-                        { text: "ADICIONAR CRÉDITOS", url: `https://bdmil.vercel.app/ac/${pagamento.url}` }
-                      ],
-                    ],
-                  },
-                });
-
-              this.bot.deleteMessage(id_telegram, messageId)
-
-            } else {
+              ⚠️ Saldo insuficiente.
+            
+              Para continuar adicionando produtos você precisa comprar mais créditos.
+            
+              Pressione o botão ADICIONAR CRÉDITOS.
+            
+              Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+              `,
+                            {
+                              reply_markup: {
+                                inline_keyboard: [
+                                  [
+                                    { text: "ADICIONAR CRÉDITOS", url: `https://bdmil.vercel.app/ac/${texto_split[0]}` }
+                                  ],
+                                ],
+                              },
+                            });
+            
+                          this.bot.deleteMessage(id_telegram, messageId)
+              
+            } catch (error) {
               await this.bot.sendMessage(id_telegram, `Algo deu errado com seu pedido?`, botao.botao_inicial);
-              this.bot.deleteMessage(id_telegram, messageId)
-            }
+              this.bot.deleteMessage(id_telegram, messageId)              
+            }          
+         
             return
           }
 
@@ -462,19 +467,12 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           })
 
           const dados = {
-            valor: taxa_empresa(texto_split[1], texto),
-            titulo: '',
-            nome: user.nome,
-            document: user.document,
-            email: user.email,
-            id_telegram: id_telegram,
-            ddd: user.ddd_phone,
-            telefone: user.phone,
+            pedido_id: parseInt(texto_split[1]),
             produto_id: user.produto[0].id,
             user_id: user.id,
           }
           try {
-            Criar_pedido(dados)
+            Update_pedido(dados)
             this.bot.deleteMessage(id_telegram, messageId)
           } catch (error) {
             await this.bot.sendMessage(id_telegram, `⚠️ Parece que algo deu errado, o que você pretende fazer?`, botao.botao_inicial);
@@ -555,7 +553,9 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               const produto_pedido = await prisma_db.produtos.update({ where: { id: editar_produtos[0].id }, data: { valor_produto: texto.replace(/\./g, ''), editar: '0' } })
               await this.bot.deleteMessage(grupo.id_grupo, editar_produtos[0].pedido[0].msg_id?.toString() || '')
 
-              const editar_msg = await this.bot.sendMessage(grupo.id_grupo,
+              console.log('veio')
+
+              const editar_msg = await this.bot.sendMessage(grupo.id_grupo,               
 
                 mensagens.msg_pagamento_grupo({ 
                   descricao_produto: produto_pedido.descricao || '', 

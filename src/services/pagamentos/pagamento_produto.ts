@@ -21,7 +21,7 @@ export default async function Pagamento (dados:dados) {
             valor: dados.valor,
             titulo: dados.titulo,
             nome: dados.nome,
-            tipo: dados.tipo,
+            tipo: dados?.tipo,
             document: dados.document,
             email: dados.email,
             id_telegram: dados.id_telegram.toString(),
