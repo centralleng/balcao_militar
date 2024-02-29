@@ -71,10 +71,11 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             await this.bot.sendMessage(id_telegram, `Artigos Militares`, botao.artigos_militares);
             await this.bot.sendMessage(id_telegram, `Artigos Civis`, botao.artigos_civis);
             this.bot.deleteMessage(id_telegram, messageId)
-            
+            return
           } catch (error) {
             await this.bot.sendMessage(id_telegram, `⚠️ O produto não existe.`, botao.suporte);
-            this.bot.deleteMessage(id_telegram, messageId)            
+            this.bot.deleteMessage(id_telegram, messageId)   
+            return         
           }
         }
 
@@ -790,10 +791,13 @@ Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'cur
                               { text: "PAGAR", url: `https://bdmil.vercel.app/pg/${pagamento.url}` },
                               { text: "PAGAR CRÉDITO", callback_data: `CREDITO_${dados.valor}_${pagamento.url}` },
                             ],
+                            // [
+                            //   { text: "Apagar Pedido", callback_data: `DELETAR-PRODUTO_${user.produto[0].id}` },
+                            // ],
                           ],
                         },
                       });
-
+                
                     this.bot.deleteMessage(id_telegram, messageId)
 
                   } else {
