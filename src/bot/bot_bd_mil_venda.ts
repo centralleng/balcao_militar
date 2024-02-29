@@ -405,24 +405,11 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           const valor_credito = user.creditos || 0
           const valor_pedido = parseInt(texto_split[1])          
 
-          if(valor_credito<valor_pedido){
-            const dados = {
-              valor: taxa_empresa(texto_split[1], texto),
-              titulo: '',
-              tipo: 'credito',
-              nome: user.nome,
-              document: user.document,
-              email: user.email,
-              id_telegram: id_telegram,
-              ddd: user.ddd_phone,
-              telefone: user.phone,
-              produto_id: user.produto[0].id,
-              user_id: user.id,
-            }
+          if(valor_credito<valor_pedido){       
 
             try {
-              const pedido_edit = prisma_db.pedidos.update({
-                where:{id: parseInt(texto_split[1])},
+              const pedido_edit = await prisma_db.pedidos.update({
+                where:{id: parseInt(texto_split[2])},
                 data:{
                   tipo: 'credito',                  
                 }
@@ -441,7 +428,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                               reply_markup: {
                                 inline_keyboard: [
                                   [
-                                    { text: "ADICIONAR CRÉDITOS", url: `https://bdmil.vercel.app/ac/${texto_split[0]}` }
+                                    { text: "ADICIONAR CRÉDITOS", url: `https://bdmil.vercel.app/ac/${texto_split[2]}` }
                                   ],
                                 ],
                               },
@@ -467,7 +454,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           })
 
           const dados = {
-            pedido_id: parseInt(texto_split[1]),
+            pedido_id: parseInt(texto_split[2]),
             produto_id: user.produto[0].id,
             user_id: user.id,
           }
