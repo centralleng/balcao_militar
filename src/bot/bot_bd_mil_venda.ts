@@ -256,14 +256,25 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
         if (texto_split[0] === 'CADASTRO'){ // Listar todo os produtos cadastrados 
         
           try {
-            await prisma_db.produtos.create({
+            const produto_db = await prisma_db.produtos.create({
               data: {
                 user_id: user?.id,
                 id_telegram: id_telegram.toString(),
                 categoria: texto_split[1]
               }
             })
-            await this.bot.sendMessage(id_telegram, mensagens.descricao, botao.suporte); // , {suporte_tutorial} para aparecer botão suporte e tutorial    
+            await this.bot.sendMessage(id_telegram, mensagens.descricao, 
+              {
+                reply_markup: {
+                  inline_keyboard: [
+                      [
+                          { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot" },
+                          { text: "Voltar ao Início", callback_data: `DELETAR_${produto_db.id}` },
+                      ],
+                  ],
+              },
+              }
+            ); // , {suporte_tutorial} para aparecer botão suporte e tutorial    
             this.bot.deleteMessage(id_telegram, messageId)
           } catch (error) {
             await this.bot.sendMessage(id_telegram, `⚠️ Parece que algo deu errado, o que você pretende fazer?`, botao.botao_inicial);
@@ -416,13 +427,13 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               })
 
               await this.bot.sendMessage(id_telegram, `
-              ⚠️ Saldo insuficiente.
-            
-              Para continuar adicionando produtos você precisa comprar mais créditos.
-            
-              Pressione o botão ADICIONAR CRÉDITOS.
-            
-              Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+⚠️ Saldo insuficiente.
+
+Para continuar adicionando produtos você precisa comprar mais créditos.
+
+Pressione o botão ADICIONAR CRÉDITOS.
+
+Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
               `,
                             {
                               reply_markup: {
@@ -637,13 +648,24 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             if (verifica_descricao.length < 150) {
 
               try {
-                await prisma_db.produtos.update({
+                const produto_db = await prisma_db.produtos.update({
                   where: { id: user.produto[0].id },
                   data: {
                     descricao: texto,
                   }
                 })
-                await this.bot.sendMessage(id_telegram, mensagens.valor, botao.suporte);
+                await this.bot.sendMessage(id_telegram, mensagens.valor, 
+                  {
+                    reply_markup: {
+                      inline_keyboard: [
+                          [
+                              { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot" },
+                              { text: "Voltar ao Início", callback_data: `DELETAR_${produto_db.id}` },
+                          ],
+                      ],
+                  },
+                  }
+                  );
                 this.bot.deleteMessage(id_telegram, messageId)
                 return
               } catch (error) {
@@ -744,6 +766,8 @@ Clique no botão PAGAR para Ativar seu Anúncio!
 Ou pode pagar com seus créditos!
 
 Valor para anunciar! ${(parseInt(dados.valor) / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+
+Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
 `,
                       {
                         reply_markup: {
