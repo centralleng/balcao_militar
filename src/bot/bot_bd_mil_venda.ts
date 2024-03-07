@@ -21,7 +21,7 @@ class Bot_bd_mil_venda {
     this.bot.on("callback_query", async (msg: any) => {
       // console.log(msg)
       const texto = msg.data;
-      console.log(texto)
+    
       const id_telegram = msg.message?.chat.id;
       const username = msg.message?.chat.username;
       const message_id = msg.message?.message_id;
@@ -121,7 +121,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               const produto_db = await prisma_db.produtos.update({
                 where:{id: user.produto[0].id},
                 data:{
-                  id_imagem: 'nao'
+                  id_imagem: 'AgACAgEAAxkBAAINHmXqFVm86KzWAZwF_CfM2_xSLT4YAAKprTEbmmNRR5GRPUsj7xLfAQADAgADcwADNAQ'
                 }
               })
               
@@ -291,9 +291,11 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                 }
               })
 
-              await this.bot.sendMessage(id_telegram, `Digite sua nova descrição para o produto: ${produto.id}.`);
-              await this.bot.sendMessage(id_telegram, `⬇️ Descrição anterior`);
-              await this.bot.sendMessage(id_telegram, `${produto.descricao}.`);
+              // await this.bot.sendMessage(id_telegram, `Digite sua nova descrição para o produto: ${produto.id}.`);
+              // await this.bot.sendMessage(id_telegram, `⬇️ Descrição anterior`);
+              // await this.bot.sendMessage(id_telegram, `${produto.descricao}.`);              
+              await this.bot.sendMessage(id_telegram, mensagens.valor, botao.suporte);
+              this.bot.deleteMessage(id_telegram, messageId)
               this.bot.deleteMessage(id_telegram, messageId)
             } else {
               await this.bot.sendMessage(id_telegram, `⚠️ Produto não encontrado.`, botao.suporte);
@@ -602,14 +604,14 @@ Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'cur
       });
 
       if (editar_produtos.length > 0) { // Tem produtos para ser editado
-
+      
+        // if (editar_produtos[0].editar === '1') {
+        //   await prisma_db.produtos.update({ where: { id: editar_produtos[0].id }, data: { descricao: texto, editar: '2' } })
+        //   await this.bot.sendMessage(id_telegram, mensagens.valor, botao.suporte);
+        //   this.bot.deleteMessage(id_telegram, messageId)
+        //   return
+        // }
         if (editar_produtos[0].editar === '1') {
-          await prisma_db.produtos.update({ where: { id: editar_produtos[0].id }, data: { descricao: texto, editar: '2' } })
-          await this.bot.sendMessage(id_telegram, mensagens.valor, botao.suporte);
-          this.bot.deleteMessage(id_telegram, messageId)
-          return
-        }
-        if (editar_produtos[0].editar === '2') {
 
           // Função para verificar se o texto é um valor monetário válido
           function isValorMonetarioValido(texto: string) {
@@ -623,7 +625,7 @@ Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'cur
           if (isValorMonetarioValido(texto)) {
 
             const valor_db = parseInt(editar_produtos[0].valor_produto || '')
-            const valor_novo = parseInt(texto)
+            const valor_novo = parseInt(texto.replace(/\./g, ''))        
 
             if (valor_novo > valor_db) {
               await this.bot.sendMessage(id_telegram, `⚠️ O valor atual não pode ultrapassar o valor anterior.`, botao.suporte);
@@ -636,10 +638,11 @@ Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'cur
             })
 
             if (grupo) {
-              const produto_pedido = await prisma_db.produtos.update({ where: { id: editar_produtos[0].id }, data: { valor_produto: texto.replace(/\./g, ''), editar: '0' } })
+              const produto_pedido = await prisma_db.produtos.update({ 
+                where: { id: editar_produtos[0].id }, 
+                data: { valor_produto: texto.replace(/\./g, ''), editar: '0' } 
+              })
               await this.bot.deleteMessage(grupo.id_grupo, editar_produtos[0].pedido[0].msg_id?.toString() || '')
-
-              console.log('imagem', produto_pedido.id_imagem)
 
               const editar_msg = await this.bot.sendPhoto(grupo.id_grupo, produto_pedido.id_imagem || '', {
                 caption: mensagens.msg_pagamento_grupo({
@@ -686,6 +689,7 @@ Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'cur
             this.bot.deleteMessage(id_telegram, messageId)
           }
         }
+
         return
       }
 
@@ -724,7 +728,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
         if (user.produto && !user.produto[0].status) {
      
           if(photo?.[0]!=undefined&&user.produto[0].categoria === null){ // proteção imagem categoria
-            console.log('veiio')
+          
             await this.bot.sendMessage(id_telegram, `⚠️ Antes de inclur imagem coloque a categoria.`,
             {
               reply_markup: {
@@ -739,9 +743,10 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             );
             this.bot.deleteMessage(id_telegram, messageId)
             return            
-          }    
+          } 
+
           if(photo?.[0]!=undefined&&user.produto[0].descricao === null){ // proteção imagem descricao
-            console.log('veiio')
+          
             await this.bot.sendMessage(id_telegram, `⚠️ Antes de inclur imagem coloque a descrição.`,
             {
               reply_markup: {
@@ -770,7 +775,6 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           if (user.produto && user.produto[0].descricao === null) {
   
             const verifica_descricao = texto?.split('')
-            console.log('descricao',verifica_descricao)
   
             if (verifica_descricao.length < 150 && verifica_descricao.length > 0) {
   
@@ -927,7 +931,6 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                 this.bot.deleteMessage(id_telegram, messageId)
                 return
               } catch (error) {
-                console.log(error)
                 await this.bot.sendMessage(id_telegram, `Ops algo deu errado escreva sua descrição novamente`);
                 this.bot.deleteMessage(id_telegram, messageId)
               }
@@ -976,9 +979,6 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
 
                 const taxa = taxa_empresa(user.produto[0].categoria, produto?.valor_produto||'', texto)
 
-                console.log("tempo",taxa.tempo)
-                console.log("valor",taxa.valor_anuncio)
-
                 if (pedido.length <= 0) {
 
                   const dados = {
@@ -1013,9 +1013,6 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                       status: true
                     }
                   })
-
-                  console.log(texto)
-                  console.log(taxa.valor_anuncio)
 
                   const dados = {
                     valor: taxa.valor_anuncio.toString(),
@@ -1074,7 +1071,6 @@ Vc tem ${taxa.tempo} meses para permanecer com esse anúncio ativado
                 }
                 return
               } catch (error) {
-                console.log(error)
                 await this.bot.sendMessage(id_telegram, `Ops algo deu errado escreva sua descrição novamente`);
                 this.bot.deleteMessage(id_telegram, messageId)
               }

@@ -17,7 +17,7 @@ Esse balcão tem por objetivo facilitar a transação comercial de artigos milit
 
 As orientações abaixo são de suma importância para o usuário. Está um pouco extensa, porém se faz necessário:
     
-1) O balcão será encontrado na plataforma Telegram, sendo operacionalizado por intermédio de Bots.
+1) O Balcão será encontrado na plataforma Telegram, sendo operacionalizado por intermédio de Bots.
 
 2) Os usuários deverão possuir uma conta na plataforma com seu respectivo nome de usuário e, se possível, com uma foto atualizada.
 
@@ -29,31 +29,44 @@ As orientações abaixo são de suma importância para o usuário. Está um pouc
 
 6) No final de cada oferta terá o link para cadastrar uma venda.
 
-7) No robô de cadastro de vendas (@BDMilquerovender), o cadastro da PRIMEIRA oferta de venda de CADA USUÁRIO será GRATUITA, a fim de familiarizar o vendedor com o processo e para criar o fluxo de negócios nos canais. Essa oferta permanecerá ativa por 2(dois) meses.
-        `;
+7) No robô de cadastro de vendas (@BDMilquerovender), o cadastro da PRIMEIRA oferta de venda de CADA USUÁRIO será GRATUITA, a fim de familiarizar o vendedor com o processo e para criar o fluxo de negócios nos canais.`;
     const termo2 = `
-8) Do segundo cadastro em diante, será cobrada uma comissão de apenas 3% sobre o valor total de cada oferta. A mesma ficará disponível no respectivo balcão também por 2 (dois) meses, podendo o usuário, nesse período, EDITAR, ATUALIZAR e DELETAR. O botão ATUALIZAR serve para trazer a proposta de venda para o dia D. Caso o vendedor exclua ou mude o preço( somente para baixo), não poderá solicitar reembolso do valor pago.
+8) Do segundo cadastro em diante, serão cobradas comissões de apenas 0.1% do valor total para veículos e venda de imóveis. Para os demais produtos 3%. No tocante aos serviços a taxa e fixa de 6 (seis) reais.
 
-9) Para ofertar a VENDA de veículos e imóveis, a comissão será de 0,1%, sobre o valor ofertado,. A oferta ficará disponível por um período de 4 (quatro) meses. Da mesma forma que o processo anterior, o ofertante poderá realizar as alterações que achar necessárias.
+9) As ofertas ficarão disponíveis conforme abaixo:
+9.1 Serviços : 2 meses;
+9.2 veículos e venda de imóveis: 
+9.1.1 até 5k = 1 mês;
+9.1.2 de 5001 a 20 k = 2 meses;
+9.1.3 de 20.001 a 45 k = 3 meses;
+9.1.4 de 45.001 a 80k= 4 meses;
+9.1.5 de 80.001 a 125 k = 5 meses;
+9.1.6 de 125.001em diante = 6 meses.
+9.2 demais produtos:
+9.2.1 até 100 = 1 mês;
+9.2.1 de 101 a 200 = 2 meses;
+9.2.3 de 202 a 400 = 3 meses;
+9.2.4 de 401 a 800 = 4 meses;
+9.2.5 de 801 a 2000 = 5 meses;
+9.2.6 de 2001 em diante = 6 meses.
 
-10) Para a oferta de serviços, será cobrada uma comissão única de 6 (seis) reais para cada item oferecido. O processo se dará da mesma forma que o de veículos e de imóveis.
+  10) Durante os períodos supracitados, o usuário poderá EDITAR, ATUALIZAR e DELETAR. O botão ATUALIZAR serve para trazer a proposta de venda para o dia D. O EDITAR serve para mudar o valor do produto. Caso o vendedor exclua ou mude o preço ( somente para baixo), não poderá solicitar reembolso do valor pago.
 
-11) Caso o comprador aceite negociar a oferta, clicando no @BDMilquerocomprar, as partes receberão um alerta da negociação nos robôs correspondentes, que fornecerão as instruções necessárias para dar continuidade à respectiva negociação.
+11) Caso ocorra algum problema na venda, o proeminente vendedor fica obrigado a devolver 100% quaisquer valores que por ventura tenha recebido.
 
-12) O comprador de um produto, poderá buscar as ofertas de forma mais específica, por intermédio do @BDMilALERTAS. Após seguir as orientações do robô, o interessado receberá o alerta de todas as ofertas lançadas do produto pretendido, em tempo real. 
+12) Caso o comprador aceite negociar a oferta, clicando no @BDMilquerocomprar, as partes receberão um alerta da negociação nos robôs correspondentes, que fornecerão as instruções necessárias para dar continuidade à respectiva negociação.
 
-13) O acesso ao @BDMilALERTAS estará no link de cada mensagem de venda.
+13) O comprador de um produto, poderá buscar as ofertas de forma mais específica, por intermédio do @BDMilALERTAS. Após seguir as orientações do robô, o interessado receberá o alerta de todas as ofertas lançadas do produto pretendido, em tempo real. 
 
-14) Outra opção que será oferecida ao comprador é de realizar buscas mais refinadas de um produto, por intermédio do link “buscar” do respectivo canal
-`;
+14) O acesso ao @BDMilALERTAS estará no link de cada mensagem de venda.
+
+15) Outra opção que será oferecida ao comprador é de realizar buscas mais refinadas de um produto, por intermédio do link “buscar” do respectivo cana`;
     const termo3 = `
-15) Existem três formas de pagamento: Pix, débito e crédito.
+16) Existem três formas de pagamento: Pix, débito e crédito.
 
-16) O usuário terá a opção de comprar créditos, usando um dos métodos de pagamento acima citados, evitando a entrada no link de pagamento diversas vezes quando da oferta de um enxoval inteiro, por exemplo. 
+17) O usuário terá a opção de comprar créditos, usando um dos métodos de pagamento acima citados, evitando a entrada no link de pagamento diversas vezes quando da oferta de um enxoval inteiro, por exemplo. 
 
-17) Caso ainda haja dúvidas sobre algum processo, será disponibilizado o link TUTORIAIS, contendo vídeos com os todos os procedimentos do balcão.
-
-18) Será disponibilizado também ao usuário o bot @BDMilsuporte, para sanar alguma dúvida que por ventura ainda possa existir.
+18) Será disponibilizado também ao usuário o bot @BDMilsuporte, para sanar alguma dúvida que por ventura ainda possa existir. Esse bot contém videos com os principais procedimentos do Balcão. 
 
 19) Será oferecido o bot SUGESTÕES para que o usuário possa contribuir com a melhoria do sistema.
 
@@ -61,9 +74,13 @@ As orientações abaixo são de suma importância para o usuário. Está um pouc
 
 21) No final de cada negociação, os usuários podem recomendar ou desaconselhar nos bots correspondentes, proporcionando maior credibilidade e segurança às negociações.
 
-22) O Balcão é apenas um facilitador para aquisição ou venda de produtos entre os militares, podendo estender à familiares, amigos e lojistas, porém sempre utilizando a conta do militar e sob total responsabilidade do mesmo.
+22) Em cada canal terá uma mensagem pré-fixada do canal Bdmilnews, que serve para manter os usuários atualizados nas mais variadas ofertas de produtos e serviço dentro e fora do Balcão.
 
-23) Por fim, lembrando mais uma vez que a negociação é livre e de responsabilidade dos usuários. Caso haja má fé, o transgressor será excluído do sistema de forma permanente.
+23) O Balcão é apenas um facilitador para aquisição ou venda de produtos entre os militares, podendo estender à familiares, amigos e lojistas, porém sempre utilizando a conta do militar e sob total responsabilidade do mesmo.
+
+24) Os dados do usuário, como por exemplo o CPF, são guardados em um servidor próprio e na "nuvem", totalmente criptografado aliado a segurança de dados existentes no Telegram.
+
+25) Por fim, lembrando mais uma vez que a negociação é livre e de responsabilidade dos usuários. Caso haja má fé, o transgressor será excluído do sistema de forma permanente.
 Boas negociações!
 `
         // const termo1 = `

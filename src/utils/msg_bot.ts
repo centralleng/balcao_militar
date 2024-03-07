@@ -198,17 +198,17 @@ Recomendo que sempre seja confirmado o valor do produto, bem como a forma de ent
     msg_interesse_compra_comprador(dados: dados_interece_compra_comprador) {
 
         return `  
-        ✅ Sua intenção de compra foi enviada para o usuário, interessado em vender o produto.
+✅ Sua intenção de compra foi enviada para o usuário, interessado em vender o produto.
 
-        ✔️  O vendedor entrará em contato caso se interesse em negociar o produto, enviando uma mensagem para a sua conta informando a senha ${dados.senha} . Essa é uma forma de certificar que ele é realmente a pessoa que postou a oferta ${dados.produto_id}. Sugiro uma análise de risco no tocante ao vendedor verificando os dados adicionais durante a negociação, para ter a certeza do processo.
-        
-        ▪️   Dica do Balcão dos militares:
-        
-        Recomendo que sempre seja confirmado o valor do produto, bem como a forma de entrega, prazos, formas de pagamento e outras coisas que se fizerem necessárias antes de fechar a transação, a fim de evitar transtornos desnecessários e exclusão do Balcão.
-        
-        🤝  Gostaríamos de lembrar da importância de honrar acordos com vendedor ou comprador no Balcão, depois de selar um acordo, a negociação não deve ser alterada. Honre sua palavra e cumpra seus acordos.
-        
-        ❌  O mau comportamento pode acarretar na exclusão do balcão.
+✔️  O vendedor entrará em contato caso se interesse em negociar o produto, enviando uma mensagem para a sua conta informando a senha ${dados.senha} . Essa é uma forma de certificar que ele é realmente a pessoa que postou a oferta ${dados.produto_id}. Sugiro uma análise de risco no tocante ao vendedor verificando os dados adicionais durante a negociação, para ter a certeza do processo.
+
+▪️   Dica do Balcão dos militares:
+
+Recomendo que sempre seja confirmado o valor do produto, bem como a forma de entrega, prazos, formas de pagamento e outras coisas que se fizerem necessárias antes de fechar a transação, a fim de evitar transtornos desnecessários e exclusão do Balcão.
+
+🤝  Gostaríamos de lembrar da importância de honrar acordos com vendedor ou comprador no Balcão, depois de selar um acordo, a negociação não deve ser alterada. Honre sua palavra e cumpra seus acordos.
+
+❌  O mau comportamento pode acarretar na exclusão do balcão.
         `
     }
 
