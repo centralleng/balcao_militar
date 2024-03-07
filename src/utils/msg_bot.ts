@@ -118,7 +118,7 @@ Valor ${(parseInt(dados.valor_produto) / 100).toLocaleString('pt-BR', { style: '
 
 Localização: ${dados.localizacao}
 
-Entrega o produto fora da sede: ${dados.localizacao}
+Entrega o produto fora da sede: ${dados.entrega}
 
 clique no código <a href="https://t.me/BDMilquerocomprar_bot?start=${dados.produto_id}">${dados.produto_id}</a> para ser encaminhado ao @BDMilquerocomprar_bot para comprar dele.
 

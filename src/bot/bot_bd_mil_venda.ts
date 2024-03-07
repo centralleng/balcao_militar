@@ -221,34 +221,33 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                 console.log('erro pedido')
               }
 
-              await this.bot.deleteMessage(grupo.id_grupo, produto_pedido.pedido[0].msg_id.toString())
-              const editar_msg = await this.bot.sendMessage(grupo.id_grupo, 
-                mensagens.msg_pagamento_grupo({ 
-                  descricao_produto: produto_pedido.descricao || '', 
-                  valor_produto: produto_pedido.valor_produto || '', 
-                  produto_id: produto_pedido.id, 
-                  recomendado: user.recomendado || 0, 
-                  desaconselhado: user.desaconselhado || 0, 
-                  data_criacao_user: user.created_at,
-                  entrega: produto_pedido.entrega||"",
-                  localizacao: produto_pedido.localizacao||'', 
+              const editar_msg = await this.bot.sendPhoto(grupo.id_grupo, produto_pedido.id_imagem || '', {
+                caption: mensagens.msg_pagamento_grupo({
+                  descricao_produto: produto_pedido.descricao || '',
+                  valor_produto: produto_pedido.valor_produto || '',
+                  produto_id: produto_pedido.id,
+                  recomendado: user?.recomendado || 0,
+                  desaconselhado: user?.desaconselhado || 0,
+                  data_criacao_user: user?.created_at,
+                  entrega: produto_pedido.entrega || "",
+                  localizacao: produto_pedido.localizacao || '',
                 }),
-                {
-                  reply_markup: {
-                    inline_keyboard: [
-                      [
-                        {
-                          text: 'Quero Vender',
-                          url: `https://t.me/BDMilCVbot?start=1`,
-                        },
-                        {
-                          text: 'Bot Alertas',
-                          url: `https://t.me/BDMilALERTAS_bot?start=1`,
-                        },
-                      ],
+                reply_markup: {
+                  inline_keyboard: [
+                    [
+                      {
+                        text: 'Quero Vender',
+                        url: `https://t.me/BDMilCVbot?start=/start`,
+                      },
+                      {
+                        text: 'Bot Alertas',
+                        url: `https://t.me/BDMilALERTAS_bot?start=/start`,
+                      },
                     ],
-                  }, parse_mode: 'HTML'
-                },);
+                  ],
+                },
+                parse_mode: 'HTML',
+              });
 
               await prisma_db.pedidos.updateMany({
                 where: { produto_id: produto_pedido.id },
@@ -640,35 +639,34 @@ Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'cur
               const produto_pedido = await prisma_db.produtos.update({ where: { id: editar_produtos[0].id }, data: { valor_produto: texto.replace(/\./g, ''), editar: '0' } })
               await this.bot.deleteMessage(grupo.id_grupo, editar_produtos[0].pedido[0].msg_id?.toString() || '')
 
-              const editar_msg = await this.bot.sendMessage(grupo.id_grupo,               
-
-                mensagens.msg_pagamento_grupo({ 
-                  descricao_produto: produto_pedido.descricao || '', 
-                  valor_produto: produto_pedido.valor_produto || '', 
-                  produto_id: produto_pedido.id, 
-                  recomendado: user?.recomendado || 0, 
-                  desaconselhado: user?.desaconselhado || 0, 
+              const editar_msg = await this.bot.sendPhoto(grupo.id_grupo, produto_pedido.id_imagem || '', {
+                caption: mensagens.msg_pagamento_grupo({
+                  descricao_produto: produto_pedido.descricao || '',
+                  valor_produto: produto_pedido.valor_produto || '',
+                  produto_id: produto_pedido.id,
+                  recomendado: user?.recomendado || 0,
+                  desaconselhado: user?.desaconselhado || 0,
                   data_criacao_user: user?.created_at,
-                  entrega: produto_pedido.entrega||"",
-                  localizacao: produto_pedido.localizacao||'',
+                  entrega: produto_pedido.entrega || "",
+                  localizacao: produto_pedido.localizacao || '',
                 }),
-                {
-                  reply_markup: {
-                    inline_keyboard: [
-                      [
-                        {
-                          text: 'Quero Vender',
-                          url: `https://t.me/BDMilCVbot?start=1`,
-                        },
-                        {
-                          text: 'Bot Alertas',
-                          url: `https://t.me/BDMilALERTAS_bot?start=1`,
-                        },
-                      ],
+                reply_markup: {
+                  inline_keyboard: [
+                    [
+                      {
+                        text: 'Quero Vender',
+                        url: `https://t.me/BDMilCVbot?start=/start`,
+                      },
+                      {
+                        text: 'Bot Alertas',
+                        url: `https://t.me/BDMilALERTAS_bot?start=/start`,
+                      },
                     ],
-                  }, parse_mode: 'HTML'
+                  ],
                 },
-              );
+                parse_mode: 'HTML',
+              });
+              
               await prisma_db.pedidos.updateMany({
                 where: { produto_id: editar_produtos[0].id },
                 data: { msg_id: editar_msg.message_id }
