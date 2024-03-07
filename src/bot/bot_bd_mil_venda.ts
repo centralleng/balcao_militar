@@ -229,7 +229,10 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                   produto_id: produto_pedido.id, 
                   recomendado: user.recomendado || 0, 
                   desaconselhado: user.desaconselhado || 0, 
-                  data_criacao_user: user.created_at }),
+                  data_criacao_user: user.created_at,
+                  entrega: produto_pedido.entrega||"",
+                  localizacao: produto_pedido.localizacao||'', 
+                }),
                 {
                   reply_markup: {
                     inline_keyboard: [
@@ -645,7 +648,10 @@ Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'cur
                   produto_id: produto_pedido.id, 
                   recomendado: user?.recomendado || 0, 
                   desaconselhado: user?.desaconselhado || 0, 
-                  data_criacao_user: user?.created_at}),
+                  data_criacao_user: user?.created_at,
+                  entrega: produto_pedido.entrega||"",
+                  localizacao: produto_pedido.localizacao||'',
+                }),
                 {
                   reply_markup: {
                     inline_keyboard: [
