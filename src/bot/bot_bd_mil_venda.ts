@@ -570,7 +570,7 @@ Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'cur
     });
  
     this.bot.on('message', async (msg: any) => {
-      // console.log(msg)
+      console.log(msg)
       const id_telegram = msg.chat.id.toString();
       const texto = msg.text;
       const name = msg.chat.first_name;
