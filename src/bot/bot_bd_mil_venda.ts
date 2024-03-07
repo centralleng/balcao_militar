@@ -121,7 +121,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               const produto_db = await prisma_db.produtos.update({
                 where:{id: user.produto[0].id},
                 data:{
-                  id_imagem: 'AgACAgEAAxkBAAINHmXqFVm86KzWAZwF_CfM2_xSLT4YAAKprTEbmmNRR5GRPUsj7xLfAQADAgADcwADNAQ'
+                  id_imagem: 'AgACAgEAAxkBAAIXzWXqJ7XXfJL2UMkIu6ECrB4M5azqAAKprTEbmmNRR0yJv08QX4KpAQADAgADcwADNAQ'
                 }
               })
               
@@ -570,7 +570,7 @@ Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'cur
     });
  
     this.bot.on('message', async (msg: any) => {
-      console.log(msg)
+      // console.log(msg)
       const id_telegram = msg.chat.id.toString();
       const texto = msg.text;
       const name = msg.chat.first_name;
