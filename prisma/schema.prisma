@@ -39,12 +39,16 @@ model Produtos {
   id                  Int            @id @default(autoincrement())
   delete              Int?
   status              Boolean?
+  quantidade          Int?
   categoria           String?
   editar              String?
   descricao           String?
   valor_produto       String?
   link_pagamento      String?
   id_telegram         String?
+  localizacao         String?
+  entrega             String?
+  id_imagem           String?
   user_id             String
   message_id          Int?  // Id quando cirar um produto, vamos precisar quando for deletar um produto             
   updated_at          DateTime      @updatedAt @default(now())
@@ -71,6 +75,7 @@ model Pedidos {
   id_telegram         String?
   telefone            String?
   ddd                 String?
+  tempo               Int?
   transacao_id        String?       @unique
   msg_id              Int?
   user_id             String

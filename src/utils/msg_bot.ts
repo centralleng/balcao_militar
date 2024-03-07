@@ -13,6 +13,8 @@ interface dados_pagamento_grupo {
     recomendado: number;
     desaconselhado: number;
     data_criacao_user: any;
+    localizacao: string;
+    entrega: string;
 }
 interface dados_pagamento_vendedor {
     descricao_produto: string;
@@ -77,7 +79,7 @@ Descreva de forma sucinta o produto que você quer ofertar, incluindo obrigatori
 
     valor =
     `
-Qual o valor pretendido? (escreva somente números. Caso haja centavos, coloque ponto pra separar o real dos centavos.)
+Qual o valor unitário pretendido? (escreva somente números. Caso haja centavos, coloque ponto pra separar o real dos centavos.)
 
 Ex: 00.00
     `
@@ -113,6 +115,10 @@ Ex: 00.00
 Interessado em vender ${dados.descricao_produto}
 
 Valor ${(parseInt(dados.valor_produto) / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+
+Localização: ${dados.localizacao}
+
+Entrega o produto fora da sede: ${dados.localizacao}
 
 clique no código <a href="https://t.me/BDMilquerocomprar_bot?start=${dados.produto_id}">${dados.produto_id}</a> para ser encaminhado ao @BDMilquerocomprar_bot para comprar dele.
 

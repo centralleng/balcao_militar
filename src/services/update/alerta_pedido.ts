@@ -48,7 +48,10 @@ await axios.post(`https://api.telegram.org/bot${botAlerta}/sendMessage`, // bot 
     produto_id: produto?.id||0, 
     recomendado: user?.recomendado || 0, 
     desaconselhado: user?.desaconselhado || 0, 
-    data_criacao_user: user?.created_at }),
+    data_criacao_user: user?.created_at,
+    entrega: produto?.entrega||"",
+    localizacao: produto?.localizacao||'',
+   }),
 });
    
  } catch (error) {console.log('erro 01')}

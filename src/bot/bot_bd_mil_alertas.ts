@@ -304,6 +304,12 @@ pre-formatted fixed-width code block written in the Python programming language
 
       const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...'); 
       const messageId = msg_del.message_id.toString()
+
+      const photo = msg.photo || []
+
+      bot.sendPhoto(id_telegram, photo[0].file_id, {caption: 'Aqui está a imagem que você recebeu.'});
+
+      console.log(photo[0])
       
       
 

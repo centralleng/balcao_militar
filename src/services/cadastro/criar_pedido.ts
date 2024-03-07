@@ -106,7 +106,10 @@ export default async function Criar_pedido(dados: dados) {
             produto_id: produto?.id||0, 
             recomendado: user?.recomendado || 0, 
             desaconselhado: user?.desaconselhado || 0, 
-            data_criacao_user: user?.created_at }),
+            data_criacao_user: user?.created_at,
+            entrega: produto?.entrega||"",
+            localizacao: produto?.localizacao||'',
+          }),
           reply_markup: createInlineKeyboard(grupo.id_grupo),
         });
 
@@ -136,17 +139,21 @@ export default async function Criar_pedido(dados: dados) {
       for await (const i of usuarios_id) {
         try {
           // Enviar msg para aleras cadastrados 
-          await axios.post(`https://api.telegram.org/bot${botAlerta}/sendMessage`, // bot CentrallTest4
+          await axios.post(`https://api.telegram.org/bot${botAlerta}/sendPhoto`, // bot CentrallTest4
             {
             parse_mode: 'HTML',
             chat_id: i,
-            text: mensagens.msg_pagamento_grupo({ 
+            photo: produto?.id_imagem,
+            caption: mensagens.msg_pagamento_grupo({ 
             descricao_produto: produto?.descricao || '', 
             valor_produto: valor || '', 
             produto_id: produto?.id||0, 
             recomendado: user?.recomendado || 0, 
             desaconselhado: user?.desaconselhado || 0, 
-            data_criacao_user: user?.created_at }),
+            data_criacao_user: user?.created_at,
+            entrega: produto?.entrega||"",
+            localizacao: produto?.localizacao||'',
+          }),
             });
 
         } catch (error) { console.log('erro 03') }

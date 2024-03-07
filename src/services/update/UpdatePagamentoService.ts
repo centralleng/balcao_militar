@@ -11,6 +11,8 @@ interface dados {
 
 export default async function UpdatePagamentoService(dados: dados) {
 
+console.log('chegou no pagamento')
+
 const botVenda = process.env.API_BOT_BDMIL_VENDA ||''
 const botAlerta = process.env.API_BOT_BDMIL_ALERTA ||''
 
@@ -100,7 +102,10 @@ try {
       produto_id: pedido.produto.id||0, 
       recomendado: recomendado || 0, 
       desaconselhado: desaconselhado || 0, 
-      data_criacao_user: pedido.users.created_at }),
+      data_criacao_user: pedido.users.created_at,
+      entrega: pedido.produto?.entrega||"",
+      localizacao: pedido.produto?.localizacao||'',
+     }),
     reply_markup: createInlineKeyboard(),
   });
 
@@ -128,11 +133,12 @@ await axios.post(`https://api.telegram.org/bot${botVenda}/sendMessage`, // Bot b
       } catch (error) {console.log('erro 02')}
 
 for await (const i of usuarios_id){
+
   try {
     // Enviar msg para aleras cadastrados 
 await axios.post(`https://api.telegram.org/bot${botAlerta}/sendMessage`, // bot CentrallTest4
 {
-  parse_mode: 'HTML',
+ parse_mode: 'HTML',
  chat_id: i,
  text: mensagens.msg_pagamento_grupo({ 
  descricao_produto: pedido.produto.descricao || '', 
@@ -140,7 +146,10 @@ await axios.post(`https://api.telegram.org/bot${botAlerta}/sendMessage`, // bot 
  produto_id: pedido.produto.id ||0, 
  recomendado: recomendado || 0, 
  desaconselhado: desaconselhado || 0, 
- data_criacao_user: pedido.users.created_at }), 
+ data_criacao_user: pedido.users.created_at,
+ entrega: pedido.produto?.entrega||"",
+ localizacao: pedido.produto?.localizacao||'',
+ }), 
 });
    
  } catch (error) {console.log('erro 03')}
