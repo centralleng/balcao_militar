@@ -93,10 +93,11 @@ function enviarMsg(id_produto:any) {
 
 try {      
   // Enviar msg para os grupos
-  const msg_grupo = await axios.post(`https://api.telegram.org/bot${botVenda}/sendMessage`, {
+  const msg_grupo = await axios.post(`https://api.telegram.org/bot${botVenda}/sendPhoto`, {
     parse_mode: 'HTML',
     chat_id: grupo.id_grupo,
-    text: mensagens.msg_pagamento_grupo({ 
+    photo: pedido.produto?.id_imagem,
+      caption: mensagens.msg_pagamento_grupo({ 
       descricao_produto: pedido.produto?.descricao || '', 
       valor_produto: valor || '', 
       produto_id: pedido.produto.id||0, 
@@ -136,11 +137,12 @@ for await (const i of usuarios_id){
 
   try {
     // Enviar msg para aleras cadastrados 
-await axios.post(`https://api.telegram.org/bot${botAlerta}/sendMessage`, // bot CentrallTest4
+await axios.post(`https://api.telegram.org/bot${botAlerta}/sendPhoto`, // bot CentrallTest4
 {
  parse_mode: 'HTML',
  chat_id: i,
- text: mensagens.msg_pagamento_grupo({ 
+ photo: pedido.produto?.id_imagem,
+ caption: mensagens.msg_pagamento_grupo({ 
  descricao_produto: pedido.produto.descricao || '', 
  valor_produto: valor || '', 
  produto_id: pedido.produto.id ||0, 

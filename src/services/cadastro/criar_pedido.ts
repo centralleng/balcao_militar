@@ -97,10 +97,11 @@ export default async function Criar_pedido(dados: dados) {
 
       try {
         // Enviar msg para os grupos
-        const msg_grupo = await axios.post(`https://api.telegram.org/bot${botVenda}/sendMessage`, {
+        const msg_grupo = await axios.post(`https://api.telegram.org/bot${botVenda}/sendPhoto`, {
           parse_mode: 'HTML',  
           chat_id: grupo.id_grupo,
-          text: mensagens.msg_pagamento_grupo({ 
+          photo: produto?.id_imagem,
+            caption: mensagens.msg_pagamento_grupo({ 
             descricao_produto: produto?.descricao || '', 
             valor_produto: valor || '', 
             produto_id: produto?.id||0, 

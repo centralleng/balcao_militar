@@ -639,6 +639,8 @@ Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'cur
               const produto_pedido = await prisma_db.produtos.update({ where: { id: editar_produtos[0].id }, data: { valor_produto: texto.replace(/\./g, ''), editar: '0' } })
               await this.bot.deleteMessage(grupo.id_grupo, editar_produtos[0].pedido[0].msg_id?.toString() || '')
 
+              console.log('imagem', produto_pedido.id_imagem)
+
               const editar_msg = await this.bot.sendPhoto(grupo.id_grupo, produto_pedido.id_imagem || '', {
                 caption: mensagens.msg_pagamento_grupo({
                   descricao_produto: produto_pedido.descricao || '',
