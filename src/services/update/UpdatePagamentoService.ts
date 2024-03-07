@@ -66,11 +66,11 @@ function createInlineKeyboard() {
       [
         {
           text: 'Quero Vender',
-          url: `https://t.me/BDMilCVbot`,
+          url: `https://t.me/BDMilCVbot?start=/start`,
         },
         {
           text: 'Bot Alertas',
-          url: `https://t.me/BDMilALERTAS_bot`,
+          url: `https://t.me/BDMilALERTAS_bot?start=/start`,
         },
       ],
     ],

@@ -567,6 +567,7 @@ Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'cur
           }
 
         }
+        
     });
  
     this.bot.on('message', async (msg: any) => {
