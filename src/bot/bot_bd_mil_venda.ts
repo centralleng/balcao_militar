@@ -593,6 +593,15 @@ Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'cur
         },
       });
 
+      if (!user) {
+        await this.bot.sendMessage(id_telegram, `
+⚠️ Primeiro precisamos realizar o seu cadastro!
+Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
+        `);
+        this.bot.deleteMessage(id_telegram, messageId)
+        return
+      }
+
       const editar_produtos = await prisma_db.produtos.findMany({
         where: {
           user_id: user?.id,
@@ -691,15 +700,6 @@ Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'cur
           }
         }
 
-        return
-      }
-
-      if (!user) {
-        await this.bot.sendMessage(id_telegram, `
-⚠️ Primeiro precisamos realizar o seu cadastro!
-Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
-        `);
-        this.bot.deleteMessage(id_telegram, messageId)
         return
       }
 

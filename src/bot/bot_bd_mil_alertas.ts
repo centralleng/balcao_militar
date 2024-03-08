@@ -305,54 +305,11 @@ pre-formatted fixed-width code block written in the Python programming language
       const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...'); 
       const messageId = msg_del.message_id.toString()
 
-      const photo = msg.photo || []
-
-      //bot.sendPhoto(id_telegram, photo[0].file_id, {caption: 'Aqui está a imagem que você recebeu.'});
-
-      console.log(photo[0])
-      
-      
-
- 
-//       bot.sendMessage(id_telegram, 
-// `
-// Clique [${111111}](https://t.me/BDMilquerocomprar_bot?start=${111}) para visitar o site de exemplo.
-// `,
-// {reply_markup: {
-//   inline_keyboard: [
-//     [
-//       {
-//         text: 'Quero Vender',
-//         url: `https://t.me/BDMilCVbot?start=1`,
-//       },
-//       {
-//         text: 'Bot Alertas',
-//         url: `https://t.me/BDMilALERTAS_bot?start=1`,
-//       },
-//     ],
-//   ],
-// },parse_mode: 'Markdown'},
-//     );
-
-// try {      
-//   // Enviar msg para os grupos
-//   const msg_grupo = await axios.post(`https://api.telegram.org/bot6970220346:AAFcSb9H-gNAMXSKakv0hf3F6FwLkQ2fN5g/sendMessage`, {
-//     parse_mode: 'HTML',
-//     chat_id: '1805743086',
-//     text: `
-// Clique <a href="https://t.me/BDMilquerocomprar_bot?start=${1234}">${1234}</a> para visitar o site de exemplo.    
-// `,
-//     reply_markup: createInlineKeyboard(123),    
-//   });
-// } catch (error) {
-//   console.log('Erro:', error);
-// }
-
-
 
       const user = await prisma_db.users.findUnique({
         where: { id_telegram: id_telegram?.toString() },
       })
+
       if (user) {
         if (username) {
 
@@ -388,8 +345,7 @@ Cadastre seus alertas - configuração enviar a palavra alerta com espaço e dep
 
 Exemplo:
 
-Alerta boots
-            
+Alerta boots            
           `); 
           bot.deleteMessage(id_telegram, messageId)
           }      
@@ -400,7 +356,11 @@ Alerta boots
           bot.deleteMessage(id_telegram, messageId)
         }
       }else{
-        //fazer cadastro
+      await bot.sendMessage(id_telegram, `
+⚠️ Primeiro precisamos realizar o seu cadastro!
+Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
+        `);
+        bot.deleteMessage(id_telegram, messageId)
       }
     });
   }

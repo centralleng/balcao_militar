@@ -74,7 +74,7 @@ class Mensagens {
 
     descricao = 
     `
-Descreva de forma sucinta o produto que você quer ofertar, incluindo obrigatoriamente a quantidade (um ou 1 par) e a cor. NÃO coloque o valor nesse momento (máximo 150 caracteres). SÓ coloque ponto no fim.
+    Descreva de forma sucinta o produto que você quer ofertar. NÃO coloque o valor nesse momento (máximo 150 caracteres). SÓ coloque ponto no fim.
     `
 
     valor =

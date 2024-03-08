@@ -487,7 +487,8 @@ A qual instituição você pertence?
           `,instituicao);
           bot.deleteMessage(id_telegram, messageId)
           return
-          }     
+          }  
+
           if(req.nome===null){  
             // updata no banco salvando nome
             await prisma_db.users.update({
@@ -502,6 +503,7 @@ Obs.: Colocar somente números.`);
             bot.deleteMessage(id_telegram, messageId)
             return
           }
+
           if(req.document===null){
 
             function contemApenasNumeros(str: string){
@@ -540,6 +542,7 @@ Obs.: Colocar somente números.`);
           }
           return
           }
+
           if(req.email===null||req.email===''){  
 
             const email = texto||''
@@ -572,6 +575,7 @@ Obs.: Colocar somente números.`);
             return 
           }  
           }
+
           if(req.phone===null){          
 
             function isTelefoneValido(texto: any) {
@@ -620,15 +624,15 @@ Obs.: Colocar somente números.`);
             // // verificar as opões válidas
             if(isTelefoneValido(texto).status){ 
 
-              const link_group = await prisma_db.grupos.findUnique({
-                where: { type: req?.instituicao||''}
-              })
+              // const link_group = await prisma_db.grupos.findUnique({
+              //   where: { type: req?.instituicao||''}
+              // })
               
-              const artigos_militares: TelegramBot.SendMessageOptions = {
-                reply_markup: {
-                  inline_keyboard: [
-                    [{ text: req?.instituicao + " Balcão de vendas", url: link_group?.link}],
-                  ]}}
+              // const artigos_militares: TelegramBot.SendMessageOptions = {
+              //   reply_markup: {
+              //     inline_keyboard: [
+              //       [{ text: req?.instituicao + " Balcão de vendas", url: link_group?.link}],
+              //     ]}}
              
               // Filtrar apenas os caracteres numéricos
               const ddd = isTelefoneValido(texto).ddd;
@@ -644,7 +648,7 @@ Prontinho, seu cadastro foi realizado com sucesso!! 🥳
 Segue abaixo o Balcão que você pode acessar para comprar ou vender um produto!          
           `
             ,);
-            await bot.sendMessage(id_telegram,`Grupo de Artigo Militar:`,artigos_militares);
+            await bot.sendMessage(id_telegram,`Grupo de Artigo Militar:`,instituicao);
 
             await bot.sendMessage(id_telegram, `Grupo de Artigos Civis`, artigos_civis);
 
@@ -663,6 +667,7 @@ Segue abaixo o Balcão que você pode acessar para comprar ou vender um produto!
            
             return
           }
+
           else{
             const link_group = await prisma_db.grupos.findUnique({
               where: { type: req?.instituicao||''}
