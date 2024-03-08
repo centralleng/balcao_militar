@@ -227,107 +227,107 @@ Boas negociações!
       },
     };
 
-    // const artigos_militares: TelegramBot.SendMessageOptions = {
-    //   reply_markup: {
-    //     inline_keyboard: [
-    //     [
-    //       { text: "[EB vendas]", url: "https://t.me/+tEE2IKh78Nk0N2Y5"},
-    //       { text: "[MB vendas]", url: "https://t.me/+22FaI9_9sHQ0YTUx" },
-    //       { text: "[FAB vendas]", url: "https://t.me/+Y1pkY-yAViFiOWRh"},
-    //     ],
-    //     [
-    //       { text: "[PMERJ vendas]", url: "https://t.me/+fP6eI1-pNI8zYWYx"},
-    //       { text: "[CBMERJ vendas]", url: "https://t.me/+AWxwCs0q-KszNjQx"},
-    //       { text: "[PMDF vendas]", url: "https://t.me/+ke1Nii3UYfM0MDNh"},
-    //     ],
-    //     [
-    //       { text: "[CBMDF vendas]", url: "https://t.me/+5wzf1jsJf_k3YTZh"},
-    //       { text: "[PMESP vendas]", url: "https://t.me/+RlDSnR8X9ZY2YTRh"},
-    //       { text: "[CBMESP vendas]", url: "https://t.me/+5cJH6yQ5SUkwNjUx"},
-    //     ],
-    //     [
-    //       { text: "[PMMG vendas]", url: "https://t.me/+0ZOmYGzHcQEzYjI5"},
-    //       { text: "[CBMMG vendas]", url: "https://t.me/+MPElU7fWtDFkNWQx"},
-    //       { text: "[PMGO vendas]", url: "https://t.me/+0z-tgSR7KMNlMjc5"},
-    //     ],
-    //     [
-    //       { text: "[CBMGO vendas]", url: "https://t.me/+TpBNm-JXd-w1MGJh"},
-    //       { text: "[PMPR vendas]", url: "https://t.me/+bUxKjoIbMP00YzIx"},
-    //       { text: "[CBMPR vendas]", url: "https://t.me/+l0cJOmgSkeM3ODdh"},
-    //     ],
-    //     [
-    //       { text: "[PMSC vendas]", url: "https://t.me/+kHO9rt65F6tmYTMx"},
-    //       { text: "[CBMSC vendas]", url: "https://t.me/+uEKOo1wogGU2ZTE5"},
-    //       { text: "[BRIGADA MILITAR vendas]", url: "https://t.me/+4m4PvEaQrlA3OWVh"},
-    //     ],
-    //     [
-    //       { text: "[CBMRS vendas]", url: "https://t.me/+wLVXBuI9tLZlYjgx"},
-    //       { text: "[PMMS vendas]", url: "https://t.me/+pFQKi0_RGrc1N2Yx"},
-    //       { text: "[CBMMS vendas]", url: "https://t.me/+eea7o4K99wMzMGYx"},
-    //     ],
-    //     [
-    //       { text: "[PMMT vendas]", url: "https://t.me/+iLnUYKOUoLY2MzQx"},
-    //       { text: "[CBMMT vendas]", url: "https://t.me/+bKPgl8N8OwQxOGU5"},
-    //       { text: "[PMBA vendas]", url: "https://t.me/+q3usbyJGEygyZTI5"},
-    //     ],
-    //     [
-    //       { text: "[CBMBA vendas]", url: "https://t.me/+7Y_EbXi8lYRkN2Ex"},
-    //       { text: "[PMES vendas]", url: "https://t.me/+JV13TdCOHTtiNzUx"},
-    //       { text: "[CBMES vendas]", url: "https://t.me/+FDp4Wnnvcww2NWFh"},
-    //     ],
-    //     [
-    //       { text: "[PMAL vendas]", url: "https://t.me/+B3aLTGTJcv1lMDUx"},
-    //       { text: "[CBMAL vendas]", url: "https://t.me/+Hc5se9g2xyo1ZGIx"},
-    //       { text: "[PMSE vendas]", url: "https://t.me/+XfvUCQjlkFM4YTIx"},
-    //     ],
-    //     [
-    //       { text: "[CBMSE vendas]", url: "https://t.me/+5h3gnKyUcy8zYWZh"},
-    //       { text: "[PMPE vendas]", url: "https://t.me/+tM5arpf0v7VhYTMx"},
-    //       { text: "[CBMPE vendas]", url: "https://t.me/+L22WPiHuO3BhMmMx"},
-    //     ],
-    //     [
-    //       { text: "[PMRN vendas]", url: "https://t.me/+v0S0DcDy0QkxYTFh"},
-    //       { text: "[CBMRN vendas]", url: "https://t.me/+mtohgUmaWIc2Mzdh"},
-    //       { text: "[PMCE vendas]", url: "https://t.me/+5C7aqMfBTBIzNDZh"},
-    //     ],
-    //     [
-    //       { text: "[CBMCE vendas]", url: "https://t.me/+tOrjCxMj9q8zOGZh"},
-    //       { text: "[PMPI vendas]", url: "https://t.me/+s-ZZoXIHK7MwYjJh"},
-    //       { text: "[CBMPI vendas]", url: "https://t.me/+a2nMvkzqghs3ODgx"},
-    //     ],
-    //     [
-    //       { text: "[PMMA vendas]", url: "https://t.me/+XiwfKrnun89mNDBh"},
-    //       { text: "[CBMMA vendas]", url: "https://t.me/+mneokjSq4ps4M2Ex"},
-    //       { text: "[PMAM vendas]", url: "https://t.me/+4Eeqv2ozfj1kYzJh"},
-    //     ],
-    //     [
-    //       { text: "[CBMAM vendas]", url: "https://t.me/+cDVMXWkD-KQzOWEx"},
-    //       { text: "[PMAP vendas]", url: "https://t.me/+HjRdxZJ67-dkNDhh"},
-    //       { text: "[CBMAP vendas]", url: "https://t.me/+vTqnwRleGJ80MjQx"},
-    //     ],
-    //     [
-    //       { text: "[PMRO vendas]", url: "https://t.me/+Tm-64V_q9UBiMzBh"},
-    //       { text: "[CBMRO vendas]", url: "https://t.me/+FPD7RiIuZTViNDhh"},
-    //       { text: "[PMTO vendas]", url: "https://t.me/+r6UUjs46txhkMWYx"},
-    //     ],
-    //     [
-    //       { text: "[CBMTO vendas]", url: "https://t.me/+7zTSApKXHKU5YmRh"},
-    //       { text: "[PMAC vendas]", url: "https://t.me/+36pWf9eJyro0YWVh"},
-    //       { text: "[CBMAC vendas]", url: "https://t.me/+1awWjaRF0oNhOTYx"},
-    //     ],
-    //     [
-    //       { text: "[PMPA vendas]", url: "https://t.me/+FwfafSnUETdkMjgx"},
-    //       { text: "[CBMPA vendas]", url: "https://t.me/+-tmrxVAwTFJjZmQx"},
-    //       { text: "[PMRR vendas]", url: "https://t.me/+ozYpjtkqsxZlOWNh"},
-    //     ],
-    //     [
-    //       { text: "[CBMRR vendas]", url: "https://t.me/+xuF17ilK2qVhZDQx"},
-    //       { text: "[PMPB vendas]", url: "https://t.me/+O39pUzjayrEyMjY5"},
-    //       { text: "[CBMPB vendas]", url: "https://t.me/+KQWkzjvExhA2N2Ex"},
-    //     ],        
-    //   ],        
-    //   },
-    // };
+    const artigos_militares: TelegramBot.SendMessageOptions = {
+      reply_markup: {
+        inline_keyboard: [
+        [
+          { text: "[EB vendas]", url: "https://t.me/+tEE2IKh78Nk0N2Y5"},
+          { text: "[MB vendas]", url: "https://t.me/+22FaI9_9sHQ0YTUx" },
+          { text: "[FAB vendas]", url: "https://t.me/+Y1pkY-yAViFiOWRh"},
+        ],
+        [
+          { text: "[PMERJ vendas]", url: "https://t.me/+fP6eI1-pNI8zYWYx"},
+          { text: "[CBMERJ vendas]", url: "https://t.me/+AWxwCs0q-KszNjQx"},
+          { text: "[PMDF vendas]", url: "https://t.me/+ke1Nii3UYfM0MDNh"},
+        ],
+        [
+          { text: "[CBMDF vendas]", url: "https://t.me/+5wzf1jsJf_k3YTZh"},
+          { text: "[PMESP vendas]", url: "https://t.me/+RlDSnR8X9ZY2YTRh"},
+          { text: "[CBMESP vendas]", url: "https://t.me/+5cJH6yQ5SUkwNjUx"},
+        ],
+        [
+          { text: "[PMMG vendas]", url: "https://t.me/+0ZOmYGzHcQEzYjI5"},
+          { text: "[CBMMG vendas]", url: "https://t.me/+MPElU7fWtDFkNWQx"},
+          { text: "[PMGO vendas]", url: "https://t.me/+0z-tgSR7KMNlMjc5"},
+        ],
+        [
+          { text: "[CBMGO vendas]", url: "https://t.me/+TpBNm-JXd-w1MGJh"},
+          { text: "[PMPR vendas]", url: "https://t.me/+bUxKjoIbMP00YzIx"},
+          { text: "[CBMPR vendas]", url: "https://t.me/+l0cJOmgSkeM3ODdh"},
+        ],
+        [
+          { text: "[PMSC vendas]", url: "https://t.me/+kHO9rt65F6tmYTMx"},
+          { text: "[CBMSC vendas]", url: "https://t.me/+uEKOo1wogGU2ZTE5"},
+          { text: "[BRIGADA MILITAR vendas]", url: "https://t.me/+4m4PvEaQrlA3OWVh"},
+        ],
+        [
+          { text: "[CBMRS vendas]", url: "https://t.me/+wLVXBuI9tLZlYjgx"},
+          { text: "[PMMS vendas]", url: "https://t.me/+pFQKi0_RGrc1N2Yx"},
+          { text: "[CBMMS vendas]", url: "https://t.me/+eea7o4K99wMzMGYx"},
+        ],
+        [
+          { text: "[PMMT vendas]", url: "https://t.me/+iLnUYKOUoLY2MzQx"},
+          { text: "[CBMMT vendas]", url: "https://t.me/+bKPgl8N8OwQxOGU5"},
+          { text: "[PMBA vendas]", url: "https://t.me/+q3usbyJGEygyZTI5"},
+        ],
+        [
+          { text: "[CBMBA vendas]", url: "https://t.me/+7Y_EbXi8lYRkN2Ex"},
+          { text: "[PMES vendas]", url: "https://t.me/+JV13TdCOHTtiNzUx"},
+          { text: "[CBMES vendas]", url: "https://t.me/+FDp4Wnnvcww2NWFh"},
+        ],
+        [
+          { text: "[PMAL vendas]", url: "https://t.me/+B3aLTGTJcv1lMDUx"},
+          { text: "[CBMAL vendas]", url: "https://t.me/+Hc5se9g2xyo1ZGIx"},
+          { text: "[PMSE vendas]", url: "https://t.me/+XfvUCQjlkFM4YTIx"},
+        ],
+        [
+          { text: "[CBMSE vendas]", url: "https://t.me/+5h3gnKyUcy8zYWZh"},
+          { text: "[PMPE vendas]", url: "https://t.me/+tM5arpf0v7VhYTMx"},
+          { text: "[CBMPE vendas]", url: "https://t.me/+L22WPiHuO3BhMmMx"},
+        ],
+        [
+          { text: "[PMRN vendas]", url: "https://t.me/+v0S0DcDy0QkxYTFh"},
+          { text: "[CBMRN vendas]", url: "https://t.me/+mtohgUmaWIc2Mzdh"},
+          { text: "[PMCE vendas]", url: "https://t.me/+5C7aqMfBTBIzNDZh"},
+        ],
+        [
+          { text: "[CBMCE vendas]", url: "https://t.me/+tOrjCxMj9q8zOGZh"},
+          { text: "[PMPI vendas]", url: "https://t.me/+s-ZZoXIHK7MwYjJh"},
+          { text: "[CBMPI vendas]", url: "https://t.me/+a2nMvkzqghs3ODgx"},
+        ],
+        [
+          { text: "[PMMA vendas]", url: "https://t.me/+XiwfKrnun89mNDBh"},
+          { text: "[CBMMA vendas]", url: "https://t.me/+mneokjSq4ps4M2Ex"},
+          { text: "[PMAM vendas]", url: "https://t.me/+4Eeqv2ozfj1kYzJh"},
+        ],
+        [
+          { text: "[CBMAM vendas]", url: "https://t.me/+cDVMXWkD-KQzOWEx"},
+          { text: "[PMAP vendas]", url: "https://t.me/+HjRdxZJ67-dkNDhh"},
+          { text: "[CBMAP vendas]", url: "https://t.me/+vTqnwRleGJ80MjQx"},
+        ],
+        [
+          { text: "[PMRO vendas]", url: "https://t.me/+Tm-64V_q9UBiMzBh"},
+          { text: "[CBMRO vendas]", url: "https://t.me/+FPD7RiIuZTViNDhh"},
+          { text: "[PMTO vendas]", url: "https://t.me/+r6UUjs46txhkMWYx"},
+        ],
+        [
+          { text: "[CBMTO vendas]", url: "https://t.me/+7zTSApKXHKU5YmRh"},
+          { text: "[PMAC vendas]", url: "https://t.me/+36pWf9eJyro0YWVh"},
+          { text: "[CBMAC vendas]", url: "https://t.me/+1awWjaRF0oNhOTYx"},
+        ],
+        [
+          { text: "[PMPA vendas]", url: "https://t.me/+FwfafSnUETdkMjgx"},
+          { text: "[CBMPA vendas]", url: "https://t.me/+-tmrxVAwTFJjZmQx"},
+          { text: "[PMRR vendas]", url: "https://t.me/+ozYpjtkqsxZlOWNh"},
+        ],
+        [
+          { text: "[CBMRR vendas]", url: "https://t.me/+xuF17ilK2qVhZDQx"},
+          { text: "[PMPB vendas]", url: "https://t.me/+O39pUzjayrEyMjY5"},
+          { text: "[CBMPB vendas]", url: "https://t.me/+KQWkzjvExhA2N2Ex"},
+        ],        
+      ],        
+      },
+    };
 
     // const artigos_civis: TelegramBot.SendMessageOptions = {
     //   reply_markup: {
@@ -648,12 +648,11 @@ Prontinho, seu cadastro foi realizado com sucesso!! 🥳
 Segue abaixo o Balcão que você pode acessar para comprar ou vender um produto!          
           `
             ,);
-            await bot.sendMessage(id_telegram,`Grupo de Artigo Militar:`,instituicao);
+            await bot.sendMessage(id_telegram,`Grupo de Artigo Militar:`, artigos_militares);
 
             await bot.sendMessage(id_telegram, `Grupo de Artigos Civis`, artigos_civis);
 
             bot.deleteMessage(id_telegram, messageId)
-
               
               return  
             }
@@ -662,22 +661,21 @@ Segue abaixo o Balcão que você pode acessar para comprar ou vender um produto!
             await bot.sendMessage(id_telegram,`Digite seu telefone com DDD no padrão abaixo:`);
             await bot.sendMessage(id_telegram,`DDD mais número de telefone:`);
             await bot.sendMessage(id_telegram,`99999999999 ou 99 999999999`);
-            bot.deleteMessage(id_telegram, messageId)
-           
+            bot.deleteMessage(id_telegram, messageId)           
            
             return
           }
 
           else{
-            const link_group = await prisma_db.grupos.findUnique({
-              where: { type: req?.instituicao||''}
-            })
+            // const link_group = await prisma_db.grupos.findUnique({
+            //   where: { type: req?.instituicao||''}
+            // })
             
-            const artigos_militares: TelegramBot.SendMessageOptions = {
-              reply_markup: {
-                inline_keyboard: [
-                  [{ text: req?.instituicao+ " Balcão de vendas", url: link_group?.link}],
-                ]}}
+            // const artigos_militares: TelegramBot.SendMessageOptions = {
+            //   reply_markup: {
+            //     inline_keyboard: [
+            //       [{ text: req?.instituicao+ " Balcão de vendas", url: link_group?.link}],
+            //     ]}}
                 
 await bot.sendMessage(id_telegram,`
 Prontinho, seu cadastro foi realizado com sucesso!! 🥳
@@ -685,7 +683,7 @@ Segue abaixo os Balcões que você pode acessar para comprar ou vender um produt
         `
           ,);
 
-          await bot.sendMessage(id_telegram,`Grupo de Artigo Militar:`,artigos_militares);
+          await bot.sendMessage(id_telegram,`Grupo de Artigo Militar:`, artigos_militares);
 
           await bot.sendMessage(id_telegram, `Grupo de Artigos Civis`, artigos_civis);
 
