@@ -226,6 +226,14 @@ Obs: Coloque no máximo 150 caracteres
 
 
     aguarde = 'Aguarde...'
+
+    suporte_cadastro = 'BAACAgEAAxkBAAN1ZfILIx8NoAw_wCPmzK-uDnfKkVYAArUCAALXdJBHvg5dOXwtpyw0BA'
+
+    suporte_venda = 'CgACAgEAAxkBAAOBZfIOiXkycZrrUoq1Vb2kKt50Bc4AAuAEAALqOZFH1-4m3aqjl980BA'
+
+    suporte_compra = 'BAACAgEAAxkBAAN-ZfINrqx1B_10gTCzWBI-qNJXtZEAArYCAALXdJBHNpY_MS9apvY0BA'
+
+    suporte_alerta = 'CgACAgEAAxkBAAOHZfITFAOsjO46kS4EE0ozQRE9Y54AArcCAALXdJBHVW2yJFYK7bQ0BA'
 }
 
 export const mensagens = new Mensagens

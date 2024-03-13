@@ -5,6 +5,7 @@ import axios from 'axios';
 import Cadastar_palavra_chave_service from '../services/cadastro/palavaChaveService';
 import Deletar_alerta_service from '../services/deletar/alertaService';
 import { Consultas_alertasService } from '../services/consultas/alertaService';
+import { mensagens } from '../utils/msg_bot';
 
 const token_bot = process.env.API_BDMIL_SUPORTE ||''
 
@@ -34,14 +35,34 @@ class Bot_bd_mil_suporte {
       const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...'); 
       const messageId = msg_del.message_id.toString()
 
-      const msg_resp:any = {'1':'1','2':'2','3':'3','4':'4','5':'5'}
+      const msg_resp:any = {'1':mensagens.suporte_cadastro,'2':mensagens.suporte_venda,'3':mensagens.suporte_alerta,'4':mensagens.suporte_compra}     
 
-      if(msg_resp[texto]){
-        await bot.sendMessage(id_telegram, msg_resp[texto]);
-      }else{
-        await bot.sendMessage(id_telegram, '36');
+      if(texto==='5'){
+      await bot.sendMessage(id_telegram, 'Entre em contato no endereço de email: balcaodosmilitares@gmail.com');
+      bot.deleteMessage(id_telegram, messageId)
+      return
       }
 
+      if(msg_resp[texto]){
+
+      await bot.sendVideo(id_telegram, msg_resp[texto]);
+      bot.deleteMessage(id_telegram, messageId)
+
+      return
+
+      }else{
+      await bot.sendMessage(id_telegram, `
+Olá! Bem-vindo ao Bot de Suporte. Por favor, escolha uma opção de 0 a 4 para sua dúvida:
+
+1 - Como fazer meu cadastro;
+2 - Como colocar um produto para vender;
+3 - Como ativar o bot alertas;
+4 - Como comprar um produto;
+5 - Fale com um representante.
+        
+        `)         
+      bot.deleteMessage(id_telegram, messageId);
+      }
     });
   }
 }
