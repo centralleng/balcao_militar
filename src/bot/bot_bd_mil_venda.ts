@@ -29,7 +29,7 @@ class Bot_bd_mil_venda {
 
       const msg_del = await this.bot.sendMessage(id_telegram, 'Aguarde...');
       const messageId = msg_del.message_id.toString()
-
+    
       if(texto_split[0]==='CADASTRO'&&texto_split[2]==='APAGAR'){
         await this.bot.deleteMessage(id_telegram, (message_id-3).toString())
         await this.bot.deleteMessage(id_telegram, (message_id-2).toString()) 
