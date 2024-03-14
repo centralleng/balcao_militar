@@ -39,8 +39,8 @@ class Botoes {
         reply_markup: {
             inline_keyboard: [
                 [
-                    { text: "SUPORTE", url: "https://t.me/" },
-                    { text: "TUTORIAL", url: "https://t.me/" },
+                    { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot" },
+                    { text: "TUTORIAL", url: "https://t.me/BDMilSUPORTE_bot" },
                 ],
             ],
         },

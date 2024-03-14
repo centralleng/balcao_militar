@@ -237,11 +237,11 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                     [
                       {
                         text: 'Quero Vender',
-                        url: `https://t.me/BDMilCVbot?start=/start`,
+                        url: `https://t.me/BDMilCVbot?start=start`,
                       },
                       {
                         text: 'Bot Alertas',
-                        url: `https://t.me/BDMilALERTAS_bot?start=/start`,
+                        url: `https://t.me/BDMilALERTAS_bot?start=start`,
                       },
                     ],
                   ],
@@ -670,11 +670,11 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                     [
                       {
                         text: 'Quero Vender',
-                        url: `https://t.me/BDMilCVbot?start=/start`,
+                        url: `https://t.me/BDMilCVbot?start=start`,
                       },
                       {
                         text: 'Bot Alertas',
-                        url: `https://t.me/BDMilALERTAS_bot?start=/start`,
+                        url: `https://t.me/BDMilALERTAS_bot?start=start`,
                       },
                     ],
                   ],

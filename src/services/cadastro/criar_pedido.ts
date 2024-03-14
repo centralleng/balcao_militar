@@ -72,11 +72,11 @@ export default async function Criar_pedido(dados: dados) {
             [
               {
                 text: 'Quero Vender',
-                url: `https://t.me/BDMilCVbot?start=/start`,
+                url: `https://t.me/BDMilCVbot?start=start`,
               },
               {
                 text: 'Bot Alertas',
-                url: `https://t.me/BDMilALERTAS_bot?start=/start`,
+                url: `https://t.me/BDMilALERTAS_bot?start=start`,
               },
             ],
           ],

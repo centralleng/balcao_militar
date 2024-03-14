@@ -20,11 +20,11 @@ function createInlineKeyboard(userTelegramId:any) {
       [
         {
           text: 'Quero Vender',
-          url: `https://t.me/BDMilCVbot?start`,
+          url: `https://t.me/BDMilCVbot?start=start`,
         },
         {
           text: 'Bot Alertas',
-          url: `https://t.me/BDMilALERTAS_bot?start`,
+          url: `https://t.me/BDMilALERTAS_bot?start=start`,
         },
       ],
     ],
