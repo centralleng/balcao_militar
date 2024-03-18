@@ -224,7 +224,6 @@ Obs: Coloque no máximo 150 caracteres
 
     desaconselho_sucesso = `✅ Desaconselho feita com sucesso!`
 
-
     aguarde = 'Aguarde...'
 
     suporte_cadastro = 'BAACAgEAAxkBAAN1ZfILIx8NoAw_wCPmzK-uDnfKkVYAArUCAALXdJBHvg5dOXwtpyw0BA'

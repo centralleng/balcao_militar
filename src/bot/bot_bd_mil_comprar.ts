@@ -88,7 +88,7 @@ function createInlineKeyboard(userTelegramId:any, produto_id:any, user_id:any) {
                     }
                   })   
                   
-                  recomendado_desaconsenho.desaconselho_vendedor(user_db.id_telegram)
+                  recomendado_desaconsenho.recomendo_vendedor(user_db.id_telegram)
                   this.bot.sendMessage(id_telegram, `✅ Recomendação feita com sucesso!`, botao.sugestao);             
                 }
               }

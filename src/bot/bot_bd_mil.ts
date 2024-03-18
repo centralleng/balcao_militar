@@ -392,10 +392,11 @@ Boas negociações!
       const msg = callbackQuery.data;
       const chatId = callbackQuery.message?.chat.id;
       const username = callbackQuery.message?.chat.username; 
-      const id_telegram = chatId || ''    
+      const id_telegram = chatId || ''; 
+      const message_id = callbackQuery.message?.message_id; 
 
       const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...');
-      const messageId = msg_del.message_id.toString()
+      const messageId = msg_del.message_id.toString()     
 
       if(msg==='sim'){ // Aceita o termo de uso 
 

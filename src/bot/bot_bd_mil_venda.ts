@@ -20,8 +20,7 @@ class Bot_bd_mil_venda {
     // Manipular callback_query
     this.bot.on("callback_query", async (msg: any) => {
       // console.log(msg)
-      const texto = msg.data;
-    
+      const texto = msg.data;    
       const id_telegram = msg.message?.chat.id;
       const username = msg.message?.chat.username;
       const message_id = msg.message?.message_id;
@@ -577,7 +576,7 @@ Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'cur
       const name = msg.chat.first_name;
       const username = msg.chat.username;
       const message_id = msg.message_id;
-      const photo = msg.photo || undefined
+      const photo = msg.photo || undefined;
 
       const msg_del = await this.bot.sendMessage(id_telegram, mensagens.aguarde);
       const messageId = msg_del.message_id.toString()
@@ -1043,7 +1042,7 @@ Valor para anunciar! ${(parseInt(dados.valor) / 100).toLocaleString('pt-BR', { s
 
 Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
 
-Vc tem ${taxa.tempo} meses para permanecer com esse anúncio ativado
+Vc tem ${taxa.tempo} mes(es) para permanecer com esse anúncio ativado
 `,
                       {
                         reply_markup: {
