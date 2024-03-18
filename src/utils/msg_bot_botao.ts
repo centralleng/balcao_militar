@@ -217,7 +217,7 @@ class Botoes {
                     { text: "[Mat. Construção] vendas", callback_data: "CADASTRO_[Mat-Construcao]_APAGAR" },
                 ],
                 [
-                    { text: "Referência de categorias", url: "https://m.pontofrio.com.br/" },
+                    { text: "⚠️ Referência de categorias", url: "https://m.pontofrio.com.br/" },
                 ],
             ],
         },

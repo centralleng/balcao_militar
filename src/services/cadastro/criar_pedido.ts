@@ -138,6 +138,7 @@ export default async function Criar_pedido(dados: dados) {
       } catch (error) { console.log('erro 02') }
 
       for await (const i of usuarios_id) {
+        console.log('alerta id', i)
         try {
           // Enviar msg para aleras cadastrados 
           await axios.post(`https://api.telegram.org/bot${botAlerta}/sendMessage`, // bot CentrallTest4
@@ -156,7 +157,7 @@ export default async function Criar_pedido(dados: dados) {
           }),
           });
 
-        } catch (error) { console.log('erro 03') }
+        } catch (error) { console.log('criar_pedido_erro 03') }
       }
     } else {
       // enviar informação de falha 

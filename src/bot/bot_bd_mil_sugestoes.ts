@@ -35,8 +35,6 @@ class Bot_bd_mil_sugestoes {
 
       const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...'); 
       const messageId = msg_del.message_id.toString()
-
-
     });
   }
 }

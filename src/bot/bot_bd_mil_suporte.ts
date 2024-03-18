@@ -46,6 +46,7 @@ class Bot_bd_mil_suporte {
       if(msg_resp[texto]){
 
       await bot.sendVideo(id_telegram, msg_resp[texto]);
+      await bot.sendMessage(id_telegram, 'Espero que tenho sanado sua dúvida. Boas negociações! Caso ainda persista, pode clicar nos itens novamente.');
       bot.deleteMessage(id_telegram, messageId)
 
       return
@@ -60,7 +61,7 @@ Olá! Bem-vindo ao Bot de Suporte. Por favor, escolha uma opção de 0 a 4 para 
 4 - Como comprar um produto;
 5 - Fale com um representante.
         
-        `)         
+        `)              
       bot.deleteMessage(id_telegram, messageId);
       }
     });

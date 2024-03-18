@@ -122,14 +122,14 @@ export default async function Update_pedido(dados: dados) {
       } catch (error) { console.log('erro 02') }
 
       for await (const i of usuarios_id) {
+        console.log('alerta atualização id', i)
         try {
           // Enviar msg para aleras cadastrados 
-          await axios.post(`https://api.telegram.org/bot${botAlerta}/sendPhoto`, // bot CentrallTest4
+          await axios.post(`https://api.telegram.org/bot${botAlerta}/sendMessage`, // bot CentrallTest4
             {
             parse_mode: 'HTML',
             chat_id: i,
-            photo: produto?.id_imagem,
-            caption: mensagens.msg_pagamento_grupo({ 
+            text: mensagens.msg_pagamento_grupo({ 
             descricao_produto: produto?.descricao || '', 
             valor_produto: valor || '', 
             produto_id: produto?.id||0, 
@@ -141,7 +141,7 @@ export default async function Update_pedido(dados: dados) {
           }),
             });
 
-        } catch (error) { console.log('erro 03') }
+        } catch (error) { console.log('alerta_atualizacao_erro 03') }
       }
     } else {
       // enviar informação de falha 

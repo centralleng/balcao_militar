@@ -74,7 +74,7 @@ class Mensagens {
 
     descricao = 
     `
-    Descreva de forma sucinta o produto que você quer ofertar. NÃO coloque o valor nesse momento (máximo 150 caracteres). SÓ coloque ponto no fim.
+    Descreva de forma sucinta o produto que você quer ofertar. NÃO coloque o valor nesse momento (máximo 200 caracteres). SÓ coloque ponto no fim.
     `
 
     valor =
@@ -156,7 +156,7 @@ Interessado em vender ${dados.descricao_produto}
 
 Valor ${(parseInt(dados.valor_produto) / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
 
-clique no código <a href="https://t.me/BDMilquerocomprar_bot?start=${dados.produto_id}">${dados.produto_id}</a> para ser encaminhado ao @BDMilquerocomprar_bot para comprar dele.
+_Clique no código_ <a href="https://t.me/BDMilquerocomprar_bot?start=${dados.produto_id}">${dados.produto_id}</a> para ser encaminhado ao @BDMilquerocomprar_bot para comprar dele.
 
 ${dados.recomendado > 0 ? `Recomendado por mais de ${dados.recomendado} pessoas` : `Ainda não recomendado`}
 
