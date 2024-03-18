@@ -777,7 +777,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
   
             const verifica_descricao = texto?.split('')
   
-            if (verifica_descricao.length < 150 && verifica_descricao.length > 0) {
+            if (verifica_descricao.length < 200 && verifica_descricao.length > 0) {
   
               try {
                 const produto_db = await prisma_db.produtos.update({
@@ -814,7 +814,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               }
   
             } else {
-              await this.bot.sendMessage(id_telegram, `⚠️ Ops algo coloque no máximo 150 caracteres. SÓ coloque ponto no fim.`);
+              await this.bot.sendMessage(id_telegram, `⚠️ Ops algo coloque no máximo 200 caracteres. SÓ coloque ponto no fim.`);
               this.bot.deleteMessage(id_telegram, messageId)
               return
             }

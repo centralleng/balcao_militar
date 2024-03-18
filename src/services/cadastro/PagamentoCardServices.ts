@@ -30,7 +30,7 @@ interface dados {
 
 async function PagamentoCardServices(dados: dados) {
 
-  console.log(dados)
+  console.log('credito',dados)
 
   // const indiceParenteses = dados.telefone.indexOf(')');
   // const telefone = dados.telefone.substring(indiceParenteses + 1).replace(/\D/g, '');
@@ -116,7 +116,7 @@ async function PagamentoCardServices(dados: dados) {
     },
   };
 
-  // console.log('dados',dadosCredit)
+  console.log('dados',dadosCredit)
 
   let dados_pagarme;
 
