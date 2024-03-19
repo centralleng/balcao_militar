@@ -120,7 +120,7 @@ Localização: ${dados.localizacao}
 
 Entrega o produto fora da sede: ${dados.entrega}
 
-clique no código <a href="https://t.me/BDMilquerocomprar_bot?start=${dados.produto_id}">${dados.produto_id}</a> para ser encaminhado ao @BDMilquerocomprar_bot para comprar dele.
+_Clique_ no código <a href="https://t.me/BDMilquerocomprar_bot?start=${dados.produto_id}">${dados.produto_id}</a> para ser encaminhado ao @BDMilquerocomprar_bot para comprar dele.
 
 ${dados.recomendado > 0 ? `Recomendado por mais de ${dados.recomendado} pessoas` : `Ainda não recomendado`}
 
@@ -166,7 +166,7 @@ Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor 
 
 Conta verificada ✅
 
-Membro desde ${moment(dados.data_criacao_user).format('DD-MM-YYYY')}      
+Membro desde ${moment(dados.data_criacao_user).format('DD-MM-YYYY')}     
     `
     }
 

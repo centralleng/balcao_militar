@@ -131,13 +131,13 @@ export default async function Update_pedido(dados: dados) {
             chat_id: i,
             text: mensagens.msg_pagamento_grupo({ 
             descricao_produto: produto?.descricao || '', 
-            valor_produto: valor || '', 
+            valor_produto: valor || '',
             produto_id: produto?.id||0, 
             recomendado: user?.recomendado || 0, 
             desaconselhado: user?.desaconselhado || 0, 
             data_criacao_user: user?.created_at,
             entrega: produto?.entrega||"",
-            localizacao: produto?.localizacao||'', 
+            localizacao: produto?.localizacao||'',
           }),
             });
 

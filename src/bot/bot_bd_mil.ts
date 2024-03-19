@@ -397,6 +397,8 @@ Boas negociações!
 
       const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...');
       const messageId = msg_del.message_id.toString()     
+    
+      bot.deleteMessage(id_telegram, message_id?.toString()||"")     
 
       if(msg==='sim'){ // Aceita o termo de uso 
 

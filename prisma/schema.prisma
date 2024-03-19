@@ -146,3 +146,14 @@ model Log_recomendacoes {
 
   @@map("bdmil_log_recomendacoes")
 }
+
+model Sugestoes {
+  id                      Int           @id @default(autoincrement())
+  delete                  Int?
+  id_telegram             String?
+  descricao               String?
+  updated_at              DateTime      @updatedAt @default(now())
+  created_at              DateTime      @default(now())
+
+  @@map("bdmil_sugestoes")
+}

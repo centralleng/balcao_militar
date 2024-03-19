@@ -35,6 +35,52 @@ class Bot_bd_mil_sugestoes {
 
       const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...'); 
       const messageId = msg_del.message_id.toString()
+
+       // Primeiro verifica se ja axiste esse usuário
+       const user = await prisma_db.users.findUnique({
+        where: { id_telegram: id_telegram?.toString()}           
+      });
+
+      if (!user) {
+        await bot.sendMessage(id_telegram, `
+⚠️ Primeiro precisamos realizar o seu cadastro!
+Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
+        `);
+        bot.deleteMessage(id_telegram, messageId)
+        return
+      }
+
+      const sugestao = await prisma_db.sugestoes.findMany({
+        where: { id_telegram: id_telegram?.toString(), descricao:null}           
+      });
+
+      if(sugestao.length>0){
+        const verifica_descricao = texto?.split('') 
+        if (verifica_descricao.length < 200 && verifica_descricao.length > 0) {
+          await prisma_db.sugestoes.update({
+            where:{id: sugestao[0].id},
+            data: {
+              descricao: texto,    
+            }
+          }) 
+          await bot.sendMessage(id_telegram, `✅ Sugestão recebida com sucesso.`);
+          bot.deleteMessage(id_telegram, messageId)
+          return
+        }else{
+          await bot.sendMessage(id_telegram, `⚠️ Ops algo coloque no máximo 150 caracteres. SÓ coloque ponto no fim.`);
+          bot.deleteMessage(id_telegram, messageId)
+          return
+        }
+      }
+      
+      await bot.sendMessage(id_telegram,`Olá, digite aqui a sua sugestão para melhorar o processo. Desde já agradecemos. Máximo 150 caracteres`);
+      bot.deleteMessage(id_telegram, messageId)
+
+      await prisma_db.sugestoes.create({
+        data: {
+          id_telegram: id_telegram?.toString(),
+        }
+      })    
     });
   }
 }

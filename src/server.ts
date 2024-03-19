@@ -51,9 +51,9 @@ bot_comprar.execute()
 
 Bot_bd_mil_alertas.execute()
 Bot_bd_mil_suporte.execute()
+Bot_bd_mil_sugestoes.execute()
 
 // Bot_bd_mil_news.execute()
-// Bot_bd_mil_sugestoes.execute()
 // Bot_bd_mil_coronel.execute()
 
 // cronDiario.envia()
