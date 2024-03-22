@@ -576,7 +576,7 @@ Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'cur
       const name = msg.chat.first_name;
       const username = msg.chat.username;
       const message_id = msg.message_id;
-      const photo = msg.photo || undefined;
+      const photo = msg.photo || undefined;      
 
       const msg_del = await this.bot.sendMessage(id_telegram, mensagens.aguarde);
       const messageId = msg_del.message_id.toString()
