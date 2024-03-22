@@ -75,6 +75,9 @@ export default async function Update_pedido(dados: dados) {
               { text: "EDITAR", callback_data: `EDITAR_${id_produto}` },
               { text: "DELETAR", callback_data: `DELETAR_${id_produto}` },
             ],
+            [
+              { text: "NOVA VENDA", callback_data: "VENDER" },
+          ],
           ],
         };
       }

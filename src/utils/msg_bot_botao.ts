@@ -19,6 +19,9 @@ class Botoes {
                     { text: "EDITAR", callback_data: "EDITAR" },
                     { text: "DELETAR", callback_data: "DELETAR_PRODUTO" },
                 ],
+                [
+                    { text: "NOVA VENDA", callback_data: "VENDER" },
+                ],
             ],
         },
     }

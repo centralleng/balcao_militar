@@ -4,6 +4,7 @@ import api from "../api_pagarme/api";
 
 interface dados {        
   valor: string;
+  tipo: string;
   pedido_id: number;
   // Dados user
   nome: string;
@@ -30,7 +31,22 @@ interface dados {
 
 async function PagamentoCardServices(dados: dados) {
 
-  console.log('credito',dados)
+  if(dados.tipo==='credito'){
+    await prisma_db.pedidos.update({
+      where:{id: dados.pedido_id},
+      data:{
+        tipo: 'credito'
+      }
+    })
+  }
+  if(dados.tipo==='produto'){
+    await prisma_db.pedidos.update({
+      where:{id: dados.pedido_id},
+      data:{
+        tipo: 'produto'
+      }
+    })
+  }
 
   // const indiceParenteses = dados.telefone.indexOf(')');
   // const telefone = dados.telefone.substring(indiceParenteses + 1).replace(/\D/g, '');

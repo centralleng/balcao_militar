@@ -176,7 +176,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           data: { username: username }
         })        
        
-        if (texto === 'VENDER'){ // Entra no fluxo de venda basta criar um produto e não finalizar o processo, so vai parar quando finalizar ou cancelar -> cancelar seguinifica apagar o produto.
+        if (texto_split[0] === 'VENDER'){ // Entra no fluxo de venda basta criar um produto e não finalizar o processo, so vai parar quando finalizar ou cancelar -> cancelar seguinifica apagar o produto.
           if (!user.produto[0] || user.produto[0].status) { // so vai criar um produto se ele não estiver nenhum pendente.
             if (user) {
               await prisma_db.produtos.create({
@@ -916,7 +916,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
 
               // Testa o texto contra a expressão regular
               return regex.test(texto);
-            }
+            }           
 
             if (isValorMonetarioValido(texto)) {
 
@@ -936,8 +936,15 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               }
               return
             } else {
-              await this.bot.sendMessage(id_telegram, `O valor monetário não é válido.`)
+              await this.bot.sendMessage(id_telegram, `
+O valor monetário não é válido.
+
+Escreva somente números. Caso haja centavos, coloque ponto pra separar o real dos centavos, mesmo sem ter centavos é preciso colocar o .00
+
+Ex: 00.00
+`)
               this.bot.deleteMessage(id_telegram, messageId)
+               return
             }
           }
 
@@ -1051,9 +1058,9 @@ Vc tem ${taxa.tempo} mes(es) para permanecer com esse anúncio ativado
                               { text: "PAGAR", url: `https://bdmil.vercel.app/pg/${pagamento.url}` },
                               { text: "PAGAR CRÉDITO", callback_data: `CREDITO_${dados.valor}_${pagamento.url}` },
                             ],
-                            // [
-                            //   { text: "Apagar Pedido", callback_data: `DELETAR-PRODUTO_${user.produto[0].id}` },
-                            // ],
+                            [
+                              { text: "ADICIONAR CRÉDITOS", url: `https://bdmil.vercel.app/ac/${pagamento.url}` }
+                            ],
                           ],
                         },
                       });

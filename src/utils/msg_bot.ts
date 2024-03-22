@@ -61,9 +61,9 @@ class Mensagens {
     // Valor R$ 100.50
 
     // Envie o código 1978654 para @BDMilquerocomprar para comprar dele.
-    // Recomendado por mais de 70 pessoas/ Ainda não recomendado (dados do vendedor)
+    // Recomendado por mais de 70 pessoa(s)/ Ainda não recomendado (dados do vendedor)
 
-    // Não desaconselhado ainda por ostros usuários/desaconselhado por 2 pessoas (dados do vendedor)
+    // Não desaconselhado ainda por ostros usuários/desaconselhado por 2 pessoa(s) (dados do vendedor)
 
     // Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor acordado ao comprador.
 
@@ -79,7 +79,7 @@ class Mensagens {
 
     valor =
     `
-Qual o valor unitário pretendido? (escreva somente números. Caso haja centavos, coloque ponto pra separar o real dos centavos.)
+Qual o valor unitário pretendido? (escreva somente números. Caso haja centavos, coloque ponto pra separar o real dos centavos, mesmo sem ter centavos é preciso colocar o 00.)
 
 Ex: 00.00
     `
@@ -122,15 +122,15 @@ Entrega o produto fora da sede: ${dados.entrega}
 
 _Clique_ no código <a href="https://t.me/BDMilquerocomprar_bot?start=${dados.produto_id}">${dados.produto_id}</a> para ser encaminhado ao @BDMilquerocomprar_bot para comprar dele.
 
-${dados.recomendado > 0 ? `Recomendado por mais de ${dados.recomendado} pessoas` : `Ainda não recomendado`}
+${dados.recomendado > 0 ? `Recomendado por mais de ${dados.recomendado} pessoa(s)` : `Ainda não recomendado`}
 
-${dados.desaconselhado > 0 ? `desaconselhado por ${dados.desaconselhado} pessoas ${dados.desaconselhado} pessoas` : `Não desaconselhado ainda por ostros usuários`}
+${dados.desaconselhado > 0 ? `desaconselhado por ${dados.desaconselhado} pessoa(s) ${dados.desaconselhado} pessoa(s)` : `Não desaconselhado ainda por ostros usuários`}
 
 Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor acordado ao comprador.
 
 Conta verificada ✅
 
-Membro desde ${moment(dados.data_criacao_user).format('DD-MM-YYYY')}      
+Membro desde ${moment(dados.data_criacao_user).format('DD-MM-YYYY')}     
     `
     }
 
@@ -158,9 +158,9 @@ Valor ${(parseInt(dados.valor_produto) / 100).toLocaleString('pt-BR', { style: '
 
 _Clique no código_ <a href="https://t.me/BDMilquerocomprar_bot?start=${dados.produto_id}">${dados.produto_id}</a> para ser encaminhado ao @BDMilquerocomprar_bot para comprar dele.
 
-${dados.recomendado > 0 ? `Recomendado por mais de ${dados.recomendado} pessoas` : `Ainda não recomendado`}
+${dados.recomendado > 0 ? `Recomendado por mais de ${dados.recomendado} pessoa(s)` : `Ainda não recomendado`}
 
-${dados.desaconselhado > 0 ? `desaconselhado por ${dados.desaconselhado} pessoas ${dados.desaconselhado} pessoas` : `Não desaconselhado ainda por ostros usuários`}
+${dados.desaconselhado > 0 ? `desaconselhado por ${dados.desaconselhado} pessoa(s) ${dados.desaconselhado} pessoa(s)` : `Não desaconselhado ainda por ostros usuários`}
 
 Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor acordado ao comprador.
 
@@ -175,7 +175,7 @@ Membro desde ${moment(dados.data_criacao_user).format('DD-MM-YYYY')}
     return `  
 ---- ✅✅✅ ----
 
-💡 Informo que @${dados.username} quer comprar o seu produto referente a oferta ${dados.produto_id}, você deve informar para ele a senha ${dados.senha} para que ele saiba que você é realmente o postador da oferta. Verifique se é a mesma senha.
+💡 Informo que @${dados.username} quer comprar o seu produto referente a oferta ${dados.produto_id}, Caso queira vender para ele(a), CLIQUE em @${dados.username} e informe a senha ${dados.senha} para que ele(a) saiba que você é realmente o(a) postador(a) da oferta. Verifique se é a mesma senha.
 
 ▪️ Dicas do Balcão dos militares:
 
@@ -183,9 +183,9 @@ Recomendo que sempre seja confirmado o valor do produto, bem como a forma de ent
 
 ❗️ verifique dados adicionais durante a negociação, para ter a certeza de estar mitigando riscos.
 
-⬆️ recomendado por ${dados.recomendado} pessoas.
+⬆️ recomendado por ${dados.recomendado} pessoa(s).
 
-⬇️ Não recomendado por ${dados.desaconselhado} pessoas.
+⬇️ Não recomendado por ${dados.desaconselhado} pessoa(s).
 
 ✅ conta verificada
 

@@ -12,6 +12,7 @@ interface dados {
   pedido_id: number,
   ddd: string,
   telefone: string,
+  tipo: string,
 }
 
 export default async function PagamentoPixServices(dados: dados) {
@@ -19,6 +20,23 @@ export default async function PagamentoPixServices(dados: dados) {
   // const indiceParenteses = dados.telefone.indexOf(')');
   // const telefone = dados.telefone.substring(indiceParenteses + 1).replace(/\D/g, '');
   // const ddd = dados.telefone.split('(')[1].split(')')[0];
+
+  if(dados.tipo==='credito'){
+    await prisma_db.pedidos.update({
+      where:{id: dados.pedido_id},
+      data:{
+        tipo: 'credito'
+      }
+    })
+  }
+  if(dados.tipo==='produto'){
+    await prisma_db.pedidos.update({
+      where:{id: dados.pedido_id},
+      data:{
+        tipo: 'produto'
+      }
+    })
+  }
 
   const codigo = crypto.randomBytes(3).toString('hex'); // Gera 6 dígitos entre letras e números
 
@@ -60,6 +78,8 @@ export default async function PagamentoPixServices(dados: dados) {
           "empresa": "bdmil",
         }           
     } 
+
+  
 
   let dados_pagarme
     try {

@@ -54,7 +54,7 @@ export default async function Criar_pedido(dados: dados) {
 
     const alerta = await prisma_db.alertas.findMany()
 
-    const alertas_db = alerta.filter((item) => descricao.includes(item.palavra_chave));
+    const alertas_db = alerta.filter((item) => (descricao.toUpperCase()).includes((item.palavra_chave).toUpperCase()));
     const alertas = alertas_db.filter((item) => item.tipo_grupo === produto?.categoria);
 
     const usuarios_id = alertas.map(item => { return item.id_telegram })
@@ -91,6 +91,9 @@ export default async function Criar_pedido(dados: dados) {
               { text: "EDITAR", callback_data: `EDITAR_${id_produto}` },
               { text: "DELETAR", callback_data: `DELETAR_${id_produto}` },
             ],
+            [
+              { text: "NOVA VENDA", callback_data: "VENDER" },
+          ],
           ],
         };
       }

@@ -24,7 +24,7 @@ const desaconselhado = user?.desaconselhado || 0
 
 const alerta = await prisma_db.alertas.findMany()
 
-const alertas_db = alerta.filter((item) => descricao.includes(item.palavra_chave));
+const alertas_db = alerta.filter((item) => (descricao.toUpperCase()).includes((item.palavra_chave).toUpperCase()));
 const alertas = alertas_db.filter((item) => item.tipo_grupo===produto?.categoria);
 
 const usuarios_id = alertas.map(item => {return item.id_telegram})
