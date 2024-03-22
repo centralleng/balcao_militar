@@ -63,7 +63,7 @@ class Mensagens {
     // Envie o código 1978654 para @BDMilquerocomprar para comprar dele.
     // Recomendado por mais de 70 pessoa(s)/ Ainda não recomendado (dados do vendedor)
 
-    // Não desaconselhado ainda por ostros usuários/desaconselhado por 2 pessoa(s) (dados do vendedor)
+    // Não desaconselhado ainda por outros usuários/desaconselhado por 2 pessoa(s) (dados do vendedor)
 
     // Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor acordado ao comprador.
 
@@ -124,7 +124,7 @@ Entrega o produto fora da sede: ${dados.entrega}
 
 ${dados.recomendado > 0 ? `Recomendado por mais de ${dados.recomendado} pessoa(s)` : `Ainda não recomendado`}
 
-${dados.desaconselhado > 0 ? `desaconselhado por ${dados.desaconselhado} pessoa(s) ${dados.desaconselhado} pessoa(s)` : `Não desaconselhado ainda por ostros usuários`}
+${dados.desaconselhado >  0 ? `desaconselhado por ${dados.desaconselhado} pessoa(s) ${dados.desaconselhado} pessoa(s)` : `Não desaconselhado ainda por outros usuários <code>1</code>`}
 
 Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor acordado ao comprador.
 
@@ -160,7 +160,7 @@ Valor ${(parseInt(dados.valor_produto) / 100).toLocaleString('pt-BR', { style: '
 
 ${dados.recomendado > 0 ? `Recomendado por mais de ${dados.recomendado} pessoa(s)` : `Ainda não recomendado`}
 
-${dados.desaconselhado > 0 ? `desaconselhado por ${dados.desaconselhado} pessoa(s) ${dados.desaconselhado} pessoa(s)` : `Não desaconselhado ainda por ostros usuários`}
+${dados.desaconselhado > 0 ? `desaconselhado por ${dados.desaconselhado} pessoa(s) ${dados.desaconselhado} pessoa(s)` : `Não desaconselhado ainda por outros usuários`}
 
 Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor acordado ao comprador.
 
