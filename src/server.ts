@@ -56,6 +56,6 @@ Bot_bd_mil_sugestoes.execute()
 // Bot_bd_mil_news.execute()
 // Bot_bd_mil_coronel.execute()
 
-// cronDiario.envia()
+cronDiario.envia()
 export {bot_venda}
 

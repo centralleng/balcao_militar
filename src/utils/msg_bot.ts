@@ -124,7 +124,7 @@ Entrega o produto fora da sede: ${dados.entrega}
 
 ${dados.recomendado > 0 ? `Recomendado por mais de ${dados.recomendado} pessoa(s)` : `Ainda não recomendado`}
 
-${dados.desaconselhado >  0 ? `desaconselhado por ${dados.desaconselhado} pessoa(s) ${dados.desaconselhado} pessoa(s)` : `Não desaconselhado ainda por outros usuários`}
+${dados.desaconselhado >  0 ? `desaconselhado por ${dados.desaconselhado} pessoa(s)` : `Não desaconselhado ainda por outros usuários`}
 
 Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor acordado ao comprador.
 
@@ -160,7 +160,7 @@ Valor ${(parseInt(dados.valor_produto) / 100).toLocaleString('pt-BR', { style: '
 
 ${dados.recomendado > 0 ? `Recomendado por mais de ${dados.recomendado} pessoa(s)` : `Ainda não recomendado`}
 
-${dados.desaconselhado > 0 ? `desaconselhado por ${dados.desaconselhado} pessoa(s) ${dados.desaconselhado} pessoa(s)` : `Não desaconselhado ainda por outros usuários`}
+${dados.desaconselhado > 0 ? `desaconselhado por ${dados.desaconselhado} pessoa(s)` : `Não desaconselhado ainda por outros usuários`}
 
 Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor acordado ao comprador.
 
