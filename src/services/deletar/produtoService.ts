@@ -15,7 +15,7 @@ export async function deletarProdutoAbandonado() {
         const dataProduto = moment(item.updated_at); // Converte a data do produto para um objeto Moment
         const minutos = dataAtual.diff(dataProduto, 'minutes');
 
-        if(minutos>5){
+        if(minutos>3){
             await prisma_db.produtos.delete({
                 where:{id: item.id}
             })

@@ -341,6 +341,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                 categoria: texto_split[1]
               }
             })
+            await this.bot.sendMessage(id_telegram, mensagens.minutosCadastro);
             await this.bot.sendMessage(id_telegram, mensagens.descricao, 
               {
                 reply_markup: {

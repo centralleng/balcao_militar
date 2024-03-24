@@ -74,7 +74,11 @@ class Mensagens {
 
     descricao = 
     `
-    Descreva de forma sucinta o produto que você quer ofertar. NÃO coloque o valor nesse momento (máximo 200 caracteres). SÓ coloque ponto no fim.
+Descreva de forma sucinta o produto que você quer ofertar. NÃO coloque o valor nesse momento (máximo 200 caracteres). SÓ coloque ponto no fim.
+    `
+    minutosCadastro = 
+    `
+🚨 Você só poderá concluir uma venda por vez. Após 3 minutos de inatividade TODO o processo será anulado, tendo que ser reiniciado.
     `
 
     valor =

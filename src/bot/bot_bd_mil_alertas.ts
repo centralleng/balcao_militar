@@ -328,10 +328,7 @@ pre-formatted fixed-width code block written in the Python programming language
 
           const msg_alerta = texto?texto.split(' '):''
         
-          if(
-            ['alerta','alertas'].includes(msg_alerta[0].toLowerCase())
-            &&msg_alerta[1]!=''
-            ){
+          if(['alerta','alertas'].includes(msg_alerta[0].toLowerCase())&&msg_alerta[1]!=''){
 
             if(msg_alerta[1]!=undefined){
 
@@ -351,6 +348,8 @@ pre-formatted fixed-width code block written in the Python programming language
             }
 
           }else{
+
+          await bot.sendMessage(id_telegram, `🚨 Você só poderá concluir um "alertas"  por vez. Após 3 minutos de inatividade, TODO o processo será anulado, tendo que ser reiniciado.`);
 
           await bot.sendMessage(id_telegram, `
 
