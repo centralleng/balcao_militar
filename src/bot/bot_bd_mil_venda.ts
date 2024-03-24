@@ -177,19 +177,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
         })        
        
         if (texto_split[0] === 'VENDER'){ // Entra no fluxo de venda basta criar um produto e não finalizar o processo, so vai parar quando finalizar ou cancelar -> cancelar seguinifica apagar o produto.
-          
-          const produtos = await prisma_db.produtos.findMany({
-            where:{id_telegram: id_telegram, status:false}
-          })
-
-          for await (let i of produtos) {          
-            try {
-              await prisma_db.produtos.delete({
-                where:{id: i.id}
-              })              
-            } catch (error) {}
-          }
-         
+                   
           await this.bot.sendMessage(id_telegram, `Onde você gostaria de divulgar a sua oferta?`);
           await this.bot.sendMessage(id_telegram, `Artigos Militares`, botao.artigos_militares);
           await this.bot.sendMessage(id_telegram, `Artigos Civis`, botao.artigos_civis);
