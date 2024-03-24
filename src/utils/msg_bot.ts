@@ -79,7 +79,7 @@ class Mensagens {
 
     valor =
     `
-Qual o valor unitário pretendido? (escreva somente números. Caso haja centavos, coloque ponto pra separar o real dos centavos, mesmo sem ter centavos é preciso colocar o 00.)
+Qual o valor unitário pretendido? (escreva somente números. Coloque .00 mesmo não havendo centavos)".
 
 Ex: 00.00
     `
@@ -124,7 +124,7 @@ Entrega o produto fora da sede: ${dados.entrega}
 
 ${dados.recomendado > 0 ? `Recomendado por mais de ${dados.recomendado} pessoa(s)` : `Ainda não recomendado`}
 
-${dados.desaconselhado >  0 ? `desaconselhado por ${dados.desaconselhado} pessoa(s) ${dados.desaconselhado} pessoa(s)` : `Não desaconselhado ainda por outros usuários <code>1</code>`}
+${dados.desaconselhado >  0 ? `desaconselhado por ${dados.desaconselhado} pessoa(s) ${dados.desaconselhado} pessoa(s)` : `Não desaconselhado ainda por outros usuários`}
 
 Em caso de problemas na negociação, o vendedor deverá devolver 100% do valor acordado ao comprador.
 
