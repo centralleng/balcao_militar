@@ -178,10 +178,12 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
        
         if (texto_split[0] === 'VENDER'){ // Entra no fluxo de venda basta criar um produto e não finalizar o processo, so vai parar quando finalizar ou cancelar -> cancelar seguinifica apagar o produto.
                    
+          await this.bot.sendMessage(id_telegram, mensagens.texto_inicial);         
           await this.bot.sendMessage(id_telegram, `Onde você gostaria de divulgar a sua oferta?`);
           await this.bot.sendMessage(id_telegram, `Artigos Militares`, botao.artigos_militares);
           await this.bot.sendMessage(id_telegram, `Artigos Civis`, botao.artigos_civis);
-          this.bot.deleteMessage(id_telegram, messageId)         
+          this.bot.deleteMessage(id_telegram, messageId)
+          return        
         }
         
         if (texto === 'MEUS_PRODUTOS'){ // Listar todo os produtos cadastrados 
