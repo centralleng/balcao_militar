@@ -11,5 +11,7 @@ export default async function Cadastar_palavra_chave_service(palavra_chave:strin
         }
     }) 
 
+    console.log(alerta)
+
     return alerta  
 }

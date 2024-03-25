@@ -227,7 +227,7 @@ function createInlineKeyboard(userTelegramId:any) {
                  inline_keyboard: [
                     [
                       { text: "ALERTAS", callback_data: `ALERTAS`},
-                      { text: "DELETAR", callback_data: `DELETAR_${texto_split[2].id}`},
+                      { text: "DELETAR", callback_data: `DELETAR_${texto_split[2]}`},
                     ],
                   ],
                  }
@@ -242,17 +242,28 @@ function createInlineKeyboard(userTelegramId:any) {
             }
 
             if(texto_split[0]==='DELETAR'){
-              console.log(texto_split[2])
-              const alerta = await Deletar_alerta_service(texto_split[2])
-              await bot.sendMessage(id_telegram, `Alerta Deletado com sucesso!`);
+
+            const alertadb = await prisma_db.alertas.findUnique({
+                where:{id: parseInt(texto_split[1])}
+            }) 
+
+            if(alertadb){
+              await Deletar_alerta_service(texto_split[1])
+              await bot.sendMessage(id_telegram, `✔️ Alerta Deletado com sucesso!`);
               bot.deleteMessage(id_telegram, messageId)
+              return
+            }            
+       
+              await bot.sendMessage(id_telegram, `❌ Esse alerta já foi deletado!`);
+              bot.deleteMessage(id_telegram, messageId)
+
             }  
 
             if(texto_split[0]==='ALERTAS'){
+
               const alerta = await Consultas_alertasService(user.id)
 
-              await bot.sendMessage(id_telegram, `Aguarde estamos procurando seus alertas...`);
-              bot.deleteMessage(id_telegram, messageId)
+              await bot.sendMessage(id_telegram, `Aguarde estamos procurando seus alertas...`);              
 
               if(alerta.length>0){
 
@@ -268,10 +279,10 @@ function createInlineKeyboard(userTelegramId:any) {
                       ],
                     },
                   });
-                  bot.deleteMessage(id_telegram, messageId)
                 }
+                await bot.deleteMessage(id_telegram, messageId)
               }else{
-                await bot.sendMessage(id_telegram, `Você não tem alertas cadastrados!`);
+                await bot.sendMessage(id_telegram, `⚠️ Você não tem alertas cadastrados!`);
                 bot.deleteMessage(id_telegram, messageId)
               }
             }       
