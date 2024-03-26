@@ -29,7 +29,7 @@ const descricao:any = pedido?.produto.descricao
 
 const alerta = await prisma_db.alertas.findMany()
 
-const alertas_db = alerta.filter((item) => descricao.includes(item.palavra_chave));
+const alertas_db = alerta.filter((item) => (descricao.toUpperCase()).includes((item.palavra_chave).toUpperCase()));
 const alertas = alertas_db.filter((item) => item.tipo_grupo=== pedido?.produto.categoria);
 
 const usuarios_id = alertas.map(item => {return item.id_telegram})
