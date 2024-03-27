@@ -11,7 +11,7 @@ const token_bot = process.env.API_BDMIL_SUPORTE ||''
 
 const bot = new TelegramBot(token_bot, { polling: true });
 class Bot_bd_mil_suporte {
-  static execute() { 
+  static execute() {
     
     bot.on('callback_query', async (msg:any) => {
         // console.log("callback_query",msg)
@@ -23,6 +23,24 @@ class Bot_bd_mil_suporte {
 
         const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...'); 
         const messageId = msg_del.message_id.toString()
+
+        const user = await prisma_db.users.findUnique({
+          where: { id_telegram: id_telegram?.toString() },
+        })
+
+        if(texto_split[0]==='DELETAR-CONTA'){
+          if(user){
+            await prisma_db.users.delete({
+              where:{id_telegram:id_telegram}
+            })
+            await bot.sendMessage(id_telegram, '✔️ Seu cadastro foi deletado com sucesso!');
+            bot.deleteMessage(id_telegram, messageId)
+
+          }else{
+            await bot.sendMessage(id_telegram, '❌ Não há nenhum registro de seu cadastro em nosso banco de dados.');
+            bot.deleteMessage(id_telegram, messageId)
+          }          
+        }
     });   
     
     bot.on('message', async (msg) => {
@@ -42,6 +60,21 @@ class Bot_bd_mil_suporte {
       bot.deleteMessage(id_telegram, messageId)
       return
       }
+      if(texto==='6'){
+        await bot.sendMessage(id_telegram, 'Este passo é irreversível. Ao clicar em SIM, você concorda em excluir permanentemente sua conta do sistema. Será necessário refazer todo o seu cadastro caso deseje utilizar nossos serviços novamente.',
+        {
+          reply_markup: {
+            inline_keyboard: [
+              [
+                { text: "SIM", callback_data: `DELETAR-CONTA` },                
+              ],                   
+            ],
+          },
+        }
+        );
+        bot.deleteMessage(id_telegram, messageId)
+        return
+        }
 
       if(msg_resp[texto]){
 
@@ -53,13 +86,14 @@ class Bot_bd_mil_suporte {
 
       }else{
       await bot.sendMessage(id_telegram, `
-Olá! Bem-vindo ao Bot de Suporte. Por favor, escolha uma opção de 0 a 4 para sua dúvida:
+Olá! Bem-vindo! Eu sou o Soldado. Por favor, selecione uma opção de 0 a 6 para esclarecer sua dúvida.:
 
 1 - Como fazer meu cadastro;
 2 - Como colocar um produto para vender;
 3 - Como ativar o bot alertas;
 4 - Como comprar um produto;
 5 - Fale com um representante.
+6 - Excluir minha conta.
         
         `)              
       bot.deleteMessage(id_telegram, messageId);

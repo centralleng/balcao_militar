@@ -73,7 +73,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
         }
       }
       
-      await bot.sendMessage(id_telegram,`Olá, digite aqui a sua sugestão para melhorar o processo. Desde já agradecemos. Máximo 150 caracteres`);
+      await bot.sendMessage(id_telegram,`Olá, Eu sou o Soldado, digite aqui a sua sugestão para melhorar o processo. Desde já agradecemos. Máximo 150 caracteres`);
       bot.deleteMessage(id_telegram, messageId)
 
       await prisma_db.sugestoes.create({
