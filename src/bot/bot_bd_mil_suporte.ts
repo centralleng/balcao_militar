@@ -31,7 +31,7 @@ class Bot_bd_mil_suporte {
         if(texto_split[0]==='DELETAR-CONTA'){
           if(user){
             await prisma_db.users.delete({
-              where:{id_telegram:id_telegram}
+              where:{id_telegram:id_telegram?.toString()}
             })
             await bot.sendMessage(id_telegram, '✔️ Seu cadastro foi deletado com sucesso!');
             bot.deleteMessage(id_telegram, messageId)
