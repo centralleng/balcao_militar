@@ -247,7 +247,18 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                 data: { msg_id: editar_msg.message_id }
               })
 
-              await this.bot.sendMessage(id_telegram, `✔️ Seu produto foi atualizado com sucesso.`, botao.suporte);
+              await this.bot.sendMessage(id_telegram, `✔️ Seu produto foi atualizado com sucesso.`, {
+                reply_markup: {
+                  inline_keyboard: [
+                    [
+                      {
+                        text: 'NOVA VENDA',
+                        callback_data: `VENDER`,
+                      }
+                    ],
+                  ],
+                },
+              });
               this.bot.deleteMessage(id_telegram, messageId)
             } else {
               await this.bot.sendMessage(id_telegram, `⚠️ Algo deu errado, entre em contato com o suporte.`, botao.suporte);
@@ -317,7 +328,18 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               })
               if (grupo) {
                 await this.bot.deleteMessage(grupo.id_grupo, produto_pedido.pedido[0].msg_id.toString())
-                await this.bot.sendMessage(id_telegram, `✅ Produto deletado com sucesso!`,);
+                await this.bot.sendMessage(id_telegram, `✅ Produto deletado com sucesso!`,{
+                  reply_markup: {
+                    inline_keyboard: [
+                      [
+                        {
+                          text: 'NOVA VENDA',
+                          callback_data: `VENDER`,
+                        }
+                      ],
+                    ],
+                  },
+                });
                 this.bot.deleteMessage(id_telegram, messageId)
               } else {
                 await this.bot.sendMessage(id_telegram, `⚠️ Algo deu errado, entre em contato com o suporte.`, botao.suporte);
@@ -374,7 +396,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           })
 
           if (log.length > 0) {
-            await this.bot.sendMessage(id_telegram, `⚠️ Sua recomendação já foi feita.`, botao.sugestao);
+            await this.bot.sendMessage(id_telegram, `⚠️ Sua avaliação já foi feita.`, botao.sugestao);
             this.bot.deleteMessage(id_telegram, messageId)
             return
           } else {
@@ -441,7 +463,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           })
 
           if (log.length > 0) {
-            await this.bot.sendMessage(id_telegram, `⚠️ Seu desaconselho já foi feito.`, botao.sugestao);
+            await this.bot.sendMessage(id_telegram, `⚠️ Sua avaliação já foi feito.`, botao.sugestao);
             this.bot.deleteMessage(id_telegram, messageId)
           } else {
 
@@ -680,7 +702,18 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                 data: { msg_id: editar_msg.message_id }
               })
 
-              await this.bot.sendMessage(id_telegram, `✔️ Seu produto foi editado com sucesso.`, botao.suporte);
+              await this.bot.sendMessage(id_telegram, `✔️ Seu produto foi editado com sucesso.`, {
+                reply_markup: {
+                  inline_keyboard: [
+                    [
+                      {
+                        text: 'NOVA VENDA',
+                        callback_data: `VENDER`,
+                      }
+                    ],
+                  ],
+                },
+              });
               this.bot.deleteMessage(id_telegram, messageId)
             } else {
               await this.bot.sendMessage(id_telegram, `⚠️ Algo deu errado, entre em contato com o suporte.`, botao.suporte);

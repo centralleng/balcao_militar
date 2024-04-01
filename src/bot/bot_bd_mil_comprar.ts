@@ -65,7 +65,7 @@ function createInlineKeyboard(userTelegramId:any, produto_id:any, user_id:any) {
               })
 
               if(log.length>0){
-                this.bot.sendMessage(id_telegram, `⚠️ Sua recomendação já foi feita.`, botao.sugestao);
+                this.bot.sendMessage(id_telegram, `⚠️ Sua avaliação já foi feita.`, botao.sugestao);
                 return
               }else{
                 const user = await prisma_db.users.findUnique({where:{id:texto_split[2]}})
