@@ -51,6 +51,10 @@ if(pedido){
           creditos: (pedido.users.creditos||0)+parseInt(pedido.valor||'')
         }
       })
+
+      console.log("crédito", (pedido.users.creditos||0)+parseInt(pedido.valor||''))
+
+      return
     }
 
     const grupo = await prisma_db.grupos.findUnique({
@@ -58,6 +62,19 @@ if(pedido){
     })      
 
     if(grupo){
+
+function createInlineKeyboardAlert(userTelegramId: any) {
+  return {
+    inline_keyboard: [
+      [
+        {
+          text: 'Listar e Deltar Alertas',
+          callback_data: `ALERTAS`,
+        },
+      ],
+    ],
+  };
+}
 
 // Função para criar botões inline
 function createInlineKeyboard() {
@@ -150,6 +167,7 @@ await axios.post(`https://api.telegram.org/bot${botAlerta}/sendPhoto`, // bot Ce
  entrega: pedido.produto?.entrega||"",
  localizacao: pedido.produto?.localizacao||'',
  }), 
+ reply_markup: createInlineKeyboardAlert(grupo.id_grupo),
 });
    
  } catch (error) {console.log('erro 03')}
