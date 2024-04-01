@@ -78,7 +78,7 @@ Descreva de forma sucinta o produto que você quer ofertar. NÃO coloque o valor
     `
     minutosCadastro = 
     `
-🚨 Você só poderá concluir uma venda por vez. Após 3 minutos de inatividade TODO o processo será anulado, tendo que ser reiniciado.
+🚨 Você só poderá concluir uma venda por vez. Após 5 minutos de inatividade TODO o processo será anulado, tendo que ser reiniciado.
     `
 
     valor =

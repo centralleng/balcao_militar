@@ -61,7 +61,7 @@ class Bot_bd_mil_suporte {
       return
       }
       if(texto==='6'){
-        await bot.sendMessage(id_telegram, 'Este passo é irreversível. Ao clicar em SIM, você concorda em excluir permanentemente sua conta do sistema. Será necessário refazer todo o seu cadastro caso deseje utilizar nossos serviços novamente.',
+        await bot.sendMessage(id_telegram, 'Este passo é irreversível. Ao clicar em SIM, você concorda em excluir permanentemente sua conta do sistema. Será necessário refazer o seu cadastro, para utilizar nossos serviços novamente.',
         {
           reply_markup: {
             inline_keyboard: [
