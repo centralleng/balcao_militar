@@ -1051,7 +1051,7 @@ Vc tem ${taxa.tempo} mes(es) para permanecer com esse anúncio ativado
                               { text: "PAGAR CRÉDITO", callback_data: `CREDITO_${dados.valor}_${pagamento.url}` },
                             ],
                             [
-                              { text: "ADICIONAR CRÉDITOS", url: `https://bdmil.vercel.app/ac/${pagamento.url}` }
+                              { text: "ADICIONAR CRÉDITOS", url: `https://bdmil.vercel.app/ac/${user.id}` }
                             ],
                           ],
                         },
