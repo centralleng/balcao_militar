@@ -24,6 +24,7 @@ const pedido = await prisma_db.pedidos.findUnique({
 });
 
 if(pedido){
+  console.log("tipo", pedido.tipo)
   if(pedido.tipo==="credito"){
     await prisma_db.users.update({
       where:{id:pedido.user_id},  
@@ -57,6 +58,7 @@ if(pedido){
   
     return
   }
+  console.log("veio crédito")
 }
 
 const valor = pedido?.produto?.valor_produto || ''
