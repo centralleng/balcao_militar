@@ -5,7 +5,7 @@ import { mensagens } from "../../utils/msg_bot";
 
 export async function deletarProdutoAbandonado() {
 
-    const botAlerta = process.env.API_BOT_BDMIL_ALERTA || ''
+  const botVenda = process.env.API_BOT_BDMIL_VENDA || ''
 
     const produto = await prisma_db.produtos.findMany({
         where:{status:false||null}
@@ -41,7 +41,7 @@ export async function deletarProdutoAbandonado() {
             await prisma_db.produtos.delete({ where:{id: item.id}});
 
         try {
-            await axios.post(`https://api.telegram.org/bot${botAlerta}/sendMessage`, // bot CentrallTest4
+            await axios.post(`https://api.telegram.org/bot${botVenda}/sendMessage`, // bot CentrallTest4
             {
             parse_mode: 'HTML',
             chat_id: item.id_telegram,
