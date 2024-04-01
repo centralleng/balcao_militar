@@ -339,7 +339,7 @@ inline_keyboard: [
             console.log(error)
           }
 
-        }else{this.bot.sendMessage(id_telegram, `ID do produto não encontrada, favor conferir a ID no anúncio.`)} 
+        }else{this.bot.sendMessage(id_telegram, `❌ Produto não encontrado ou excluído`)} 
 
         return
       }
