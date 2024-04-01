@@ -29,6 +29,20 @@ export default async function Update_pedido(dados: dados) {
     where: { id: dados.produto_id }
   })
 
+   // Função para criar botões inline
+   function createInlineKeyboardAlert(userTelegramId: any) {
+    return {
+      inline_keyboard: [
+        [
+          {
+            text: 'Listar e Deltar Alertas',
+            callback_data: `ALERTAS`,
+          },
+        ],
+      ],
+    };
+  }
+
   if (pedido) {
 
     const valor = produto?.valor_produto || ''
@@ -142,6 +156,8 @@ export default async function Update_pedido(dados: dados) {
             entrega: produto?.entrega||"",
             localizacao: produto?.localizacao||'',
           }),
+          
+          reply_markup: createInlineKeyboardAlert(grupo.id_grupo),
             });
 
         } catch (error) { console.log('alerta_atualizacao_erro 03') }

@@ -15,6 +15,20 @@ export default async function Alerta_pedido (produto_id:number,user_id:string) {
       where:{id: user_id}
   })
 
+   // Função para criar botões inline
+   function createInlineKeyboardAlert(userTelegramId: any) {
+    return {
+      inline_keyboard: [
+        [
+          {
+            text: 'Listar e Deltar Alertas',
+            callback_data: `ALERTAS`,
+          },
+        ],
+      ],
+    };
+  }
+
 if(produto){
 
 const valor = produto?.valor_produto || ''
@@ -52,6 +66,8 @@ await axios.post(`https://api.telegram.org/bot${botAlerta}/sendMessage`, // bot 
   entrega: produto?.entrega||"",
   localizacao: produto?.localizacao||'',
    }),
+   
+   reply_markup: createInlineKeyboardAlert(grupo.id_grupo),
 });
    
  } catch (error) {console.log('erro 01')}

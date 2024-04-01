@@ -83,6 +83,20 @@ export default async function Criar_pedido(dados: dados) {
         };
       }
 
+       // Função para criar botões inline
+       function createInlineKeyboardAlert(userTelegramId: any) {
+        return {
+          inline_keyboard: [
+            [
+              {
+                text: 'Listar e Deltar Alertas',
+                callback_data: `ALERTAS`,
+              },
+            ],
+          ],
+        };
+      }
+
       function enviarMsg(id_produto: any) {
         return {
           inline_keyboard: [
@@ -158,6 +172,7 @@ export default async function Criar_pedido(dados: dados) {
             entrega: produto?.entrega||"",
             localizacao: produto?.localizacao||'',
           }),
+          reply_markup: createInlineKeyboardAlert(grupo.id_grupo),
           });
 
         } catch (error) { console.log('criar_pedido_erro 03') }

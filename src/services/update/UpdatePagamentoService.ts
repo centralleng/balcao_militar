@@ -22,15 +22,15 @@ const pedido = await prisma_db.pedidos.findUnique({
   }
 })
 
-const valor = pedido?.produto.valor_produto || ''
+const valor = pedido?.produto?.valor_produto || ''
 const recomendado = pedido?.users.recomendado || 0
 const desaconselhado = pedido?.users.desaconselhado || 0
-const descricao:any = pedido?.produto.descricao
+const descricao:any = pedido?.produto?.descricao
 
 const alerta = await prisma_db.alertas.findMany()
 
 const alertas_db = alerta.filter((item) => (descricao.toUpperCase()).includes((item.palavra_chave).toUpperCase()));
-const alertas = alertas_db.filter((item) => item.tipo_grupo=== pedido?.produto.categoria);
+const alertas = alertas_db.filter((item) => item.tipo_grupo=== pedido?.produto?.categoria);
 
 const usuarios_id = alertas.map(item => {return item.id_telegram})
 
@@ -54,7 +54,7 @@ if(pedido){
     }
 
     const grupo = await prisma_db.grupos.findUnique({
-      where:{type: pedido.produto.categoria||''}
+      where:{type: pedido?.produto?.categoria||''}
     })      
 
     if(grupo){
@@ -98,7 +98,7 @@ try {
       caption: mensagens.msg_pagamento_grupo({ 
       descricao_produto: pedido.produto?.descricao || '', 
       valor_produto: valor || '', 
-      produto_id: pedido.produto.id||0, 
+      produto_id: pedido?.produto?.id||0, 
       recomendado: recomendado || 0, 
       desaconselhado: desaconselhado || 0, 
       data_criacao_user: pedido.users.created_at,
@@ -123,10 +123,10 @@ await axios.post(`https://api.telegram.org/bot${botVenda}/sendMessage`, // Bot b
 {
   chat_id: pedido.users.id_telegram,
   text: mensagens.msg_pagamento_vendedor({ 
-    descricao_produto: pedido.produto.descricao || '', 
+    descricao_produto: pedido?.produto?.descricao || '', 
     valor_produto: valor || '', 
-    produto_id: pedido.produto.id ||0,}),
-    reply_markup: enviarMsg(pedido.produto.id),
+    produto_id: pedido?.produto?.id ||0,}),
+    reply_markup: enviarMsg(pedido?.produto?.id),
     });
         
       } catch (error) {console.log('erro 02')}
@@ -141,9 +141,9 @@ await axios.post(`https://api.telegram.org/bot${botAlerta}/sendPhoto`, // bot Ce
  chat_id: i,
  photo: pedido.produto?.id_imagem,
  caption: mensagens.msg_pagamento_grupo({ 
- descricao_produto: pedido.produto.descricao || '', 
+ descricao_produto: pedido?.produto?.descricao || '', 
  valor_produto: valor || '', 
- produto_id: pedido.produto.id ||0, 
+ produto_id: pedido?.produto?.id ||0, 
  recomendado: recomendado || 0, 
  desaconselhado: desaconselhado || 0, 
  data_criacao_user: pedido.users.created_at,

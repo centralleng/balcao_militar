@@ -27,26 +27,27 @@ interface dados {
   cep: string;
   city: string; // Cidade
   state: string; // Eatado  
+  user_id: string,
 }
 
-async function PagamentoCardServices(dados: dados) {
+async function PagamentoCardServices(dados: dados) {  
 
-  if(dados.tipo==='credito'){
-    await prisma_db.pedidos.update({
-      where:{id: dados.pedido_id},
-      data:{
-        tipo: 'credito'
-      }
-    })
-  }
-  if(dados.tipo==='produto'){
-    await prisma_db.pedidos.update({
-      where:{id: dados.pedido_id},
-      data:{
-        tipo: 'produto'
-      }
-    })
-  }
+  // if(dados.tipo==='credito'){
+  //   await prisma_db.pedidos.update({
+  //     where:{id: dados.pedido_id},
+  //     data:{
+  //       tipo: 'credito'
+  //     }
+  //   })
+  // }
+  // if(dados.tipo==='produto'){
+  //   await prisma_db.pedidos.update({
+  //     where:{id: dados.pedido_id},
+  //     data:{
+  //       tipo: 'produto'
+  //     }
+  //   })
+  // }
 
   // const indiceParenteses = dados.telefone.indexOf(')');
   // const telefone = dados.telefone.substring(indiceParenteses + 1).replace(/\D/g, '');
@@ -130,9 +131,7 @@ async function PagamentoCardServices(dados: dados) {
     metadata: {
       empresa: "bdmil",
     },
-  };
-
-  console.log('dados',dadosCredit)
+  }; 
 
   let dados_pagarme;
 
@@ -153,12 +152,39 @@ async function PagamentoCardServices(dados: dados) {
   } catch (error) {
     console.log(error)
     throw new Error("erro_pagarme");
-  }
-
-  console.log('pagamento', dados_pagarme)
+  } 
 
   if(dados_pagarme){
 
+    if(dados.tipo==='credito'){
+      
+      const user_db = await prisma_db.users.findUnique({where:{id:dados.user_id}})
+
+      await prisma_db.pedidos.create({
+        data: {
+          valor: dados.valor,
+          status: dados_pagarme.status,
+          nome: dados.nome,
+          document: dados.document,
+          email: dados.email,
+          id_telegram: user_db?.id_telegram,
+          ddd: dados.ddd,
+          telefone: dados.telefone,
+          user_id: dados.user_id,
+          transacao_id: dados_pagarme.charges[0].id,        
+        }
+      })      
+  
+    const rec_pagarme = {
+        status: 'ok',
+        metodo_pagamento: 'pix',
+        qr_code: dados_pagarme.charges[0].last_transaction.qr_code,
+        qr_code_url: dados_pagarme.charges[0].last_transaction.qr_code_url,
+    }
+    return rec_pagarme
+
+    }else{
+      
     await prisma_db.pedidos.update({
       where:{id: dados.pedido_id},
       data:{
@@ -172,6 +198,9 @@ async function PagamentoCardServices(dados: dados) {
       metodo_pagamento: 'credit_card',
   }
   return rec_pagarme
+
+    }
+
   } 
 }
 

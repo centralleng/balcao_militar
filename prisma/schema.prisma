@@ -79,12 +79,12 @@ model Pedidos {
   transacao_id        String?       @unique
   msg_id              Int?
   user_id             String
-  produto_id          Int
+  produto_id          Int?
   updated_at          DateTime      @updatedAt @default(now())
   created_at          DateTime      @default(now())
 
   users               Users         @relation(fields: [user_id], references: [id])
-  produto             Produtos      @relation(fields: [produto_id], references: [id])
+  produto             Produtos?      @relation(fields: [produto_id], references: [id])
 
   @@map("bdmil_pedidos")
 }

@@ -13,6 +13,7 @@ interface dados {
   ddd: string,
   telefone: string,
   tipo: string,
+  user_id: string,
 }
 
 export default async function PagamentoPixServices(dados: dados) {
@@ -21,22 +22,22 @@ export default async function PagamentoPixServices(dados: dados) {
   // const telefone = dados.telefone.substring(indiceParenteses + 1).replace(/\D/g, '');
   // const ddd = dados.telefone.split('(')[1].split(')')[0];
 
-  if(dados.tipo==='credito'){
-    await prisma_db.pedidos.update({
-      where:{id: dados.pedido_id},
-      data:{
-        tipo: 'credito'
-      }
-    })
-  }
-  if(dados.tipo==='produto'){
-    await prisma_db.pedidos.update({
-      where:{id: dados.pedido_id},
-      data:{
-        tipo: 'produto'
-      }
-    })
-  }
+  // if(dados.tipo==='credito'){
+  //   await prisma_db.pedidos.update({
+  //     where:{id: dados.pedido_id},
+  //     data:{
+  //       tipo: 'credito'
+  //     }
+  //   })
+  // }
+  // if(dados.tipo==='produto'){
+  //   await prisma_db.pedidos.update({
+  //     where:{id: dados.pedido_id},
+  //     data:{
+  //       tipo: 'produto'
+  //     }
+  //   })
+  // }
 
   const codigo = crypto.randomBytes(3).toString('hex'); // Gera 6 dígitos entre letras e números
 
@@ -96,6 +97,35 @@ export default async function PagamentoPixServices(dados: dados) {
 
   if(dados_pagarme){
 
+  if(dados.tipo==='credito'){  
+    
+    const user_db = await prisma_db.users.findUnique({where:{id:dados.user_id}})
+    
+    await prisma_db.pedidos.create({
+      data: {
+        valor: dados.valor,
+        status: dados_pagarme.status,
+        nome: dados.nome,
+        document: dados.document,
+        email: dados.email,
+        id_telegram: user_db?.id_telegram,
+        ddd: dados.ddd,
+        telefone: dados.telefone,
+        user_id: dados.user_id,
+        transacao_id: dados_pagarme.charges[0].id,        
+      }
+    })      
+
+  const rec_pagarme = {
+      status: 'ok',
+      metodo_pagamento: 'pix',
+      qr_code: dados_pagarme.charges[0].last_transaction.qr_code,
+      qr_code_url: dados_pagarme.charges[0].last_transaction.qr_code_url,
+  }
+  return rec_pagarme
+
+  }else{
+
     await prisma_db.pedidos.update({
       where:{id: dados.pedido_id},
       data:{
@@ -104,13 +134,15 @@ export default async function PagamentoPixServices(dados: dados) {
       }
     })   
 
-    const rec_pagarme = {
+  const rec_pagarme = {
       status: 'ok',
       metodo_pagamento: 'pix',
       qr_code: dados_pagarme.charges[0].last_transaction.qr_code,
       qr_code_url: dados_pagarme.charges[0].last_transaction.qr_code_url,
   }
   return rec_pagarme
+
+  }
   }
 
 }

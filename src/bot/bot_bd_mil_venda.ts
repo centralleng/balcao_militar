@@ -99,7 +99,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                 reply_markup: {
                   inline_keyboard: [
                       [
-                          { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot" },
+                          { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot?start=start" },
                           { text: "Voltar ao Início", callback_data: `DELETAR-PRODUTO_${produto_db.id}` },
                       ],
                   ],
@@ -129,7 +129,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                 reply_markup: {
                   inline_keyboard: [                     
                     [
-                      { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot" },
+                      { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot?start=start" },
                       { text: "Voltar ao Início", callback_data: `DELETAR-PRODUTO_${produto_db.id}` },
                     ],
                   ],
@@ -192,17 +192,21 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
 
         if (texto_split[0] === 'ATUALIZAR'){
 
-          const produto_pedido = await prisma_db.produtos.findUnique({
+          const produto_pedido = await prisma_db.produtos.findUnique({ // pega pedido
             where: { id: parseInt(texto_split[1]) },
             include: { pedido: true }
           });
 
           if (produto_pedido && produto_pedido.pedido[0].msg_id != null) {
-            const grupo = await prisma_db.grupos.findUnique({
+            const grupo = await prisma_db.grupos.findUnique({ // pega o grupo
               where: { type: produto_pedido?.categoria || '' }
-            })
+            })            
 
             if (grupo) {
+
+              try {
+                await this.bot.deleteMessage(grupo.id_grupo, produto_pedido.pedido[0].msg_id.toString())                
+              } catch (error) {}
 
               try {
                 Alerta_pedido(produto_pedido.id, user.id)
@@ -285,7 +289,6 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               // await this.bot.sendMessage(id_telegram, `${produto.descricao}.`);              
               await this.bot.sendMessage(id_telegram, mensagens.valor, botao.suporte);
               this.bot.deleteMessage(id_telegram, messageId)
-              this.bot.deleteMessage(id_telegram, messageId)
             } else {
               await this.bot.sendMessage(id_telegram, `⚠️ Produto não encontrado.`, botao.suporte);
               this.bot.deleteMessage(id_telegram, messageId)
@@ -347,7 +350,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                 reply_markup: {
                   inline_keyboard: [
                       [
-                          { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot" },
+                          { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot?start=start" },
                           { text: "Voltar ao Início", callback_data: `DELETAR-PRODUTO_${produto_db.id}` },
                       ],
                   ],
@@ -725,7 +728,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               reply_markup: {
                 inline_keyboard: [                     
                   [
-                    { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot" },
+                    { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot?start=start" },
                     { text: "Voltar ao Início", callback_data: `DELETAR-PRODUTO_${user.produto[0].id}` },
                   ],
                 ],
@@ -743,7 +746,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               reply_markup: {
                 inline_keyboard: [                     
                   [
-                    { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot" },
+                    { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot?start=start" },
                     { text: "Voltar ao Início", callback_data: `DELETAR-PRODUTO_${user.produto[0].id}` },
                   ],
                 ],
@@ -788,7 +791,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                           { text: "🚫 Dispenso Imagem", callback_data: `IMAGEM_${produto_db.id}` },
                         ],                     
                         [
-                          { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot" },
+                          { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot?start=start" },
                           { text: "Voltar ao Início", callback_data: `DELETAR-PRODUTO_${produto_db.id}` },
                         ],
                       ],
@@ -827,7 +830,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                   reply_markup: {
                     inline_keyboard: [                     
                       [
-                        { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot" },
+                        { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot?start=start" },
                         { text: "Voltar ao Início", callback_data: `DELETAR-PRODUTO_${produto_db.id}` },
                       ],
                     ],
@@ -871,7 +874,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                         { text: "NÃO", callback_data: `ENTREGA_NÃO_${produto_db.id}` },
                       ],                     
                       [
-                        { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot" },
+                        { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot?start=start" },
                         { text: "Voltar ao Início", callback_data: `DELETAR-PRODUTO_${produto_db.id}` },
                       ],
                     ],

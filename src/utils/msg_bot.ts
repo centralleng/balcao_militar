@@ -237,6 +237,9 @@ Obs: Coloque no máximo 150 caracteres
     suporte_compra = 'BAACAgEAAxkBAAN-ZfINrqx1B_10gTCzWBI-qNJXtZEAArYCAALXdJBHNpY_MS9apvY0BA'
 
     suporte_alerta = 'CgACAgEAAxkBAAOHZfITFAOsjO46kS4EE0ozQRE9Y54AArcCAALXdJBHVW2yJFYK7bQ0BA'
+
+    timeGrup =`❌ Seu processo de venda foi expirado!`
+        
 }
 
 export const mensagens = new Mensagens

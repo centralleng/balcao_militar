@@ -42,8 +42,8 @@ class Botoes {
         reply_markup: {
             inline_keyboard: [
                 [
-                    { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot" },
-                    { text: "TUTORIAL", url: "https://t.me/BDMilSUPORTE_bot" },
+                    { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot?start=start" },
+                    { text: "TUTORIAL", url: "https://t.me/BDMilSUPORTE_bot?start=start" },
                 ],
             ],
         },
@@ -53,7 +53,7 @@ class Botoes {
         reply_markup: {
             inline_keyboard: [
                 [
-                    { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot" },
+                    { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot?start=start" },
                 ],
             ],
         },
@@ -63,7 +63,7 @@ class Botoes {
         reply_markup: {
             inline_keyboard: [
                 [
-                    { text: "SUGESTÕES", url: "https://t.me/BDMilSUGESTOES_bot" },
+                    { text: "SUGESTÕES", url: "https://t.me/BDMilSUGESTOES_bot?start=start" },
                 ],
             ],
         },
