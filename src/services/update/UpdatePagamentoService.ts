@@ -10,6 +10,8 @@ interface dados {
 
 export default async function UpdatePagamentoService(dados: dados) {
 
+console.log(dados)
+
 const botVenda = process.env.API_BOT_BDMIL_VENDA ||''
 const botAlerta = process.env.API_BOT_BDMIL_ALERTA ||''
 
