@@ -62,7 +62,7 @@ As orientações abaixo são de suma importância para o usuário. Está um pouc
 
 15) Outra opção que será oferecida ao comprador é de realizar buscas mais refinadas de um produto, por intermédio do link “buscar” do respectivo cana`;
     const termo3 = `
-16) Existem três formas de pagamento: Pix, débito e crédito.
+16) Existem três formas de pagamento: Pix e crédito.
 
 17) O usuário terá a opção de comprar créditos, usando um dos métodos de pagamento acima citados, evitando a entrada no link de pagamento diversas vezes quando da oferta de um enxoval inteiro, por exemplo. 
 
