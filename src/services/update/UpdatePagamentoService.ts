@@ -6,7 +6,6 @@ import { mensagens } from "../../utils/msg_bot";
 interface dados {
   pagamento_id: string, 
   status: string, 
-  porduto_id: number
 }
 
 export default async function UpdatePagamentoService(dados: dados) {
