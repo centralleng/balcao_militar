@@ -30,12 +30,23 @@ class Bot_bd_mil_suporte {
 
         if(texto_split[0]==='DELETAR-CONTA'){
           if(user){
+
+            const produtos = await prisma_db.produtos.findMany({where:{id_telegram:id_telegram?.toString()}})
+
             await prisma_db.users.delete({
               where:{id_telegram:id_telegram?.toString()}
             })
-            await bot.sendMessage(id_telegram, '✔️ Seu cadastro foi deletado com sucesso!');
-            bot.deleteMessage(id_telegram, messageId)
 
+            for await ( let i of produtos){
+              try {
+                await prisma_db.produtos.delete({
+                  where:{id: i.id}
+                })
+                
+              } catch (error) {}             
+            }
+            await bot.sendMessage(id_telegram, '✔️ Seu cadastro foi deletado com sucesso!');
+            bot.deleteMessage(id_telegram, messageId)           
           }else{
             await bot.sendMessage(id_telegram, '❌ Não há nenhum registro de seu cadastro em nosso banco de dados.');
             bot.deleteMessage(id_telegram, messageId)
