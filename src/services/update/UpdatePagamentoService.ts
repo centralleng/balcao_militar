@@ -21,9 +21,43 @@ const pedido = await prisma_db.pedidos.findUnique({
     produto:true,
     users:true,
   }
-})
+});
 
-console.log("pedido",pedido)
+if(pedido){
+  if(pedido.tipo==="credito"){
+    await prisma_db.users.update({
+      where:{id:pedido.user_id},  
+      data:{
+        creditos: (pedido.users.creditos||0)+parseInt(pedido.valor||'')
+      }
+    })
+  
+    function enviarMsg(id_produto:any) {
+      return {
+        inline_keyboard: [
+          [
+            { text: "NOVA VENDA", callback_data: "VENDER" },
+          ],
+        ],
+      };
+    }
+  
+    try {
+      // Enviar msg para o vendedor 
+      await axios.post(`https://api.telegram.org/bot${botVenda}/sendMessage`, // Bot bdmil_venda
+      {
+        chat_id: pedido.users.id_telegram,
+        text: `✅ Seus créditos foram atualizados com sucesso`,
+          reply_markup: enviarMsg(pedido?.produto?.id),
+          });
+              
+      } catch (error) {console.log('erro credito')}
+  
+    console.log("crédito", (pedido.users.creditos||0)+parseInt(pedido.valor||''))
+  
+    return
+  }
+}
 
 const valor = pedido?.produto?.valor_produto || ''
 const recomendado = pedido?.users.recomendado || 0
@@ -46,41 +80,6 @@ if(pedido){
   })
 
   if(dados.status==='pago'){
-
-    if(pedido.tipo==="credito"){
-      await prisma_db.users.update({
-        where:{id:pedido.user_id},  
-        data:{
-          creditos: (pedido.users.creditos||0)+parseInt(pedido.valor||'')
-        }
-      })
-
-      function enviarMsg(id_produto:any) {
-        return {
-          inline_keyboard: [
-            [
-              { text: "NOVA VENDA", callback_data: "VENDER" },
-            ],
-          ],
-        };
-      }
-
-      try {
-        // Enviar msg para o vendedor 
-        await axios.post(`https://api.telegram.org/bot${botVenda}/sendMessage`, // Bot bdmil_venda
-        {
-          chat_id: pedido.users.id_telegram,
-          text: `✅ Seus créditos foram atualizados com sucesso`,
-            reply_markup: enviarMsg(pedido?.produto?.id),
-            });
-                
-        } catch (error) {console.log('erro credito')}
-
-      console.log("crédito", (pedido.users.creditos||0)+parseInt(pedido.valor||''))
-
-      return
-    }
-
     const grupo = await prisma_db.grupos.findUnique({
       where:{type: pedido?.produto?.categoria||''}
     })      
