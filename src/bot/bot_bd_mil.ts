@@ -468,6 +468,8 @@ A qual instituição você pertence?
       const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...');
       const messageId = msg_del.message_id.toString()
 
+      console.log(texto)
+
       const req = await prisma_db.users.findUnique({
         where:{id_telegram:id_telegram.toString()}
       }) 
