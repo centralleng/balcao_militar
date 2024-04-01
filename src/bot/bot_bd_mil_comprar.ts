@@ -159,7 +159,7 @@ function createInlineKeyboard(userTelegramId:any, produto_id:any, user_id:any) {
                     descricao = 'Não é militar'                    
                       break;
                     case '6':  
-                    descricao = ''                    
+                    descricao = 'Outros'                    
                       break;  
                   }
 
