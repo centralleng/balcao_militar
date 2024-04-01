@@ -458,7 +458,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           const log = await prisma_db.log_recomendacoes.findMany({
             where: {
               user_id: user?.id,
-              produto_id: parseInt(texto_split[1])
+              produto_id: parseInt(texto_split[2])
             }
           })
 

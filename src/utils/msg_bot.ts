@@ -226,7 +226,7 @@ Recomendo que sempre seja confirmado o valor do produto, bem como a forma de ent
 Obs: Coloque no máximo 150 caracteres
     `
 
-    desaconselho_sucesso = `✅ Desaconselho feita com sucesso!`
+    desaconselho_sucesso = `✅ Desaconselho feito com sucesso!`
 
     aguarde = 'Aguarde...'
 
