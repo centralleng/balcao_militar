@@ -9,8 +9,8 @@ const botCompra = process.env.API_BOT_BDMIL_COMPRA || ''
           inline_keyboard: [
             [
               {
-                text: 'SUPORTE',
-                url: `https://t.me/BDMilSUGESTOES_bot`,
+                text: 'SUGESTÕES',
+                url: `https://t.me/BDMilSUGESTOES_bot?start=start`,
               },
             ],
           ],
