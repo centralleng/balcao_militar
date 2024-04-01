@@ -69,7 +69,6 @@ const botCompra = process.env.API_BOT_BDMIL_COMPRA || ''
                 });
 
             } catch (error) { console.log('erro-rd 04') }
-
         }
 }
 
