@@ -22,6 +22,8 @@ const pedido = await prisma_db.pedidos.findUnique({
   }
 })
 
+console.log("pedido",pedido)
+
 const valor = pedido?.produto?.valor_produto || ''
 const recomendado = pedido?.users.recomendado || 0
 const desaconselhado = pedido?.users.desaconselhado || 0
