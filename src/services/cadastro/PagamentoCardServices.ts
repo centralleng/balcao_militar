@@ -163,6 +163,7 @@ async function PagamentoCardServices(dados: dados) {
       await prisma_db.pedidos.create({
         data: {
           valor: dados.valor,
+          tipo: 'credito',
           status: dados_pagarme.status,
           nome: dados.nome,
           document: dados.document,
