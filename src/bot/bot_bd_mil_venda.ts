@@ -454,6 +454,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
         }
 
         if (texto_split[0] === 'DESACONSELHODB'){
+          console.log(texto_split)
 
           const log = await prisma_db.log_recomendacoes.findMany({
             where: {
@@ -463,15 +464,18 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           })
 
           if (log.length > 0) {
+            console.log('2')
             await this.bot.sendMessage(id_telegram, `⚠️ Sua avaliação já foi feito.`, botao.sugestao);
             this.bot.deleteMessage(id_telegram, messageId)
           } else {
 
+            console.log('3')
             const user_req = await prisma_db.users.findUnique({ where: { id: texto_split[2] } })
             const desaconselhado_db = user?.desaconselhado || 0
             const desaconselhado = desaconselhado_db + 1
 
             if (user_req) {
+              console.log('4')
               const user_db = await prisma_db.users.update({
                 where: { id: user_req?.id },
                 data: {
