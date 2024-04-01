@@ -35,7 +35,7 @@ export default async function Update_pedido(dados: dados) {
       inline_keyboard: [
         [
           {
-            text: 'Listar e Deltar Alertas',
+            text: 'Listar e Deletar Alertas',
             callback_data: `ALERTAS`,
           },
         ],

@@ -90,7 +90,7 @@ function createInlineKeyboardAlert(userTelegramId: any) {
     inline_keyboard: [
       [
         {
-          text: 'Listar e Deltar Alertas',
+          text: 'Listar e Deletar Alertas',
           callback_data: `ALERTAS`,
         },
       ],

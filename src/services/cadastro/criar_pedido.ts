@@ -89,7 +89,7 @@ export default async function Criar_pedido(dados: dados) {
           inline_keyboard: [
             [
               {
-                text: 'Listar e Deltar Alertas',
+                text: 'Listar e Deletar Alertas',
                 callback_data: `ALERTAS`,
               },
             ],
