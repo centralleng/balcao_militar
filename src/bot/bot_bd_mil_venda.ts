@@ -458,7 +458,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           const log = await prisma_db.log_recomendacoes.findMany({
             where: {
               user_id: user?.id,
-              produto_id: parseInt(texto_split[2])
+              produto_id: parseInt(texto_split[1])
             }
           })
 
@@ -488,6 +488,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               '6': 'Outros'
             } 
               if (texto_split[3] === '') {
+                console.log("descon",texto_split[3])
                 await prisma_db.log_recomendacoes.create({
                   data: {
                     status: 'desaconselhado',
