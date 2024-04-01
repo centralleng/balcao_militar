@@ -265,7 +265,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               this.bot.deleteMessage(id_telegram, messageId)
             }
           } else {
-            await this.bot.sendMessage(id_telegram, `⚠️ Esse produto ainda não foi ativo.`);
+            await this.bot.sendMessage(id_telegram, `⚠️ Essa oferta já foi deletada.`);
             this.bot.deleteMessage(id_telegram, messageId)
           }
         }
@@ -301,7 +301,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               await this.bot.sendMessage(id_telegram, mensagens.valor, botao.suporte);
               this.bot.deleteMessage(id_telegram, messageId)
             } else {
-              await this.bot.sendMessage(id_telegram, `⚠️ Produto não encontrado.`, botao.suporte);
+              await this.bot.sendMessage(id_telegram, `⚠️ Essa oferta já foi deletada.`);
               this.bot.deleteMessage(id_telegram, messageId)
             }
 
@@ -351,7 +351,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               this.bot.deleteMessage(id_telegram, messageId)
             }
           } else {
-            await this.bot.sendMessage(id_telegram, `⚠️ O produto já foi deletado.`);
+            await this.bot.sendMessage(id_telegram, `⚠️ Essa oferta já foi deletada.`);
             this.bot.deleteMessage(id_telegram, messageId)
           }
         }       
