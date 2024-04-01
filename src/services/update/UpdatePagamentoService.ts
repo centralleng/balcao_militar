@@ -53,6 +53,27 @@ if(pedido){
         }
       })
 
+      function enviarMsg(id_produto:any) {
+        return {
+          inline_keyboard: [
+            [
+              { text: "NOVA VENDA", callback_data: "VENDER" },
+            ],
+          ],
+        };
+      }
+
+      try {
+        // Enviar msg para o vendedor 
+        await axios.post(`https://api.telegram.org/bot${botVenda}/sendMessage`, // Bot bdmil_venda
+        {
+          chat_id: pedido.users.id_telegram,
+          text: `✅ Seus créditos foram atualizados com sucesso`,
+            reply_markup: enviarMsg(pedido?.produto?.id),
+            });
+                
+        } catch (error) {console.log('erro credito')}
+
       console.log("crédito", (pedido.users.creditos||0)+parseInt(pedido.valor||''))
 
       return
@@ -150,7 +171,7 @@ await axios.post(`https://api.telegram.org/bot${botVenda}/sendMessage`, // Bot b
     reply_markup: enviarMsg(pedido?.produto?.id),
     });
         
-      } catch (error) {console.log('erro 02')}
+} catch (error) {console.log('erro 02')}
 
 for await (const i of usuarios_id){
 
