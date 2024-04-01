@@ -91,7 +91,7 @@ export default async function Update_pedido(dados: dados) {
             ],
             [
               { text: "NOVA VENDA", callback_data: "VENDER" },
-          ],
+            ],
           ],
         };
       }
