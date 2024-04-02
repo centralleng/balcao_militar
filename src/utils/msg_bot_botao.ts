@@ -218,6 +218,12 @@ class Botoes {
                 [
                     { text: "[Ferramenta] vendas", callback_data: "CADASTRO_[Ferramenta]_APAGAR" },
                     { text: "[Mat. Construção] vendas", callback_data: "CADASTRO_[Mat-Construcao]_APAGAR" },
+                    { text: "[Alimento] vendas", callback_data: "CADASTRO_[Alimento]_APAGAR" },
+                ],
+                [
+                    { text: "[Joia e Bijuteria] vendas", callback_data: "CADASTRO_[Joia-Bijuteria]_APAGAR" },
+                    { text: "[Vestuario] vendas", callback_data: "CADASTRO_[Vestuario]_APAGAR" },
+                    { text: "[Instr. musicais] vendas", callback_data: "CADASTRO_[Instr-musicais]_APAGAR" },
                 ],
                 [
                     { text: "⚠️ Referência de categorias", url: "https://m.pontofrio.com.br/" },

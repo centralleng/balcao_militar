@@ -383,6 +383,12 @@ Boas negociações!
         [
           { text: "[Ferramenta] vendas",  url: "https://t.me/+B6SXBxIhSxczYzNh" },
           { text: "[Mat. Construção] vendas",  url: "https://t.me/+Kh9k9ns1hSkzMjAx" },
+          { text: "[Alimento] vendas", callback_data: "https://t.me/+zDzOkCOcJAg0Mzdh" },
+        ],
+        [
+          { text: "[Joia e Bijuteria] vendas", callback_data: "https://t.me/+xb8RlYsKF31mNWQx" },
+          { text: "[Vestuario] vendas", callback_data: "https://t.me/+1WFdW9QGintlNGMx" },
+          { text: "[Instr. musicais] vendas", callback_data: "https://t.me/+voNtAgBdh942MTkx" },
         ],
       ],        
       },
