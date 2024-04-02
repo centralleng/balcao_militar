@@ -844,10 +844,16 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               this.bot.deleteMessage(id_telegram, messageId)
               return
             }
-          }     
+          }         
 
-          if (user.produto && user.produto[0].id_imagem === null && photo[0] != undefined){ //Eta aqui para segurança de não derrubar api devido a imagem              
-
+          if (user.produto && user.produto[0].id_imagem === null){ //Eta aqui para segurança de não derrubar api devido a imagem              
+          
+            if(photo=== undefined){
+              await this.bot.sendMessage(id_telegram, `⚠️ Imagem inválida.`);
+              this.bot.deleteMessage(id_telegram, messageId)              
+              return
+            }
+                         
             try{
               if(photo!=undefined){
   
