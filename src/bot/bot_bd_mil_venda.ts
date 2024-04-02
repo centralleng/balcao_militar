@@ -40,7 +40,7 @@ class Bot_bd_mil_venda {
         await this.bot.deleteMessage(id_telegram, (message_id-1).toString())
         await this.bot.deleteMessage(id_telegram, (message_id).toString())
         await this.bot.deleteMessage(id_telegram, (message_id+1).toString())
-      } 
+      }
       // Primeiro verifica se ja axiste esse usuário
       const user = await this.verificar_usuario(id_telegram)
 
@@ -187,7 +187,6 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
         }
         
         if (texto === 'MEUS_PRODUTOS'){ // Listar todo os produtos cadastrados 
-
         }
 
         if (texto_split[0] === 'ATUALIZAR'){
@@ -544,7 +543,7 @@ Seus Créditos: ${((user.creditos||0)/100).toLocaleString('pt-BR', { style: 'cur
                               reply_markup: {
                                 inline_keyboard: [
                                   [
-                                    { text: "ADICIONAR CRÉDITOS", url: `https://bdmil.vercel.app/ac/${texto_split[2]}` }
+                                    { text: "ADICIONAR CRÉDITOS", url: `https://bdmil.vercel.app/ac/${user.id}` }
                                   ],
                                 ],
                               },
@@ -1039,7 +1038,6 @@ Ex: 00.00
                 }
 
                 if (produto) {
-
                   await prisma_db.produtos.update({
                     where: { id: user.produto[0].id },
                     data: {
