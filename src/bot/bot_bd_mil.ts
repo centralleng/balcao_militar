@@ -15,7 +15,7 @@ class Bot_bd_mil {
 
 Esse balcão tem por objetivo facilitar a transação comercial de artigos militares e de “artigos civis”, novos ou usados, entre os integrantes das FFAA e Forças Singulares de todo o Brasil, da ativa (de carreira ou temporários) e da reserva (remunerada ou não), incluindo os pensionistas e os reformados.
 
-As orientações abaixo são de suma importância para o usuário. Está um pouco extensa, porém se faz necessário:
+As regras abaixo são de suma importância para o usuário. Está um pouco extensa, porém se faz necessário para o estabelecimento do compliance:
     
 1) O Balcão será encontrado na plataforma Telegram, sendo operacionalizado por intermédio de Bots.
 
@@ -62,15 +62,15 @@ As orientações abaixo são de suma importância para o usuário. Está um pouc
 
 15) Outra opção que será oferecida ao comprador é de realizar buscas mais refinadas de um produto, por intermédio do link “buscar” do respectivo cana`;
     const termo3 = `
-16) Pamento apenas em PIX.
+16) O pagamento será realizado apenas por PIX.
 
-17) O usuário terá a opção de comprar créditos, usando um dos métodos de pagamento acima citados, evitando a entrada no link de pagamento diversas vezes quando da oferta de um enxoval inteiro, por exemplo. 
+17) O usuário terá a opção de comprar créditos, evitando efetuar o pagamento, pelo canal bancário, diversas vezes quando da oferta de um enxoval inteiro, por exemplo. 
 
 18) Será disponibilizado também ao usuário o bot @BDMilsuporte, para sanar alguma dúvida que por ventura ainda possa existir. Esse bot contém videos com os principais procedimentos do Balcão. 
 
 19) Será oferecido o bot SUGESTÕES para que o usuário possa contribuir com a melhoria do sistema.
 
-20) A negociação no Balcão é LIVRE, conforme várias plataformas de marketplace. É nesse momento que as partes procuram refinar as informações, a fim de realizar uma negociação segura. É nesse momento também a hora de expor possíveis vídeos e mais descrições do produto, bem como ajustar a forma de pagamento e da entrega. 
+20) A negociação no Balcão é LIVRE, conforme as várias plataformas de marketplace. É nesse momento que as partes procuram refinar as informações, a fim de realizar uma negociação segura. É nesse momento também a hora de expor possíveis vídeos e mais descrições do produto, bem como ajustar a forma de pagamento e da entrega. 
 
 21) No final de cada negociação, os usuários podem recomendar ou desaconselhar nos bots correspondentes, proporcionando maior credibilidade e segurança às negociações.
 
@@ -80,7 +80,9 @@ As orientações abaixo são de suma importância para o usuário. Está um pouc
 
 24) Os dados do usuário, como por exemplo o CPF, são guardados em um servidor próprio e na "nuvem", totalmente criptografado aliado a segurança de dados existentes no Telegram.
 
-25) Por fim, lembrando mais uma vez que a negociação é livre e de responsabilidade dos usuários. Caso haja má fé, o transgressor será excluído do sistema de forma permanente.
+25) É proibida a venda de armas e munições, bem como quaisquer produtos considerados ilícitos pelas leis brasileiras. 
+
+26) Por fim, lembrando mais uma vez que a negociação é livre e de responsabilidade dos usuários. Caso haja má fé, o transgressor será excluído do sistema de forma permanente.
 Boas negociações!
 `
         // const termo1 = `
@@ -345,7 +347,7 @@ Boas negociações!
         ],
         [
           { text: "[Smartphone vendas]", url: "https://t.me/+oTtGpdSVjZJjMzkx"},
-          { text: "[Acessório vendas]", url: "https://t.me/+jV7ioExY8XRkMGYx"},
+          { text: "[Diversos vendas]", url: "https://t.me/+jV7ioExY8XRkMGYx"},
           { text: "[Eletrodoméstico vendas]", url: "https://t.me/+lafHsTpLYLM0NTgx"},
         ],
         [
@@ -659,7 +661,7 @@ Segue abaixo o Balcão que você pode acessar para comprar ou vender um produto!
 
             bot.deleteMessage(id_telegram, messageId)
               
-              return  
+              return
             }
 
             // Caso não pare em nenhum if
@@ -684,7 +686,7 @@ Segue abaixo o Balcão que você pode acessar para comprar ou vender um produto!
                 
 await bot.sendMessage(id_telegram,`
 Prontinho, seu cadastro foi realizado com sucesso!! 🥳
-Segue abaixo os Balcões que você pode acessar para comprar ou vender um produto!          
+Seguem abaixo os canais que você pode acessar para comprar ou vender um produto!          
         `
           ,);
 
@@ -694,9 +696,7 @@ Segue abaixo os Balcões que você pode acessar para comprar ou vender um produt
 
           bot.deleteMessage(id_telegram, messageId)
           }
-
         }
-
       }
     });
   }

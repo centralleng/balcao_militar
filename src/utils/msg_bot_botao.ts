@@ -182,7 +182,7 @@ class Botoes {
                 ],
                 [
                     { text: "[Smartphone] vendas", callback_data: "CADASTRO_[Smartphone]_APAGAR" },
-                    { text: "[Acessório] vendas", callback_data: "CADASTRO_[Acessorio]_APAGAR" },
+                    { text: "[Diversos] vendas", callback_data: "CADASTRO_[Diversos]_APAGAR" },
                     { text: "[Eletrodoméstico] vendas", callback_data: "CADASTRO_[Eletrodomestico]_APAGAR" },
                 ],
                 [
