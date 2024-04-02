@@ -81,6 +81,7 @@ As regras abaixo são de suma importância para o usuário. Está um pouco exten
 24) Os dados do usuário, como por exemplo o CPF, são guardados em um servidor próprio e na "nuvem", totalmente criptografado aliado a segurança de dados existentes no Telegram.
 
 25) É proibida a venda de armas e munições, bem como quaisquer produtos considerados ilícitos pelas leis brasileiras. 
+
 26) É terminantemente PROIBIDO o uso do Balcão por menores de 18 anos.
 
 27) Por fim, lembrando mais uma vez que a negociação é livre e de responsabilidade dos usuários. Caso haja má fé, o transgressor será excluído do sistema de forma permanente.
@@ -697,9 +698,9 @@ Seguem abaixo os canais que você pode acessar para comprar ou vender um produto
         `
           ,);
 
-          await bot.sendMessage(id_telegram,`Grupo de Artigo Militar:`, artigos_militares);
+          await bot.sendMessage(id_telegram,`Canais de artigos militares:`, artigos_militares);
 
-          await bot.sendMessage(id_telegram, `Grupo de Artigos Civis`, artigos_civis);
+          await bot.sendMessage(id_telegram, `Canais de artigos civis:`, artigos_civis);
 
           bot.deleteMessage(id_telegram, messageId)
           }
