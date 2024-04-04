@@ -106,8 +106,10 @@ model Intencao_de_compras {
 
 model Alertas {
   id                      Int           @id @default(autoincrement())
+  status                  Int?
   delete                  Int?
-  palavra_chave           String
+  palavra_chave           String?
+  localizacao             String?
   tipo_grupo              String?
   user_id                 String
   grupo                   String?

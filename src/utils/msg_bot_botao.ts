@@ -191,7 +191,7 @@ class Botoes {
                     { text: "[Eletroportátil] vendas", callback_data: "CADASTRO_[Eletroportatil]_APAGAR" },
                 ],
                 [
-                    { text: "[Ferramenta] vendas", callback_data: "CADASTRO_[Ferramenta]_APAGAR" },
+                    { text: "[Beleza e Saúde] vendas", callback_data: "CADASTRO_[Beleza-Saude]_APAGAR" },
                     { text: "[Bebida] vendas", callback_data: "CADASTRO_[Bebida]_APAGAR" },
                     { text: "[Bebê] vendas", callback_data: "CADASTRO_[Bebe]_APAGAR" },
                 ],

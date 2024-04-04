@@ -25,7 +25,7 @@ const pedido = await prisma_db.pedidos.findUnique({
 
 if(pedido){
   if(pedido.tipo==="credito"){
-    await prisma_db.users.update({
+    const users_db = await prisma_db.users.update({
       where:{id:pedido.user_id},  
       data:{
         creditos: (pedido.users.creditos||0)+parseInt(pedido.valor||'')
@@ -47,12 +47,15 @@ if(pedido){
       await axios.post(`https://api.telegram.org/bot${botVenda}/sendMessage`, // Bot bdmil_venda
       {
         chat_id: pedido.users.id_telegram,
-        text: `✅ Seus créditos foram atualizados com sucesso`,
+        text: `
+✅ Seus créditos foram atualizados com sucesso
+
+Saldo atual: ${(users_db.creditos || 0 / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+`,
           reply_markup: enviarMsg(pedido?.produto?.id),
           });
               
-      } catch (error) {console.log('erro credito')} 
-      
+      } catch (error) {console.log('erro credito')}       
       
     return
   }
@@ -65,8 +68,8 @@ const descricao:any = pedido?.produto?.descricao
 
 const alerta = await prisma_db.alertas.findMany()
 
-const alertas_db = alerta.filter((item) => (descricao.toUpperCase()).includes((item.palavra_chave).toUpperCase()));
-const alertas = alertas_db.filter((item) => item.tipo_grupo=== pedido?.produto?.categoria);
+const alertas_db = alerta.filter((item) => (descricao.toUpperCase()).includes((item.palavra_chave||'').toUpperCase()));
+const alertas = alertas_db.filter((item) => item.localizacao!=null?item.tipo_grupo === pedido?.produto?.categoria && item.localizacao === pedido?.produto?.localizacao:item.tipo_grupo === pedido?.produto?.categoria);
 
 const usuarios_id = alertas.map(item => {return item.id_telegram})
 

@@ -221,13 +221,13 @@ function createInlineKeyboard(userTelegramId:any) {
                  }               
                 }) 
 
-                await bot.sendMessage(id_telegram, `Alerta: ✅ ${alerta.palavra_chave} ✅ cadastrado com sucesso!`,
+                await bot.sendMessage(id_telegram, `Por favor, selecione 'SIM' ou 'NÃO' para determinar se deseja incluir localização nos alertas.`,
                {
                reply_markup: {
                  inline_keyboard: [
                     [
-                      { text: "ALERTAS", callback_data: `ALERTAS`},
-                      { text: "DELETAR", callback_data: `DELETAR_${texto_split[2]}`},
+                      { text: "SIM", callback_data: `SIM_${alerta.id}`},
+                      { text: "NÃO", callback_data: `NAO_${alerta.id}`},
                     ],
                   ],
                  }
@@ -285,7 +285,50 @@ function createInlineKeyboard(userTelegramId:any) {
                 await bot.sendMessage(id_telegram, `⚠️ Você não tem alertas cadastrados!`);
                 bot.deleteMessage(id_telegram, messageId)
               }
-            }       
+            } 
+            
+            if(texto_split[0]==='NAO'){
+
+              const alertadb = await prisma_db.alertas.update({
+                where:{id: parseInt(texto_split[1])},
+                data:{status:1}
+              })
+
+              await bot.sendMessage(id_telegram, `Alerta: ✅ ${alertadb.palavra_chave} ✅ cadastrado com sucesso!`,
+               {
+              reply_markup: {
+                inline_keyboard: [
+                  [
+                    { text: "ALERTAS", callback_data: `ALERTAS`},
+                    { text: "DELETAR", callback_data: `DELETAR_${alertadb.id}`},
+                  ],
+                ],
+                }
+              },
+              );
+              bot.deleteMessage(id_telegram, messageId) 
+            }
+
+            if(texto_split[0]==='SIM'){
+
+            await bot.sendMessage(id_telegram, ` Qual é a localização do produto? (Digite cidade e estado conforme o modelo: CIDADE - UF)`);
+            bot.deleteMessage(id_telegram, messageId)
+
+            }   
+            
+            if(texto_split[0]==='PALAVRA'){
+
+              await prisma_db.alertas.create({
+                data:{
+                  user_id: user.id,
+                  id_telegram: id_telegram.toString(),                  
+                }
+              })
+
+              await bot.sendMessage(id_telegram, `Digite sua palavra chave.`); 
+              bot.deleteMessage(id_telegram, messageId)
+            }
+            
         }else{
           await bot.sendMessage(id_telegram, `⚠️ É necessário cadastrar um UserName do Telegram, para dar continuidade no Balcão.`);
           bot.deleteMessage(id_telegram, messageId)
@@ -329,49 +372,161 @@ pre-formatted fixed-width code block written in the Python programming language
       const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...'); 
       const messageId = msg_del.message_id.toString()
 
-
       const user = await prisma_db.users.findUnique({
-        where: { id_telegram: id_telegram?.toString() },
+        where: { id_telegram: id_telegram?.toString()},
+        include:{
+          alerta: {
+            orderBy: { id: 'desc' },
+            take: 1, // Apenas o último produto
+          },
+        }
       })
 
       if (user) {
         if (username) {
 
-          const msg_alerta = texto?texto.split(' '):''
-        
-          if(['alerta','alertas'].includes(msg_alerta[0].toLowerCase())&&msg_alerta[1]!=''){
+          if(user?.alerta.length>0){
 
-            if(msg_alerta[1]!=undefined){
+            // Inicio das condicionais
 
-              const palavra_chave = msg_alerta[1]
-              const user_id = user.id
+            if(!user?.alerta[0].status){
 
-              const alerta = await Cadastar_palavra_chave_service(palavra_chave, user_id, id_telegram)
+              if(user?.alerta[0].palavra_chave===null){
+
+              const msg_alerta = texto?texto.split(' '):''
+
+              const alerta = await prisma_db.alertas.update({
+                where:{id: user?.alerta[0].id},
+                data:{
+                    palavra_chave: msg_alerta[0]
+                }
+              });
 
               await bot.sendMessage(id_telegram, `De qual grupo você gostaria de receber alertas?`);
               await bot.sendMessage(id_telegram, `Artigos Militares`, artigos_militares(alerta.id));
               await bot.sendMessage(id_telegram, `Artigos Civis`, artigos_civis(alerta.id));
-              bot.deleteMessage(id_telegram, messageId)  
-
-            }else{              
-              await bot.sendMessage(id_telegram, `Forneça uma palavra válida`);
               bot.deleteMessage(id_telegram, messageId)
-            }
+              return
+              }
 
+              if(user?.alerta[0].localizacao===null){
+
+                function verificarFormatoCidadeUF(dados:string){
+                  // Verificar se os dados estão no formato "Cidade - UF" 
+                  const regex = /.+-[A-Za-z]{2}$/;      
+                  if (regex.test(dados)) {
+                    return true; // O formato está correto
+                  } else {
+                    return false; // O formato está incorreto
+                  }
+                }
+    
+                if(!verificarFormatoCidadeUF(texto)){
+                await bot.sendMessage(id_telegram, `⚠️ Digite cidade e estado conforme o modelo: CIDADE-UF`);
+                bot.deleteMessage(id_telegram, messageId)
+                  return
+                }  
+
+                await prisma_db.alertas.update({
+                  where:{id: user.alerta[0].id},
+                  data:{localizacao: texto,status:1}
+                })
+
+                await bot.sendMessage(id_telegram, `Alerta: ✅ ${user.alerta[0].palavra_chave} ✅ cadastrado com sucesso!`,
+                 {
+                reply_markup: {
+                  inline_keyboard: [
+                    [
+                      { text: "ALERTAS", callback_data: `ALERTAS`},
+                      { text: "DELETAR", callback_data: `DELETAR_${user.alerta[0].id}`},
+                    ],
+                  ],
+                  }
+                },
+                );
+                bot.deleteMessage(id_telegram, messageId) 
+                return
+              }
+
+            }else{
+              await bot.sendMessage(id_telegram, `
+🚨 Você só poderá concluir um alertas por vez. Após 3 minutos de inatividade, TODO o processo será anulado, tendo que ser reiniciado.
+
+Pressione CADASTRAR NOVA PALAVRA para iniciar.
+              `,
+              {
+                reply_markup: {
+                  inline_keyboard: [
+                    [
+                      { text: "CADASTRAR NOVA PALAVRA", callback_data: `PALAVRA`},
+                    ],
+                  ],
+                  }
+                },
+              );
+         
+              bot.deleteMessage(id_telegram, messageId)
+              }
           }else{
+            await bot.sendMessage(id_telegram, `
+🚨 Você só poderá concluir um alertas por vez. Após 3 minutos de inatividade, TODO o processo será anulado, tendo que ser reiniciado.
 
-          await bot.sendMessage(id_telegram, `🚨 Você só poderá concluir um "alertas"  por vez. Após 3 minutos de inatividade, TODO o processo será anulado, tendo que ser reiniciado.`);
-
-          await bot.sendMessage(id_telegram, `
-
-Cadastre seus alertas - configuração enviar a palavra alerta com espaço e depois colocar uma palavra chave
-
-Exemplo:
-
-Alerta boots            
-          `); 
+Pressione CADASTRAR NOVA PALAVRA para iniciar.
+            `,
+            {
+              reply_markup: {
+                inline_keyboard: [
+                   [
+                     { text: "CADASTRAR NOVA PALAVRA", callback_data: `PALAVRA`},
+                   ],
+                 ],
+                }
+               },
+            ); 
           bot.deleteMessage(id_telegram, messageId)
-          }      
+          }
+
+//           const msg_alerta = texto?texto.split(' '):''
+        
+//           if(user?.alerta.length<1){
+
+//             if(msg_alerta[1]!=undefined){
+
+//               const palavra_chave = msg_alerta[1]
+//               const user_id = user.id
+
+//               const alerta = await prisma_db.alertas.create({
+//                 data:{
+//                     palavra_chave: palavra_chave,
+//                     user_id: user_id,
+//                     id_telegram: id_telegram,
+//                 }
+//             }) 
+
+//               await bot.sendMessage(id_telegram, `De qual grupo você gostaria de receber alertas?`);
+//               await bot.sendMessage(id_telegram, `Artigos Militares`, artigos_militares(alerta.id));
+//               await bot.sendMessage(id_telegram, `Artigos Civis`, artigos_civis(alerta.id));
+//               bot.deleteMessage(id_telegram, messageId)  
+
+//             }else{              
+//               await bot.sendMessage(id_telegram, `Forneça uma palavra válida`);
+//               bot.deleteMessage(id_telegram, messageId)
+//             }
+
+//           }else{
+
+//           await bot.sendMessage(id_telegram, `🚨 Você só poderá concluir um "alertas"  por vez. Após 3 minutos de inatividade, TODO o processo será anulado, tendo que ser reiniciado.`);
+
+//           await bot.sendMessage(id_telegram, `
+
+// Cadastre seus alertas - configuração enviar a palavra alerta com espaço e depois colocar uma palavra chave
+
+// Exemplo:
+
+// Alerta boots            
+//           `); 
+//           bot.deleteMessage(id_telegram, messageId)
+//           }      
          
         }else{
           // Melhorar msg

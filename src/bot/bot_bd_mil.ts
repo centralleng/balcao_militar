@@ -358,7 +358,7 @@ Boas negociações!
           { text: "[Eletroportátil vendas]", url: "https://t.me/+8qvV2dgSEdNkZTgx"},
         ],
         [
-          { text: "[Ferramenta vendas]", url: "https://t.me/+Qe4AWjFnm4BiYmJh"},
+          { text: "[Beleza e Saúde]", url: "https://t.me/+Qe4AWjFnm4BiYmJh"},
           { text: "[Bebida vendas]", url: "https://t.me/+FtkZD1h-GAk2OTJh"},
           { text: "[Bebê vendas]", url: "https://t.me/+mYGNUwXiyb8wYzcx"},
         ],
@@ -410,7 +410,7 @@ Boas negociações!
     
       bot.deleteMessage(id_telegram, message_id?.toString()||"")     
 
-      if(msg==='sim'){ // Aceita o termo de uso 
+      if(msg==='sim'){ // Aceita o termo de uso
 
         // Primeiro verifica se ja axiste esse usuário
         const user = await prisma_db.users.findUnique({
@@ -423,7 +423,7 @@ Boas negociações!
               id_telegram: id_telegram?.toString(),
               username: username,
               termo:true
-            }  
+            }
           })
           
         await bot.sendMessage(id_telegram,`

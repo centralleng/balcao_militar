@@ -790,7 +790,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             return            
           }     
        
-          if (user.produto[0].categoria === null) {  // Esse if é somente para não deixar colocar a cateria por aqui
+          if (user.produto[0].categoria === null){  // Esse if é somente para não deixar colocar a cateria por aqui
             await this.bot.sendMessage(id_telegram, mensagens.texto_inicial);           
             await this.bot.sendMessage(id_telegram, `Onde você gostaria de divulgar a sua oferta?`);
             await this.bot.sendMessage(id_telegram, `Artigos Militares`, botao.artigos_militares);
@@ -799,7 +799,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             return
           }
   
-          if (user.produto && user.produto[0].descricao === null) {
+          if (user.produto && user.produto[0].descricao === null){
   
             const verifica_descricao = texto?.split('')
   
@@ -849,7 +849,10 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           if (user.produto && user.produto[0].id_imagem === null){ //Eta aqui para segurança de não derrubar api devido a imagem              
           
             if(photo=== undefined){
-              await this.bot.sendMessage(id_telegram, `⚠️ Imagem inválida.`);
+              await this.bot.sendMessage(id_telegram, `
+⚠️ Desculpe, mas a imagem que você tentou enviar é muito pequena. 
+
+Para garantir uma qualidade adequada, por favor envie uma imagem com dimensões mínimas de 400 por 400 pixels.`);
               this.bot.deleteMessage(id_telegram, messageId)              
               return
             }
@@ -864,7 +867,9 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                   }
                 })
   
-                await this.bot.sendMessage(id_telegram, `Qual é a localização do produto? (Escreva cidade e estado)`, 
+                await this.bot.sendMessage(id_telegram, `
+Qual é a localização do produto? (Digite cidade e estado conforme o modelo: CIDADE-UF)
+`, 
                 {
                   reply_markup: {
                     inline_keyboard: [                     
@@ -879,7 +884,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
               this.bot.deleteMessage(id_telegram, messageId)
   
               }else{
-                await this.bot.sendMessage(id_telegram, `⚠️ Imagem inválida.`);
+                await this.bot.sendMessage(id_telegram, `⚠️ Desculpe, mas a imagem que você tentou enviar é muito pequena. Para garantir uma qualidade adequada, por favor envie uma imagem com dimensões mínimas de 400 por 400 pixels.`);
                 this.bot.deleteMessage(id_telegram, messageId)
                 return
               }
@@ -891,9 +896,25 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             return
           }
 
-          if (user.produto && user.produto[0].localizacao === null) {
+          if (user.produto && user.produto[0].localizacao === null){
 
             const verifica_descricao = texto?.split('')
+
+            function verificarFormatoCidadeUF(dados:string){
+              // Verificar se os dados estão no formato "Cidade - UF"
+              const regex = /.+-[A-Za-z]{2}$/;         
+              if (regex.test(dados)) {
+                return true; // O formato está correto
+              } else {
+                return false; // O formato está incorreto
+              }
+            }
+
+            if(!verificarFormatoCidadeUF(texto)){
+            await this.bot.sendMessage(id_telegram, `⚠️ Digite cidade e estado conforme o modelo: CIDADE - UF`);
+            this.bot.deleteMessage(id_telegram, messageId)
+              return
+            }  
 
             if (verifica_descricao.length < 150) {
 
@@ -901,7 +922,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                 const produto_db = await prisma_db.produtos.update({
                   where: { id: user.produto[0].id },
                   data: {
-                    localizacao: texto,
+                    localizacao: texto.toUpperCase(),
                   }
                 })
                 await this.bot.sendMessage(id_telegram, `Entrega o produto/serviço fora da sede? (Escolha sim ou não.)`, 
@@ -941,7 +962,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
             return
           }
 
-          if (user.produto && user.produto[0].valor_produto === null) {           
+          if (user.produto && user.produto[0].valor_produto === null){           
             // Função para verificar se o texto é um valor monetário válido
             function isValorMonetarioValido(texto: string) {
               // Expressão regular para verificar o padrão
@@ -960,7 +981,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                     valor_produto: texto.replace(/\./g, ''),
                   }
                 })
-                await this.bot.sendMessage(id_telegram, `Qual a quantidade pretendido? (escreva somente números. Caso seja par 1 par etc)`);
+                await this.bot.sendMessage(id_telegram, `Qual a quantidade pretendida? (escreva somente números. Caso seja par 1 par etc)`);
                 this.bot.deleteMessage(id_telegram, messageId)
                 return
               } catch (error) {
@@ -979,7 +1000,7 @@ Ex: 00.00
             }
           }
 
-          if (user.produto && user.produto[0].quantidade === null) {
+          if (user.produto && user.produto[0].quantidade === null){
             // Função para verificar se o texto é um valor monetário válido
             function isValorMonetarioValido(texto: string) {
               // Expressão regular para verificar o padrão
