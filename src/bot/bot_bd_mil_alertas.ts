@@ -313,6 +313,9 @@ function createInlineKeyboard(userTelegramId:any) {
                     { text: "ALERTAS", callback_data: `ALERTAS`},
                     { text: "DELETAR", callback_data: `DELETAR_${alertadb.id}`},
                   ],
+                  [
+                    { text: "CADASTRAR NOVA PALAVRA CHAVE", callback_data: `PALAVRA`},
+                  ],
                 ],
                 }
               },
@@ -433,6 +436,9 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                     [
                       { text: "ALERTAS", callback_data: `ALERTAS`},
                       { text: "DELETAR", callback_data: `DELETAR_${user.alerta[0].id}`},
+                    ],
+                    [
+                      { text: "CADASTRAR NOVA PALAVRA CHAVE", callback_data: `PALAVRA`},
                     ],
                   ],
                   }
