@@ -93,9 +93,11 @@ function createInlineKeyboardAlert(userTelegramId: any) {
     inline_keyboard: [
       [
         {
-          text: 'Listar e Deletar Alertas',
-          callback_data: `ALERTAS`,
-        },
+          text: 'Listar e Deletar Alertas', callback_data: `ALERTAS`,
+        }
+      ],
+      [
+        { text: "CADASTRAR NOVA PALAVRA CHAVE", callback_data: `PALAVRA`},
       ],
     ],
   };

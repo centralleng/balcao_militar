@@ -322,7 +322,7 @@ function createInlineKeyboard(userTelegramId:any) {
 
             if(texto_split[0]==='SIM'){
 
-            await bot.sendMessage(id_telegram, ` Qual é a localização do produto? (Digite cidade e estado conforme o modelo: CIDADE - UF)`);
+            await bot.sendMessage(id_telegram, ` Qual é a localização do produto? (Digite cidade e estado conforme o modelo: CIDADE-UF)`);
             bot.deleteMessage(id_telegram, messageId)
 
             }   
@@ -353,26 +353,6 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
       }
     });
 
-    /**bold \*text*
-_italic \*text_
-__underline__
-~strikethrough~
-||spoiler||
-*bold _italic bold ~italic bold strikethrough ||italic bold strikethrough spoiler||~ __underline italic bold___ bold*
-[inline URL](http://www.example.com/)
-[inline mention of a user](tg://user?id=123456789)
-![👍](tg://emoji?id=5368324170671202286)
-`inline fixed-width code`
-```
-pre-formatted fixed-width code block
-```
-```python
-pre-formatted fixed-width code block written in the Python programming language
-```
->Block quotation started
->Block quotation continued
->The last line of the block quotation*/ 
-    
     bot.on('message', async (msg) => {
       // console.log(msg)
       const id_telegram = msg.chat.id.toString();
@@ -440,7 +420,10 @@ pre-formatted fixed-width code block written in the Python programming language
 
                 await prisma_db.alertas.update({
                   where:{id: user.alerta[0].id},
-                  data:{localizacao: texto,status:1}
+                  data:{
+                    localizacao: texto.toUpperCase(),
+                    status:1,
+                  }
                 })
 
                 await bot.sendMessage(id_telegram, `Alerta: ✅ ${user.alerta[0].palavra_chave} ✅ cadastrado com sucesso!`,
@@ -463,13 +446,13 @@ pre-formatted fixed-width code block written in the Python programming language
               await bot.sendMessage(id_telegram, `
 🚨 Você só poderá concluir um alertas por vez. Após 3 minutos de inatividade, TODO o processo será anulado, tendo que ser reiniciado.
 
-Pressione CADASTRAR NOVA PALAVRA para iniciar.
+Pressione CADASTRAR NOVA PALAVRA CHAVE para iniciar.
               `,
               {
                 reply_markup: {
                   inline_keyboard: [
                     [
-                      { text: "CADASTRAR NOVA PALAVRA", callback_data: `PALAVRA`},
+                      { text: "CADASTRAR NOVA PALAVRA CHAVE", callback_data: `PALAVRA`},
                     ],
                   ],
                   }
@@ -482,13 +465,13 @@ Pressione CADASTRAR NOVA PALAVRA para iniciar.
             await bot.sendMessage(id_telegram, `
 🚨 Você só poderá concluir um alertas por vez. Após 3 minutos de inatividade, TODO o processo será anulado, tendo que ser reiniciado.
 
-Pressione CADASTRAR NOVA PALAVRA para iniciar.
+Pressione CADASTRAR NOVA PALAVRA CHAVE para iniciar.
             `,
             {
               reply_markup: {
                 inline_keyboard: [
                    [
-                     { text: "CADASTRAR NOVA PALAVRA", callback_data: `PALAVRA`},
+                     { text: "CADASTRAR NOVA PALAVRA CHAVE", callback_data: `PALAVRA`},
                    ],
                  ],
                 }
@@ -497,48 +480,6 @@ Pressione CADASTRAR NOVA PALAVRA para iniciar.
           bot.deleteMessage(id_telegram, messageId)
           }
 
-//           const msg_alerta = texto?texto.split(' '):''
-        
-//           if(user?.alerta.length<1){
-
-//             if(msg_alerta[1]!=undefined){
-
-//               const palavra_chave = msg_alerta[1]
-//               const user_id = user.id
-
-//               const alerta = await prisma_db.alertas.create({
-//                 data:{
-//                     palavra_chave: palavra_chave,
-//                     user_id: user_id,
-//                     id_telegram: id_telegram,
-//                 }
-//             }) 
-
-//               await bot.sendMessage(id_telegram, `De qual grupo você gostaria de receber alertas?`);
-//               await bot.sendMessage(id_telegram, `Artigos Militares`, artigos_militares(alerta.id));
-//               await bot.sendMessage(id_telegram, `Artigos Civis`, artigos_civis(alerta.id));
-//               bot.deleteMessage(id_telegram, messageId)  
-
-//             }else{              
-//               await bot.sendMessage(id_telegram, `Forneça uma palavra válida`);
-//               bot.deleteMessage(id_telegram, messageId)
-//             }
-
-//           }else{
-
-//           await bot.sendMessage(id_telegram, `🚨 Você só poderá concluir um "alertas"  por vez. Após 3 minutos de inatividade, TODO o processo será anulado, tendo que ser reiniciado.`);
-
-//           await bot.sendMessage(id_telegram, `
-
-// Cadastre seus alertas - configuração enviar a palavra alerta com espaço e depois colocar uma palavra chave
-
-// Exemplo:
-
-// Alerta boots            
-//           `); 
-//           bot.deleteMessage(id_telegram, messageId)
-//           }      
-         
         }else{
           // Melhorar msg
           await bot.sendMessage(id_telegram, `⚠️ É necessário cadastrar um UserName do Telegram, para dar continuidade no Balcão.`);

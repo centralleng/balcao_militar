@@ -21,9 +21,11 @@ export default async function Alerta_pedido (produto_id:number,user_id:string) {
       inline_keyboard: [
         [
           {
-            text: 'Listar e Deltar Alertas',
-            callback_data: `ALERTAS`,
+            text: 'Listar e Deltar Alertas', callback_data: `ALERTAS`,
           },
+        ],
+        [
+          { text: "CADASTRAR NOVA PALAVRA CHAVE", callback_data: `PALAVRA`},
         ],
       ],
     };

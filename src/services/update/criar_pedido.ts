@@ -39,6 +39,9 @@ export default async function Update_pedido(dados: dados) {
             callback_data: `ALERTAS`,
           },
         ],
+        [
+          { text: "CADASTRAR NOVA PALAVRA CHAVE", callback_data: `PALAVRA`},
+        ],
       ],
     };
   }

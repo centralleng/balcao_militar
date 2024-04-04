@@ -49,33 +49,7 @@ export async function deletarProdutoAbandonado() {
             reply_markup: createInlineKeyboardAlert(),
             });
             
-        } catch (error) {
-            
-        }
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        } catch (error) {}
                         
         }
     }
