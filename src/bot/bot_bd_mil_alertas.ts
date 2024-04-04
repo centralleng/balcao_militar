@@ -175,9 +175,20 @@ function createInlineKeyboard(userTelegramId:any) {
             { text: "[Utilidade Doméstica] vendas", callback_data: `CADASTRO_[Utilidade-Domestica]_${id}_APAGAR` },
           ],
           [
-            { text: "[Ferramenta] vendas", callback_data: `CADASTRO_[Ferramenta]_${id}_APAGAR` },
+            { text: "[Material Escolar] vendas", callback_data: `CADASTRO_[Material-Escolar]_${id}_APAGAR` },
+            { text: "[Passagens Aéreas] vendas", callback_data: `CADASTRO_[Passagens-Aereas]_${id}_APAGAR` },
+            { text: "[Tudo Pet] vendas", callback_data: `CADASTRO_[Tudo-Pet]_${id}_APAGAR` },
+          ],
+          [
+            { text: "[Beleza e Saúde] vendas", callback_data: `CADASTRO_[Beleza-Saude]_${id}_APAGAR` },
             { text: "[Mat. Construção] vendas", callback_data: `CADASTRO_[Mat-Construcao]_${id}_APAGAR` },
-        ],         
+            { text: "[Alimento] vendas", callback_data: `CADASTRO_[Alimento]_${id}_APAGAR` },
+          ],
+          [
+            { text: "[Joia e Bijuteria] vendas", callback_data: `CADASTRO_[Joia-Bijuteria]_${id}_APAGAR` },
+            { text: "[Vestuario] vendas", callback_data: `CADASTRO_[Vestuario]_${id}_APAGAR` },
+            { text: "[Instr. musicais] vendas", callback_data: `CADASTRO_[Instr-musicais]_${id}_APAGAR` },
+          ],       
         ],
       },
     }
