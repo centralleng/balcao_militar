@@ -658,12 +658,11 @@ Obs.: Colocar somente números.`);
                 data:{phone: telefone, ddd_phone:ddd}
               })
 
-              await bot.sendMessage(id_telegram,`
-🚨 Para finizar o seu cadastro, CLIQUE no canal correspondente à sua Instituição/Corporação abaixo. Dentro do canal clique em pelo menos um canal de artigos civis de seu interesse. Eles se encontram nos respectivos canais de artigos militares 🥳
+              await bot.sendMessage(id_telegram,`      
+🚨 Para finizar o seu cadastro, CLIQUE no canal correspondente à sua Instituição/Corporação de origem logo abaixo. Já dentro do canal da Força, clique em pelo menos um dos canais de artigos civis de seu interesse. Eles se encontram em mensagens prefixadas no respectivos canais. 🥳
 
-🚨 Atenção: não esqueça de criar o @username para realizar as operações dentro do Balcão. Caso não saiba, clique (link do suporte) e digite o número do vídeo correspondente.          
-          `
-            ,);
+🚨 Atenção: não esqueça de criar o @username para realizar as operações dentro do Balcão. Caso não saiba, clique @BDMILSUPORTE_bot e digite o número do vídeo correspondente.
+`            ,);
             await bot.sendMessage(id_telegram,`Grupo de Artigo Militar:`, artigos_militares);
 
             await bot.sendMessage(id_telegram, `Grupo de Artigos Civis`, artigos_civis);
