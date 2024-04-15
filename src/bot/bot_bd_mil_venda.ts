@@ -932,6 +932,7 @@ Qual é a localização do produto? (Digite cidade e estado conforme o modelo: C
                       [
                         { text: "SIM", callback_data: `ENTREGA_SIM_${produto_db.id}` },
                         { text: "NÃO", callback_data: `ENTREGA_NÃO_${produto_db.id}` },
+                        { text: "A NEGOCIAR", callback_data: `ENTREGA_A NEGOCIAR_${produto_db.id}` },
                       ],                     
                       [
                         { text: "SUPORTE", url: "https://t.me/BDMilSUPORTE_bot?start=start" },

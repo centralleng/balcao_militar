@@ -659,8 +659,9 @@ Obs.: Colocar somente números.`);
               })
 
               await bot.sendMessage(id_telegram,`
-Prontinho, seu cadastro foi realizado com sucesso!! 🥳
-Segue abaixo o Balcão que você pode acessar para comprar ou vender um produto!          
+🚨 Para finizar o seu cadastro, CLIQUE no canal correspondente à sua Instituição/Corporação abaixo. Dentro do canal clique em pelo menos um canal de artigos civis de seu interesse. Eles se encontram nos respectivos canais de artigos militares 🥳
+
+🚨 Atenção: não esqueça de criar o @username para realizar as operações dentro do Balcão. Caso não saiba, clique (link do suporte) e digite o número do vídeo correspondente.          
           `
             ,);
             await bot.sendMessage(id_telegram,`Grupo de Artigo Militar:`, artigos_militares);
