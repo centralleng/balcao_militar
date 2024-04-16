@@ -498,7 +498,7 @@ A qual instituição você pertence?
           await bot.sendMessage(id_telegram,`
 Vamos dar início ao seu cadastro: 
 
-A qual instituição de origem?           
+Qual sua instituição de origem?           
           `,instituicao);
           bot.deleteMessage(id_telegram, messageId)
           return
