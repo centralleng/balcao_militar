@@ -338,6 +338,8 @@ Boas negociações!
     //     inline_keyboard: [
           
     //     ]}}
+
+
   
     const artigos_civis: TelegramBot.SendMessageOptions = {
       reply_markup: {
@@ -658,12 +660,22 @@ Obs.: Colocar somente números.`);
                 data:{phone: telefone, ddd_phone:ddd}
               })
 
+              const grupo = await prisma_db.grupos.findUnique({where:{type:req.instituicao}})
+
               await bot.sendMessage(id_telegram,`      
-🚨 Para finizar o seu cadastro, CLIQUE no canal correspondente à sua Instituição/Corporação de origem, logo abaixo. Ato contínuo, já dentro do canal da força, clique em pelo menos um dos canais de artigos civis de seu interesse. Eles se encontram na mensagem prefixada nos respectivos canais. 🥳
+🚨 Para finizar o seu cadastro, CLIQUE no canal correspondente à sua Instituição de origem, logo abaixo. Ato contínuo, já dentro do canal da força, CLIQUE em pelo menos um dos canais de artigos civis de seu interesse. Eles se encontram numa mensagem prefixada nos respectivos canais nas instituições. 🥳
 
 🚨 Atenção: não esqueça de criar o @username para realizar as operações dentro do Balcão. Caso não saiba, clique @BDMILSUPORTE_bot e digite o número do vídeo correspondente.
 `            ,);
-            await bot.sendMessage(id_telegram,`Canais de Artigos Militares:`, artigos_militares);
+            await bot.sendMessage(id_telegram,`Canais de Artigos Militares:`, {
+              reply_markup: {
+                inline_keyboard: [
+                [
+                  { text: req.instituicao, url: grupo?.link},
+                ],             
+              ],        
+              },
+            });
 
             // await bot.sendMessage(id_telegram, `Canais de Artigos Civis`, artigos_civis);
 
