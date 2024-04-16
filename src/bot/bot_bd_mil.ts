@@ -427,9 +427,9 @@ Boas negociações!
           })
           
         await bot.sendMessage(id_telegram,`
-Vamos dar início ao seu cadastro:
+Vamos dar início ao seu cadastro: 
 
-A qual instituição você pertence?          
+Qual sua instituição de origem?          
         ` 
         ,instituicao);
         await bot.deleteMessage(id_telegram, messageId)
@@ -437,7 +437,7 @@ A qual instituição você pertence?
         await bot.sendMessage(id_telegram,`
 Vamos dar início ao seu cadastro: 
 
-A qual instituição você pertence?      
+Qual sua instituição de origem?      
                   ` 
         ,instituicao);
         bot.deleteMessage(id_telegram, messageId)
