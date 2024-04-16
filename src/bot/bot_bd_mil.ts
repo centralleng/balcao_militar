@@ -665,7 +665,7 @@ Obs.: Colocar somente números.`);
 `            ,);
             await bot.sendMessage(id_telegram,`Canais de Artigos Militares:`, artigos_militares);
 
-            await bot.sendMessage(id_telegram, `Canais de Artigos Civis`, artigos_civis);
+            // await bot.sendMessage(id_telegram, `Canais de Artigos Civis`, artigos_civis);
 
             bot.deleteMessage(id_telegram, messageId)
               
@@ -676,7 +676,7 @@ Obs.: Colocar somente números.`);
             await bot.sendMessage(id_telegram,`Digite seu telefone com DDD no padrão abaixo:`);
             await bot.sendMessage(id_telegram,`DDD mais número de telefone:`);
             await bot.sendMessage(id_telegram,`99999999999 ou 99 999999999`);
-            bot.deleteMessage(id_telegram, messageId)           
+            bot.deleteMessage(id_telegram, messageId)        
            
             return
           }
