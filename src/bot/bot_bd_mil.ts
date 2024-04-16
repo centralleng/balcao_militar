@@ -343,12 +343,12 @@ Boas negociações!
       reply_markup: {
         inline_keyboard: [
         [
-          { text: "[Uniforme vendas]", url: "https://t.me/+07bigcW1r4syMjRh"},
-          { text: "[Veículo vendas]", url: "https://t.me/+CcK6KcqceLRkZjhh" },
           { text: "[Serviço vendas]", url: "https://t.me/+0ni_n2uu5wQwNDYx"},
+          { text: "[Uniforme vendas]", url: "https://t.me/+07bigcW1r4syMjRh"},
+          { text: "[Smartphone vendas]", url: "https://t.me/+oTtGpdSVjZJjMzkx"},
         ],
         [
-          { text: "[Smartphone vendas]", url: "https://t.me/+oTtGpdSVjZJjMzkx"},
+          { text: "[Veículo vendas]", url: "https://t.me/+CcK6KcqceLRkZjhh" },
           { text: "[Diversos vendas]", url: "https://t.me/+jV7ioExY8XRkMGYx"},
           { text: "[Eletrodoméstico vendas]", url: "https://t.me/+lafHsTpLYLM0NTgx"},
         ],
@@ -498,7 +498,7 @@ A qual instituição você pertence?
           await bot.sendMessage(id_telegram,`
 Vamos dar início ao seu cadastro: 
 
-A qual instituição você pertence?           
+A qual instituição de origem?           
           `,instituicao);
           bot.deleteMessage(id_telegram, messageId)
           return
