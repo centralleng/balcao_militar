@@ -496,7 +496,7 @@ Qual sua instituição de origem?
           if(req.instituicao===null){              
             // Qual seu cpf
           await bot.sendMessage(id_telegram,`
-Vamos dar início ao seu cadastro: 
+Vamos dar início ao seu cadastro:
 
 Qual sua instituição de origem?           
           `,instituicao);
@@ -659,13 +659,13 @@ Obs.: Colocar somente números.`);
               })
 
               await bot.sendMessage(id_telegram,`      
-🚨 Para finizar o seu cadastro, CLIQUE no canal correspondente à sua Instituição/Corporação de origem logo abaixo. Já dentro do canal da Força, clique em pelo menos um dos canais de artigos civis de seu interesse. Eles se encontram em mensagens prefixadas no respectivos canais. 🥳
+🚨 Para finizar o seu cadastro, CLIQUE no canal correspondente à sua Instituição/Corporação de origem, logo abaixo. Ato contínuo, já dentro do canal da força, clique em pelo menos um dos canais de artigos civis de seu interesse. Eles se encontram na mensagem prefixada nos respectivos canais. 🥳
 
 🚨 Atenção: não esqueça de criar o @username para realizar as operações dentro do Balcão. Caso não saiba, clique @BDMILSUPORTE_bot e digite o número do vídeo correspondente.
 `            ,);
-            await bot.sendMessage(id_telegram,`Grupo de Artigo Militar:`, artigos_militares);
+            await bot.sendMessage(id_telegram,`Canais de Artigo Militar:`, artigos_militares);
 
-            await bot.sendMessage(id_telegram, `Grupo de Artigos Civis`, artigos_civis);
+            await bot.sendMessage(id_telegram, `Canais de Artigos Civis`, artigos_civis);
 
             bot.deleteMessage(id_telegram, messageId)
               
