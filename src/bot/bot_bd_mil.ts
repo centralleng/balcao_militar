@@ -663,13 +663,13 @@ Obs.: Colocar somente números.`);
 
 🚨 Atenção: não esqueça de criar o @username para realizar as operações dentro do Balcão. Caso não saiba, clique @BDMILSUPORTE_bot e digite o número do vídeo correspondente.
 `            ,);
-            await bot.sendMessage(id_telegram,`Canais de Artigo Militar:`, artigos_militares);
+            await bot.sendMessage(id_telegram,`Canais de Artigos Militares:`, artigos_militares);
 
             await bot.sendMessage(id_telegram, `Canais de Artigos Civis`, artigos_civis);
 
             bot.deleteMessage(id_telegram, messageId)
               
-              return
+            return
             }
 
             // Caso não pare em nenhum if
