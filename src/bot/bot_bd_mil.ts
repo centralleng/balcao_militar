@@ -10,6 +10,61 @@ const bot = new TelegramBot(token_bot, { polling: true });
 
 class Bot_bd_mil {
   static execute() {
+
+  const termo = `
+Olá! Bem-vindo ao Balcão dos militares (BDMil).
+
+Fique atento (a) às regras abaixo:
+
+1) O cadastro no @BDMil é GRATUITO E VOLUNTÁRIO, bem como as inscrições nos canais.
+
+2) O cadastro da PRIMEIRA oferta de venda de CADA USUÁRIO será GRATUITA.
+
+3) Do segundo cadastro em diante, serão cobradas comissões de apenas 3% do valor total de casa oferra. Para veículos e venda de imóveis 0.1%. No tocante aos serviços a taxa é fixa de 3 (três) reais.
+
+4) As ofertas ficarão disponíveis no Balcão conforme abaixo:
+9.1 Serviços : 1 mês;
+9.2 veículos e venda de imóveis: 
+- até 5k = 1 mês; 
+- de 5.1 a 20 k = 2 meses; 
+- de 20.1 a 45 k = 3 meses;                      
+- de 45.1 a 80k= 4 meses;                     
+- de 80.1 a 125 k = 5 meses;                  
+- de 125.1 em diante = 6 meses.
+9.3 demais produtos: 
+- até 100 = 1 mês; 
+- de 101 a 200 = 2 meses;                     
+- de 201 a 400 = 3 meses;                     
+- de 401 a 800 = 4 meses;                     
+- de 801 a 2000 = 5 meses;                      
+- de 2001 em diante = 6 meses.
+
+5) O usuário poderá EDITAR, ATUALIZAR e DELETAR a oferta.
+
+6) O proeminente vendedor fica obrigado a devolver 100% do valor que por ventura tenha recebido, caso ocorra algum problema. 
+
+7) O comprador de um produto, poderá buscar as ofertas de forma mais específica, por intermédio do @BDMilALERTAS ou na ferramenta de busca do próprio canal.
+
+8) O pagamento será realizado apenas por PIX.
+
+9) O usuário terá a opção de comprar créditos, evitando efetuar o pagamento, pelo canal bancário a cada oferta.
+
+10) Será disponibilizado ao usuário o bot @BDMilsuporte.
+
+11) Será oferecido o bot SUGESTÕES para que o usuário possa contribuir com a melhoria do sistema.
+
+12) A negociação no Balcão é LIVRE, conforme as várias plataformas de marketplace. Faça uma negociação segura.
+
+13) Os dados do usuário são guardados em um servidor próprio e na "nuvem", totalmente criptografado aliado a segurança de dados existentes no Telegram.
+
+14) É proibida a venda de armas e munições, bem como quaisquer produtos considerados ilícitos pelas leis brasileiras. 
+
+15) É terminantemente PROIBIDO o uso do Balcão por menores de 18 anos.
+
+16) Por fim, caso haja má fé, o transgressor será excluído do sistema de forma permanente.
+Boas negociações!
+`
+
     const termo1 = `
 *Olá! Bem-vindo ao Balcão dos militares (BDMil).*
 
@@ -487,9 +542,10 @@ Qual sua instituição de origem?
       }) 
 
       if(!req){ // Primeiro contato com o bot  
-      await bot.sendMessage(id_telegram, termo1, {parse_mode: 'Markdown'});
-      await bot.sendMessage(id_telegram, termo2, {parse_mode: 'Markdown'});
-      await bot.sendMessage(id_telegram, termo3, {parse_mode: 'Markdown'});
+      await bot.sendMessage(id_telegram, termo, {parse_mode: 'Markdown'});
+      // await bot.sendMessage(id_telegram, termo1, {parse_mode: 'Markdown'});
+      // await bot.sendMessage(id_telegram, termo2, {parse_mode: 'Markdown'});
+      // await bot.sendMessage(id_telegram, termo3, {parse_mode: 'Markdown'});
       await bot.sendMessage(id_telegram,"Eu li e concordo com os termos de uso:",termos_uso);
       bot.deleteMessage(id_telegram, messageId)
       //colocar um botão de OK aqui!!        

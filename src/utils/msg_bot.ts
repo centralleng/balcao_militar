@@ -185,7 +185,10 @@ Membro desde ${moment(dados.data_criacao_user).format('DD-MM-YYYY')}
 
 Recomendo que sempre seja confirmado o valor do produto, bem como a forma de entrega, prazos, formas de pagamento e outras coisas que se fizerem necessárias antes de fechar a transação, a fim de evitar transtornos desnecessários e exclusão do Balcão.
 
+❌ O mau comportamento pode acarretar na exclusão do balcão.
 ❗️ verifique dados adicionais durante a negociação, para ter a certeza de estar mitigando riscos.
+❗️ Não esqueça de recomendar ou desaconselhar o comprador após a venda.
+❗️ Não esqueça de deletar o produto após a venda.
 
 ⬆️ recomendado por ${dados.recomendado} pessoa(s).
 
@@ -194,9 +197,7 @@ Recomendo que sempre seja confirmado o valor do produto, bem como a forma de ent
 ✅ conta verificada
 
 ✔️ Membro desde ${moment(dados.created_at).format('DD-MM-YYYY')}
-
-❗️ Não esqueça de deletar o produto, após a venda.
-    `
+`
     }
 
     msg_interesse_compra_comprador(dados: dados_interece_compra_comprador) {
