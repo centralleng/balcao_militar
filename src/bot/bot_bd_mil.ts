@@ -105,7 +105,7 @@ As regras abaixo são de suma importância para o usuário. Está um pouco exten
 9.2.5 de 801 a 2000 = 5 meses;
 9.2.6 de 2001 em diante = 6 meses.
 
-  10) Durante os períodos supracitados, o usuário poderá EDITAR, ATUALIZAR e DELETAR. O botão ATUALIZAR serve para trazer a proposta de venda para o dia D. O EDITAR serve para mudar o valor do produto. Caso o vendedor exclua ou mude o preço ( somente para baixo), não poderá solicitar reembolso do valor pago.
+10) Durante os períodos supracitados, o usuário poderá EDITAR, ATUALIZAR e DELETAR. O botão ATUALIZAR serve para trazer a proposta de venda para o dia D. O EDITAR serve para mudar o valor do produto. Caso o vendedor exclua ou mude o preço ( somente para baixo), não poderá solicitar reembolso do valor pago.
 
 11) Caso ocorra algum problema na venda, o proeminente vendedor fica obrigado a devolver 100% quaisquer valores que por ventura tenha recebido.
 
@@ -193,95 +193,99 @@ Boas negociações!
           { text: "[FAB]", callback_data: "[FAB]" },
         ],
         [
-          { text: "[PMERJ]", callback_data: "[PMERJ]" },
-          { text: "[CBMERJ]", callback_data: "[CBMERJ]" },
-          { text: "[PMDF]", callback_data: "[PMDF]" },
+          { text: "[PM]", callback_data: "[PM]" },
+          { text: "[BM]", callback_data: "[BM]" },
         ],
-        [
-          { text: "[CBMDF]", callback_data: "[CBMDF]" },
-          { text: "[PMESP]", callback_data: "[PMESP]" },
-          { text: "[CBMESP]", callback_data: "[CBMESP]" },
-        ],
-        [
-          { text: "[PMMG]", callback_data: "[PMMG]" },
-          { text: "[CBMMG]", callback_data: "[CBMMG]" },
-          { text: "[PMGO]", callback_data: "[PMGO]" },
-        ],
-        [
-          { text: "[CBMGO]", callback_data: "[CBMGO]" },
-          { text: "[PMPR]", callback_data: "[PMPR]" },
-          { text: "[CBMPR]", callback_data: "[CBMPR]" },
-        ],
-        [
-          { text: "[PMSC]", callback_data: "[PMSC]" },
-          { text: "[CBMSC]", callback_data: "[CBMSC]" },
-          { text: "[BRIGADA MILITAR]", callback_data: "[BRIGADA-MILITAR]" },
-        ],
-        [
-          { text: "[CBMRS]", callback_data: "[CBMRS]" },
-          { text: "[PMMS]", callback_data: "[PMMS]" },
-          { text: "[CBMMS]", callback_data: "[CBMMS]" },
-        ],
-        [
-          { text: "[PMMT]", callback_data: "[PMMT]" },
-          { text: "[CBMMT]", callback_data: "[CBMMT]" },
-          { text: "[PMBA]", callback_data: "[PMBA]" },
-        ],
-        [
-          { text: "[CBMBA]", callback_data: "[CBMBA]" },
-          { text: "[PMES]", callback_data: "[PMES]" },
-          { text: "[CBMES]", callback_data: "[CBMES]" },
-        ],
-        [
-          { text: "[PMAL]", callback_data: "[PMAL]" },
-          { text: "[CBMAL]", callback_data: "[CBMAL]" },
-          { text: "[PMSE]", callback_data: "[PMSE]" },
-        ],
-        [
-          { text: "[CBMSE]", callback_data: "[CBMSE]" },
-          { text: "[PMPE]", callback_data: "[PMPE]" },
-          { text: "[CBMPE]", callback_data: "[CBMPE]" },
-        ],
-        [
-          { text: "[PMRN]", callback_data: "[PMRN]" },
-          { text: "[CBMRN]", callback_data: "[CBMRN]" },
-          { text: "[PMCE]", callback_data: "[PMCE]" },
-        ],
-        [
-          { text: "[CBMCE]", callback_data: "[CBMCE]" },
-          { text: "[PMPI]", callback_data: "[PMPI]" },
-          { text: "[CBMPI]", callback_data: "[CBMPI]" },
-        ],
-        [
-          { text: "[PMMA]", callback_data: "[PMMA]" },
-          { text: "[CBMMA]", callback_data: "[CBMMA]" },
-          { text: "[PMAM]", callback_data: "[PMAM]" },
-        ],
-        [
-          { text: "[CBMAM]", callback_data: "[CBMAM]" },
-          { text: "[PMAP]", callback_data: "[PMAP]" },
-          { text: "[CBMAP]", callback_data: "[CBMAP]" },
-        ],
-        [
-          { text: "[PMRO]", callback_data: "[PMRO]" },
-          { text: "[CBMRO]", callback_data: "[CBMRO]" },
-          { text: "[PMTO]", callback_data: "[PMTO]" },
-        ],
-        [
-          { text: "[CBMTO]", callback_data: "[CBMTO]" },
-          { text: "[PMAC]", callback_data: "[PMAC]" },
-          { text: "[CBMAC]", callback_data: "[CBMAC]" },
-        ],
-        [
-          { text: "[PMPA]", callback_data: "[PMPA]"},
-          { text: "[CBMPA]", callback_data: "[CBMPA]"},
-          { text: "[PMRR]", callback_data: "[PMRR]"},
-        ],
-        [
-          { text: "[CBMRR]", callback_data: "[CBMRR]"},
-          { text: "[PMPB]", callback_data: "[PMPB]"},
-          { text: "[CBMPB]", callback_data: "[CBMPB]"},
-        ],        
+        // [
+        //   { text: "[PMERJ]", callback_data: "[PMERJ]" },
+        //   { text: "[CBMERJ]", callback_data: "[CBMERJ]" },
+        //   { text: "[PMDF]", callback_data: "[PMDF]" },
+        // ],
+        // [
+        //   { text: "[CBMDF]", callback_data: "[CBMDF]" },
+        //   { text: "[PMESP]", callback_data: "[PMESP]" },
+        //   { text: "[CBMESP]", callback_data: "[CBMESP]" },
+        // ],
+        // [
+        //   { text: "[PMMG]", callback_data: "[PMMG]" },
+        //   { text: "[CBMMG]", callback_data: "[CBMMG]" },
+        //   { text: "[PMGO]", callback_data: "[PMGO]" },
+        // ],
+        // [
+        //   { text: "[CBMGO]", callback_data: "[CBMGO]" },
+        //   { text: "[PMPR]", callback_data: "[PMPR]" },
+        //   { text: "[CBMPR]", callback_data: "[CBMPR]" },
+        // ],
+        // [
+        //   { text: "[PMSC]", callback_data: "[PMSC]" },
+        //   { text: "[CBMSC]", callback_data: "[CBMSC]" },
+        //   { text: "[BRIGADA MILITAR]", callback_data: "[BRIGADA-MILITAR]" },
+        // ],
+        // [
+        //   { text: "[CBMRS]", callback_data: "[CBMRS]" },
+        //   { text: "[PMMS]", callback_data: "[PMMS]" },
+        //   { text: "[CBMMS]", callback_data: "[CBMMS]" },
+        // ],
+        // [
+        //   { text: "[PMMT]", callback_data: "[PMMT]" },
+        //   { text: "[CBMMT]", callback_data: "[CBMMT]" },
+        //   { text: "[PMBA]", callback_data: "[PMBA]" },
+        // ],
+        // [
+        //   { text: "[CBMBA]", callback_data: "[CBMBA]" },
+        //   { text: "[PMES]", callback_data: "[PMES]" },
+        //   { text: "[CBMES]", callback_data: "[CBMES]" },
+        // ],
+        // [
+        //   { text: "[PMAL]", callback_data: "[PMAL]" },
+        //   { text: "[CBMAL]", callback_data: "[CBMAL]" },
+        //   { text: "[PMSE]", callback_data: "[PMSE]" },
+        // ],
+        // [
+        //   { text: "[CBMSE]", callback_data: "[CBMSE]" },
+        //   { text: "[PMPE]", callback_data: "[PMPE]" },
+        //   { text: "[CBMPE]", callback_data: "[CBMPE]" },
+        // ],
+        // [
+        //   { text: "[PMRN]", callback_data: "[PMRN]" },
+        //   { text: "[CBMRN]", callback_data: "[CBMRN]" },
+        //   { text: "[PMCE]", callback_data: "[PMCE]" },
+        // ],
+        // [
+        //   { text: "[CBMCE]", callback_data: "[CBMCE]" },
+        //   { text: "[PMPI]", callback_data: "[PMPI]" },
+        //   { text: "[CBMPI]", callback_data: "[CBMPI]" },
+        // ],
+        // [
+        //   { text: "[PMMA]", callback_data: "[PMMA]" },
+        //   { text: "[CBMMA]", callback_data: "[CBMMA]" },
+        //   { text: "[PMAM]", callback_data: "[PMAM]" },
+        // ],
+        // [
+        //   { text: "[CBMAM]", callback_data: "[CBMAM]" },
+        //   { text: "[PMAP]", callback_data: "[PMAP]" },
+        //   { text: "[CBMAP]", callback_data: "[CBMAP]" },
+        // ],
+        // [
+        //   { text: "[PMRO]", callback_data: "[PMRO]" },
+        //   { text: "[CBMRO]", callback_data: "[CBMRO]" },
+        //   { text: "[PMTO]", callback_data: "[PMTO]" },
+        // ],
+        // [
+        //   { text: "[CBMTO]", callback_data: "[CBMTO]" },
+        //   { text: "[PMAC]", callback_data: "[PMAC]" },
+        //   { text: "[CBMAC]", callback_data: "[CBMAC]" },
+        // ],
+        // [
+        //   { text: "[PMPA]", callback_data: "[PMPA]"},
+        //   { text: "[CBMPA]", callback_data: "[CBMPA]"},
+        //   { text: "[PMRR]", callback_data: "[PMRR]"},
+        // ],
+        // [
+        //   { text: "[CBMRR]", callback_data: "[CBMRR]"},
+        //   { text: "[PMPB]", callback_data: "[PMPB]"},
+        //   { text: "[CBMPB]", callback_data: "[CBMPB]"},
+        // ],        
       ],        
       },
     };
@@ -295,95 +299,99 @@ Boas negociações!
           { text: "[FAB vendas]", url: "https://t.me/+Y1pkY-yAViFiOWRh"},
         ],
         [
-          { text: "[PMERJ vendas]", url: "https://t.me/+fP6eI1-pNI8zYWYx"},
-          { text: "[CBMERJ vendas]", url: "https://t.me/+AWxwCs0q-KszNjQx"},
-          { text: "[PMDF vendas]", url: "https://t.me/+ke1Nii3UYfM0MDNh"},
+          { text: "[PM] vendas", url: "https://t.me/+wJd2Kfv4IOs5ZWFh" },
+          { text: "[BM] vendas", url: "https://t.me/+lwkAOKUoMCcyN2Zh" },
         ],
-        [
-          { text: "[CBMDF vendas]", url: "https://t.me/+5wzf1jsJf_k3YTZh"},
-          { text: "[PMESP vendas]", url: "https://t.me/+RlDSnR8X9ZY2YTRh"},
-          { text: "[CBMESP vendas]", url: "https://t.me/+5cJH6yQ5SUkwNjUx"},
-        ],
-        [
-          { text: "[PMMG vendas]", url: "https://t.me/+0ZOmYGzHcQEzYjI5"},
-          { text: "[CBMMG vendas]", url: "https://t.me/+MPElU7fWtDFkNWQx"},
-          { text: "[PMGO vendas]", url: "https://t.me/+0z-tgSR7KMNlMjc5"},
-        ],
-        [
-          { text: "[CBMGO vendas]", url: "https://t.me/+TpBNm-JXd-w1MGJh"},
-          { text: "[PMPR vendas]", url: "https://t.me/+bUxKjoIbMP00YzIx"},
-          { text: "[CBMPR vendas]", url: "https://t.me/+l0cJOmgSkeM3ODdh"},
-        ],
-        [
-          { text: "[PMSC vendas]", url: "https://t.me/+kHO9rt65F6tmYTMx"},
-          { text: "[CBMSC vendas]", url: "https://t.me/+uEKOo1wogGU2ZTE5"},
-          { text: "[BRIGADA MILITAR vendas]", url: "https://t.me/+4m4PvEaQrlA3OWVh"},
-        ],
-        [
-          { text: "[CBMRS vendas]", url: "https://t.me/+wLVXBuI9tLZlYjgx"},
-          { text: "[PMMS vendas]", url: "https://t.me/+pFQKi0_RGrc1N2Yx"},
-          { text: "[CBMMS vendas]", url: "https://t.me/+eea7o4K99wMzMGYx"},
-        ],
-        [
-          { text: "[PMMT vendas]", url: "https://t.me/+iLnUYKOUoLY2MzQx"},
-          { text: "[CBMMT vendas]", url: "https://t.me/+bKPgl8N8OwQxOGU5"},
-          { text: "[PMBA vendas]", url: "https://t.me/+q3usbyJGEygyZTI5"},
-        ],
-        [
-          { text: "[CBMBA vendas]", url: "https://t.me/+7Y_EbXi8lYRkN2Ex"},
-          { text: "[PMES vendas]", url: "https://t.me/+JV13TdCOHTtiNzUx"},
-          { text: "[CBMES vendas]", url: "https://t.me/+FDp4Wnnvcww2NWFh"},
-        ],
-        [
-          { text: "[PMAL vendas]", url: "https://t.me/+B3aLTGTJcv1lMDUx"},
-          { text: "[CBMAL vendas]", url: "https://t.me/+Hc5se9g2xyo1ZGIx"},
-          { text: "[PMSE vendas]", url: "https://t.me/+XfvUCQjlkFM4YTIx"},
-        ],
-        [
-          { text: "[CBMSE vendas]", url: "https://t.me/+5h3gnKyUcy8zYWZh"},
-          { text: "[PMPE vendas]", url: "https://t.me/+tM5arpf0v7VhYTMx"},
-          { text: "[CBMPE vendas]", url: "https://t.me/+L22WPiHuO3BhMmMx"},
-        ],
-        [
-          { text: "[PMRN vendas]", url: "https://t.me/+v0S0DcDy0QkxYTFh"},
-          { text: "[CBMRN vendas]", url: "https://t.me/+mtohgUmaWIc2Mzdh"},
-          { text: "[PMCE vendas]", url: "https://t.me/+5C7aqMfBTBIzNDZh"},
-        ],
-        [
-          { text: "[CBMCE vendas]", url: "https://t.me/+tOrjCxMj9q8zOGZh"},
-          { text: "[PMPI vendas]", url: "https://t.me/+s-ZZoXIHK7MwYjJh"},
-          { text: "[CBMPI vendas]", url: "https://t.me/+a2nMvkzqghs3ODgx"},
-        ],
-        [
-          { text: "[PMMA vendas]", url: "https://t.me/+XiwfKrnun89mNDBh"},
-          { text: "[CBMMA vendas]", url: "https://t.me/+mneokjSq4ps4M2Ex"},
-          { text: "[PMAM vendas]", url: "https://t.me/+4Eeqv2ozfj1kYzJh"},
-        ],
-        [
-          { text: "[CBMAM vendas]", url: "https://t.me/+cDVMXWkD-KQzOWEx"},
-          { text: "[PMAP vendas]", url: "https://t.me/+HjRdxZJ67-dkNDhh"},
-          { text: "[CBMAP vendas]", url: "https://t.me/+vTqnwRleGJ80MjQx"},
-        ],
-        [
-          { text: "[PMRO vendas]", url: "https://t.me/+Tm-64V_q9UBiMzBh"},
-          { text: "[CBMRO vendas]", url: "https://t.me/+FPD7RiIuZTViNDhh"},
-          { text: "[PMTO vendas]", url: "https://t.me/+r6UUjs46txhkMWYx"},
-        ],
-        [
-          { text: "[CBMTO vendas]", url: "https://t.me/+7zTSApKXHKU5YmRh"},
-          { text: "[PMAC vendas]", url: "https://t.me/+36pWf9eJyro0YWVh"},
-          { text: "[CBMAC vendas]", url: "https://t.me/+1awWjaRF0oNhOTYx"},
-        ],
-        [
-          { text: "[PMPA vendas]", url: "https://t.me/+FwfafSnUETdkMjgx"},
-          { text: "[CBMPA vendas]", url: "https://t.me/+-tmrxVAwTFJjZmQx"},
-          { text: "[PMRR vendas]", url: "https://t.me/+ozYpjtkqsxZlOWNh"},
-        ],
-        [
-          { text: "[CBMRR vendas]", url: "https://t.me/+xuF17ilK2qVhZDQx"},
-          { text: "[PMPB vendas]", url: "https://t.me/+O39pUzjayrEyMjY5"},
-          { text: "[CBMPB vendas]", url: "https://t.me/+KQWkzjvExhA2N2Ex"},
-        ],        
+        // [
+        //   { text: "[PMERJ vendas]", url: "https://t.me/+fP6eI1-pNI8zYWYx"},
+        //   { text: "[CBMERJ vendas]", url: "https://t.me/+AWxwCs0q-KszNjQx"},
+        //   { text: "[PMDF vendas]", url: "https://t.me/+ke1Nii3UYfM0MDNh"},
+        // ],
+        // [
+        //   { text: "[CBMDF vendas]", url: "https://t.me/+5wzf1jsJf_k3YTZh"},
+        //   { text: "[PMESP vendas]", url: "https://t.me/+RlDSnR8X9ZY2YTRh"},
+        //   { text: "[CBMESP vendas]", url: "https://t.me/+5cJH6yQ5SUkwNjUx"},
+        // ],
+        // [
+        //   { text: "[PMMG vendas]", url: "https://t.me/+0ZOmYGzHcQEzYjI5"},
+        //   { text: "[CBMMG vendas]", url: "https://t.me/+MPElU7fWtDFkNWQx"},
+        //   { text: "[PMGO vendas]", url: "https://t.me/+0z-tgSR7KMNlMjc5"},
+        // ],
+        // [
+        //   { text: "[CBMGO vendas]", url: "https://t.me/+TpBNm-JXd-w1MGJh"},
+        //   { text: "[PMPR vendas]", url: "https://t.me/+bUxKjoIbMP00YzIx"},
+        //   { text: "[CBMPR vendas]", url: "https://t.me/+l0cJOmgSkeM3ODdh"},
+        // ],
+        // [
+        //   { text: "[PMSC vendas]", url: "https://t.me/+kHO9rt65F6tmYTMx"},
+        //   { text: "[CBMSC vendas]", url: "https://t.me/+uEKOo1wogGU2ZTE5"},
+        //   { text: "[BRIGADA MILITAR vendas]", url: "https://t.me/+4m4PvEaQrlA3OWVh"},
+        // ],
+        // [
+        //   { text: "[CBMRS vendas]", url: "https://t.me/+wLVXBuI9tLZlYjgx"},
+        //   { text: "[PMMS vendas]", url: "https://t.me/+pFQKi0_RGrc1N2Yx"},
+        //   { text: "[CBMMS vendas]", url: "https://t.me/+eea7o4K99wMzMGYx"},
+        // ],
+        // [
+        //   { text: "[PMMT vendas]", url: "https://t.me/+iLnUYKOUoLY2MzQx"},
+        //   { text: "[CBMMT vendas]", url: "https://t.me/+bKPgl8N8OwQxOGU5"},
+        //   { text: "[PMBA vendas]", url: "https://t.me/+q3usbyJGEygyZTI5"},
+        // ],
+        // [
+        //   { text: "[CBMBA vendas]", url: "https://t.me/+7Y_EbXi8lYRkN2Ex"},
+        //   { text: "[PMES vendas]", url: "https://t.me/+JV13TdCOHTtiNzUx"},
+        //   { text: "[CBMES vendas]", url: "https://t.me/+FDp4Wnnvcww2NWFh"},
+        // ],
+        // [
+        //   { text: "[PMAL vendas]", url: "https://t.me/+B3aLTGTJcv1lMDUx"},
+        //   { text: "[CBMAL vendas]", url: "https://t.me/+Hc5se9g2xyo1ZGIx"},
+        //   { text: "[PMSE vendas]", url: "https://t.me/+XfvUCQjlkFM4YTIx"},
+        // ],
+        // [
+        //   { text: "[CBMSE vendas]", url: "https://t.me/+5h3gnKyUcy8zYWZh"},
+        //   { text: "[PMPE vendas]", url: "https://t.me/+tM5arpf0v7VhYTMx"},
+        //   { text: "[CBMPE vendas]", url: "https://t.me/+L22WPiHuO3BhMmMx"},
+        // ],
+        // [
+        //   { text: "[PMRN vendas]", url: "https://t.me/+v0S0DcDy0QkxYTFh"},
+        //   { text: "[CBMRN vendas]", url: "https://t.me/+mtohgUmaWIc2Mzdh"},
+        //   { text: "[PMCE vendas]", url: "https://t.me/+5C7aqMfBTBIzNDZh"},
+        // ],
+        // [
+        //   { text: "[CBMCE vendas]", url: "https://t.me/+tOrjCxMj9q8zOGZh"},
+        //   { text: "[PMPI vendas]", url: "https://t.me/+s-ZZoXIHK7MwYjJh"},
+        //   { text: "[CBMPI vendas]", url: "https://t.me/+a2nMvkzqghs3ODgx"},
+        // ],
+        // [
+        //   { text: "[PMMA vendas]", url: "https://t.me/+XiwfKrnun89mNDBh"},
+        //   { text: "[CBMMA vendas]", url: "https://t.me/+mneokjSq4ps4M2Ex"},
+        //   { text: "[PMAM vendas]", url: "https://t.me/+4Eeqv2ozfj1kYzJh"},
+        // ],
+        // [
+        //   { text: "[CBMAM vendas]", url: "https://t.me/+cDVMXWkD-KQzOWEx"},
+        //   { text: "[PMAP vendas]", url: "https://t.me/+HjRdxZJ67-dkNDhh"},
+        //   { text: "[CBMAP vendas]", url: "https://t.me/+vTqnwRleGJ80MjQx"},
+        // ],
+        // [
+        //   { text: "[PMRO vendas]", url: "https://t.me/+Tm-64V_q9UBiMzBh"},
+        //   { text: "[CBMRO vendas]", url: "https://t.me/+FPD7RiIuZTViNDhh"},
+        //   { text: "[PMTO vendas]", url: "https://t.me/+r6UUjs46txhkMWYx"},
+        // ],
+        // [
+        //   { text: "[CBMTO vendas]", url: "https://t.me/+7zTSApKXHKU5YmRh"},
+        //   { text: "[PMAC vendas]", url: "https://t.me/+36pWf9eJyro0YWVh"},
+        //   { text: "[CBMAC vendas]", url: "https://t.me/+1awWjaRF0oNhOTYx"},
+        // ],
+        // [
+        //   { text: "[PMPA vendas]", url: "https://t.me/+FwfafSnUETdkMjgx"},
+        //   { text: "[CBMPA vendas]", url: "https://t.me/+-tmrxVAwTFJjZmQx"},
+        //   { text: "[PMRR vendas]", url: "https://t.me/+ozYpjtkqsxZlOWNh"},
+        // ],
+        // [
+        //   { text: "[CBMRR vendas]", url: "https://t.me/+xuF17ilK2qVhZDQx"},
+        //   { text: "[PMPB vendas]", url: "https://t.me/+O39pUzjayrEyMjY5"},
+        //   { text: "[CBMPB vendas]", url: "https://t.me/+KQWkzjvExhA2N2Ex"},
+        // ],        
       ],        
       },
     };
@@ -393,62 +401,85 @@ Boas negociações!
     //     inline_keyboard: [
           
     //     ]}}
-
-
   
     const artigos_civis: TelegramBot.SendMessageOptions = {
       reply_markup: {
         inline_keyboard: [
         [
-          { text: "[Serviço vendas]", url: "https://t.me/+0ni_n2uu5wQwNDYx"},
-          { text: "[Uniforme vendas]", url: "https://t.me/+07bigcW1r4syMjRh"},
+          { text: "[Serviços vendas]", url: "https://t.me/+0ni_n2uu5wQwNDYx"},
           { text: "[Smartphone vendas]", url: "https://t.me/+oTtGpdSVjZJjMzkx"},
-        ],
+          { text: "[Eletrônicos vendas]", url: "https://t.me/+lafHsTpLYLM0NTgx"}, // Eletrodoméstico
+        ],        
         [
-          { text: "[Veículo vendas]", url: "https://t.me/+CcK6KcqceLRkZjhh" },
+          { text: "[Escolar vendas]", url: "https://t.me/+07bigcW1r4syMjRh"}, // Uniforme
           { text: "[Diversos vendas]", url: "https://t.me/+jV7ioExY8XRkMGYx"},
-          { text: "[Eletrodoméstico vendas]", url: "https://t.me/+lafHsTpLYLM0NTgx"},
+          { text: "[Veículo vendas]", url: "https://t.me/+CcK6KcqceLRkZjhh" },
         ],
         [
-          { text: "[Automotivo vendas]", url: "https://t.me/+UaJaV4ey4Z43YzQx"},
-          { text: "[Áudio vendas]", url: "https://t.me/+HtkbigIaR6YzNmIx"},
-          { text: "[Eletroportátil vendas]", url: "https://t.me/+8qvV2dgSEdNkZTgx"},
+          { text: "[Milhas vendas]", url: "https://t.me/+uAO-TjuuXUUyZjgx"}, // Novo
+          { text: "[Cripto vendas]", url: "https://t.me/+YPkZ0rHEHdthNmIx"}, // Novo
+          { text: "[Câmbio vendas]", url: "https://t.me/+ECfenxUMiZs2MTMx" }, // Novo
         ],
         [
-          { text: "[Beleza e Saúde]", url: "https://t.me/+Qe4AWjFnm4BiYmJh"},
-          { text: "[Bebida vendas]", url: "https://t.me/+FtkZD1h-GAk2OTJh"},
-          { text: "[Bebê vendas]", url: "https://t.me/+mYGNUwXiyb8wYzcx"},
-        ],
-        [
-          { text: "[Esporte vendas]", url: "https://t.me/+giWAHbN3AuQ4NmYx"},
-          { text: "[Smart TV vendas]", url: "https://t.me/+nt5pJ_-m2HoxNGYx"},
-          { text: "[Ar e Ventilação vendas]", url: "https://t.me/+tr2ws_c0hnQwNmIx"},
-        ],
-        [
+          { text: "[Pet vendas]", url: "https://t.me/+_1pAWrcE20c4MDUx"}, // Novo
+          { text: "[Casa vendas]", url: "https://t.me/+PtB2vbBLKxg1MjYx"}, // Novo
           { text: "[Imóvel vendas]", url: "https://t.me/+dTc2DriyCCZmNDUx"},
-          { text: "[Brinquedo vendas]", url: "https://t.me/+sEunOn7qodJhMWYx"},
-          { text: "[Informática vendas]", url: "https://t.me/+31XlqHxWcfA0YWVh"},
         ],
-        [
-          { text: "[Game vendas]", url: "https://t.me/+6jF7Q3oL8-BjMjkx"},
-          { text: "[Móvel vendas]", url: "https://t.me/+MlaeVILmRR84MzNh"},
-          { text: "[Utilidade Doméstica vendas]", url: "https://t.me/+UKKjuOU36ylmZjhh"},
+        [     
+          { text: "[Infantil vendas]", url: "https://t.me/+sEunOn7qodJhMWYx"}, // Brinquedo
+          { text: "[Mulher vendas]", url: "https://t.me/+OPBOzQcBuWFjNjIx"}, // Novo
+          { text: "[Passagens Aéreas vendas]", url: "https://t.me/+I-H1x2hOBQVkMmQ5"}, // Novo
         ],
-        [
-          {text: "[Material Escolar vendas]", url: "https://t.me/+xPsCdljf7FtkZTYx"},
-          { text: "[Tudo Pet] vendas",  url: "https://t.me/+ycJBfYd0ub84ZjZh" },
-          { text: "[Passagens Aéreas] vendas",  url: "https://t.me/+URd2yP1W80o3MTQx" },
-       ],
-        [
-          { text: "[Ferramenta] vendas",  url: "https://t.me/+B6SXBxIhSxczYzNh" },
-          { text: "[Mat. Construção] vendas",  url: "https://t.me/+Kh9k9ns1hSkzMjAx" },
-          { text: "[Alimento] vendas", url: "https://t.me/+zDzOkCOcJAg0Mzdh" },
-        ],
-        [
-          { text: "[Joia e Bijuteria] vendas", url: "https://t.me/+xb8RlYsKF31mNWQx" },
-          { text: "[Vestuario] vendas", url: "https://t.me/+1WFdW9QGintlNGMx" },
-          { text: "[Instr. musicais] vendas", url: "https://t.me/+voNtAgBdh942MTkx" },
-        ],
+      //   [
+      //     { text: "[Serviço vendas]", url: "https://t.me/+0ni_n2uu5wQwNDYx"},
+      //     { text: "[Uniforme vendas]", url: "https://t.me/+07bigcW1r4syMjRh"},
+      //     { text: "[Smartphone vendas]", url: "https://t.me/+oTtGpdSVjZJjMzkx"},
+      //   ],
+      //   [
+      //     { text: "[Veículo vendas]", url: "https://t.me/+CcK6KcqceLRkZjhh" },
+      //     { text: "[Diversos vendas]", url: "https://t.me/+jV7ioExY8XRkMGYx"},
+      //     { text: "[Eletrodoméstico vendas]", url: "https://t.me/+lafHsTpLYLM0NTgx"},
+      //   ],
+      //   [
+      //     { text: "[Automotivo vendas]", url: "https://t.me/+UaJaV4ey4Z43YzQx"},
+      //     { text: "[Áudio vendas]", url: "https://t.me/+HtkbigIaR6YzNmIx"},
+      //     { text: "[Eletroportátil vendas]", url: "https://t.me/+8qvV2dgSEdNkZTgx"},
+      //   ],
+      //   [
+      //     { text: "[Beleza e Saúde]", url: "https://t.me/+Qe4AWjFnm4BiYmJh"},
+      //     { text: "[Bebida vendas]", url: "https://t.me/+FtkZD1h-GAk2OTJh"},
+      //     { text: "[Bebê vendas]", url: "https://t.me/+mYGNUwXiyb8wYzcx"},
+      //   ],
+      //   [
+      //     { text: "[Esporte vendas]", url: "https://t.me/+giWAHbN3AuQ4NmYx"},
+      //     { text: "[Smart TV vendas]", url: "https://t.me/+nt5pJ_-m2HoxNGYx"},
+      //     { text: "[Ar e Ventilação vendas]", url: "https://t.me/+tr2ws_c0hnQwNmIx"},
+      //   ],
+      //   [
+      //     { text: "[Imóvel vendas]", url: "https://t.me/+dTc2DriyCCZmNDUx"},
+      //     { text: "[Brinquedo vendas]", url: "https://t.me/+sEunOn7qodJhMWYx"},
+      //     { text: "[Informática vendas]", url: "https://t.me/+31XlqHxWcfA0YWVh"},
+      //   ],
+      //   [
+      //     { text: "[Game vendas]", url: "https://t.me/+6jF7Q3oL8-BjMjkx"},
+      //     { text: "[Móvel vendas]", url: "https://t.me/+MlaeVILmRR84MzNh"},
+      //     { text: "[Utilidade Doméstica vendas]", url: "https://t.me/+UKKjuOU36ylmZjhh"},
+      //   ],
+      //   [
+      //     {text: "[Material Escolar vendas]", url: "https://t.me/+xPsCdljf7FtkZTYx"},
+      //     { text: "[Tudo Pet] vendas",  url: "https://t.me/+ycJBfYd0ub84ZjZh" },
+      //     { text: "[Passagens Aéreas] vendas",  url: "https://t.me/+URd2yP1W80o3MTQx" },
+      //  ],
+      //   [
+      //     { text: "[Ferramenta] vendas",  url: "https://t.me/+B6SXBxIhSxczYzNh" },
+      //     { text: "[Mat. Construção] vendas",  url: "https://t.me/+Kh9k9ns1hSkzMjAx" },
+      //     { text: "[Alimento] vendas", url: "https://t.me/+zDzOkCOcJAg0Mzdh" },
+      //   ],
+      //   [
+      //     { text: "[Joia e Bijuteria] vendas", url: "https://t.me/+xb8RlYsKF31mNWQx" },
+      //     { text: "[Vestuario] vendas", url: "https://t.me/+1WFdW9QGintlNGMx" },
+      //     { text: "[Instr. musicais] vendas", url: "https://t.me/+voNtAgBdh942MTkx" },
+      //   ],
       ],        
       },
     };

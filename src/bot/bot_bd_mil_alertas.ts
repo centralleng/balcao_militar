@@ -13,10 +13,10 @@ const bot = new TelegramBot(token_bot, { polling: true });
 class Bot_bd_mil_alertas {
   static execute() {
 
-            // Função para criar botões inline
+// Função para criar botões inline
 function createInlineKeyboard(userTelegramId:any) {
   return {
-    inline_keyboard: [                                                               
+    inline_keyboard: [                                                            
       [
         {
           text: 'Quero Vender',
@@ -35,101 +35,15 @@ function createInlineKeyboard(userTelegramId:any) {
       return {
       reply_markup: {
         inline_keyboard: [
-          [
-            { text: "[EB] vendas", callback_data: `CADASTRO_[EB]_${id}_APAGAR-01` },
-            { text: "[MB] vendas", callback_data: `CADASTRO_[MB]_${id}_APAGAR-01` },
-            { text: "[FAB] vendas", callback_data: `CADASTRO_[FAB]_${id}_APAGAR-01` },
-          ],
-          [
-            { text: "[PMERJ] vendas", callback_data: `CADASTRO_[PMERJ]_${id}_APAGAR-01` },
-            { text: "[CBMERJ] vendas", callback_data: `CADASTRO_[CBMERJ]_${id}_APAGAR-01` },
-            { text: "[PMDF] vendas", callback_data: `CADASTRO_[PMDF]_${id}_APAGAR-01` },
-          ],
-          [
-            { text: "[CBMDF] vendas", callback_data: `CADASTRO_[CBMDF]_${id}_APAGAR-01` },
-            { text: "[PMESP] vendas", callback_data: `CADASTRO_[PMESP]_${id}_APAGAR-01` },
-            { text: "[CBMESP] vendas", callback_data: `CADASTRO_[CBMESP]_${id}_APAGAR-01` },
-          ],
-          [
-            { text: "[PMMG] vendas", callback_data: `CADASTRO_[PMMG]_${id}_APAGAR-01` },
-            { text: "[CBMMG] vendas", callback_data: `CADASTRO_[CBMMG]_${id}_APAGAR-01` },
-            { text: "[PMGO] vendas", callback_data: `CADASTRO_[PMGO]_${id}_APAGAR-01` },
-          ],
-          [
-            { text: "[CBMGO] vendas", callback_data: `CADASTRO_[CBMGO]_${id}_APAGAR-01` },
-            { text: "[PMPR] vendas", callback_data: `CADASTRO_[PMPR]_${id}_APAGAR-01` },
-            { text: "[CBMPR] vendas", callback_data: `CADASTRO_[CBMPR]_${id}_APAGAR-01` },
-          ],
-          [
-            { text: "[PMSC] vendas", callback_data: `CADASTRO_[PMSC]_${id}_APAGAR-01` },
-            { text: "[CBMSC] vendas", callback_data: `CADASTRO_[CBMSC]_${id}_APAGAR-01` },
-            { text: "[BRIGADA MILITAR] vendas", callback_data: `CADASTRO_[BRIGADA-MILITAR]_${id}_APAGAR-01` },
-          ],
-          [
-            { text: "[CBMRS] vendas", callback_data: `CADASTRO_[CBMRS]_${id}_APAGAR-01` },
-            { text: "[PMMS] vendas", callback_data: `CADASTRO_[PMMS]_${id}_APAGAR-01` },
-            { text: "[CBMMS] vendas", callback_data: `CADASTRO_[CBMMS]_${id}_APAGAR-01` },
-          ],
-          [
-            { text: "[PMMT] vendas", callback_data: `CADASTRO_[PMMT]_${id}_APAGAR-01` },
-            { text: "[CBMMT] vendas", callback_data: `CADASTRO_[CBMMT]_${id}_APAGAR-01` },
-            { text: "[PMBA] vendas", callback_data: `CADASTRO_[PMBA]_${id}_APAGAR-01` },
-          ],
-          [
-            { text: "[CBMBA] vendas", callback_data: `CADASTRO_[CBMBA]_${id}_APAGAR-01` },
-            { text: "[PMES] vendas", callback_data: `CADASTRO_[PMES]_${id}_APAGAR-01` },
-            { text: "[CBMES] vendas", callback_data: `CADASTRO_[CBMES]_${id}_APAGAR-01` },
-          ],
-          [
-            { text: "[PMAL] vendas", callback_data: `CADASTRO_[PMAL]_${id}_APAGAR-01` },
-            { text: "[CBMAL] vendas", callback_data: `CADASTRO_[CBMAL]_${id}_APAGAR-01` },
-            { text: "[PMSE] vendas", callback_data: `CADASTRO_[PMSE]_${id}_APAGAR-01` },
-          ],
-          [
-            { text: "[CBMSE] vendas", callback_data: `CADASTRO_[CBMSE]_${id}_APAGAR-01` },
-            { text: "[PMPE] vendas", callback_data: `CADASTRO_[PMPE]_${id}_APAGAR-01` },
-            { text: "[CBMPE] vendas", callback_data: `CADASTRO_[CBMPE]_${id}_APAGAR-01` },
-          ],
-          [
-            { text: "[PMRN] vendas", callback_data: `CADASTRO_[PMRN]_${id}_APAGAR-01` },
-            { text: "[CBMRN] vendas", callback_data: `CADASTRO_[CBMRN]_${id}_APAGAR-01` },
-            { text: "[PMCE] vendas", callback_data: `CADASTRO_[PMCE]_${id}_APAGAR-01` },
-          ],
-          [
-            { text: "[CBMCE] vendas", callback_data: `CADASTRO_[CBMCE]_${id}_APAGAR-01` },
-            { text: "[PMPI] vendas", callback_data: `CADASTRO_[PMPI]_${id}_APAGAR-01` },
-            { text: "[CBMPI] vendas", callback_data: `CADASTRO_[CBMPI]_${id}_APAGAR-01` },
-          ],
-          [
-            { text: "[PMMA] vendas", callback_data: `CADASTRO_[PMMA]_${id}_APAGAR-01` },
-            { text: "[CBMMA] vendas", callback_data: `CADASTRO_[CBMMA]_${id}_APAGAR-01` },
-            { text: "[PMAM] vendas", callback_data: `CADASTRO_[PMAM]_${id}_APAGAR-01` },
-          ],
-          [
-            { text: "[CBMAM] vendas", callback_data: `CADASTRO_[CBMAM]_${id}_APAGAR-01` },
-            { text: "[PMAP] vendas", callback_data: `CADASTRO_[PMAP]_${id}_APAGAR-01` },
-            { text: "[CBMAP] vendas", callback_data: `CADASTRO_[CBMAP]_${id}_APAGAR-01` },
-          ],
-          [
-            { text: "[PMRO] vendas", callback_data: `CADASTRO_[PMRO]_${id}_APAGAR-01` },
-            { text: "[CBMRO] vendas", callback_data: `CADASTRO_[CBMRO]_${id}_APAGAR-01` },
-            { text: "[PMTO] vendas", callback_data: `CADASTRO_[PMTO]_${id}_APAGAR-01` },
-          ],
-          [
-            { text: "[CBMTO] vendas", callback_data: `CADASTRO_[CBMTO]_${id}_APAGAR-01` },
-            { text: "[PMAC] vendas", callback_data: `CADASTRO_[PMAC]_${id}_APAGAR-01` },
-            { text: "[CBMAC] vendas", callback_data: `CADASTRO_[CBMAC]_${id}_APAGAR-01` },
-          ],
-          [
-            { text: "[PMPA] vendas", callback_data: `CADASTRO_[PMPA]_${id}_APAGAR-01` },
-            { text: "[CBMPA] vendas", callback_data: `CADASTRO_[CBMPA]_${id}_APAGAR-01` },
-            { text: "[PMRR] vendas", callback_data: `CADASTRO_[PMRR]_${id}_APAGAR-01` },
-          ],
-          [
-            { text: "[CBMRR] vendas", callback_data: `CADASTRO_[CBMRR]_${id}_APAGAR-01` },
-            { text: "[PMPB] vendas", callback_data: `CADASTRO_[PMPB]_${id}_APAGAR-01` },
-            { text: "[CBMPB] vendas", callback_data: `CADASTRO_[CBMPB]_${id}_APAGAR-01` },
-          ],          
+        [
+            { text: "[EB] vendas", callback_data: `CADASTRO_[EB]_${id}_APAGAR-01`},
+            { text: "[MB] vendas", callback_data: `CADASTRO_[MB]_${id}_APAGAR-01`},
+            { text: "[FAB] vendas", callback_data: `CADASTRO_[FAB]_${id}_APAGAR-01`},
+        ],
+        [
+            { text: "[PM] vendas", callback_data: `CADASTRO_[PM]_${id}_APAGAR-01`},
+            { text: "[BM] vendas", callback_data: `CADASTRO_[BM]_${id}_APAGAR-01`},
+        ],       
         ],
       },
     }
@@ -140,55 +54,80 @@ function createInlineKeyboard(userTelegramId:any) {
       reply_markup: {
         inline_keyboard: [
           [
-            { text: "[Uniforme] vendas", callback_data: `CADASTRO_[Uniforme]_${id}` },
-            { text: "[Veículo] vendas", callback_data: `CADASTRO_[Veiculo]_${id}` },
-            { text: "[Serviço] vendas", callback_data: `CADASTRO_[Servico]_${id}` },
+            { text: "[Serviços vendas]", callback_data: `CADASTRO_[Servicos]_${id}`},
+            { text: "[Smartphone vendas]", callback_data: `CADASTRO_[Smartphone]_${id}`},
+            { text: "[Eletrônicos vendas]", callback_data: `CADASTRO_[Eletronicos]_${id}`},
+          ],        
+          [
+            { text: "[Escolar vendas]", callback_data: `CADASTRO_[Escolar]_${id}`},
+            { text: "[Diversos vendas]", callback_data: `CADASTRO_[Diversos]_${id}`},
+            { text: "[Veículo vendas]", callback_data: `CADASTRO_[Veiculo]_${id}`},
           ],
           [
-            { text: "[Smartphone] vendas", callback_data: `CADASTRO_[Smartphone]_${id}` },
-            { text: "[Acessório] vendas", callback_data: `CADASTRO_[Acessorio]_${id}` },
-            { text: "[Eletrodoméstico] vendas", callback_data: `CADASTRO_[Eletrodomestico]_${id}` },
+            { text: "[Milhas vendas]", callback_data: `CADASTRO_[Milhas]_${id}`},
+            { text: "[Cripto vendas]", callback_data: `CADASTRO_[Cripto]_${id}`},
+            { text: "[Câmbio vendas]", callback_data: `CADASTRO_[Cambio]_${id}`},
           ],
           [
-            { text: "[Automotivo] vendas", callback_data: `CADASTRO_[Automotivo]_${id}` },
-            { text: "[Audio] vendas", callback_data: `CADASTRO_[Audio]_${id}` },
-            { text: "[Eletroportátil] vendas", callback_data: `CADASTRO_[Eletroportatil]_${id}` },
+            { text: "[Pet vendas]", callback_data: `CADASTRO_[Pet]_${id}`},
+            { text: "[Casa vendas]", callback_data: `CADASTRO_[Casa]_${id}`},
+            { text: "[Imóvel vendas]", callback_data: `CADASTRO_[Imovel]_${id}`},
           ],
-          [
-            { text: "[Ferramenta] vendas", callback_data: `CADASTRO_[Ferramenta]_${id}` },
-            { text: "[Bebida] vendas", callback_data: `CADASTRO_[Bebida]_${id}` },
-            { text: "[Bebê] vendas", callback_data: `CADASTRO_[Bebe]_${id}` },
+          [     
+            { text: "[Infantil vendas]", callback_data: `CADASTRO_[Infantil]_${id}`},
+            { text: "[Mulher vendas]", callback_data: `CADASTRO_[Mulher]_${id}`},
+            { text: "[Passagens Aéreas vendas]", callback_data: `CADASTRO_[Passagens]_${id}`},
           ],
-          [
-            { text: "[Esporte] vendas", callback_data: `CADASTRO_[Esporte]_${id}` },
-            { text: "[Smart TV] vendas", callback_data: `CADASTRO_[Smart-TV]_${id}` },
-            { text: "[Ar e Ventilação] vendas", callback_data: `CADASTRO_[Ar-e-Ventilacao]_${id}` },
-          ],
-          [
-            { text: "[Imóvel] vendas", callback_data: `CADASTRO_[Imovel]_${id}_APAGAR` },
-            { text: "[Brinquedo] vendas", callback_data: `CADASTRO_[Brinquedo]_${id}_APAGAR` },
-            { text: "[Informática] vendas", callback_data: `CADASTRO_[Informatica]_${id}_APAGAR` },
-          ],
-          [
-            { text: "[Game] vendas", callback_data: `CADASTRO_[Game]_${id}_APAGAR` },
-            { text: "[Móvel] vendas", callback_data: `CADASTRO_[Movel]_${id}_APAGAR` },
-            { text: "[Utilidade Doméstica] vendas", callback_data: `CADASTRO_[Utilidade-Domestica]_${id}_APAGAR` },
-          ],
-          [
-            { text: "[Material Escolar] vendas", callback_data: `CADASTRO_[Material-Escolar]_${id}_APAGAR` },
-            { text: "[Passagens Aéreas] vendas", callback_data: `CADASTRO_[Passagens-Aereas]_${id}_APAGAR` },
-            { text: "[Tudo Pet] vendas", callback_data: `CADASTRO_[Tudo-Pet]_${id}_APAGAR` },
-          ],
-          [
-            { text: "[Beleza e Saúde] vendas", callback_data: `CADASTRO_[Beleza-Saude]_${id}_APAGAR` },
-            { text: "[Mat. Construção] vendas", callback_data: `CADASTRO_[Mat-Construcao]_${id}_APAGAR` },
-            { text: "[Alimento] vendas", callback_data: `CADASTRO_[Alimento]_${id}_APAGAR` },
-          ],
-          [
-            { text: "[Joia e Bijuteria] vendas", callback_data: `CADASTRO_[Joia-Bijuteria]_${id}_APAGAR` },
-            { text: "[Vestuario] vendas", callback_data: `CADASTRO_[Vestuario]_${id}_APAGAR` },
-            { text: "[Instr. musicais] vendas", callback_data: `CADASTRO_[Instr-musicais]_${id}_APAGAR` },
-          ],       
+          // [
+          //   { text: "[Uniforme] vendas", callback_data: `CADASTRO_[Uniforme]_${id}` },
+          //   { text: "[Veículo] vendas", callback_data: `CADASTRO_[Veiculo]_${id}` },
+          //   { text: "[Serviço] vendas", callback_data: `CADASTRO_[Servico]_${id}` },
+          // ],
+          // [
+          //   { text: "[Smartphone] vendas", callback_data: `CADASTRO_[Smartphone]_${id}` },
+          //   { text: "[Acessório] vendas", callback_data: `CADASTRO_[Acessorio]_${id}` },
+          //   { text: "[Eletrodoméstico] vendas", callback_data: `CADASTRO_[Eletrodomestico]_${id}` },
+          // ],
+          // [
+          //   { text: "[Automotivo] vendas", callback_data: `CADASTRO_[Automotivo]_${id}` },
+          //   { text: "[Audio] vendas", callback_data: `CADASTRO_[Audio]_${id}` },
+          //   { text: "[Eletroportátil] vendas", callback_data: `CADASTRO_[Eletroportatil]_${id}` },
+          // ],
+          // [
+          //   { text: "[Ferramenta] vendas", callback_data: `CADASTRO_[Ferramenta]_${id}` },
+          //   { text: "[Bebida] vendas", callback_data: `CADASTRO_[Bebida]_${id}` },
+          //   { text: "[Bebê] vendas", callback_data: `CADASTRO_[Bebe]_${id}` },
+          // ],
+          // [
+          //   { text: "[Esporte] vendas", callback_data: `CADASTRO_[Esporte]_${id}` },
+          //   { text: "[Smart TV] vendas", callback_data: `CADASTRO_[Smart-TV]_${id}` },
+          //   { text: "[Ar e Ventilação] vendas", callback_data: `CADASTRO_[Ar-e-Ventilacao]_${id}` },
+          // ],
+          // [
+          //   { text: "[Imóvel] vendas", callback_data: `CADASTRO_[Imovel]_${id}_APAGAR` },
+          //   { text: "[Brinquedo] vendas", callback_data: `CADASTRO_[Brinquedo]_${id}_APAGAR` },
+          //   { text: "[Informática] vendas", callback_data: `CADASTRO_[Informatica]_${id}_APAGAR` },
+          // ],
+          // [
+          //   { text: "[Game] vendas", callback_data: `CADASTRO_[Game]_${id}_APAGAR` },
+          //   { text: "[Móvel] vendas", callback_data: `CADASTRO_[Movel]_${id}_APAGAR` },
+          //   { text: "[Utilidade Doméstica] vendas", callback_data: `CADASTRO_[Utilidade-Domestica]_${id}_APAGAR` },
+          // ],
+          // [
+          //   { text: "[Material Escolar] vendas", callback_data: `CADASTRO_[Material-Escolar]_${id}_APAGAR` },
+          //   { text: "[Passagens Aéreas] vendas", callback_data: `CADASTRO_[Passagens-Aereas]_${id}_APAGAR` },
+          //   { text: "[Tudo Pet] vendas", callback_data: `CADASTRO_[Tudo-Pet]_${id}_APAGAR` },
+          // ],
+          // [
+          //   { text: "[Beleza e Saúde] vendas", callback_data: `CADASTRO_[Beleza-Saude]_${id}_APAGAR` },
+          //   { text: "[Mat. Construção] vendas", callback_data: `CADASTRO_[Mat-Construcao]_${id}_APAGAR` },
+          //   { text: "[Alimento] vendas", callback_data: `CADASTRO_[Alimento]_${id}_APAGAR` },
+          // ],
+          // [
+          //   { text: "[Joia e Bijuteria] vendas", callback_data: `CADASTRO_[Joia-Bijuteria]_${id}_APAGAR` },
+          //   { text: "[Vestuario] vendas", callback_data: `CADASTRO_[Vestuario]_${id}_APAGAR` },
+          //   { text: "[Instr. musicais] vendas", callback_data: `CADASTRO_[Instr-musicais]_${id}_APAGAR` },
+          // ],       
         ],
       },
     }
