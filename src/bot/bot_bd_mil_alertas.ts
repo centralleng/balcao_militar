@@ -64,19 +64,19 @@ function createInlineKeyboard(userTelegramId:any) {
             { text: "[Veículo vendas]", callback_data: `CADASTRO_[Veiculo]_${id}`},
           ],
           [
-            { text: "[Milhas vendas]", callback_data: `CADASTRO_[Milhas]_${id}`},
-            { text: "[Cripto vendas]", callback_data: `CADASTRO_[Cripto]_${id}`},
-            { text: "[Câmbio vendas]", callback_data: `CADASTRO_[Cambio]_${id}`},
+            { text: "[Milhas]", callback_data: `CADASTRO_[Milhas]_${id}`},
+            { text: "[Cripto]", callback_data: `CADASTRO_[Cripto]_${id}`},
+            { text: "[Câmbio]", callback_data: `CADASTRO_[Cambio]_${id}`},
           ],
           [
-            { text: "[Pet vendas]", callback_data: `CADASTRO_[Pet]_${id}`},
-            { text: "[Casa vendas]", callback_data: `CADASTRO_[Casa]_${id}`},
-            { text: "[Imóvel vendas]", callback_data: `CADASTRO_[Imovel]_${id}`},
+            { text: "[Pet]", callback_data: `CADASTRO_[Pet]_${id}`},
+            { text: "[Casa]", callback_data: `CADASTRO_[Casa]_${id}`},
+            { text: "[Imóveis]", callback_data: `CADASTRO_[Imovel]_${id}`},
           ],
           [     
-            { text: "[Infantil vendas]", callback_data: `CADASTRO_[Infantil]_${id}`},
-            { text: "[Mulher vendas]", callback_data: `CADASTRO_[Mulher]_${id}`},
-            { text: "[Passagens Aéreas vendas]", callback_data: `CADASTRO_[Passagens]_${id}`},
+            { text: "[Infantil]", callback_data: `CADASTRO_[Infantil]_${id}`},
+            { text: "[Beleza e Saúde]", callback_data: `CADASTRO_[Beleza_Saude]_${id}`},
+            { text: "[Passagens Aéreas]", callback_data: `CADASTRO_[Passagens]_${id}`},
           ],
           // [
           //   { text: "[Uniforme] vendas", callback_data: `CADASTRO_[Uniforme]_${id}` },
