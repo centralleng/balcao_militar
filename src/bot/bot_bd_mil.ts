@@ -20,7 +20,7 @@ Fique atento (a) às regras abaixo:
 
 2) O cadastro da PRIMEIRA oferta de venda de CADA USUÁRIO será GRATUITA.
 
-3) Do segundo cadastro em diante, serão cobradas comissões de apenas 3% do valor total de casa oferra. Para veículos e venda de imóveis 0.1%. No tocante aos serviços a taxa é fixa de 3 (três) reais.
+3) Do segundo cadastro em diante, serão cobradas comissões de apenas 3% do valor total de casa oferta. Para veículos e venda de imóveis 0.1%. No tocante aos serviços a taxa é fixa de 3 (três) reais.
 
 4) As ofertas ficarão disponíveis no Balcão conforme abaixo:
 9.1 Serviços : 1 mês;
@@ -566,8 +566,6 @@ Qual sua instituição de origem?
       const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...');
       const messageId = msg_del.message_id.toString()
 
-      console.log(texto)
-
       const req = await prisma_db.users.findUnique({
         where:{id_telegram:id_telegram.toString()}
       }) 
@@ -748,23 +746,18 @@ Obs.: Colocar somente números.`);
               })
 
               const grupo = await prisma_db.grupos.findUnique({where:{type:req.instituicao}})
-
+             
               await bot.sendMessage(id_telegram,`      
 🚨 Para finizar o seu cadastro, CLIQUE no canal correspondente à sua Instituição de origem, logo abaixo. Ato contínuo, já dentro do canal da força, CLIQUE em pelo menos um dos canais de artigos civis de seu interesse. Eles se encontram numa mensagem prefixada nos respectivos canais das instituições. 🥳
 
 🚨 Atenção: não esqueça de criar o @username para realizar as operações dentro do Balcão. Caso não saiba, clique @BDMILSUPORTE_bot e digite o número do vídeo correspondente.
-`            ,);
-            await bot.sendMessage(id_telegram,``, {
-              reply_markup: {
-                inline_keyboard: [
-                [
-                  { text: req.instituicao, url: grupo?.link},
-                ],             
-              ],        
-              },
-            });
+`            ,{
+                reply_markup: {
+                  inline_keyboard: [[{ text: grupo?.type||'', url: grupo?.link }]],
+                },
+              });         
 
-            // await bot.sendMessage(id_telegram, `Canais de Artigos Civis`, artigos_civis);
+            await bot.sendMessage(id_telegram, `Canais de Artigos Civis`, artigos_civis);
 
             bot.deleteMessage(id_telegram, messageId)
               
