@@ -757,7 +757,7 @@ Obs.: Colocar somente números.`);
                 },
               });         
 
-            await bot.sendMessage(id_telegram, `Canais de Artigos Civis`, artigos_civis);
+            // await bot.sendMessage(id_telegram, `Canais de Artigos Civis`, artigos_civis);
 
             bot.deleteMessage(id_telegram, messageId)
               
