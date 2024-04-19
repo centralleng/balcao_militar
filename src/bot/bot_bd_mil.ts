@@ -20,7 +20,7 @@ Fique atento (a) às regras abaixo:
 
 2) O cadastro da PRIMEIRA oferta de venda de CADA USUÁRIO será GRATUITA.
 
-3) Do segundo cadastro em diante, serão cobradas comissões de apenas 3% do valor total de casa oferta. Para veículos e venda de imóveis 0.1%. No tocante aos serviços a taxa é fixa de 3 (três) reais.
+3) Do segundo cadastro em diante, serão cobradas comissões de apenas 3% do valor total de cada oferta. Para veículos e venda de imóveis 0.1%. No tocante aos serviços a taxa é fixa de 3 (três) reais.
 
 4) As ofertas ficarão disponíveis no Balcão conforme abaixo:
 9.1 Serviços : 1 mês;
