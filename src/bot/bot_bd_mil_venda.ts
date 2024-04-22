@@ -19,7 +19,7 @@ class Bot_bd_mil_venda {
   execute() {
     // Manipular callback_query
     this.bot.on("callback_query", async (msg: any) => {
-      // console.log(msg)
+      console.log(msg)
       const texto = msg.data;    
       const id_telegram = msg.message?.chat.id;
       const username = msg.message?.chat.username;
@@ -77,11 +77,13 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
           }
         }  
         
-        if (texto_split[0] === 'ENTREGA'){ // Listar todo os produtos cadastrados 
+        if (texto_split[0] === 'ENTREGA'){ 
 
-          const verific_produto = await prisma_db.produtos.findUnique({where:{id:parseInt(texto_split[2])}})
+          console.log(texto_split)
+
+          const verific_produto = await prisma_db.produtos.findUnique({where:{id:parseInt(texto_split[2])}})        
   
-          if(verific_produto?.entrega==="SIM"||verific_produto?.entrega==="NÃO"){
+          if(verific_produto?.entrega==="SIM"||verific_produto?.entrega==="NÃO"||verific_produto?.entrega==="A NEGOCIAR"){
             await this.bot.sendMessage(id_telegram, mensagens.finalizar_pruduto, botao.suporte);
               this.bot.deleteMessage(id_telegram, messageId)
               return
@@ -124,7 +126,7 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
                 }
               })
               
-              await this.bot.sendMessage(id_telegram, `Qual é a localização do produto? (Escreva cidade e estado)`, 
+              await this.bot.sendMessage(id_telegram, `Qual é a localização do produto? (Digite cidade e estado, tudo junto, conforme o modelo: CIDADE-UF)`, 
               {
                 reply_markup: {
                   inline_keyboard: [                     
@@ -517,6 +519,8 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
 
         if(texto_split[0] === 'CREDITO'){
 
+          console.log(texto_split)
+
           const valor_credito = user.creditos || 0
           const valor_pedido = parseInt(texto_split[1])          
 
@@ -868,7 +872,7 @@ Para garantir uma qualidade adequada, por favor envie uma imagem com dimensões 
                 })
   
                 await this.bot.sendMessage(id_telegram, `
-Qual é a localização do produto? (Digite cidade e estado conforme o modelo: CIDADE-UF)
+Qual é a localização do produto? (Digite cidade e estado, tudo junto, conforme o modelo: CIDADE-UF)
 `, 
                 {
                   reply_markup: {
@@ -911,7 +915,7 @@ Qual é a localização do produto? (Digite cidade e estado conforme o modelo: C
             }
 
             if(!verificarFormatoCidadeUF(texto)){
-            await this.bot.sendMessage(id_telegram, `⚠️ Digite cidade e estado conforme o modelo: CIDADE - UF`);
+            await this.bot.sendMessage(id_telegram, `⚠️ Digite cidade e estado conforme o modelo: CIDADE-UF`);
             this.bot.deleteMessage(id_telegram, messageId)
               return
             }  

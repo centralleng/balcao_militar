@@ -179,29 +179,29 @@ class Botoes {
         reply_markup: {
             inline_keyboard: [
                 [
-                    { text: "[Serviços]", callback_data: "CADASTRO_[Servicos]_APAGAR"},
-                    { text: "[Smartphone]", callback_data: "CADASTRO_[Smartphone]_APAGAR"},
-                    { text: "[Eletrônicos]", callback_data: "CADASTRO_[Eletronicos]_APAGAR"},
+                    { text: "[Serviços] vendas", callback_data: "CADASTRO_[Servicos]_APAGAR"},
+                    { text: "[Smartphone] vendas", callback_data: "CADASTRO_[Smartphone]_APAGAR"},
+                    { text: "[Eletrônicos] vendas", callback_data: "CADASTRO_[Eletronicos]_APAGAR"},
                   ],        
                   [
-                    { text: "[Escolar]", callback_data: "CADASTRO_[Escolar]_APAGAR"},
-                    { text: "[Diversos]", callback_data: "CADASTRO_[Diversos]_APAGAR"},
-                    { text: "[Veículo]", callback_data: "CADASTRO_[Veiculo]_APAGAR"},
+                    { text: "[Escolar] vendas", callback_data: "CADASTRO_[Escolar]_APAGAR"},
+                    { text: "[Diversos] vendas", callback_data: "CADASTRO_[Diversos]_APAGAR"},
+                    { text: "[Veículo] vendas", callback_data: "CADASTRO_[Veiculo]_APAGAR"},
                   ],
                   [
-                    { text: "[Milhas]", callback_data: "CADASTRO_[Milhas]_APAGAR"},
-                    { text: "[Cripto]", callback_data: "CADASTRO_[Cripto]_APAGAR"},
-                    { text: "[Câmbio]", callback_data: "CADASTRO_[Cambio]_APAGAR"},
+                    { text: "[Milhas] vendas", callback_data: "CADASTRO_[Milhas]_APAGAR"},
+                    { text: "[Cripto] vendas", callback_data: "CADASTRO_[Cripto]_APAGAR"},
+                    { text: "[Câmbio] vendas", callback_data: "CADASTRO_[Cambio]_APAGAR"},
                   ],
                   [
-                    { text: "[Pet]", callback_data: "CADASTRO_[Pet]_APAGAR"},
-                    { text: "[Casa]", callback_data: "CADASTRO_[Casa]_APAGAR"},
-                    { text: "[Imóveis]", callback_data: "CADASTRO_[Imovel]_APAGAR"},
+                    { text: "[Pet] vendas", callback_data: "CADASTRO_[Pet]_APAGAR"},
+                    { text: "[Casa] vendas", callback_data: "CADASTRO_[Casa]_APAGAR"},
+                    { text: "[Imóveis] vendas", callback_data: "CADASTRO_[Imovel]_APAGAR"},
                   ],
                   [     
-                    { text: "[Infantil]", callback_data: "CADASTRO_[Infantil]_APAGAR"},
-                    { text: "[Beleza e Saúde]", callback_data: "CADASTRO_[Beleza_Saude]_APAGAR"},
-                    { text: "[Passagens Aéreas]", callback_data: "CADASTRO_[Passagens]_APAGAR"},
+                    { text: "[Infantil] vendas", callback_data: "CADASTRO_[Infantil]_APAGAR"},
+                    { text: "[Beleza e Saúde] vendas", callback_data: "CADASTRO_[Beleza-Saude]_APAGAR"},
+                    { text: "[Passagens Aéreas] vendas", callback_data: "CADASTRO_[Passagens-Aereas]_APAGAR"},
                   ],
 
                 // [

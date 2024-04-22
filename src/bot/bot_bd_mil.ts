@@ -294,9 +294,9 @@ Boas negociações!
       reply_markup: {
         inline_keyboard: [
         [
-          { text: "[EB vendas]", url: "https://t.me/+tEE2IKh78Nk0N2Y5"},
-          { text: "[MB vendas]", url: "https://t.me/+22FaI9_9sHQ0YTUx" },
-          { text: "[FAB vendas]", url: "https://t.me/+Y1pkY-yAViFiOWRh"},
+          { text: "[EB] vendas", url: "https://t.me/+tEE2IKh78Nk0N2Y5"},
+          { text: "[MB] vendas", url: "https://t.me/+22FaI9_9sHQ0YTUx" },
+          { text: "[FAB] vendas", url: "https://t.me/+Y1pkY-yAViFiOWRh"},
         ],
         [
           { text: "[PM] vendas", url: "https://t.me/+wJd2Kfv4IOs5ZWFh" },
@@ -406,29 +406,29 @@ Boas negociações!
       reply_markup: {
         inline_keyboard: [
         [
-          { text: "[Serviços]", url: "https://t.me/+0ni_n2uu5wQwNDYx"},
-          { text: "[Smartphone]", url: "https://t.me/+oTtGpdSVjZJjMzkx"},
-          { text: "[Eletrônicos]", url: "https://t.me/+lafHsTpLYLM0NTgx"}, // Eletrodoméstico
+          { text: "[Serviços] vendas", url: "https://t.me/+0ni_n2uu5wQwNDYx"},
+          { text: "[Smartphone] vendas", url: "https://t.me/+oTtGpdSVjZJjMzkx"},
+          { text: "[Eletrônicos] vendas", url: "https://t.me/+lafHsTpLYLM0NTgx"}, // Eletrodoméstico
         ],        
         [
-          { text: "[Escolar]", url: "https://t.me/+07bigcW1r4syMjRh"}, // Uniforme
-          { text: "[Diversos]", url: "https://t.me/+jV7ioExY8XRkMGYx"},
-          { text: "[Veículo]", url: "https://t.me/+CcK6KcqceLRkZjhh" },
+          { text: "[Escolar] vendas", url: "https://t.me/+07bigcW1r4syMjRh"}, // Uniforme
+          { text: "[Diversos] vendas", url: "https://t.me/+jV7ioExY8XRkMGYx"},
+          { text: "[Veículo] vendas", url: "https://t.me/+CcK6KcqceLRkZjhh" },
         ],
         [
-          { text: "[Milhas]", url: "https://t.me/+uAO-TjuuXUUyZjgx"}, // Novo
-          { text: "[Cripto]", url: "https://t.me/+YPkZ0rHEHdthNmIx"}, // Novo
-          { text: "[Câmbio]", url: "https://t.me/+ECfenxUMiZs2MTMx" }, // Novo
+          { text: "[Milhas] vendas", url: "https://t.me/+uAO-TjuuXUUyZjgx"}, // Novo
+          { text: "[Cripto] vendas", url: "https://t.me/+YPkZ0rHEHdthNmIx"}, // Novo
+          { text: "[Câmbio] vendas", url: "https://t.me/+ECfenxUMiZs2MTMx" }, // Novo
         ],
         [
-          { text: "[Pet]", url: "https://t.me/+_1pAWrcE20c4MDUx"}, // Novo
-          { text: "[Casa]", url: "https://t.me/+PtB2vbBLKxg1MjYx"}, // Novo
-          { text: "[Imóveis]", url: "https://t.me/+dTc2DriyCCZmNDUx"},
+          { text: "[Pet] vendas", url: "https://t.me/+_1pAWrcE20c4MDUx"}, // Novo
+          { text: "[Casa] vendas", url: "https://t.me/+PtB2vbBLKxg1MjYx"}, // Novo
+          { text: "[Imóveis] vendas", url: "https://t.me/+dTc2DriyCCZmNDUx"},
         ],
         [     
-          { text: "[Infantil]", url: "https://t.me/+sEunOn7qodJhMWYx"}, // Brinquedo
-          { text: "[Beleza e Saúde]", url: "https://t.me/+OPBOzQcBuWFjNjIx"}, // Novo
-          { text: "[Passagens Aéreas]", url: "https://t.me/+I-H1x2hOBQVkMmQ5"}, // Novo
+          { text: "[Infantil] vendas", url: "https://t.me/+sEunOn7qodJhMWYx"}, // Brinquedo
+          { text: "[Beleza e Saúde] vendas", url: "https://t.me/+OPBOzQcBuWFjNjIx"}, // Novo
+          { text: "[Passagens Aéreas] vendas", url: "https://t.me/+I-H1x2hOBQVkMmQ5"}, // Novo
         ],
       //   [
       //     { text: "[Serviço vendas]", url: "https://t.me/+0ni_n2uu5wQwNDYx"},

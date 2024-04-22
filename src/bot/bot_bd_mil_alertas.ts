@@ -75,8 +75,8 @@ function createInlineKeyboard(userTelegramId:any) {
           ],
           [     
             { text: "[Infantil]", callback_data: `CADASTRO_[Infantil]_${id}`},
-            { text: "[Beleza e Saúde]", callback_data: `CADASTRO_[Beleza_Saude]_${id}`},
-            { text: "[Passagens Aéreas]", callback_data: `CADASTRO_[Passagens]_${id}`},
+            { text: "[Beleza e Saúde]", callback_data: `CADASTRO_[Beleza-Saude]_${id}`},
+            { text: "[Passagens Aéreas]", callback_data: `CADASTRO_[Passagens-Aereas]_${id}`},
           ],
           // [
           //   { text: "[Uniforme] vendas", callback_data: `CADASTRO_[Uniforme]_${id}` },
@@ -264,7 +264,7 @@ function createInlineKeyboard(userTelegramId:any) {
 
             if(texto_split[0]==='SIM'){
 
-            await bot.sendMessage(id_telegram, ` Qual é a localização do produto? (Digite cidade e estado conforme o modelo: CIDADE-UF)`);
+            await bot.sendMessage(id_telegram, `Qual é a localização do produto? (Digite cidade e estado, tudo junto, conforme o modelo: CIDADE-UF)`);
             bot.deleteMessage(id_telegram, messageId)
 
             }   
