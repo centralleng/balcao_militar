@@ -41,6 +41,8 @@ if(pedido){
         ],
       };
     }
+
+    console.log(pedido.users.id_telegram)
   
     try {
       // Enviar msg para o vendedor 
@@ -50,7 +52,7 @@ if(pedido){
         text: `
 ✅ Seus créditos foram atualizados com sucesso
 
-Saldo atual: ${(users_db.creditos || 0 / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+Saldo atual: ${((users_db.creditos||0) / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
 `,
           reply_markup: enviarMsg(pedido?.produto?.id),
           });
