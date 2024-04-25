@@ -55,29 +55,35 @@ function createInlineKeyboard(userTelegramId:any) {
         inline_keyboard: [
           [
             { text: `[Serviços] vendas`, callback_data: `CADASTRO_[Servicos]_${id}`},
+          ],        
+          [
             { text: `[Smartphone] vendas`, callback_data: `CADASTRO_[Smartphone]_${id}`},
             { text: `[Eletrônicos] vendas`, callback_data: `CADASTRO_[Eletronicos]_${id}`},
-          ],        
+          ],
           [
             { text: `[Escolar] vendas`, callback_data: `CADASTRO_[Escolar]_${id}`},
             { text: `[Diversos] vendas`, callback_data: `CADASTRO_[Diversos]_${id}`},
-            { text: `[Veículo] vendas`, callback_data: `CADASTRO_[Veiculo]_${id}`},
           ],
           [
+            { text: `[Veículo] vendas`, callback_data: `CADASTRO_[Veiculo]_${id}`},
             { text: `[Milhas] vendas`, callback_data: `CADASTRO_[Milhas]_${id}`},
+          ],
+          [
             { text: `[Cripto] vendas`, callback_data: `CADASTRO_[Cripto]_${id}`},
             { text: `[Câmbio] vendas`, callback_data: `CADASTRO_[Cambio]_${id}`},
           ],
           [
             { text: `[Pet] vendas`, callback_data: `CADASTRO_[Pet]_${id}`},
             { text: `[Casa] vendas`, callback_data: `CADASTRO_[Casa]_${id}`},
-            { text: `[Imóveis] vendas`, callback_data: `CADASTRO_[Imovel]_${id}`},
           ],
           [     
+            { text: `[Imóveis] vendas`, callback_data: `CADASTRO_[Imovel]_${id}`},
             { text: `[Infantil] vendas`, callback_data: `CADASTRO_[Infantil]_${id}`},
+          ],
+          [
             { text: `[Beleza e Saúde] vendas`, callback_data: `CADASTRO_[Beleza-Saude]_${id}`},
             { text: `[Passagens Aéreas] vendas`, callback_data: `CADASTRO_[Passagens-Aereas]_${id}`},
-          ],
+          ]
           // [
           //   { text: "[Uniforme] vendas", callback_data: `CADASTRO_[Uniforme]_${id}` },
           //   { text: "[Veículo] vendas", callback_data: `CADASTRO_[Veiculo]_${id}` },
@@ -176,8 +182,8 @@ function createInlineKeyboard(userTelegramId:any) {
                reply_markup: {
                  inline_keyboard: [
                     [
-                      { text: "SIM1", callback_data: `SIM1_${alerta.id}`},
-                      { text: "NÃO1", callback_data: `NAO1_${alerta.id}`},
+                      { text: "SIM", callback_data: `SIM1_${alerta.id}`},
+                      { text: "NÃO", callback_data: `NAO_${alerta.id}`},
                     ],
                   ],
                  }
@@ -268,6 +274,13 @@ function createInlineKeyboard(userTelegramId:any) {
             bot.deleteMessage(id_telegram, messageId)
 
             }   
+
+            if(texto_split[0]==='SIM2'){
+
+              await bot.sendMessage(id_telegram, `Digite sua CIDADE`);
+              bot.deleteMessage(id_telegram, messageId)
+  
+              } 
             
             if(texto_split[0]==='PALAVRA'){
 
@@ -307,11 +320,6 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
       const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...'); 
       const messageId = msg_del.message_id.toString()
 
-      ////////////////////////////////////////////////////////////////////////////////////////////
-      await bot.sendMessage(id_telegram, '⚠️ Estamos em manutenção'); 
-      bot.deleteMessage(id_telegram, messageId)
-
-
       const user = await prisma_db.users.findUnique({
         where: { id_telegram: id_telegram?.toString()},
         include:{
@@ -325,106 +333,145 @@ Entre em contato com o @bdmilbot para iniciar o processo de cadastro.
       if (user) {
         if (username) {
 
-//           if(user?.alerta.length>0){
+          if(user?.alerta.length>0){
 
-//             // Inicio das condicionais
+            // Inicio das condicionais
 
-//             if(!user?.alerta[0].status){
+            if(!user?.alerta[0].status){
 
-//               if(user?.alerta[0].palavra_chave===null){
+              if(user?.alerta[0].palavra_chave===null){
 
-//               const msg_alerta = texto?texto.split(' '):''
+              const msg_alerta = texto?texto.split(' '):''
 
-//               const alerta = await prisma_db.alertas.update({
-//                 where:{id: user?.alerta[0].id},
-//                 data:{
-//                     palavra_chave: msg_alerta[0]
-//                 }
-//               });
+              const alerta = await prisma_db.alertas.update({
+                where:{id: user?.alerta[0].id},
+                data:{
+                    palavra_chave: msg_alerta[0]
+                }
+              });
 
-//               await bot.sendMessage(id_telegram, `De qual canal você gostaria de receber alertas?`);
-//               await bot.sendMessage(id_telegram, `Artigos Militares`, artigos_militares(alerta.id));
-//               await bot.sendMessage(id_telegram, `Artigos Civis`, artigos_civis(alerta.id));
-//               bot.deleteMessage(id_telegram, messageId)
-//               return
-//               }
+              await bot.sendMessage(id_telegram, `De qual canal você gostaria de receber alertas?`);
+              await bot.sendMessage(id_telegram, `Artigos Militares`, artigos_militares(alerta.id));
+              await bot.sendMessage(id_telegram, `Artigos Civis`, artigos_civis(alerta.id));
+              bot.deleteMessage(id_telegram, messageId)
+              return
+              }
 
-//               if(user?.alerta[0].uf===null){
+              if(user?.alerta[0].uf===null){
 
-//                const uf_db = ["AC","AL","AM","AP","BA","CE","DF","ES","GO","MA","MG","MS","MT","PA","PB","PE","PI","PR","RJ","RN","RO","RR","RS","SC","SE","SP","TO"]
+               const uf_db = ["AC","AL","AM","AP","BA","CE","DF","ES","GO","MA","MG","MS","MT","PA","PB","PE","PI","PR","RJ","RN","RO","RR","RS","SC","SE","SP","TO"]
 
-//                const filter_uf = uf_db.filter((item)=> item === texto)
+               const filter_uf = uf_db.filter((item)=> item === texto.toUpperCase())
     
-//                 if(filter_uf.length<1){
-//                 await bot.sendMessage(id_telegram, `⚠️ Digite uma UF válida`);
-//                 bot.deleteMessage(id_telegram, messageId)
-//                   return
-//                 }  
+                if(filter_uf.length<1){
+                await bot.sendMessage(id_telegram, `⚠️ Digite uma UF válida`);
+                bot.deleteMessage(id_telegram, messageId)
+                  return
+                }  
 
-//                 await prisma_db.alertas.update({
-//                   where:{id: user.alerta[0].id},
-//                   data:{
-//                     uf: texto.toUpperCase(),
-//                     status:1,
-//                   }
-//                 })
+                const alerta_up = await prisma_db.alertas.update({
+                  where:{id: user.alerta[0].id},
+                  data:{
+                    uf: texto.toUpperCase(),
+                  }
+                })
 
-//                 await bot.sendMessage(id_telegram, `Alerta: ✅ ${user.alerta[0].palavra_chave} ✅ cadastrado com sucesso!`,
-//                  {
-//                 reply_markup: {
-//                   inline_keyboard: [
-//                     [
-//                       { text: "ALERTAS", callback_data: `ALERTAS`},
-//                       { text: "DELETAR", callback_data: `DELETAR_${user.alerta[0].id}`},
-//                     ],
-//                     [
-//                       { text: "CADASTRAR NOVA PALAVRA CHAVE", callback_data: `PALAVRA`},
-//                     ],
-//                   ],
-//                   }
-//                 },
-//                 );
-//                 bot.deleteMessage(id_telegram, messageId) 
-//                 return
-//               }
+                // await bot.sendMessage(id_telegram, `Alerta: ✅ ${user.alerta[0].palavra_chave} ✅ cadastrado com sucesso!`,
+                //  {
+                // reply_markup: {
+                //   inline_keyboard: [
+                //     [
+                //       { text: "ALERTAS", callback_data: `ALERTAS`},
+                //       { text: "DELETAR", callback_data: `DELETAR_${user.alerta[0].id}`},
+                //     ],
+                //     [
+                //       { text: "CADASTRAR NOVA PALAVRA CHAVE", callback_data: `PALAVRA`},
+                //     ],
+                //   ],
+                //   }
+                // },
+                // );
+                await bot.sendMessage(id_telegram, `Por favor, selecione 'SIM' ou 'NÃO' para determinar se deseja incluir Cidade nos alertas.`,
+                {
+                reply_markup: {
+                  inline_keyboard: [
+                     [
+                       { text: "SIM", callback_data: `SIM2_${alerta_up.id}`},
+                       { text: "NÃO", callback_data: `NAO_${alerta_up.id}`},
+                     ],
+                   ],
+                  }
+                 },
+                 );
+                bot.deleteMessage(id_telegram, messageId) 
+                return
+              }
 
-//             }else{
-//               await bot.sendMessage(id_telegram, `
-// 🚨 Você só poderá concluir um alertas por vez. Após 3 minutos de inatividade, TODO o processo será anulado, tendo que ser reiniciado.
+              if(user?.alerta[0].cidade===null){
 
-// Pressione CADASTRAR NOVA PALAVRA CHAVE para iniciar.
-//               `,
-//               {
-//                 reply_markup: {
-//                   inline_keyboard: [
-//                     [
-//                       { text: "CADASTRAR NOVA PALAVRA CHAVE", callback_data: `PALAVRA`},
-//                     ],
-//                   ],
-//                   }
-//                 },
-//               );
+                await prisma_db.alertas.update({
+                  where:{id: user.alerta[0].id},
+                  data:{
+                    cidade: texto.toUpperCase(),
+                    status: 1
+                  }
+                })
+
+                await bot.sendMessage(id_telegram, `Alerta: ✅ ${user.alerta[0].palavra_chave} ✅ cadastrado com sucesso!`,
+                 {
+                reply_markup: {
+                  inline_keyboard: [
+                    [
+                      { text: "ALERTAS", callback_data: `ALERTAS`},
+                      { text: "DELETAR", callback_data: `DELETAR_${user.alerta[0].id}`},
+                    ],
+                    [
+                      { text: "CADASTRAR NOVA PALAVRA CHAVE", callback_data: `PALAVRA`},
+                    ],
+                  ],
+                  }
+                },
+                );
+                bot.deleteMessage(id_telegram, messageId)
+              }
+
+            }else{
+              await bot.sendMessage(id_telegram, `
+🚨 Você só poderá concluir um alertas por vez. Após 3 minutos de inatividade, TODO o processo será anulado, tendo que ser reiniciado.
+
+Pressione CADASTRAR NOVA PALAVRA CHAVE para iniciar.
+              `,
+              {
+                reply_markup: {
+                  inline_keyboard: [
+                    [
+                      { text: "CADASTRAR NOVA PALAVRA CHAVE", callback_data: `PALAVRA`},
+                    ],
+                  ],
+                  }
+                },
+              );
          
-//               bot.deleteMessage(id_telegram, messageId)
-//               }
-//           }else{
-//             await bot.sendMessage(id_telegram, `
-// 🚨 Você só poderá concluir um alertas por vez. Após 3 minutos de inatividade, TODO o processo será anulado, tendo que ser reiniciado.
+              bot.deleteMessage(id_telegram, messageId)
+              }
+          }else{
+            await bot.sendMessage(id_telegram, `
+🚨 Você só poderá concluir um alertas por vez. Após 3 minutos de inatividade, TODO o processo será anulado, tendo que ser reiniciado.
 
-// Pressione CADASTRAR NOVA PALAVRA CHAVE para iniciar.
-//             `,
-//             {
-//               reply_markup: {
-//                 inline_keyboard: [
-//                    [
-//                      { text: "CADASTRAR NOVA PALAVRA CHAVE", callback_data: `PALAVRA`},
-//                    ],
-//                  ],
-//                 }
-//                },
-//             ); 
-//           bot.deleteMessage(id_telegram, messageId)
-//           }
+Pressione CADASTRAR NOVA PALAVRA CHAVE para iniciar.
+            `,
+            {
+              reply_markup: {
+                inline_keyboard: [
+                   [
+                     { text: "CADASTRAR NOVA PALAVRA CHAVE", callback_data: `PALAVRA`},
+                   ],
+                 ],
+                }
+               },
+            ); 
+          bot.deleteMessage(id_telegram, messageId)
+          }
 
         }else{
           // Melhorar msg
