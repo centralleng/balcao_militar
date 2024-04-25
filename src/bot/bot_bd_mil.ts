@@ -406,29 +406,59 @@ Boas negociações!
       reply_markup: {
         inline_keyboard: [
         [
-          { text: "[Serviços] vendas", url: "https://t.me/+0ni_n2uu5wQwNDYx"},
-          { text: "[Smartphone] vendas", url: "https://t.me/+oTtGpdSVjZJjMzkx"},
-          { text: "[Eletrônicos] vendas", url: "https://t.me/+lafHsTpLYLM0NTgx"}, // Eletrodoméstico
+          { text: `
+[Serviços]
+vendas`, url: "https://t.me/+0ni_n2uu5wQwNDYx"},
+          { text: `
+[Smartphone]
+vendas`, url: "https://t.me/+oTtGpdSVjZJjMzkx"},
+          { text: `
+[Eletrônicos]
+vendas`, url: "https://t.me/+lafHsTpLYLM0NTgx"}, // Eletrodoméstico
         ],        
         [
-          { text: "[Escolar] vendas", url: "https://t.me/+07bigcW1r4syMjRh"}, // Uniforme
-          { text: "[Diversos] vendas", url: "https://t.me/+jV7ioExY8XRkMGYx"},
-          { text: "[Veículo] vendas", url: "https://t.me/+CcK6KcqceLRkZjhh" },
+          { text: `
+[Escolar]
+vendas`, url: "https://t.me/+07bigcW1r4syMjRh"}, // Uniforme
+          { text: `
+[Diversos]
+vendas`, url: "https://t.me/+jV7ioExY8XRkMGYx"},
+          { text: `
+[Veículo]
+vendas`, url: "https://t.me/+CcK6KcqceLRkZjhh" },
         ],
         [
-          { text: "[Milhas] vendas", url: "https://t.me/+uAO-TjuuXUUyZjgx"}, // Novo
-          { text: "[Cripto] vendas", url: "https://t.me/+YPkZ0rHEHdthNmIx"}, // Novo
-          { text: "[Câmbio] vendas", url: "https://t.me/+ECfenxUMiZs2MTMx" }, // Novo
+          { text: `
+[Milhas]
+vendas`, url: "https://t.me/+uAO-TjuuXUUyZjgx"}, // Novo
+          { text: `
+[Cripto]
+vendas`, url: "https://t.me/+YPkZ0rHEHdthNmIx"}, // Novo
+          { text: `
+[Câmbio]
+vendas`, url: "https://t.me/+ECfenxUMiZs2MTMx" }, // Novo
         ],
         [
-          { text: "[Pet] vendas", url: "https://t.me/+_1pAWrcE20c4MDUx"}, // Novo
-          { text: "[Casa] vendas", url: "https://t.me/+PtB2vbBLKxg1MjYx"}, // Novo
-          { text: "[Imóveis] vendas", url: "https://t.me/+dTc2DriyCCZmNDUx"},
+          { text: `
+[Pet]
+vendas`, url: "https://t.me/+_1pAWrcE20c4MDUx"}, // Novo
+          { text: `
+[Casa]
+vendas`, url: "https://t.me/+PtB2vbBLKxg1MjYx"}, // Novo
+          { text: `
+[Imóveis]
+vendas`, url: "https://t.me/+dTc2DriyCCZmNDUx"},
         ],
         [     
-          { text: "[Infantil] vendas", url: "https://t.me/+sEunOn7qodJhMWYx"}, // Brinquedo
-          { text: "[Beleza e Saúde] vendas", url: "https://t.me/+OPBOzQcBuWFjNjIx"}, // Novo
-          { text: "[Passagens Aéreas] vendas", url: "https://t.me/+I-H1x2hOBQVkMmQ5"}, // Novo
+          { text: `
+[Infantil]
+vendas`, url: "https://t.me/+sEunOn7qodJhMWYx"}, // Brinquedo
+          { text: `
+[Beleza e Saúde]
+vendas`, url: "https://t.me/+OPBOzQcBuWFjNjIx"}, // Novo
+          { text: `
+[Passagens Aéreas]
+vendas`, url: "https://t.me/+I-H1x2hOBQVkMmQ5"}, // Novo
         ],
       //   [
       //     { text: "[Serviço vendas]", url: "https://t.me/+0ni_n2uu5wQwNDYx"},
@@ -561,7 +591,7 @@ Qual sua instituição de origem?
       const id_telegram = msg.chat.id.toString();
       const texto = msg.text;
       const name = msg.chat.first_name;
-      const username = msg.chat.username;
+      const username = msg.chat.username;     
 
       const msg_del = await bot.sendMessage(id_telegram, 'Aguarde...');
       const messageId = msg_del.message_id.toString()
@@ -748,7 +778,7 @@ Obs.: Colocar somente números.`);
               const grupo = await prisma_db.grupos.findUnique({where:{type:req.instituicao}})
              
               await bot.sendMessage(id_telegram,`      
-🚨 Para finizar o seu cadastro, CLIQUE no canal correspondente à sua Instituição de origem, logo abaixo. Ato contínuo, já dentro do canal da força, CLIQUE em pelo menos um dos canais de artigos civis de seu interesse. Eles se encontram numa mensagem prefixada nos respectivos canais das instituições. 🥳
+🚨 Para finalizar o seu cadastro, CLIQUE no canal correspondente à sua Instituição de origem, logo abaixo. Ato contínuo, já dentro do canal da força, CLIQUE em pelo menos um dos canais de artigos civis de seu interesse. Eles se encontram numa mensagem prefixada nos respectivos canais das instituições. 🥳
 
 🚨 Atenção: não esqueça de criar o @username para realizar as operações dentro do Balcão. Caso não saiba, clique @BDMILSUPORTE_bot e digite o número do vídeo correspondente.
 `            ,{
@@ -785,8 +815,9 @@ Obs.: Colocar somente números.`);
             //     ]}}
                 
 await bot.sendMessage(id_telegram,`
-Prontinho, seu cadastro foi realizado com sucesso!! 🥳
-Seguem abaixo os canais que você pode acessar para comprar ou vender um produto!          
+🚨 Para finalizar o seu cadastro, CLIQUE no canal correspondente à sua Instituição de origem, logo abaixo. Ato contínuo, já dentro do canal da força, CLIQUE em pelo menos um dos canais de artigos civis de seu interesse. Eles se encontram numa mensagem prefixada nos respectivos canais das instituições. 🥳
+
+🚨 Atenção: não esqueça de criar o @username para realizar as operações dentro do Balcão. Caso não saiba, clique @BDMILSUPORTE_bot e digite o número do vídeo correspondente.         
         `
           ,);
 

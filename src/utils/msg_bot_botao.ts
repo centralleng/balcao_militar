@@ -73,13 +73,23 @@ class Botoes {
         reply_markup: {
             inline_keyboard: [
                 [
-                    { text: "[EB] vendas", callback_data: "CADASTRO_[EB]_APAGAR-01" },
-                    { text: "[MB] vendas", callback_data: "CADASTRO_[MB]_APAGAR-01" },
-                    { text: "[FAB] vendas", callback_data: "CADASTRO_[FAB]_APAGAR-01" },
+                    { text: `
+[EB] 
+vendas`, callback_data: "CADASTRO_[EB]_APAGAR-01" },
+                    { text: `
+[MB] 
+vendas`, callback_data: "CADASTRO_[MB]_APAGAR-01" },
+                    { text: `
+[FAB] 
+vendas`, callback_data: "CADASTRO_[FAB]_APAGAR-01" },
                 ],
                 [
-                    { text: "[PM] vendas", callback_data: "CADASTRO_[PM]_APAGAR-01" },
-                    { text: "[BM] vendas", callback_data: "CADASTRO_[BM]_APAGAR-01" },
+                    { text: `
+[PM] 
+vendas`, callback_data: "CADASTRO_[PM]_APAGAR-01" },
+                    { text: `
+[BM] 
+vendas`, callback_data: "CADASTRO_[BM]_APAGAR-01" },
                 ],
                 // [
                 //     { text: "[PMERJ] vendas", callback_data: "CADASTRO_[PMERJ]_APAGAR-01" },
@@ -179,29 +189,59 @@ class Botoes {
         reply_markup: {
             inline_keyboard: [
                 [
-                    { text: "[Serviços] vendas", callback_data: "CADASTRO_[Servicos]_APAGAR"},
-                    { text: "[Smartphone] vendas", callback_data: "CADASTRO_[Smartphone]_APAGAR"},
-                    { text: "[Eletrônicos] vendas", callback_data: "CADASTRO_[Eletronicos]_APAGAR"},
+                    { text: `
+[Serviços] 
+vendas`, callback_data: "CADASTRO_[Servicos]_APAGAR"},
+                    { text: `
+[Smartphone] 
+vendas`, callback_data: "CADASTRO_[Smartphone]_APAGAR"},
+                    { text: `
+[Eletrônicos] 
+vendas`, callback_data: "CADASTRO_[Eletronicos]_APAGAR"},
                   ],        
                   [
-                    { text: "[Escolar] vendas", callback_data: "CADASTRO_[Escolar]_APAGAR"},
-                    { text: "[Diversos] vendas", callback_data: "CADASTRO_[Diversos]_APAGAR"},
-                    { text: "[Veículo] vendas", callback_data: "CADASTRO_[Veiculo]_APAGAR"},
+                    { text: `
+[Escolar] 
+vendas`, callback_data: "CADASTRO_[Escolar]_APAGAR"},
+                    { text: `
+[Diversos] 
+vendas`, callback_data: "CADASTRO_[Diversos]_APAGAR"},
+                    { text: `
+[Veículo] 
+vendas`, callback_data: "CADASTRO_[Veiculo]_APAGAR"},
                   ],
                   [
-                    { text: "[Milhas] vendas", callback_data: "CADASTRO_[Milhas]_APAGAR"},
-                    { text: "[Cripto] vendas", callback_data: "CADASTRO_[Cripto]_APAGAR"},
-                    { text: "[Câmbio] vendas", callback_data: "CADASTRO_[Cambio]_APAGAR"},
+                    { text: `
+[Milhas] 
+vendas`, callback_data: "CADASTRO_[Milhas]_APAGAR"},
+                    { text: `
+[Cripto] 
+vendas`, callback_data: "CADASTRO_[Cripto]_APAGAR"},
+                    { text: `
+[Câmbio] 
+vendas`, callback_data: "CADASTRO_[Cambio]_APAGAR"},
                   ],
                   [
-                    { text: "[Pet] vendas", callback_data: "CADASTRO_[Pet]_APAGAR"},
-                    { text: "[Casa] vendas", callback_data: "CADASTRO_[Casa]_APAGAR"},
-                    { text: "[Imóveis] vendas", callback_data: "CADASTRO_[Imovel]_APAGAR"},
+                    { text: `
+[Pet] 
+vendas`, callback_data: "CADASTRO_[Pet]_APAGAR"},
+                    { text: `
+[Casa] 
+vendas`, callback_data: "CADASTRO_[Casa]_APAGAR"},
+                    { text: `
+[Imóveis] 
+vendas`, callback_data: "CADASTRO_[Imovel]_APAGAR"},
                   ],
                   [     
-                    { text: "[Infantil] vendas", callback_data: "CADASTRO_[Infantil]_APAGAR"},
-                    { text: "[Beleza e Saúde] vendas", callback_data: "CADASTRO_[Beleza-Saude]_APAGAR"},
-                    { text: "[Passagens Aéreas] vendas", callback_data: "CADASTRO_[Passagens-Aereas]_APAGAR"},
+                    { text: `
+[Infantil] 
+vendas`, callback_data: "CADASTRO_[Infantil]_APAGAR"},
+                    { text: `
+[Beleza e Saúde] 
+vendas`, callback_data: "CADASTRO_[Beleza-Saude]_APAGAR"},
+                    { text: `
+[Passagens Aéreas] 
+vendas`, callback_data: "CADASTRO_[Passagens-Aereas]_APAGAR"},
                   ],
 
                 // [

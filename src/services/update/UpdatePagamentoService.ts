@@ -70,8 +70,12 @@ const descricao:any = pedido?.produto?.descricao
 
 const alerta = await prisma_db.alertas.findMany()
 
+// const alertas_db = alerta.filter((item) => (descricao.toUpperCase()).includes((item.palavra_chave||'').toUpperCase()));
+// const alertas = alertas_db.filter((item) => item.localizacao!=null?item.tipo_grupo === pedido?.produto?.categoria && item.localizacao === pedido?.produto?.localizacao:item.tipo_grupo === pedido?.produto?.categoria);
+
 const alertas_db = alerta.filter((item) => (descricao.toUpperCase()).includes((item.palavra_chave||'').toUpperCase()));
-const alertas = alertas_db.filter((item) => item.localizacao!=null?item.tipo_grupo === pedido?.produto?.categoria && item.localizacao === pedido?.produto?.localizacao:item.tipo_grupo === pedido?.produto?.categoria);
+const alertas_db2 = alertas_db.filter((item) => item.uf != null ? item.tipo_grupo === pedido?.produto?.categoria &&  (pedido?.produto.localizacao)?.includes(item.uf) :  item.tipo_grupo === pedido?.produto?.categoria); 
+const alertas = alertas_db2.filter((item) => item.cidade!= null ? item.tipo_grupo === pedido?.produto?.categoria && (pedido?.produto.localizacao)?.includes(item.cidade) :item.tipo_grupo === pedido?.produto?.categoria);
 
 const usuarios_id = alertas.map(item => {return item.id_telegram})
 
